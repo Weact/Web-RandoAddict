@@ -1,8 +1,4 @@
-<!DOCTYPE HTML>
-<html>
-
 <?php
-    include_once("./PHP/Include/mail.php");
+    header("Location: PHP/Accueil.php");
+    exit;
 ?>
-
-</html>
