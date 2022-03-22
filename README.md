@@ -34,10 +34,10 @@
 
 ## Division of Labor
 
-** LD : HTML5 Bootstrap5 **
-** JZ : HTML5 Bootstrap5 **
-** RS : Communication/Gestion BDD PHP AJAX **
-** VF : JS (AJAX) **
-** LC : PHP **
-** GG : Structure Web **
-** GP : BDD SQL **
+**LD : HTML5 Bootstrap5**
+**JZ : HTML5 Bootstrap5**
+**RS : Communication/Gestion BDD PHP AJAX**
+**VF : JS (AJAX)**
+**LC : PHP**
+**GG : Structure Web**
+**GP : BDD SQL**
