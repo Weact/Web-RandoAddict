@@ -1,8 +1,22 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.2] - 2022-03-23
+### Added
+- Le dossier Managers créé à l'intérieur du dossier DBOperation. Il contient tous les managers nécessaire pour la communication avec la BDD.
+- La classe Manager, dont tous les autres Manager héritent.
+- Le ManagerExcursion & ManagerTerrain, utilisés pour la connexion entre la base de donnée et le PHP.
+
+### Changed
+- La nomenclature dans le changelog a été modifiée. Les guillemets ont été retirés.
+
+### TO-DO
+- Terminer les Managers
+- Communiquer avec la partie Front & Back pour déterminer les requête utiles.
+
+
 ## [0.0.1] - 2022-03-22
 ### Added
-- Le dossier "Objects" créé à l'intéreur du dossier "DBOperation". Il contient tous les objets nécessaire pour la communication avec la BDD.
-- "PDO_Connect.php" qui contient la fonction qui permet de se connecter à la BDD.
+- Le dossier Objects créé à l'intéreur du dossier DBOperation. Il contient tous les objets nécessaire pour la communication avec la BDD.
+- PDO_Connect.php qui contient la fonction qui permet de se connecter à la BDD.
 - Tous les objets, répliqués depuis le MLD, avec une fonction Hydrate & leurs accesseurs & mutateurs.
