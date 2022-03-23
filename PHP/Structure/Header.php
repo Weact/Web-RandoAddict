@@ -1,3 +1,3 @@
 <?php
-    include_once('../HTML/Structure/Header.html');
+    include_once('../HTML/Structure/Header_Online.html');
 ?>
