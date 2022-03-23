@@ -1,44 +1,51 @@
 <header>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar scroll</a>
+            <div>
+            <a class="display-2 nav-link "  href="#" ><span class="text-primary">RANDO</span><span class="text-success">ADDICT</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
                 aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarScroll">
-                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;" >
+                    <li class="nav-item text-left">
+                        <a class="nav-link active" aria-current="page" href="#">Randonnées Disponibles</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li class="nav-item text-left">
+                        <a class="nav-link active" href="#">A propos de nous</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Link
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
+                    <li class="nav-item text-left" >
+                        <a class="nav-link active" href="#">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Link</a>
-                    </li>
+                    
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+
+
+                <form class="">
+                <form class="" style="color: antiquewhite">
+                    <input  class="form-control me-2" style="padding-right: 500px; margin-top: 47px" type="search" placeholder="Recherche" aria-label="Recherche" >
                 </form>
+ 
+                </form>
+                <div style="padding-left: 10px" >
+                    <button type="button" class="btn btn-outline-primary">Connexion</button>
+                    <button type="button" class="btn btn-outline-primary ">Inscription</button>
+                    <div  style="padding-top: 10px">
+                        <button class="btn btn-outline-success" style="padding-right: 120px;" type="submit">Recherche</button>               
+                    </div>
+                    
+
+                </div>
             </div>
         </div>
     </nav>
+    <div class="has-bg-img">
+        <img class="bg-img bg obj-fit-cover" src="/ASSETS/hero_1.jpg" alt="Image cool ici... Normalement">
+
+     </div>
+
 
 </header>
