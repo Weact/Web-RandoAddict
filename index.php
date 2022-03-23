@@ -1,4 +1,4 @@
 <?php
-    header("Location: PHP/Accueil.php");
+    header("Location: PHP/PageRandonee.php");
     exit;
 ?>
