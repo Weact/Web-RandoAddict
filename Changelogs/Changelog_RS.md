@@ -3,6 +3,7 @@
 -Création d'une clef d'API Googlemap au nom de romain.schloter@gmail.com
 -Création de la fonction createGoogleMapIframeTravel() pour générer un Iframe google map de trajet à pieds.
 -Mise en place de la gestion des requêtes GET sur la page googleMap.php pour directement appelé la fonction createGoogleMapIframeTravel().
+-Mise en place des requêtes AJAX en JQuery pour recharger des fragments de page html.
 
 ## [0.0.1] - 2022-03-22
 ### Ajout
