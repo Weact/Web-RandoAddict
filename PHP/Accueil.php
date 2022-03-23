@@ -3,7 +3,7 @@
 
 <?php
     /* Changez la variable header_to_load pour ; HeaderOnline ; HeaderAdmin */
-    $header_to_load = 'Header';
+    $header_to_load = 'HeaderAdmin';
     $header_path = 'Structure/' . $header_to_load . '.php';
 
     /* Remplace la balise HEAD des pages HTML */
