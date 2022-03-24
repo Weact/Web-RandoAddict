@@ -1,5 +1,5 @@
 <?php
-class Terrain
+class Marcheur
 {
 	// Private members
 	private $sMail_Utilisateur;
@@ -32,7 +32,7 @@ class Terrain
 	}
 
 	// Getters & Setters
-  public function getsMail_Utilsateur()
+  public function getsMail_Utilisateur()
   {
     return $this->sMail_Utilisateur;
   }
@@ -42,7 +42,7 @@ class Terrain
     $this->sMail_Utilisateur = $text;
   }
 
-  public function getsPseudo_Utilsateur()
+  public function getsPseudo_Utilisateur()
   {
     return $this->sPseudo_Utilisateur;
   }
@@ -52,7 +52,7 @@ class Terrain
     $this->sPseudo_Utilisateur = $text;
   }
 
-  public function getsTel_Utilsateur()
+  public function getsTel_Utilisateur()
   {
     return $this->sTel_Utilisateur;
   }
@@ -62,7 +62,7 @@ class Terrain
     $this->sTel_Utilisateur = $text;
   }
 
-  public function getsMdp_Utilsateur()
+  public function getsMdp_Utilisateur()
   {
     return $this->sMdp_Utilisateur;
   }
@@ -72,7 +72,7 @@ class Terrain
     $this->sMdp_Utilisateur = $text;
   }
 
-  public function getsRole_Utilsateur()
+  public function getsRole_Utilisateur()
   {
     return $this->sRole_Utilisateur;
   }

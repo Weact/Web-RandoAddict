@@ -4,6 +4,31 @@ require_once("Manager.php")
 
 class ManagerPhoto extends Manager
 {
+  private function arrayConstructor($stmt)
+  // Goal : It should return the array for the corresponding object
+  {
+    if($stmt->rowCount() > 0)
+    {
+      $valueStmt = $stmt->fetchAll()[0];
+
+      $tab = array(
+        "nId_Photo" => $valueStmt["idPhoto"],
+        "sLien_Photo" => $valueStmt["lienPhoto"],
+        "sLabel_Photo" => $valueStmt["labelPhoto"],
+        "nId_Excursion" => $valueStmt["idExcursion"]
+        );
+    }else{
+      $tab = array(
+        "nId_Photo" => "",
+        "sLien_Photo" => "",
+        "sLabel_Photo" => "",
+        "nId_Excursion" => ""
+        );
+    }
+
+    return $tab;
+  }
+
   // Database commands
   public function insertPhoto(Photo $p)
   // Goal : Insert a photo in the database
@@ -63,24 +88,7 @@ class ManagerPhoto extends Manager
 
 			$p = new Photo;
 
-			if($stmt->rowCount() > 0)
-			{
-				$valueStmt = $stmt->fetchAll()[0];
-
-				$tab = array(
-					"nId_Photo" => $valueStmt["idPhoto"],
-          "sLien_Photo" => $valueStmt["LienPhoto"],
-					"sLabel_Photo" => $valueStmt["labelPhoto"],
-					"nId_Excursion" => $valueStmt["idExcursion"]
-					);
-			}else{
-				$tab = array(
-          "nId_Photo" => "",
-					"sLien_Photo" => "",
-					"sLabel_Photo" => "",
-					"nId_Excursion" => ""
-					);
-			}
+      $tab = arrayConstructor($stmt);
 
 			$p->hydrate($tab);
 			return $p;
@@ -92,6 +100,25 @@ class ManagerPhoto extends Manager
 			exit();
 
 		}
+  }
+
+  public function selectPhotosByLabel($text)
+  {
+    $req = "SELECT * FROM PHOTO WHERE labelPhoto = :LABEL";
+
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->db->prepare($req);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
+			$stmt->execute();
+			return $stmt;
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
   }
 
 }

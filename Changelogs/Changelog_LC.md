@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.3] - 2022-03-24
+### Added
+- Création de tous les fichiers des classes Manager.
+
+### TO-DO
+- Faire une réunion pour déterminer comment gérer le mot de passe, et certaines tables.
+
 ## [0.0.2] - 2022-03-23
 ### Added
 - Le dossier Managers créé à l'intérieur du dossier DBOperation. Il contient tous les managers nécessaire pour la communication avec la BDD.

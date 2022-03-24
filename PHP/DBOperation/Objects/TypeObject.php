@@ -1,5 +1,5 @@
 <?php
-class Terrain
+class Type
 {
 	// Private members
 	private $sLabel_Type;

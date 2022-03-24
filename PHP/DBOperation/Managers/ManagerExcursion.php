@@ -4,6 +4,32 @@ require_once("Manager.php")
 
 class ManagerExcursion extends Manager
 {
+  private function arrayConstructor($stmt)
+  {
+    if($stmt->rowCount() > 0)
+    {
+      $valueStmt = $stmt->fetchAll()[0];
+
+      $tab = array(
+        "nId_Excursion" => $valueStmt["idExcursion"],
+        "sLabel_Excursion" => $valueStmt["labelExcursion"],
+        "sDesc_Excursion" => $valueStmt["descExcursion"],
+        "sChemin_Excursion" => $valueStmt["cheminExcursion"],
+        "fPrix_Excursion" => $valueStmt["prixExcursion"]
+        );
+    }else{
+      $tab = array(
+        "nId_Excursion" => "",
+        "sLabel_Excursion" => "",
+        "sDesc_Excursion" => "",
+        "sChemin_Excursion" => "",
+        "fPrix_Excursion" => ""
+        );
+    }
+
+    return $tab;
+  }
+
   // Database commands
   public function insertExcursion(Excursion $e)
   // Goal : Insert an excursion in the database
@@ -65,26 +91,7 @@ class ManagerExcursion extends Manager
 
 			$e = new Excursion;
 
-			if($stmt->rowCount() > 0)
-			{
-				$valueStmt = $stmt->fetchAll()[0];
-
-				$tab = array(
-					"nId_Excursion" => $valueStmt["idExcursion"],
-					"sLabel_Excursion" => $valueStmt["labelExcursion"],
-					"sDesc_Excursion" => $valueStmt["descExcursion"],
-					"sChemin_Excursion" => $valueStmt["cheminExcursion"],
-					"fPrix_Excursion" => $valueStmt["prixExcursion"]
-					);
-			}else{
-				$tab = array(
-          "nId_Excursion" => "",
-					"sLabel_Excursion" => "",
-					"sDesc_Excursion" => "",
-					"sChemin_Excursion" => "",
-					"fPrix_Excursion" => ""
-					);
-			}
+      $tab = arrayConstructor($stmt);
 
 			$e->hydrate($tab);
 			return $e;
