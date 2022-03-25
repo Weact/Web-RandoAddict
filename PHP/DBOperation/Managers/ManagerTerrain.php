@@ -94,5 +94,45 @@ class ManagerTerrain extends Manager
     }
   }
 
+  public function updateTerrainByLabel(TERRAIN $t, $text)
+  // Goal : Update a terrain with a given name
+  // Entry : A text for the name
+  {
+    $req = "UPDATE TERRAIN SET labelTerrain = :NEWLABEL, descTerrain = :NEWINFO WHERE labelTerrain = :LABEL";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Terrain, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $t->getsDesc_Terrain, PDO::PARAM_STR);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
+  }
+
+  public function deleTerrainByLabel($text)
+  // Goal : Delete a terrain with a given name
+  // Entry : A text for the name
+  {
+    $req = "DELETE FROM TERRAIN WHERE labelTerrain = :LABEL";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
+  }
+
 }
 ?>

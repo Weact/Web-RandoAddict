@@ -93,13 +93,51 @@ class ManagerPhoto extends Manager
 			$p->hydrate($tab);
 			return $p;
 
-		}
-		catch(PDOException $error)
-		{
+		} catch(PDOException $error) {
 			echo "<script>console.log('".$error->getMessage()."')</script>";
 			exit();
 
 		}
+  }
+
+  public function updatePhotoById(Photo $p, $num)
+  // Goal : Update a photo by a given ID
+  // Entry : A number for the ID
+  {
+    $req = "UPDATE PHOTO SET lienPhoto = :NEWLIEN, labelPhoto = :NEWLABEL, idExcursion = :NEW_ID WHERE idPhoto = :ID";
+
+    try
+    {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLIEN", $p->getsLien_Photo, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $p->getnId_Excursion, PDO::PARAM_INT);
+
+    } catch(PDOException $error) {
+			echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+		}
+  }
+
+  public function deletePhotoById($num)
+  // Goal : Delete a program with a given ID
+  // Entry : A num for the ID
+  {
+    $req = "DELETE FROM PHOTO WHERE idPhoto = :ID";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
   }
 
   public function selectPhotosByLabel($text)

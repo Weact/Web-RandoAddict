@@ -1,7 +1,24 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/ManagerMarcheur.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerExcursion
+* Fonctions     : arrayConstructor($stmt)
+*                 insertMarcheur(Marcheur $m)
+*                 existMarcheurByMail($mail, $mdp)
+*                 selectMarcheurs()
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+/*******************************************************************************\
+* 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/MarcheurObject.php")
 require_once("Manager.php")
-
 class ManagerMarcheur extends Manager
 {
   private function arrayConstructor($stmt)
@@ -35,6 +52,9 @@ class ManagerMarcheur extends Manager
   // Goal : Insert a user in the database
   // Entry : A marcheur object
   {
+    //objet de retour
+    $result;
+
     $req = "INSERT INTO MARCHEUR(mailMarcheur, pseudoMarcheur, telUtilisateur, mdpUtilisateur, roleUtilisateur) VALUES (:MAIL, :PSEUDO, :TEL, :MDP, :ROLE)";
 
     // Send the request to the database
@@ -47,8 +67,20 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":ROLE", $m->getsRole_Utilisateur, PDO::PARAM_STR);
       $stmt->execute();
 
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      $result['stmt']=$stmt;
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
       exit();
 
     }
@@ -57,6 +89,9 @@ class ManagerMarcheur extends Manager
   public function existMarcheurByMail($mail, $mdp)
   // Goal : Return a boolean if a user exists
   {
+    //objet de retour
+    $result;
+
     $req = "SELECT * FROM MARCHEUR WHERE mailUtilisateur = :MAIL";
 
     // Send the request to the Database
@@ -68,13 +103,36 @@ class ManagerMarcheur extends Manager
 			if($stmt->rowCount > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
+        
+        //Retour succès
+        $result['success']=true;
+        $result['error']=true;
+        $result['message']="success";
+        $result['passwordVerify']=password_verify($mdp, $valueStmt["mdpUtilisateur"]);
+        echo json_encode($result);
+
 				return password_verify($mdp, $valueStmt["mdpUtilisateur"]);
 			}else{
+        
+        //Retour échec
+        $result['success']=true;
+        $result['error']=true;
+        $result['message']="Mot de passe invalide";
+        $result['passwordVerify']=false;
+        echo json_encode($result);
+
 				return false;
 			}
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
+      
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
       exit();
 
     }
@@ -84,6 +142,9 @@ class ManagerMarcheur extends Manager
   // Goal : Select all users in the database
   // Return : An array holding all the users
   {
+    //objet de retour
+    $result;
+
     $req = "SELECT * FROM MARCHEUR";
 
     // Send the request to the database
@@ -91,10 +152,25 @@ class ManagerMarcheur extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
+
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      $result['stmt']=$stmt;
+      echo json_encode($result);
+
 			return $stmt;
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
+
+      //Retour échec
+      $result['success']=true;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }

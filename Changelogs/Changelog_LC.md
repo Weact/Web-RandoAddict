@@ -1,6 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.4] - 2022-03-25
+### Added
+- Méthodes Update & Delete pour les Managers de Terrain, Type, Programme, Photo.
+
+### Changed
+- Retours des méthodes dans les Managers Marcheur & Excursion sous format JSON.
+
+### Project Management
+- Revue avec Romain SCHLOTTER pour les principes du CRUD et de de la nomenclature des fichiers.
+
+### TO-DO
+- Terminer le CRUD.
+- Terminer le changement du retour des méthodes sous format JSON. 
+
 ## [0.0.3] - 2022-03-24
 ### Added
 - Création de tous les fichiers des classes Manager.

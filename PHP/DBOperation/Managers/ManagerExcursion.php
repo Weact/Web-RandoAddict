@@ -1,3 +1,23 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/ManagerExcursion.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerExcursion
+* Fonctions     : arrayConstructor($stmt)
+*                 insertExcursion(Excursion $e)
+*                 selectExcursions()
+*                 selectExcursionById($num)
+*                 selectExcursionsByPrice($float)
+*                 selectExcursionsByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+/*******************************************************************************\
+* 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/ExcursionObject.php")
 require_once("Manager.php")
@@ -35,6 +55,9 @@ class ManagerExcursion extends Manager
   // Goal : Insert an excursion in the database
   // Entry : A excursion object
   {
+    //objet de retour
+    $result;
+
     $req = "INSERT INTO EXCURSION(labelExcursion, descExcursion, cheminExcursion, prixExcursion) VALUES (:LABEL, :INFO, :CHEMIN, :PRIX)";
 
     // Send the request to the database
@@ -47,11 +70,23 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":CHEMIN", $e->getsChemin_Excursion, PDO::PARAM_STR);
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion, PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
+      
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      echo json_encode($result);
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
 
+      exit();
     }
   }
 
@@ -59,6 +94,9 @@ class ManagerExcursion extends Manager
   // Goal : Select all excursions in the database
   // Return : An array holding all the excursions
   {
+    //objet de retour
+    $result;
+
     $req = "SELECT * FROM EXCURSION";
 
     // Send the request to the database
@@ -66,10 +104,25 @@ class ManagerExcursion extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
+
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      $result['stmt']=$stmt;
+      echo json_encode($result);
+
 			return $stmt;
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
+
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }
@@ -80,6 +133,9 @@ class ManagerExcursion extends Manager
   // Entry : A num for the ID
   // Return : An Excursion object
   {
+    //objet de retour
+    $result;
+
     $req = "SELECT * FROM EXCURSION WHERE idExcursion = :ID";
 
 		//Envoie de la requête à la base
@@ -94,12 +150,27 @@ class ManagerExcursion extends Manager
       $tab = arrayConstructor($stmt);
 
 			$e->hydrate($tab);
+      
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      $result['e']=$e;
+      echo json_encode($result);
+
 			return $e;
 
 		}
 		catch(PDOException $error)
 		{
 			echo "<script>console.log('".$error->getMessage()."')</script>";
+
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
 		}
@@ -110,6 +181,9 @@ class ManagerExcursion extends Manager
   // Entry : A float for the maximum price acceptable
   // Return : An array holding all the corresponding excursions
   {
+    //objet de retour
+    $result;
+
     $req = "SELECT * FROM EXCURSION WHERE prixExcursion <= :PRIX";
 
     // Send the request to the database
@@ -118,10 +192,25 @@ class ManagerExcursion extends Manager
       $stmt = $this->db->prepare($req);
 			$stmt->bindValue(":PRIX", $float, PDO::PARAM_STR);
 			$stmt->execute();
+
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      $result['stmt']=$stmt;
+      echo json_encode($result);
+
       return $stmt;
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
+
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }
@@ -132,6 +221,9 @@ class ManagerExcursion extends Manager
   // Entry : A text for the label
   // Return : An array holding all the corresponding excursions
   {
+    //objet de retour
+    $result;
+
     $req = "SELECT * FROM EXCURSION WHERE labelExcursion = :LABEL";
 
     // Send the request to the database
@@ -140,10 +232,25 @@ class ManagerExcursion extends Manager
       $stmt = $this->db->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
+
+      //Retour succès
+      $result['success']=true;
+      $result['error']=false;
+      $result['message']="success";
+      $result['stmt']=$stmt;
+      echo json_encode($result);
+
 			return $stmt;
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
+      
+      //Retour échec
+      $result['success']=false;
+      $result['error']=true;
+      $result['message']=$error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }

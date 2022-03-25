@@ -32,7 +32,7 @@ class ManagerType extends Manager
   {
     $req = "INSERT INTO TYPE(labelType, descType) VALUES (:LABEL, :INFO)";
 
-    // Send the request to the database
+    // Send the request to the Database
     try {
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":LABEL", $t->getsLabel_Type, PDO::PARAM_STR);
@@ -52,7 +52,7 @@ class ManagerType extends Manager
   {
     $req = "SELECT * FROM TYPE";
 
-    // Send the request to the database
+    // Send the request to the Database
     try
     {
       $stmt = $this->db->prepare($req);
@@ -73,7 +73,7 @@ class ManagerType extends Manager
   {
     $req = "SELECT * FROM TYPE WHERE labelType = :LABEL"
 
-    // Send the request to the database
+    // Send the request to the Database
     try
     {
       $stmt = $this->db->prepare($req);
@@ -81,11 +81,49 @@ class ManagerType extends Manager
 			$stmt->execute();
 
 			$t = new Type;
-
       $tab = arrayConstructor($stmt);
-
       $t->hydrate($tab);
       return $t;
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
+  }
+
+  public function updateTypeByLabel(TYPE $t, $text)
+  // Goal : Update a type with a given name
+  // Entry : A text for the name
+  {
+    $req = "UPDATE TYPE SET labelType = :NEWLABEL, descType = :NEWINFO WHERE labelType = :LABEL";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Type, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $t->getsDesc_Type, PDO::PARAM_STR);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
+  }
+
+  public function deleTypeByLabel($text)
+  // Goal : Delete a type with a given name
+  // Entry : A text for the name
+  {
+    $req = "DELETE FROM TYPE WHERE labelType = :LABEL";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+			$stmt->execute();
 
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";

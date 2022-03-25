@@ -12,14 +12,14 @@ class ManagerProgramme extends Manager
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
-        "nId_Prog" => $valueStmt["idProg"],
-        "sLabel_Prog" => $valueStmt["labelProg"],
-        "sDesc_Prog" => $valueStmt["descProg"],
-        "sDepart_Prog" => $valueStmt["departProg"],
-        "sArrivee_Prog" => $valueStmt["arriveeProg"],
-        "nCapacite_Prog" => $valueStmt["capaciteProg"],
-        "nDifficulte_Prog" => $valueStmt["difficulteProg"],
-        "sValideProg" => $valueStmt["valideProg"]
+        "nId_Prog" => $valueStmt["idProgramme"],
+        "sLabel_Prog" => $valueStmt["labelProgramme"],
+        "sDesc_Prog" => $valueStmt["descProgramme"],
+        "sDepart_Prog" => $valueStmt["dateDepartProgramme"],
+        "sArrivee_Prog" => $valueStmt["dateArriveeProgramme"],
+        "nCapacite_Prog" => $valueStmt["capaciteProgramme"],
+        "nDifficulte_Prog" => $valueStmt["difficulteProgramme"],
+        "sValideProg" => $valueStmt["valideProgramme"]
         );
     }else{
       $tab = array(
@@ -42,7 +42,7 @@ class ManagerProgramme extends Manager
   // Goal : Insert a program in the database
   // Entry : A program object
   {
-    $req = "INSERT INTO PROGRAMME(labelProg, descProg, departProg, ariveeProg, capaciteProg, difficulteProg, valideProg) VALUES (:LABEL, :INFO, :DEPART, :ARIVEE, :CAP, :DIF, :VALIDE)";
+    $req = "INSERT INTO PROGRAMME(labelProgramme, descProgramme, dateDepartProgramme, dateAriveeProgramme, capaciteProgramme, difficulteProgramme, valideProgramme) VALUES (:LABEL, :INFO, :DEPART, :ARIVEE, :CAP, :DIF, :VALIDE)";
 
     // Send the request to the database
     try {
@@ -111,6 +111,51 @@ class ManagerProgramme extends Manager
 			exit();
 
 		}
+  }
+
+  public function updateProgrammeById(Programme $p, $num)
+  // Goal : Update a program by a given ID
+  // Entry : A number for the ID
+  {
+    $req = "UPDATE PROGRAMME SET labelProgramme = :NEWLABEL, descProgramme = :NEWINFO, dateDepartProgramme = :NEWDEPART, dateArriveeProgramme = :NEWARRIVEE, capaciteProgramme = :NEWCAP, difficulteProgramme = :NEWDIF, valideProgramme = :NEWVALIDE WHERE idProgramme = :ID";
+  
+    try
+    {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Prog, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $p->getsDesc_Prog, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWDEPART", $p->getsDepart_Prog, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWARRIVEE", $p->getsArrivee_Prog, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWCAP", $p->getsCapacite_Prog, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWDIF", $p->getsDifficulte_Prog, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWVALIDE", $p->getsValide_Prog, PDO::PARAM_STR);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
+  }
+
+  public function deleProgrammeById($num)
+  // Goal : Delete a program with a given ID
+  // Entry : A num for the ID
+  {
+    $req = "DELETE FROM PROGRAMME WHERE idProgramme = :ID";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
   }
 
   public function selectProgrammesByLabel($text)
