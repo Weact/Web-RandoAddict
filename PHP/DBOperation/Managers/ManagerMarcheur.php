@@ -52,9 +52,6 @@ class ManagerMarcheur extends Manager
   // Goal : Insert a user in the database
   // Entry : A marcheur object
   {
-    //objet de retour
-    $result;
-
     $req = "INSERT INTO MARCHEUR(mailMarcheur, pseudoMarcheur, telUtilisateur, mdpUtilisateur, roleUtilisateur) VALUES (:MAIL, :PSEUDO, :TEL, :MDP, :ROLE)";
 
     // Send the request to the database
@@ -67,7 +64,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":ROLE", $m->getsRole_Utilisateur, PDO::PARAM_STR);
       $stmt->execute();
 
-      //Retour succès
+      // Return success
       $result['success']=true;
       $result['error']=false;
       $result['message']="success";
@@ -75,7 +72,7 @@ class ManagerMarcheur extends Manager
       echo json_encode($result);
 
     } catch (PDOException $error) {
-      //Retour échec
+      // Return error
       $result['success']=false;
       $result['error']=true;
       $result['message']=$error->getMessage();
@@ -104,7 +101,7 @@ class ManagerMarcheur extends Manager
 			{
 				$valueStmt = $stmt->fetchAll()[0];
         
-        //Retour succès
+        // Retour success
         $result['success']=true;
         $result['error']=true;
         $result['message']="success";
@@ -114,7 +111,7 @@ class ManagerMarcheur extends Manager
 				return password_verify($mdp, $valueStmt["mdpUtilisateur"]);
 			}else{
         
-        //Retour échec
+        // Return error
         $result['success']=true;
         $result['error']=true;
         $result['message']="Mot de passe invalide";
@@ -127,7 +124,7 @@ class ManagerMarcheur extends Manager
     } catch (PDOException $error) {
       echo "<script>console.log('".$error->getMessage()."')</script>";
       
-      //Retour échec
+      // Return error
       $result['success']=false;
       $result['error']=true;
       $result['message']=$error->getMessage();
@@ -153,19 +150,15 @@ class ManagerMarcheur extends Manager
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
 
-      //Retour succès
+      // Return success
       $result['success']=true;
       $result['error']=false;
       $result['message']="success";
       $result['stmt']=$stmt;
       echo json_encode($result);
 
-			return $stmt;
-
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-
-      //Retour échec
+      // Return error
       $result['success']=true;
       $result['error']=true;
       $result['message']=$error->getMessage();

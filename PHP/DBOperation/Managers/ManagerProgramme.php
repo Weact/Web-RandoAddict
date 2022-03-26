@@ -139,7 +139,7 @@ class ManagerProgramme extends Manager
     }
   }
 
-  public function deleProgrammeById($num)
+  public function deleteProgrammeById($num)
   // Goal : Delete a program with a given ID
   // Entry : A num for the ID
   {

@@ -94,5 +94,45 @@ class ManagerMateriel extends Manager
     }
   }
 
+  public function updateMaterielByLabel($m, $text)
+  // Goal : Update a material by a given name
+  // Entry : A text for the name
+  {
+    $req = "UPDATE MATERIEL SET labelMateriel = :NEWLABEL, descMateriel = :NEWINFO WHERE labelMateriel = :LABEL";
+
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $m->getsLabel_Materiel, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $m->getsDesc_Materiel, PDO::PARAM_STR);
+
+    } catch(PDOException $error) {
+			echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+		}
+  }
+
+  public function deleteMaterielByLabel($text)
+  // Goal : Delete a material with a given name
+  // Entry : A text for the name
+  {
+    $req = "DELETE FROM MATERIEL WHERE labelMateriel = :LABEL";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+			$stmt->execute();
+
+    } catch (PDOException $error) {
+      echo "<script>console.log('".$error->getMessage()."')</script>";
+			exit();
+
+    }
+  }
+
 }
 ?>
