@@ -1,0 +1,49 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+## [0.0.5] - 2022-03-28
+### Added
+- Méthodes Update & Delete pour plus de Managers
+
+### Merge with develop
+
+## [0.0.4] - 2022-03-25
+### Added
+- Méthodes Update & Delete pour les Managers de Terrain, Type, Programme, Photo.
+
+### Changed
+- Retours des méthodes dans les Managers Marcheur & Excursion sous format JSON.
+
+### Project Management
+- Revue avec Romain SCHLOTTER pour les principes du CRUD et de de la nomenclature des fichiers.
+
+### TO-DO
+- Terminer le CRUD.
+- Terminer le changement du retour des méthodes sous format JSON. 
+
+## [0.0.3] - 2022-03-24
+### Added
+- Création de tous les fichiers des classes Manager.
+
+### TO-DO
+- Faire une réunion pour déterminer comment gérer le mot de passe, et certaines tables.
+
+## [0.0.2] - 2022-03-23
+### Added
+- Le dossier Managers créé à l'intérieur du dossier DBOperation. Il contient tous les managers nécessaire pour la communication avec la BDD.
+- La classe Manager, dont tous les autres Manager héritent.
+- Le ManagerExcursion & ManagerTerrain, utilisés pour la connexion entre la base de donnée et le PHP.
+
+### Changed
+- La nomenclature dans le changelog a été modifiée. Les guillemets ont été retirés.
+
+### TO-DO
+- Terminer les Managers
+- Communiquer avec la partie Front & Back pour déterminer les requête utiles.
+
+
+## [0.0.1] - 2022-03-22
+### Added
+- Le dossier Objects créé à l'intéreur du dossier DBOperation. Il contient tous les objets nécessaire pour la communication avec la BDD.
+- PDO_Connect.php qui contient la fonction qui permet de se connecter à la BDD.
+- Tous les objets, répliqués depuis le MLD, avec une fonction Hydrate & leurs accesseurs & mutateurs.
