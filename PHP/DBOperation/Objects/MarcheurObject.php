@@ -2,11 +2,11 @@
 class Marcheur
 {
 	// Private members
-	private $sMail_Utilisateur;
-	private $sPseudo_Utilisateur;
-  private $sTel_Utilisateur;
-  private $sMdp_Utilisateur;
-  private $sRole_Utilisateur;
+	private $sMail_Marcheur;
+	private $sPseudo_Marcheur;
+  private $sTel_Marcheur;
+  private $sMdp_Marcheur;
+  private $sRole_Marcheur;
 
 	// Methods
 	// Hydrate
@@ -32,54 +32,54 @@ class Marcheur
 	}
 
 	// Getters & Setters
-  public function getsMail_Utilisateur()
+  public function getsMail_Marcheur()
   {
-    return $this->sMail_Utilisateur;
+    return $this->sMail_Marcheur;
   }
 
-  public function setsMail_Utilisateur($text)
+  public function setsMail_Marcheur($text)
   {
-    $this->sMail_Utilisateur = $text;
+    $this->sMail_Marcheur = $text;
   }
 
-  public function getsPseudo_Utilisateur()
+  public function getsPseudo_Marcheur()
   {
-    return $this->sPseudo_Utilisateur;
+    return $this->sPseudo_Marcheur;
   }
 
-  public function setsPseudo_Utilisateur($text)
+  public function setsPseudo_Marcheur($text)
   {
-    $this->sPseudo_Utilisateur = $text;
+    $this->sPseudo_Marcheur = $text;
   }
 
-  public function getsTel_Utilisateur()
+  public function getsTel_Marcheur()
   {
-    return $this->sTel_Utilisateur;
+    return $this->sTel_Marcheur;
   }
 
-  public function setsTel_Utilisateur($text)
+  public function setsTel_Marcheur($text)
   {
-    $this->sTel_Utilisateur = $text;
+    $this->sTel_Marcheur = $text;
   }
 
-  public function getsMdp_Utilisateur()
+  public function getsMdp_Marcheur()
   {
-    return $this->sMdp_Utilisateur;
+    return $this->sMdp_Marcheur;
   }
 
-  public function setsMdp_Utilisateur($text)
+  public function setsMdp_Marcheur($text)
   {
-    $this->sMdp_Utilisateur = $text;
+    $this->sMdp_Marcheur = $text;
   }
 
-  public function getsRole_Utilisateur()
+  public function getsRole_Marcheur()
   {
-    return $this->sRole_Utilisateur;
+    return $this->sRole_Marcheur;
   }
 
-  public function setsRole_Utilisateur($text)
+  public function setsRole_Marcheur($text)
   {
-    $this->sRole_Utilisateur = $text;
+    $this->sRole_Marcheur = $text;
   }
 
 }

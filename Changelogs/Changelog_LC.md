@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.5] - 2022-03-28
+### Added
+- Méthodes Update & Delete pour plus de Managers
+
 ## [0.0.4] - 2022-03-25
 ### Added
 - Méthodes Update & Delete pour les Managers de Terrain, Type, Programme, Photo.
