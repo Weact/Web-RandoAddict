@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/ManagerExcursion.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
 *
 * Description   : ---.
 *

@@ -1,3 +1,20 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerMateriel.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerMateriel
+* Fonctions     : arrayConstructor($stmt)
+*                 insertMateriel(Materiel $m)
+*                 selectMateriels()
+*                 selectMaterielByLabel($text)
+*                 updateMaterielByLabel($m, $text)
+*                 deleteMaterielByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/MaterielObject.php")
 require_once("Manager.php")

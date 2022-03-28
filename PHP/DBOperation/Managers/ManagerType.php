@@ -1,3 +1,20 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerType.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerType
+* Fonctions     : arrayConstructor($stmt)
+*                 insertType(Type $t)
+*                 selectTypes()
+*                 selectTypeByLabel($text)
+*                 updateTypeByLabel(Type $t, $text)
+*                 deleTypeByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/TypeObject.php")
 require_once("Manager.php")
@@ -125,7 +142,7 @@ class ManagerType extends Manager
     }
   }
 
-  public function updateTypeByLabel(TYPE $t, $text)
+  public function updateTypeByLabel(Type $t, $text)
   // Goal : Update a type with a given name
   // Entry : A text for the name
   {
