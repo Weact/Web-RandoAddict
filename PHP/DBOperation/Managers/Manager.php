@@ -1,3 +1,20 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/Manager.php
+*
+* Description   : ---.
+*
+* Classe        : Manager
+* Fonctions     : __construct($_db)
+*                 __destruct()
+*                 getdb()
+*                 setdb($conn)
+*                 __toString()
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
+
 <?php
 class Manager
 {
