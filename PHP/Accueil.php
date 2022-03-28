@@ -1,3 +1,16 @@
+<!--/*******************************************************************************\
+* Fichier       : Accueil.php
+*
+* Description   : Fichier PHP principal du site; SEUL le header et le body de la
+*                   page change en fonction de la situation
+* Fonction      : -.
+*
+* Créateur      : Lucas DRUCKES
+\*******************************************************************************/
+/*******************************************************************************\
+* 21-03-2022    : Création page
+\*******************************************************************************/-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +29,8 @@
 <body class="h-100 text-center text-white bg-dark">
 
     <?php
-        include_once('Structure/ListeRandonneesAccueil.php');
+        include_once('Structure/ListeRandonneesAccueil.php'); /* PAGE PHP A INCLURE DE BASE DANS ACCUEIL.PHP */
+        /*include_once('PageRandonee.php'); /* PAGE RANDONEE, CETTE PAGE SERA INCLU DANS L'UTILISATEUR VOUDRA CONSULTER UNE RANDONEE */
     ?>
 
     <?php
