@@ -16,7 +16,7 @@
 
 <?php
     /* Changez la variable header_to_load pour ; HeaderOnline ; HeaderAdmin */
-    $header_to_load = 'Header';
+    $header_to_load = 'HeaderOnline';
     $header_path = 'Structure/' . $header_to_load . '.php';
 
     /* Remplace la balise HEAD des pages HTML */
@@ -29,10 +29,7 @@
 <body class="h-100 text-center text-white bg-dark">
 
     <main id="main">
-      <?php
-          include_once('Structure/ListeRandonneesAccueil.php'); /* PAGE PHP A INCLURE DE BASE DANS ACCUEIL.PHP */
-          //include_once('PageRandonee.php'); /* PAGE RANDONEE, CETTE PAGE SERA INCLU DANS L'UTILISATEUR VOUDRA CONSULTER UNE RANDONEE */
-      ?>
+
     </main>
     <?php
     /* Inclu le footer dans la page */
