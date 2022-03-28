@@ -56,9 +56,20 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":VALIDE", $p->getsValide_Prog, PDO::PARAM_STR);
       $stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
+			exit();
 
     }
   }
@@ -74,10 +85,21 @@ class ManagerProgramme extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -98,19 +120,26 @@ class ManagerProgramme extends Manager
 			$stmt->execute();
 
 			$p = new Programme;
-
       $tab = arrayConstructor($stmt);
-
 			$p->hydrate($tab);
-			return $p;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['programme'] = $p;
+      echo json_encode($result);
 
-		}
-		catch(PDOException $error)
-		{
-			echo "<script>console.log('".$error->getMessage()."')</script>";
+		} catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
-		}
+    }
   }
 
   public function updateProgrammeById(Programme $p, $num)
@@ -132,8 +161,19 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":NEWVALIDE", $p->getsValide_Prog, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -151,8 +191,19 @@ class ManagerProgramme extends Manager
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -171,10 +222,21 @@ class ManagerProgramme extends Manager
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -191,10 +253,21 @@ class ManagerProgramme extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -221,11 +294,22 @@ class ManagerProgramme extends Manager
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":DIF", $num, PDO::PARAM_STR);
       $stmt->execute();
-      return $stmt;
+      
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
+			exit();
 
     }
   }
