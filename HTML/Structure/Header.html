@@ -71,7 +71,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="form" action="../action_page.php">
+            <form class="form" method="POST" action="../action_page.php">
               <!--Mail-->
                <div class="row">
                 <div class="col">
@@ -102,7 +102,7 @@
                 <!--Password-->
                 <div class="mb-3 form-floating">
                   <input type="date" class="form-control" id="password" placeholder="Entrer date" name="date"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
-                   <label for="date" class="form-label">Mot de passe</label>
+                   <label for="date" class="form-label">Date de naissance</label>
                   </div>
                 </div>
                 <div class="col">
@@ -129,7 +129,7 @@
             <h5 class="modal-title">Connexion au compte</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form class="form" action="../action_page.php">
+          <form class="form" method="POST" action="../action_page.php">
           <div class="modal-body">
             <!--Mail-->
              <div class="row">
