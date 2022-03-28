@@ -1,3 +1,4 @@
 <?php
-	echo "string";
+    header("Location: PHP/Accueil.php");
+    exit;
 ?>
