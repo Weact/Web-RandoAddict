@@ -12,7 +12,11 @@
     <!-- This is adding a link to a CSS file that is used to make the Bootstrap CSS Icons work. -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
-    
+
     <link rel="icon" type="image/x-icon" href="../ASSETS/favicon.ico">
-    
+
+    <script src="AJAX/pageNavigator.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 </head>
