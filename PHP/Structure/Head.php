@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rando Addict Ludus</title>
 
+    <!-- CUSTOM CSS FOR HEADERS -->
+    <link rel="stylesheet" href="../CSS/header.css">
+
     <!--  Adding a link to the CSS file that is used to make the Bootstrap CSS work. -->
     <link rel="stylesheet" href="../CSS/bootstrap/bootstrap.css">
     <!-- This is the JavaScript, Popper Included, that is used to make the Bootstrap CSS work. -->
