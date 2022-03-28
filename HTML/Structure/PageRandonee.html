@@ -1,4 +1,13 @@
+<?php
+    if (isset($_POST['formularData']))
+    {
+        //Do the request. With DBOperation.
 
+        header("HTTP/1.1 303 See Other"); //Redirection vers une page rompant la navigation. Pour Empêcher le renvoie de formulaire.
+        header("Location: http://$_SERVER['HTTP_HOST']/new/location/here"); //Redirection vers la vraie page de destination.
+        exit();
+    }
+?>
 <h1 class="text-center" style="padding-top: 10%;">La randonnée du KFC</h1>
 <h2 class="text-center">Difficulté modérée</h2>
 
