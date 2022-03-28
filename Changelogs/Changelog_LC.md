@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.8] - 2022-03-28
+### HOTFIX
+- Correction d'une erreur dans la requête d'insertion dans la table Photo.
+
 ## [0.0.7] - 2022-03-28
 ### Added
 - Ajout de l'entête pour tous les fichiers Managers.
