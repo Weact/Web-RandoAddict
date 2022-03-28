@@ -23,13 +23,15 @@
     include_once('Structure/Head.php');
     /* Inclu le header online dans la page */
     include_once($header_path);
-    
+
 ?>
 
 <body class="h-100 text-center text-white bg-dark">
 
     <?php
-        include_once('Structure/ListeRandonneesAccueil.php'); /* PAGE PHP A INCLURE DE BASE DANS ACCUEIL.PHP */
+          //include_once('Structure/PageAdmin.php');
+          include_once('Structure/ListeRandonneesAdminPage.php');
+        /*include_once('Structure/ListeRandonneesAccueil.php'); *//* PAGE PHP A INCLURE DE BASE DANS ACCUEIL.PHP */
         /*include_once('PageRandonee.php'); /* PAGE RANDONEE, CETTE PAGE SERA INCLU DANS L'UTILISATEUR VOUDRA CONSULTER UNE RANDONEE */
     ?>
 
