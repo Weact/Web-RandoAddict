@@ -1,4 +1,19 @@
+<!--/*******************************************************************************\
+* Fichier       : index.php
+*
+* Description   : Fichier permettant la redirection de l'utilisateur vers la page d'accueil du site
+* Fonction      : -.
+* Créateur      : Lucas DRUCKES
+\*******************************************************************************/
+/*******************************************************************************\
+* 21-03-2022    : Creation de la page et début du projet
+\*******************************************************************************/
+/*******************************************************************************
+* NOTE : MERCI DE NE JAMAIS MODIFIER DE FICHIER                                *
+********************************************************************************/
+-->
+
 <?php
-    header("Location: PHP/PageRandonee.php");
+    header("Location: PHP/Accueil.php");
     exit;
 ?>
