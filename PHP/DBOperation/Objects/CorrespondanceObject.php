@@ -3,7 +3,7 @@ class Correspondance
 {
 	// Private members
 	private $nId_Prog;
-  private $sLabel_Type;
+  	private $sLabel_Type;
 
 	// Methods
 	// Hydrate

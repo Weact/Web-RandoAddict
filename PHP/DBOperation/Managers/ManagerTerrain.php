@@ -1,3 +1,20 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerTerrain
+* Fonctions     : arrayConstructor($stmt)
+*                 insertTerrain(Terrain $t)
+*                 selectTerrains()
+*                 selectTerrainByLabel($text)
+*                 updateTerrainByLabel(TERRAIN $t, $text)
+*                 deleteTerrainByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/TerrainObject.php")
 require_once("Manager.php")
@@ -39,8 +56,19 @@ class ManagerTerrain extends Manager
       $stmt->bindValue(":INFO", $t->getsDesc_Terrain, PDO::PARAM_STR);
       $stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
       exit();
 
     }
@@ -57,11 +85,22 @@ class ManagerTerrain extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			return $stmt;
+      
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
+      exit();
 
     }
   }
@@ -81,15 +120,24 @@ class ManagerTerrain extends Manager
 			$stmt->execute();
 
 			$t = new Terrain;
-
       $tab = arrayConstructor($stmt);
-
       $t->hydrate($tab);
-      return $t;
+      
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['terrain'] = $t;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
+      exit();
 
     }
   }
@@ -101,35 +149,59 @@ class ManagerTerrain extends Manager
     $req = "UPDATE TERRAIN SET labelTerrain = :NEWLABEL, descTerrain = :NEWINFO WHERE labelTerrain = :LABEL";
 
     // Send the request to the Database
-    try {
+    try
+    {
       $stmt = $this->db->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
       $stmt->bindValue(":NEWLABEL", $t->getsLabel_Terrain, PDO::PARAM_STR);
       $stmt->bindValue(":NEWINFO", $t->getsDesc_Terrain, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
+      exit();
 
     }
   }
 
-  public function deleTerrainByLabel($text)
+  public function deleteTerrainByLabel($text)
   // Goal : Delete a terrain with a given name
   // Entry : A text for the name
   {
     $req = "DELETE FROM TERRAIN WHERE labelTerrain = :LABEL";
 
     // Send the request to the Database
-    try {
+    try
+    {
       $stmt = $this->db->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
+      exit();
 
     }
   }

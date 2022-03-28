@@ -1,3 +1,21 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerPhoto
+* Fonctions     : arrayConstructor($stmt)
+*                 insertPhoto(Photo $p)
+*                 selectPhotos()
+*                 selectPhotoById($num)
+*                 updatePhotoById(Photo $p, $num)
+*                 deletePhotoById($num)
+*                 selectPhotosByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/PhotoObject.php")
 require_once("Manager.php")
@@ -45,9 +63,20 @@ class ManagerPhoto extends Manager
       $stmt->bindValue(":ID", $p->nId_Photo, PDO::PARAM_INT);
       $stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
+			exit();
 
     }
   }
@@ -63,10 +92,21 @@ class ManagerPhoto extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -87,17 +127,27 @@ class ManagerPhoto extends Manager
 			$stmt->execute();
 
 			$p = new Photo;
-
       $tab = arrayConstructor($stmt);
-
 			$p->hydrate($tab);
-			return $p;
 
-		} catch(PDOException $error) {
-			echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['photo'] = $p;
+      echo json_encode($result);
+			
+
+		} catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
-		}
+    }
   }
 
   public function updatePhotoById(Photo $p, $num)
@@ -114,11 +164,22 @@ class ManagerPhoto extends Manager
       $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
       $stmt->bindValue(":NEW_ID", $p->getnId_Excursion, PDO::PARAM_INT);
 
-    } catch(PDOException $error) {
-			echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "Photo mise à jour";
+      echo json_encode($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
-		}
+    }
   }
 
   public function deletePhotoById($num)
@@ -133,8 +194,19 @@ class ManagerPhoto extends Manager
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "Photo supprimée";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }
@@ -150,10 +222,21 @@ class ManagerPhoto extends Manager
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
 			exit();
 
     }

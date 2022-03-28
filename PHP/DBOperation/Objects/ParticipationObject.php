@@ -3,8 +3,8 @@ class Participation
 {
 	// Private members
 	private $nId_Prog;
-	private $sMail_Utilisateur;
-  private $sRole_Utilisateur;
+	private $sMail_Marcheur;
+  private $sRole_Marcheur;
 
 	// Methods
 	// Hydrate
@@ -40,24 +40,24 @@ class Participation
     $this->nId_Prog = $num;
   }
 
-  public function getsMail_Utilisateur()
+  public function getsMail_Marcheur()
   {
-    return $this->sMail_Utilisateur;
+    return $this->sMail_Marcheur;
   }
 
-  public function setsMail_Utilisateur($text)
+  public function setsMail_Marcheur($text)
   {
-    $this->sMail_Utilisateur = $text;
+    $this->sMail_Marcheur = $text;
   }
 
-  public function getsRole_Utilisateur()
+  public function getsRole_Marcheur()
   {
-    return $this->sRole_Utilisateur;
+    return $this->sRole_Marcheur;
   }
 
-  public function setsRole_Utilisateur($text)
+  public function setsRole_Marcheur($text)
   {
-    $this->sRole_Utilisateur = $text;
+    $this->sRole_Marcheur = $text;
   }
 
 }

@@ -1,3 +1,3 @@
 <?php
-    include_once('../HTML/Structure/ListeRandonneesAccueil.html');
+    include_once('../../HTML/Structure/ListeRandonneesAccueil.html');
 ?>
