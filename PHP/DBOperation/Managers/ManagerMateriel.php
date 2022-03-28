@@ -81,10 +81,9 @@ class ManagerMateriel extends Manager
 			$stmt->execute();
 
 			$m = new Materiel;
-
       $tab = arrayConstructor($stmt);
-
       $m->hydrate($tab);
+      
       return $m;
 
     } catch (PDOException $error) {
@@ -107,6 +106,7 @@ class ManagerMateriel extends Manager
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
       $stmt->bindValue(":NEWLABEL", $m->getsLabel_Materiel, PDO::PARAM_STR);
       $stmt->bindValue(":NEWINFO", $m->getsDesc_Materiel, PDO::PARAM_STR);
+      $stmt->execute();
 
     } catch(PDOException $error) {
 			echo "<script>console.log('".$error->getMessage()."')</script>";

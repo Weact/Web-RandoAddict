@@ -1,9 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2022-03-28
+### Changed
+- Retours des méthodes dans les Managers.
+- deleTerrainByLabel renommée en deleteTerrainByLabel.
+
+### TO-DO
+- Terminer le CRUD dans les tables de liaison.
+
 ## [0.0.5] - 2022-03-28
 ### Added
-- Méthodes Update & Delete pour plus de Managers
+- Méthodes Update & Delete pour plus de Managers.
 
 ### Merge with develop
 

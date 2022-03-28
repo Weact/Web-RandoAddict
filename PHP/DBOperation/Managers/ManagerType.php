@@ -39,9 +39,20 @@ class ManagerType extends Manager
       $stmt->bindValue(":INFO", $t->getsDesc_Type, PDO::PARAM_STR);
       $stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
+			exit();
 
     }
   }
@@ -57,10 +68,21 @@ class ManagerType extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }
@@ -83,10 +105,21 @@ class ManagerType extends Manager
 			$t = new Type;
       $tab = arrayConstructor($stmt);
       $t->hydrate($tab);
-      return $t;
+      
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['type'] = $t;
+      echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }
@@ -106,8 +139,19 @@ class ManagerType extends Manager
       $stmt->bindValue(":NEWINFO", $t->getsDesc_Type, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }
@@ -125,8 +169,19 @@ class ManagerType extends Manager
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
 			exit();
 
     }

@@ -55,9 +55,6 @@ class ManagerExcursion extends Manager
   // Goal : Insert an excursion in the database
   // Entry : A excursion object
   {
-    //objet de retour
-    $result;
-
     $req = "INSERT INTO EXCURSION(labelExcursion, descExcursion, cheminExcursion, prixExcursion) VALUES (:LABEL, :INFO, :CHEMIN, :PRIX)";
 
     // Send the request to the database
@@ -71,22 +68,21 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion, PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
       
-      //Retour succès
-      $result['success']=true;
-      $result['error']=false;
-      $result['message']="success";
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
       echo json_encode($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      
-      //Retour échec
-      $result['success']=false;
-      $result['error']=true;
-      $result['message']=$error->getMessage();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
       echo json_encode($result);
 
       exit();
+
     }
   }
 
@@ -94,9 +90,6 @@ class ManagerExcursion extends Manager
   // Goal : Select all excursions in the database
   // Return : An array holding all the excursions
   {
-    //objet de retour
-    $result;
-
     $req = "SELECT * FROM EXCURSION";
 
     // Send the request to the database
@@ -105,22 +98,18 @@ class ManagerExcursion extends Manager
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
 
-      //Retour succès
-      $result['success']=true;
-      $result['error']=false;
-      $result['message']="success";
-      $result['stmt']=$stmt;
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
       echo json_encode($result);
 
-			return $stmt;
-
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-
-      //Retour échec
-      $result['success']=false;
-      $result['error']=true;
-      $result['message']=$error->getMessage();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
       echo json_encode($result);
 
 			exit();
@@ -133,9 +122,6 @@ class ManagerExcursion extends Manager
   // Entry : A num for the ID
   // Return : An Excursion object
   {
-    //objet de retour
-    $result;
-
     $req = "SELECT * FROM EXCURSION WHERE idExcursion = :ID";
 
 		//Envoie de la requête à la base
@@ -146,29 +132,21 @@ class ManagerExcursion extends Manager
 			$stmt->execute();
 
 			$e = new Excursion;
-
       $tab = arrayConstructor($stmt);
-
 			$e->hydrate($tab);
       
-      //Retour succès
-      $result['success']=true;
-      $result['error']=false;
-      $result['message']="success";
-      $result['e']=$e;
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['excursion'] = $e;
       echo json_encode($result);
 
-			return $e;
-
-		}
-		catch(PDOException $error)
-		{
-			echo "<script>console.log('".$error->getMessage()."')</script>";
-
-      //Retour échec
-      $result['success']=false;
-      $result['error']=true;
-      $result['message']=$error->getMessage();
+		} catch(PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
       echo json_encode($result);
 
 			exit();
@@ -176,14 +154,72 @@ class ManagerExcursion extends Manager
 		}
   }
 
+  public function updateExcursionById(Excursion $e, $num)
+  {
+    $req = "UPDATE EXCURSION SET idExcursion = :NEW_ID, labelExcursion = :NEWLABEL, descExcursion = :NEWINFO, cheminExcursion = :NEWCHEMIN, prixExcursion = :NEWPRIX WHERE idExcursion = :ID";
+
+    try
+    {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":NEW_ID", $e->getnId_Excursion, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLABEL", $e->getsLabel_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $e->getsDesc_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWCHEMIN", $e->getsChemin_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPRIX", $m->getfPrix_Excursion, PDO::PARAM_STR);
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
+    } catch(PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+
+			exit();
+
+		}
+  }
+
+  public function deleteExcursionById($num)
+  {
+    $req = "DELETE FROM EXCURSION WHERE idExcursion = :ID";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->db->prepare($req);
+			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      echo json_encode($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      echo json_encode($result);
+ 
+			exit();
+
+    }
+  }
+
   public function selectExcursionsByPrice($float)
   // Goal : Select all excursions with a price under a given number
   // Entry : A float for the maximum price acceptable
   // Return : An array holding all the corresponding excursions
   {
-    //objet de retour
-    $result;
-
     $req = "SELECT * FROM EXCURSION WHERE prixExcursion <= :PRIX";
 
     // Send the request to the database
@@ -193,22 +229,18 @@ class ManagerExcursion extends Manager
 			$stmt->bindValue(":PRIX", $float, PDO::PARAM_STR);
 			$stmt->execute();
 
-      //Retour succès
-      $result['success']=true;
-      $result['error']=false;
-      $result['message']="success";
-      $result['stmt']=$stmt;
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
       echo json_encode($result);
 
-      return $stmt;
-
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-
-      //Retour échec
-      $result['success']=false;
-      $result['error']=true;
-      $result['message']=$error->getMessage();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
       echo json_encode($result);
 
 			exit();
@@ -221,9 +253,6 @@ class ManagerExcursion extends Manager
   // Entry : A text for the label
   // Return : An array holding all the corresponding excursions
   {
-    //objet de retour
-    $result;
-
     $req = "SELECT * FROM EXCURSION WHERE labelExcursion = :LABEL";
 
     // Send the request to the database
@@ -233,22 +262,18 @@ class ManagerExcursion extends Manager
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
-      //Retour succès
-      $result['success']=true;
-      $result['error']=false;
-      $result['message']="success";
-      $result['stmt']=$stmt;
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
       echo json_encode($result);
 
-			return $stmt;
-
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      
-      //Retour échec
-      $result['success']=false;
-      $result['error']=true;
-      $result['message']=$error->getMessage();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
       echo json_encode($result);
 
 			exit();
