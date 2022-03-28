@@ -16,7 +16,8 @@
 <body class="h-100 text-center text-white bg-dark">
 
     <?php
-        include_once('Structure/ListeRandonneesAccueil.php');
+        /*include_once('Structure/ListeRandonneesAccueil.php');*/
+        include_once('Structure/ListeRandonneesAdminPage.php');
     ?>
 
     <?php
