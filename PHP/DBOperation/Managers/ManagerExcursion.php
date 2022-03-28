@@ -34,15 +34,17 @@ class ManagerExcursion extends Manager
         "nId_Excursion" => $valueStmt["idExcursion"],
         "sLabel_Excursion" => $valueStmt["labelExcursion"],
         "sDesc_Excursion" => $valueStmt["descExcursion"],
-        "sChemin_Excursion" => $valueStmt["cheminExcursion"],
+        "sDepart_Excursion" => $valueStmt["departExcursion"],
+        "sArrivee_Excursion" => $valueStmt["arriveeExcursion"],
         "fPrix_Excursion" => $valueStmt["prixExcursion"]
         );
-    }else{
+    } else {
       $tab = array(
         "nId_Excursion" => "",
         "sLabel_Excursion" => "",
         "sDesc_Excursion" => "",
-        "sChemin_Excursion" => "",
+        "sDepart_Excursion" => "",
+        "sArrivee_Excursion" => "",
         "fPrix_Excursion" => ""
         );
     }
@@ -55,7 +57,7 @@ class ManagerExcursion extends Manager
   // Goal : Insert an excursion in the database
   // Entry : A excursion object
   {
-    $req = "INSERT INTO EXCURSION(labelExcursion, descExcursion, cheminExcursion, prixExcursion) VALUES (:LABEL, :INFO, :CHEMIN, :PRIX)";
+    $req = "INSERT INTO EXCURSION(labelExcursion, descExcursion, departExcursion, arriveeExcursion, prixExcursion) VALUES (:LABEL, :INFO, :DEPART, :ARRIVEE, :PRIX)";
 
     // Send the request to the database
     try
@@ -64,7 +66,8 @@ class ManagerExcursion extends Manager
       // $stmt->bindValue(":ID", $e->getnId_Excursion, PDO::PARAM_INT)
       $stmt->bindValue(":LABEL", $e->getsLabel_Excursion, PDO::PARAM_STR);
       $stmt->bindValue(":INFO", $e->getsDesc_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":CHEMIN", $e->getsChemin_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":DEPART", $e->getsDepart_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion, PDO::PARAM_STR);
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion, PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
       
@@ -156,7 +159,7 @@ class ManagerExcursion extends Manager
 
   public function updateExcursionById(Excursion $e, $num)
   {
-    $req = "UPDATE EXCURSION SET idExcursion = :NEW_ID, labelExcursion = :NEWLABEL, descExcursion = :NEWINFO, cheminExcursion = :NEWCHEMIN, prixExcursion = :NEWPRIX WHERE idExcursion = :ID";
+    $req = "UPDATE EXCURSION SET idExcursion = :NEW_ID, labelExcursion = :NEWLABEL, descExcursion = :NEWINFO, departExcursion = :NEWDEPART, arriveeExcursion = :NEWARRIVEE, prixExcursion = :NEWPRIX WHERE idExcursion = :ID";
 
     try
     {
@@ -165,7 +168,8 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":NEW_ID", $e->getnId_Excursion, PDO::PARAM_INT);
       $stmt->bindValue(":NEWLABEL", $e->getsLabel_Excursion, PDO::PARAM_STR);
       $stmt->bindValue(":NEWINFO", $e->getsDesc_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWCHEMIN", $e->getsChemin_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWDEPART", $e->getsDepart_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWARRIVEE", $e->getsArrivee_Excursion, PDO::PARAM_STR);
       $stmt->bindValue(":NEWPRIX", $m->getfPrix_Excursion, PDO::PARAM_STR);
 			$stmt->execute();
 
