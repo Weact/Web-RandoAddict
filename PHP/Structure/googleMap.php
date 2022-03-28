@@ -21,15 +21,15 @@
     {
         if ($taille<=0)
         {
-            echo '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin='.$depart.'&destination='.$destination.'&mode=walking" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+            echo '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin='.$depart.'&destination='.$arrive.'&mode=walking" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
         }
         else if ($taille <=1)
         {
-            echo '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin='.$depart.'&destination='.$destination.'&mode=walking" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+            echo '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin='.$depart.'&destination='.$arrive.'&mode=walking" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
         }
         else if ($taille >1)
         {
-            echo '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin='.$depart.'&destination='.$destination.'&mode=walking" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
+            echo '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin='.$depart.'&destination='.$arrive.'&mode=walking" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>';
         }
     }
 
@@ -37,7 +37,7 @@
     //BUT : Si le fichier php est appelé avec une requête GET, renvoyer une carte à l'endroit de l'appel.
     //ENTREE : les informations depart et arrivé ainsi que la taille dans GET pour la fonction createGoogleMapIframeTravel()
     //SORTIE : L'iframe renvoyé par la fonction en html.
-    if (isset($_GET['depart'] && isset($_GET['arrive'])))
+    /*if (isset($_GET['depart'] && isset($_GET['arrive'])))
     {
         //Mise en place des données
         $depart = $_GET['depart'];
@@ -50,5 +50,8 @@
 
         //Appel de la fonction
         createGoogleMapIframeTravel($depart,$arrive,$taille);
-    }
+    }*/
+
+    
+    createGoogleMapIframeTravel("Pl.+des+Halles,+67000+Strasbourg","11+Rue+de+la+Rheinmatt,+67000+Strasbourg",2);//C'est l'adresse à donner à Tom.
 ?>

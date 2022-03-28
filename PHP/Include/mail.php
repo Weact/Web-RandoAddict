@@ -51,7 +51,7 @@ function sendMail($mailClient, $titre, $texte)
     // 2nde partie du message
     // Le 1er fichier (inline)
     //---------------------------------
-    $fichier = './ASSETS/penguin.jpg'; //Variable
+    $fichier = './penguin.jpg'; //VariableASSETS/
     $fp      = fopen($fichier, "rb");
     $fichierattache = fread($fp, filesize($fichier));
     fclose($fp);
@@ -77,6 +77,6 @@ function sendMail($mailClient, $titre, $texte)
 }
 
 //Test du sendMail
-//sendMail("romain.schlotter@gmail.com","Le Titre !","Le message");
+sendMail("romain.schlotter@gmail.com","Le Titre !","Le message");
 
 ?>
