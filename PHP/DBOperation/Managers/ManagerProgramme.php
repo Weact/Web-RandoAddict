@@ -15,7 +15,7 @@
 *                 selectProgrammesByDifficulty($num)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/-->
 
 <?php
@@ -62,7 +62,7 @@ class ManagerProgramme extends Manager
   // Goal : Insert a program in the database
   // Entry : A program object
   {
-    $req = "INSERT INTO PROGRAMME(labelProgramme, descProgramme, dateDepartProgramme, dateAriveeProgramme, capaciteProgramme, difficulteProgramme, valideProgramme) VALUES (:LABEL, :INFO, :DEPART, :ARIVEE, :CAP, :DIF, :VALIDE)";
+    $req = "INSERT INTO PROGRAMME(labelProgramme, descProgramme, dateDepartProgramme, dateArriveeProgramme, capaciteProgramme, difficulteProgramme, valideProgramme) VALUES (:LABEL, :INFO, :DEPART, :ARIVEE, :CAP, :DIF, :VALIDE)";
 
     // Send the request to the database
     try {
@@ -88,7 +88,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -105,7 +105,7 @@ class ManagerProgramme extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -119,7 +119,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -142,7 +142,7 @@ class ManagerProgramme extends Manager
 			$p = new Programme;
       $tab = arrayConstructor($stmt);
 			$p->hydrate($tab);
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -156,7 +156,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -167,7 +167,7 @@ class ManagerProgramme extends Manager
   // Entry : A number for the ID
   {
     $req = "UPDATE PROGRAMME SET labelProgramme = :NEWLABEL, descProgramme = :NEWINFO, dateDepartProgramme = :NEWDEPART, dateArriveeProgramme = :NEWARRIVEE, capaciteProgramme = :NEWCAP, difficulteProgramme = :NEWDIF, valideProgramme = :NEWVALIDE WHERE idProgramme = :ID";
-  
+
     try
     {
       $stmt = $this->db->prepare($req);
@@ -193,7 +193,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -223,7 +223,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -242,7 +242,7 @@ class ManagerProgramme extends Manager
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -256,7 +256,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -273,7 +273,7 @@ class ManagerProgramme extends Manager
     {
       $stmt = $this->db->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -287,7 +287,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
@@ -306,7 +306,7 @@ class ManagerProgramme extends Manager
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":DIF", $num, PDO::PARAM_STR);
       $stmt->execute();
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -320,7 +320,7 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
