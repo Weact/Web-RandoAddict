@@ -28,10 +28,13 @@
 
 <body class="h-100 text-center text-white bg-dark">
 
+    <main id="mainSection">
     <?php
         include_once('Structure/ListeRandonneesAccueil.php'); /* PAGE PHP A INCLURE DE BASE DANS ACCUEIL.PHP */
-        /*include_once('PageRandonee.php'); /* PAGE RANDONEE, CETTE PAGE SERA INCLU DANS L'UTILISATEUR VOUDRA CONSULTER UNE RANDONEE */
+        //include_once('PageRandonee.php'); /* PAGE RANDONEE, CETTE PAGE SERA INCLU DANS L'UTILISATEUR VOUDRA CONSULTER UNE RANDONEE */
     ?>
+    </main>
+    
 
     <?php
     /* Inclu le footer dans la page */
