@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS Participation(
 
 CREATE TABLE IF NOT EXISTS Necessaire(
 	idProgramme int not null,
-	labelMateriel int not null,
+	labelMateriel varchar(128) not null,
 	CONSTRAINT pk_Necessaire PRIMARY KEY(idProgramme, labelMateriel),
 	CONSTRAINT fk_NecessaireProgramme FOREIGN KEY(idProgramme) REFERENCES Programme(idProgramme),
 	CONSTRAINT fk_NecessaireMateriel FOREIGN KEY(labelMateriel) REFERENCES Materiel(labelMateriel)
