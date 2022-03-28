@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 ### Added
 - Ajout de l'entête pour tous les fichiers Managers.
 
+### Changed
+- cheminExcursion modifié en departExcursion & arriveeExcursion dans la classe Objet et le Manager, conformément à la BDD.
+
 ## [0.0.6] - 2022-03-28
 ### Changed
 - Retours des méthodes dans les Managers.

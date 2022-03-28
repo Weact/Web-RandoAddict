@@ -5,7 +5,8 @@ class Excursion
 	private $nId_Excursion;
   private $sLabel_Excursion;
   private $sDesc_Excursion;
-  private $sChemin_Excursion;
+  private $sDepart_Excursion;
+  private $sArrivee_Excursion;
   private $fPrix_Excursion;
 
 	// Methods
@@ -62,14 +63,24 @@ class Excursion
     $this->sDesc_Excursion = $text;
   }
 
-  public function getsChemin_Excursion()
+  public function getsDepart_Excursion()
   {
-    return $this->sChemin_Excursion;
+    return $this->sDepart_Excursion;
   }
 
-  public function setsChemin_Excursion($text)
+  public function setsDepart_Excursion($text)
   {
-    $this->sChemin_Excursion = $text;
+    $this->sDepart_Excursion = $text;
+  }
+
+  public function getsArrivee_Excursion()
+  {
+    return $this->sArrivee_Excursion;
+  }
+
+  public function setsArrivee_Excursion($text)
+  {
+    $this->sArrivee_Excursion = $text;
   }
 
   public function getfPrix_Excursion()
