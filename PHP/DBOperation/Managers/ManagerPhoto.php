@@ -52,7 +52,7 @@ class ManagerPhoto extends Manager
   // Goal : Insert a photo in the database
   // Entry : A photo object
   {
-    $req = "INSERT INTO PHOTO(lienPhoto, labelPhoto, idPhoto) VALUES (:LIEN, :LABEL, :ID)";
+    $req = "INSERT INTO PHOTO(lienPhoto, labelPhoto, idExcursion) VALUES (:LIEN, :LABEL, :ID)";
 
     // Send the request to the database
     try
@@ -60,7 +60,7 @@ class ManagerPhoto extends Manager
       $stmt = $this->db->prepare($req);
       $stmt->bindValue(":LIEN", $p->getsLien_Photo, PDO::PARAM_STR);
       $stmt->bindValue(":LABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":ID", $p->nId_Photo, PDO::PARAM_INT);
+      $stmt->bindValue(":ID", $p->nId_Excursion, PDO::PARAM_INT);
       $stmt->execute();
 
       // Return success
