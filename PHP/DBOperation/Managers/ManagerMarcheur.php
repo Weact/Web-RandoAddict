@@ -1,13 +1,16 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/ManagerMarcheur.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
 *
 * Description   : ---.
 *
-* Classe        : ManagerExcursion
+* Classe        : ManagerMarcheur
 * Fonctions     : arrayConstructor($stmt)
 *                 insertMarcheur(Marcheur $m)
 *                 existMarcheurByMail($mail, $mdp)
 *                 selectMarcheurs()
+*                 selectMarcheurByMail($mail)
+*                 updateMarcheurByMail(Marcheur $m, $mail)
+*                 deleteMarcheurByMail($mail)
 *
 * Créateur      : Luc Cornu
 * 

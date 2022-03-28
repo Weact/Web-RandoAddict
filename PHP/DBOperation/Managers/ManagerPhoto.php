@@ -1,3 +1,21 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerPhoto
+* Fonctions     : arrayConstructor($stmt)
+*                 insertPhoto(Photo $p)
+*                 selectPhotos()
+*                 selectPhotoById($num)
+*                 updatePhotoById(Photo $p, $num)
+*                 deletePhotoById($num)
+*                 selectPhotosByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/PhotoObject.php")
 require_once("Manager.php")

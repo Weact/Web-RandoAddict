@@ -1,3 +1,20 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerTerrain
+* Fonctions     : arrayConstructor($stmt)
+*                 insertTerrain(Terrain $t)
+*                 selectTerrains()
+*                 selectTerrainByLabel($text)
+*                 updateTerrainByLabel(TERRAIN $t, $text)
+*                 deleteTerrainByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/TerrainObject.php")
 require_once("Manager.php")

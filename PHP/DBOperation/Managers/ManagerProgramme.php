@@ -1,3 +1,23 @@
+<!--/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerProgramme.php
+*
+* Description   : ---.
+*
+* Classe        : ManagerProgramme
+* Fonctions     : arrayConstructor($stmt)
+*                 insertProgramme(Programme $p)
+*                 selectProgrammes()
+*                 selectProgrammeById($num)
+*                 updateProgrammeById(Programme $p, $num)
+*                 deleteProgrammeById($num)
+*                 selectProgrammesByLabel($text)
+*                 selectProgrammesWithValideDate()
+*                 selectProgrammesByDifficulty($num)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/-->
+
 <?php
 require_once("../Objects/ProgrammeObject.php")
 require_once("Manager.php")
@@ -271,14 +291,6 @@ class ManagerProgramme extends Manager
 			exit();
 
     }
-  }
-
-  public function selectProgrammesByValidation($bool)
-  // Goal : Select a program with validation or not
-  // Entry : A boolean
-  // Return : An array holding all the programs valid
-  {
-    // TO-DO <--
   }
 
   public function selectProgrammesByDifficulty($num)
