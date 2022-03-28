@@ -13,7 +13,9 @@
 * 21-03-2022    : Création page
 * 28-03-2022    : Pull Request et mise en commun avec le travail général
 * 28-03-2022    : Modification du header par Lucas DRUCKES pour un meilleur visuel
-\*******************************************************************************/-->
+\*******************************************************************************/
+\*******************************************************************************/
+* TODO          : ADD PROFILE DROPDOWN BUTTON WITH ADDITIONALS OPTIONS         *-->
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
@@ -59,9 +61,13 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li
-                        class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link">
+                        class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link goToDispRando">
                         <a class="nav-link fw-bolder p-2 text-primary fs-5" aria-current="page" href="#">Randonnées
                             Disponibles</a>
+                    </li>
+                    <li
+                        class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link goToDispRando">
+                        <a class="nav-link fw-bolder p-2 text-primary fs-5 goToMyRando" aria-current="page" href="#">Mes Randonnées</a>
                     </li>
                     <li
                         class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link">
@@ -73,7 +79,7 @@
                     </li>
                     <li
                         class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link">
-                        <a class="nav-link fw-bolder p-2 text-primary fs-5" href="#">Espace Administrateur</a>
+                        <a class="nav-link fw-bolder p-2 text-primary fs-5 goToAdmin" href="#">Espace Administrateur</a>
                     </li>
                 </ul>
 
