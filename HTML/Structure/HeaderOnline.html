@@ -19,15 +19,17 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
         <div class="container-fluid align-items-end">
-            <h1 class="user-select-none text-primary display-1 text-uppercase">
-                RANDO<span class="text-success">ADDICT</span>
-            </h1>
+            <a href="#" class="goToDispRando" style="text-decoration: none!important;">
+                <h1 class="user-select-none text-primary display-1 text-uppercase">
+                    RANDO<span class="text-success">ADDICT</span>
+                </h1>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                
+
                 <form class="w-100 text-primary fw-bolder mr-3 mt-3">
                     <div class="d-flex text-dark align-items-center justify-content-end">
                         <i class="bi bi-person-circle fs-1 me-3"></i>
@@ -61,18 +63,12 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li
                         class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link">
-                        <a class="nav-link fw-bolder p-2 text-primary fs-5" aria-current="page" href="#">Randonnées
-                            Disponibles</a>
-                    </li>
-                    <li
-                        class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link">
-                        <a class="nav-link fw-bolder p-2 text-primary fs-5" href="#">A propos de nous</a>
-                    </li>
-                    <li
-                        class="nav-item text-left m-2 border-bottom border-2 border-primary rounded-pill nav-custom-link">
-                        <a class="nav-link fw-bolder p-2 text-primary fs-5" href="#">Contact</a>
+                        <a class="nav-link fw-bolder p-2 text-primary fs-5 goToMyRando" aria-current="page" href="#">Mes
+                            randonnées</a>
                     </li>
                 </ul>
+
+                <button class="btn btn-danger fw-bolder text-uppercase" value="Inscription">Déconnexion</button>
             </div>
         </div>
     </nav>
