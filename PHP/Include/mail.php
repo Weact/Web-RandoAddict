@@ -54,240 +54,240 @@ function sendMail($mailClient, $titre, $etat, $Date, $Date2,
     $msg .= "<img src=\"cid:image1\"><br/>"; //L'id cid: correspond au Content-ID du fichier joint.
     $msg .= "</html>\r\n";*/
     if ($etat == 1){
-        echo('1');
+       //echo('1');
        $msg .= "
-<html>
-<html>
+      <html>
+      <html>
 
-<body>
-<style>
-    
-* { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; line-height: 1.65; }
+      <body>
+      <style>
 
-img { max-width: 100%; margin: 0 auto; display: block; }
+      * { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; line-height: 1.65; }
 
-body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
+      img { max-width: 100%; margin: 0 auto; display: block; }
 
-a { color: #71bc37; text-decoration: none; }
+      body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
 
-a:hover { text-decoration: underline; }
+      a { color: #71bc37; text-decoration: none; }
 
-.text-center { text-align: center; }
+      a:hover { text-decoration: underline; }
 
-.text-right { text-align: right; }
+      .text-center { text-align: center; }
 
-.text-left { text-align: left; }
+      .text-right { text-align: right; }
 
-.button { display: inline-block; color: white; background: #71bc37; border: solid #71bc37; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
+      .text-left { text-align: left; }
 
-.button:hover { text-decoration: none; }
+      .button { display: inline-block; color: white; background: #71bc37; border: solid #71bc37; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
 
-h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
+      .button:hover { text-decoration: none; }
 
-h1 { font-size: 32px; }
+      h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
 
-h2 { font-size: 28px; }
+      h1 { font-size: 32px; }
 
-h3 { font-size: 24px; }
+      h2 { font-size: 28px; }
 
-h4 { font-size: 20px; }
+      h3 { font-size: 24px; }
 
-h5 { font-size: 16px; }
+      h4 { font-size: 20px; }
 
-p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
+      h5 { font-size: 16px; }
 
-.container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
+      p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
 
-.container table { width: 100% !important; border-collapse: collapse; }
+      .container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
 
-.container .masthead { padding: 80px 0; color: white; }
+      .container table { width: 100% !important; border-collapse: collapse; }
 
-.container .masthead h1 { margin: 0 auto !important; max-width: 90%; text-transform: uppercase; }
+      .container .masthead { padding: 80px 0; color: white; }
 
-.container .content { background: white; padding: 30px 35px; }
+      .container .masthead h1 { margin: 0 auto !important; max-width: 90%; text-transform: uppercase; }
 
-.container .content.footer { background: none; }
+      .container .content { background: white; padding: 30px 35px; }
 
-.container .content.footer p { margin-bottom: 0; color: #888; text-align: center; font-size: 14px; }
+      .container .content.footer { background: none; }
 
-.container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
+      .container .content.footer p { margin-bottom: 0; color: #888; text-align: center; font-size: 14px; }
 
-.container .content.footer a:hover { text-decoration: underline; }    
-</style>    
+      .container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
 
-<table class='body-wrap'>
-    <tr>
-        <td class='container'>
+      .container .content.footer a:hover { text-decoration: underline; }    
+      </style>    
 
-            <table>
-                <tr>
-                    <td class='content'>
-                    <img src='cid:image1' >
+      <table class='body-wrap'>
+          <tr>
+              <td class='container'>
 
-                        <h2 style='color: green'> Excursion Valide,</h2>
+                  <table>
+                      <tr>
+                          <td class='content'>
+                          <img src='cid:image1' >
 
-                        <p> Votre excursion du <span>$Date</span> à <span>$Lieu </span>est préte et demare dans 72 heures!
-                        il y a actuellement <span>$NbGens</span> personnes dans le groupe <br> parmi eux, <span>$guide</span> votre guide. <br>
-                        La randonnée a une difficulté de <span>$difficult</span>, elle commence le $Date à $Lieu et fini le $Date2 à $Lieu2<br> n'oubliez pas de prendre <span>$Materiel</span>. <br>
-                        Si vous avez besoin de plus d informations, <br> veuillez consulter la page de la randonnée sur notre site web.</p>
-                        <table>
-                            <tr>
-                            <td class='button'>
-                                <a  class='link' href='http://randoaddict/PHP/Accueil.php' target='_blank'>
-                                Votre Excursion             
-                                </a>
-                            </td>
-                            </tr>
-                        </table>
+                              <h2 style='color: green'> Excursion Valide,</h2>
 
-                        <p>Par ailleurs, si vous voulez vous inscrire à d'autres randonnées, n'hésitez pas à venir voir notre site <a href='http://randoaddict/PHP/Accueil.php'>Randoaddict</a>.</p>
+                              <p> Votre excursion du <span>$Date</span> à <span>$Lieu </span>est préte et demare dans 72 heures!
+                              il y a actuellement <span>$NbGens</span> personnes dans le groupe <br> parmi eux, <span>$guide</span> votre guide. <br>
+                              La randonnée a une difficulté de <span>$difficult</span>, elle commence le $Date à $Lieu et fini le $Date2 à $Lieu2<br> n'oubliez pas de prendre <span>$Materiel</span>. <br>
+                              Si vous avez besoin de plus d informations, <br> veuillez consulter la page de la randonnée sur notre site web.</p>
+                              <table>
+                                  <tr>
+                                  <td class='button'>
+                                      <a  class='link' href='http://randoaddict/PHP/Accueil.php' target='_blank'>
+                                      Votre Excursion             
+                                      </a>
+                                  </td>
+                                  </tr>
+                              </table>
 
-                        <p><em>– l'équipe de Randoaddict</em></p>
+                              <p>Par ailleurs, si vous voulez vous inscrire à d'autres randonnées, n'hésitez pas à venir voir notre site <a href='http://randoaddict/PHP/Accueil.php'>Randoaddict</a>.</p>
 
-                    </td>
-                </tr>
-            </table>
+                              <p><em>– l'équipe de Randoaddict</em></p>
 
-        </td>
-    </tr>
-    <tr>
-        <td class='container'>
+                          </td>
+                      </tr>
+                  </table>
 
-            <table>
-                <tr>
-                    <td class='content footer' align='center'>
-                        <center><p> <a href='#'>Se desabonner</a></p></center>
-                    </td>
-                </tr>
-            </table>
+              </td>
+          </tr>
+          <tr>
+              <td class='container'>
 
-        </td>
-    </tr>
-</table>
-</body>
-</html>
-\r\n"; 
-    }
-    
-    else if ($etat == 2){
-        echo('2');
+                  <table>
+                      <tr>
+                          <td class='content footer' align='center'>
+                              <center><p> <a href='#'>Se desabonner</a></p></center>
+                          </td>
+                      </tr>
+                  </table>
+
+              </td>
+          </tr>
+      </table>
+      </body>
+      </html>
+      \r\n"; 
+          }
+    else if ($etat == 2)
+    {
+        //echo('2');
        $msg .= "
-    <html>
-    <html>
+        <html>
+        <html>
 
-    <body>
-    <style>
-    
-    * { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; line-height:   1.65; }
+        <body>
+        <style>
 
-    img { max-width: 100%; margin: 0 auto; display: block; }
-    
-    body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
-    
-    a { color: #71bc37; text-decoration: none; }
-    
-    a:hover { text-decoration: underline; }
-    
-    .text-center { text-align: center; }
-    
-    .text-right { text-align: right; }
-    
-.text-  left { text-align: left; }
+        * { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; line-height:   1.65; }
 
-.button { display: inline-block; color: white; background: #71bc37; border: solid #71bc37; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
+        img { max-width: 100%; margin: 0 auto; display: block; }
 
-.button:hover { text-decoration: none; }
+        body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
 
-h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
+        a { color: #71bc37; text-decoration: none; }
 
-h1 { font-size: 32px; }
+        a:hover { text-decoration: underline; }
 
-h2 { font-size: 28px; }
+        .text-center { text-align: center; }
 
-h3 { font-size: 24px; }
+        .text-right { text-align: right; }
 
-h4 { font-size: 20px; }
+    .text-  left { text-align: left; }
 
-h5 { font-size: 16px; }
+    .button { display: inline-block; color: white; background: #71bc37; border: solid #71bc37; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
 
-p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
+    .button:hover { text-decoration: none; }
 
-.container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
+    h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
 
-.container table { width: 100% !important; border-collapse: collapse; }
+    h1 { font-size: 32px; }
 
-.container .masthead { padding: 80px 0; color: white; }
+    h2 { font-size: 28px; }
 
-.container .masthead h1 { margin: 0 auto !important; max-width: 90%; text-transform: uppercase; }
+    h3 { font-size: 24px; }
 
-.container .content { background: white; padding: 30px 35px; }
+    h4 { font-size: 20px; }
 
-.container .content.footer { background: none; }
+    h5 { font-size: 16px; }
 
-.container .content.footer p { margin-bottom: 0; color: #888; text-align: center; font-size: 14px; }
+    p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
 
-.container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
+    .container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
 
-.container .content.footer a:hover { text-decoration: underline; }    
-</style>    
+    .container table { width: 100% !important; border-collapse: collapse; }
 
-    <table class='body-wrap'>
-    <tr>
-        <td class='container'>
+    .container .masthead { padding: 80px 0; color: white; }
 
-            <table>
-                <tr>
-                    <td class='content'>
-                    <img src='cid:image1' >
+    .container .masthead h1 { margin: 0 auto !important; max-width: 90%; text-transform: uppercase; }
 
-                        <h2 style='color: red'> Excursion Annulée,</h2>
+    .container .content { background: white; padding: 30px 35px; }
 
-                        <p> Votre excursion du <span>$Date</span> à <span>$Lieu </span>est annulée !
-                            Malheureusement, l'excursion ne pourra pas avoir lieu, <br> n'hésitez pas à consulter et à vous inscrire à nos nombreuses autres excursions. 
-                        </p>
-                        <table>
-                            <tr>
-                            <td class='button'>
-                                <a  class='link' href='http://randoaddict/PHP/Accueil.php' target='_blank'>
-                                randoaddict             
-                                </a>
-                            </td>
-                            </tr>
-                        </table>
+    .container .content.footer { background: none; }
 
-                        <p><em>– l'équipe de Randoaddict</em></p>
+    .container .content.footer p { margin-bottom: 0; color: #888; text-align: center; font-size: 14px; }
 
-                    </td>
-                </tr>
-            </table>
+    .container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
 
-        </td>
-    </tr>
-    <tr>
-        <td class='container'>
+    .container .content.footer a:hover { text-decoration: underline; }    
+    </style>    
 
-            <table>
-                <tr>
-                    <td class='content footer' align='center'>
-                        <center><p> <a href='#'>Se desabonner</a></p></center>
-                    </td>
-                </tr>
-            </table>
+        <table class='body-wrap'>
+        <tr>
+            <td class='container'>
 
-        </td>
-    </tr>
-    </table>
-    </body>
-    </html>
-    \r\n"; 
-    }
+                <table>
+                    <tr>
+                        <td class='content'>
+                        <img src='cid:image1' >
 
+                            <h2 style='color: red'> Excursion Annulée,</h2>
+
+                            <p> Votre excursion du <span>$Date</span> à <span>$Lieu </span>est annulée !
+                                Malheureusement, l'excursion ne pourra pas avoir lieu, <br> n'hésitez pas à consulter et à vous inscrire à nos nombreuses autres excursions. 
+                            </p>
+                            <table>
+                                <tr>
+                                <td class='button'>
+                                    <a  class='link' href='http://randoaddict/PHP/Accueil.php' target='_blank'>
+                                    randoaddict             
+                                    </a>
+                                </td>
+                                </tr>
+                            </table>
+
+                            <p><em>– l'équipe de Randoaddict</em></p>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        <tr>
+            <td class='container'>
+
+                <table>
+                    <tr>
+                        <td class='content footer' align='center'>
+                            <center><p> <a href='#'>Se desabonner</a></p></center>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+        </table>
+        </body>
+        </html>
+        \r\n"; 
+        }
 
     //---------------------------------
     // 2nde partie du message
     // Le 1er fichier (inline)
     //---------------------------------
-    $fichier = 'PaysageRandonnee_2.jpg'; //VariableASSETS/
+
+    $fichier = '..../ASSETS/PaysageRandonnee_2.jpg'; //VariableASSETS/
     $fp      = fopen($fichier, "rb");
     $fichierattache = fread($fp, filesize($fichier));
     fclose($fp);
@@ -305,7 +305,9 @@ p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
     $expediteur   = 'randoaddictludus@gmail.com'; //Constante
     $reponse      = $expediteur;
     $replyTo      = "Reply-to: no-reply\r\n".$entete;
+
     echo "Ce script envoie un mail au format HTML avec 1 image à $destinataire";
+    
     mail($destinataire,
         $titre,
         $msg,
