@@ -25,7 +25,7 @@ class Manager
 
   public function __construct($_db)
   {
-    $this->setDb($_db);
+    $this->setdb($_db);
   }
 
 	public function __destruct()
