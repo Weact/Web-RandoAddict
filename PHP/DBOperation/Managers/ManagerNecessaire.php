@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/NecessaireObject.php")
-require_once("Manager.php")
+require_once("../Objects/NecessaireObject.php");
+require_once("Manager.php");
 
 class ManagerNecessaire extends Manager
 {

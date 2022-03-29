@@ -19,8 +19,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/EscaleObject.php")
-require_once("Manager.php")
+require_once("../Objects/EscaleObject.php");
+require_once("Manager.php");
 
 class ManagerEscale extends Manager
 {

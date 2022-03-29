@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/ParticipationObject.php")
-require_once("Manager.php")
+require_once("../Objects/ParticipationObject.php");
+require_once("Manager.php");
 
 class ManagerParticipation extends Manager
 {

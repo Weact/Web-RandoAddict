@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/TraverseeObject.php")
-require_once("Manager.php")
+require_once("../Objects/TraverseeObject.php");
+require_once("Manager.php");
 
 class ManagerTraversee extends Manager
 {

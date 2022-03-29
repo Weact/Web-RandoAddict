@@ -20,8 +20,9 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/MarcheurObject.php")
-require_once("Manager.php")
+require_once("../Objects/MarcheurObject.php");
+require_once("Manager.php");
+
 class ManagerMarcheur extends Manager
 {
   private function arrayConstructor($stmt)
