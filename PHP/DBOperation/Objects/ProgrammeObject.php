@@ -110,7 +110,7 @@ class Programme
     return $this->sValide_Prog;
   }
 
-  public function setsValide_Prog($text)
+  public function setsValideProg($text)
   {
     $this->sValide_Prog = $text;
   }

@@ -19,7 +19,7 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/ProgrammeObject.php");
+require_once("DBOperation/Objects/ProgrammeObject.php");
 require_once("Manager.php");
 
 class ManagerProgramme extends Manager
@@ -75,6 +75,7 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":DIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":VALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
       $stmt->execute();
+      var_dump($p);
 
       // Return success
       $result['success'] = true;
