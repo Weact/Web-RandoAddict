@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerType.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerType.php
 *
 * Description   : Le Manager pour la table Type.
 *
@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/TypeObject.php");
+require_once("DBOperation/Objects/TypeObject.php");
 require_once("Manager.php");
 
 class ManagerType extends Manager

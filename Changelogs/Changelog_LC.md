@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - Correction d'une erreur dans les Managers.
 - Correction d'une erreur dans les Objets.
 - Correction sur les commentaires en HTML.
+- Correction du chemin des includes dans les classes Managers.
 
 ## [0.0.8] - 2022-03-28
 ### HOTFIX

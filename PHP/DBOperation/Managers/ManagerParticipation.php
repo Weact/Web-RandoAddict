@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerParticipation.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerParticipation.php
 *
 * Description   : Le Manager pour la table Participation.
 *
@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/ParticipationObject.php");
+require_once("DBOperation/Objects/ParticipationObject.php");
 require_once("Manager.php");
 
 class ManagerParticipation extends Manager

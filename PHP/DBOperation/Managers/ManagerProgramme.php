@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerProgramme.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerProgramme.php
 *
 * Description   : Le Manager pour la table Programme.
 *
@@ -19,7 +19,7 @@
 *
 \*******************************************************************************/
 
-require_once("../Objects/ProgrammeObject.php");
+require_once("DBOperation/Objects/ProgrammeObject.php");
 require_once("Manager.php");
 
 class ManagerProgramme extends Manager

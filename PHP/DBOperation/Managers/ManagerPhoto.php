@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerPhoto.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
 *
 * Description   : Le Manager pour la table Photo.
 *
@@ -17,7 +17,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/PhotoObject.php");
+require_once("DBOperation/Objects/PhotoObject.php");
 require_once("Manager.php");
 
 class ManagerPhoto extends Manager

@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerEscale.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerEscale.php
 *
 * Description   : Le Manager pour la table Escale.
 *
@@ -19,7 +19,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/EscaleObject.php");
+require_once("DBOperation/Objects/EscaleObject.php");
 require_once("Manager.php");
 
 class ManagerEscale extends Manager

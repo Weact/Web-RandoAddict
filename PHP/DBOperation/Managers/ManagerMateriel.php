@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerMateriel.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerMateriel.php
 *
 * Description   : Le Manager pour la table Materiel.
 *
@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/MaterielObject.php");
+require_once("DBOperation/Objects/MaterielObject.php");
 require_once("Manager.php");
 
 class ManagerMateriel extends Manager

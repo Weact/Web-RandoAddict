@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerNecessaire.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerNecessaire.php
 *
 * Description   : Le Manager pour la table Necessaire.
 *
@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/NecessaireObject.php");
+require_once("DBOperation/Objects/NecessaireObject.php");
 require_once("Manager.php");
 
 class ManagerNecessaire extends Manager

@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerTraversee.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerTraversee.php
 *
 * Description   : Le Manager pour la table Traversée.
 *
@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/TraverseeObject.php");
+require_once("DBOperation/Objects/TraverseeObject.php");
 require_once("Manager.php");
 
 class ManagerTraversee extends Manager

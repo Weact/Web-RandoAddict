@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerTerrain.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
 *
 * Description   : Le Manager pour la table Terrain.
 *
@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("../Objects/TerrainObject.php");
+require_once("DBOperation/Objects/TerrainObject.php");
 require_once("Manager.php");
 
 class ManagerTerrain extends Manager

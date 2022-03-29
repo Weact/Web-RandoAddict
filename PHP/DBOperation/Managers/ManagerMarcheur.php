@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerMarcheur.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
 *
 * Description   : Le Manager pour la table Marcheur.
 *
@@ -20,7 +20,7 @@
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
 \*******************************************************************************/
 
-require_once("../Objects/MarcheurObject.php");
+require_once("DBOperation/Objects/MarcheurObject.php");
 require_once("Manager.php");
 
 class ManagerMarcheur extends Manager

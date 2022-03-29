@@ -1,6 +1,6 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/dbOperation/Managers/ManagerExcursion.php
+* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
 *
 * Description   : Le Manager pour la table Excursion.
 *
@@ -19,7 +19,7 @@
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
 \*******************************************************************************/
 
-require_once("../Objects/ExcursionObject.php");
+require_once("DBOperation/Objects/ExcursionObject.php");
 require_once("Manager.php");
 
 class ManagerExcursion extends Manager
