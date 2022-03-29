@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerType.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerType.php
 *
 * Description   : ---.
 *
@@ -51,9 +51,9 @@ class ManagerType extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LABEL", $t->getsLabel_Type, PDO::PARAM_STR);
-      $stmt->bindValue(":INFO", $t->getsDesc_Type, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LABEL", $t->getsLabel_Type(), PDO::PARAM_STR);
+      $stmt->bindValue(":INFO", $t->getsDesc_Type(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
@@ -83,7 +83,7 @@ class ManagerType extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			
       // Return success
@@ -115,7 +115,7 @@ class ManagerType extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -150,10 +150,10 @@ class ManagerType extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Type, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWINFO", $t->getsDesc_Type, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Type(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $t->getsDesc_Type(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -182,7 +182,7 @@ class ManagerType extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 

@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerParticipation.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerParticipation.php
 *
 * Description   : ---.
 *
@@ -51,10 +51,10 @@ class ManagerParticipation extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":ID", $p->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":MAIL", $p->getsMail_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":_ROLE", $p->getsRole_Marcheur, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $p->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":MAIL", $p->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":_ROLE", $p->getsRole_Marcheur(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
@@ -82,7 +82,7 @@ class ManagerParticipation extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			
       // Return success
@@ -111,7 +111,7 @@ class ManagerParticipation extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -144,11 +144,11 @@ class ManagerParticipation extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEW_ID", $p->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWMAIL", $p->getsMail_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWROLE", $p->getsRole_Marcheur, PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $p->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWMAIL", $p->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWROLE", $p->getsRole_Marcheur(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -175,7 +175,7 @@ class ManagerParticipation extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
