@@ -97,7 +97,7 @@ class ManagerMarcheur extends Manager
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
-			if($stmt->rowCount > 0)
+			if($stmt->rowCount() > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
 
@@ -105,7 +105,7 @@ class ManagerMarcheur extends Manager
         $result['success'] = true;
         $result['error'] = false;
         $result['message'] = "success";
-        $result['passwordVerify'] = password_verify($mdp, $valueStmt["mdpMarcheur"]);
+        $result['passwordVerify'] = (md5($mdp) == $valueStmt["mdpMarcheur"]);
         return($result);
 
 			}else{
