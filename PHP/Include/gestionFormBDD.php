@@ -14,7 +14,7 @@
     //Vérification et initialisation des variables de session le cas échéant.
     if (!isset($_SESSION['typeUtilisateur']))
     {
-        $_SESSION['nomUtilisateur'] = "anon";
+        $_SESSION['typeUtilisateur'] = "anon";
     }
     if (!isset($_SESSION['nomUtilisateur']))
     {
