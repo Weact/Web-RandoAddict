@@ -64,7 +64,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":MAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":TEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
-      $stmt->bindValue(":MDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":MDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
       $stmt->bindValue(":ROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
       $stmt->execute();
 
@@ -205,7 +205,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
       $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
 			$stmt->execute();
 
