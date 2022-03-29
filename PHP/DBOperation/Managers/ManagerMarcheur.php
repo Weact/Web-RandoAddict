@@ -97,7 +97,7 @@ class ManagerMarcheur extends Manager
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
-			if($stmt->rowCount > 0)
+			if($stmt->rowCount() > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
 
@@ -106,7 +106,7 @@ class ManagerMarcheur extends Manager
         $result['error'] = false;
         $result['message'] = "success";
         $result['passwordVerify'] = password_verify($mdp, $valueStmt["mdpMarcheur"]);
-        echo json_encode($result);
+        return $result;
 
 			}else{
         // Return error
@@ -114,7 +114,7 @@ class ManagerMarcheur extends Manager
         $result['error'] = true;
         $result['message'] = "Mot de passe invalide";
         $result['passwordVerify'] = false;
-        echo json_encode($result);
+        return $result;
 			}
 
     } catch (PDOException $error) {

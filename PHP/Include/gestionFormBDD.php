@@ -32,6 +32,9 @@
           'sRole_Marcheur' => 'Marcheur'
           );
 
+          if($donnees['sPseudo_Marcheur'] == "admin"){
+            $donnees['sRole_Marcheur'] = "Guide";
+          }
           makeNewUser($donnees);
           connectUser($_POST['sMail_Marcheur_Inscription']);
          exit();
@@ -40,8 +43,11 @@
       }
       elseif(isset($_POST["sMail_Marcheur_Connexion"])) {
           //CONNEXION AUTOMATIQUE
-          connectUser($_POST["sMail_Marcheur_Connexion"]);
-
+          $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
+          var_dump($isValidMarcheur);
+          if ($isValidMarcheur){
+            connectUser($_POST["sMail_Marcheur_Connexion"]);
+          }
       }
       elseif(isset($_POST["departExcursion"]))
         {
@@ -121,5 +127,14 @@
          header("HTTP/1.1 303 See Other");
          header("Location: ./Accueil.php");
          exit();
+    }
+
+    function checkUserPw($mail, $pw) {
+        require_once("DBOperation/Managers/ManagerMarcheur.php");
+        require_once("DBOperation/PDO_Connect.php");
+        $conn = connect_bd();
+        $mng = new ManagerMarcheur($conn);
+
+        return $mng->existMarcheurByMail($mail, $pw)['passwordVerify'];
     }
 ?>

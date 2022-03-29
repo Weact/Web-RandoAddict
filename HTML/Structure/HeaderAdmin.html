@@ -17,7 +17,7 @@
 \*******************************************************************************/
 * TODO          : ADD PROFILE DROPDOWN BUTTON WITH ADDITIONALS OPTIONS         *-->
 
-<header>
+<html><header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
         <div class="container-fluid align-items-end">
             <a href="#" class="goToDispRando" style="text-decoration: none!important;">
@@ -74,7 +74,9 @@
 
                 <button class="btn btn-primary fw-bolder text-uppercase me-2" value="Connexion" hidden>Connexion</button>
                 <button class="btn btn-primary fw-bolder text-uppercase" value="Inscription" hidden>Inscription</button>
-                <button class="btn btn-danger fw-bolder text-uppercase" value="Inscription">Déconnexion</button>
+                <form id='disconnectForm' name='disconnectForm' class="form" method="POST" action="#">
+                  <button name="disconnect" type="submit" class="btn btn-danger fw-bolder text-uppercase" value="Inscription">Déconnexion</button>
+                </form>
             </div>
         </div>
     </nav>

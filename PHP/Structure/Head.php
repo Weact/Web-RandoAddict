@@ -27,7 +27,7 @@
 <?php
   //CONNEXION AUTOMATIQUE
     //Vérification et initialisation des variables de session le cas échéant.
-    if ($_SESSION['typeUtilisateur'] == "Admin")
+    if ($_SESSION['typeUtilisateur'] == "Guide")
     {
       require_once("Structure/HeaderAdmin.php");
     }
