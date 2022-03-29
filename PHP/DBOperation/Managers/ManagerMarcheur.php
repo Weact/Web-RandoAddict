@@ -14,7 +14,7 @@
 *                 deleteMarcheurByMail($mail)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
@@ -22,7 +22,6 @@
 
 require_once("DBOperation/Objects/MarcheurObject.php");
 require_once("Manager.php");
-
 class ManagerMarcheur extends Manager
 {
   private function arrayConstructor($stmt)
@@ -101,7 +100,7 @@ class ManagerMarcheur extends Manager
 			if($stmt->rowCount > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
-        
+
         // Retour success
         $result['success'] = true;
         $result['error'] = false;
@@ -118,7 +117,7 @@ class ManagerMarcheur extends Manager
         echo json_encode($result);
 			}
 
-    } catch (PDOException $error) {      
+    } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
@@ -175,7 +174,7 @@ class ManagerMarcheur extends Manager
 		  $m = new Marcheur;
       $tab = arrayConstructor($stmt);
       $m->hydrate($tab);
-        
+
       // Retour success
       $result['success'] = true;
       $result['error'] = true;
@@ -198,7 +197,7 @@ class ManagerMarcheur extends Manager
   public function updateMarcheurByMail(Marcheur $m, $mail)
   {
     $req = "UPDATE MARCHEUR SET mailMarcheur = :NEWMAIL, pseudoMarcheur = :NEWPSEUDO, telMarcheur = :NEWTEL, mdpMarcheur = :NEWMDP, roleMarcheur = :NEWROLE WHERE mailMarcheur = :MAIL";
-  
+
     try
     {
       $stmt = $this->getdb()->prepare($req);
@@ -250,7 +249,7 @@ class ManagerMarcheur extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }
