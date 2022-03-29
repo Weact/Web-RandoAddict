@@ -136,7 +136,8 @@
         $mng = new ManagerMarcheur($conn);
         $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
 
-        var_dump(md5($pw));
-        return $current_marcheur->getsMdp_Marcheur() == md5($pw);
+        $resulteotjea = $mng->existMarcheurByMail($mail, $pw)['passwordVerify'];
+        var_dump($resulteotjea);
+        return $resulteotjea;
     }
 ?>
