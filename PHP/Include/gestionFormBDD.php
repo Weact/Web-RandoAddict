@@ -41,7 +41,7 @@
 
 
       }
-      elseif(isset($_POST["sMail_Marcheur_Connexion"])) {
+      if(isset($_POST["sMail_Marcheur_Connexion"])) {
           //CONNEXION AUTOMATIQUE
           $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
           var_dump($isValidMarcheur);
@@ -134,7 +134,9 @@
         require_once("DBOperation/PDO_Connect.php");
         $conn = connect_bd();
         $mng = new ManagerMarcheur($conn);
+        $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
 
-        return $mng->existMarcheurByMail($mail, $pw)['passwordVerify'];
+        var_dump(md5($pw));
+        return $current_marcheur->getsMdp_Marcheur() == md5($pw);
     }
 ?>
