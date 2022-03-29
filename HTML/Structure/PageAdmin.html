@@ -1,27 +1,27 @@
-<div class="container bg-info rounded p-3">
-  <h2 class="text-center text-dark text-bold">Page administrateur<h2>
+<div class="container bg-light p-3">
+  <h2 class="text-center text-success">Page administrateur<h2>
 
       <!---------------------------------------------------------------------------------------------------------------------------------------------->
       <!---Onglets------------>
       <div class="m-5">
-        <ul class="nav nav-tabs" id="myTab">
-          <li class="nav-item">
-            <a href="#crea_rando" class="nav-link active text-dark" data-bs-toggle="tab">
+        <ul class="nav nav-tabs justify-content-center" id="myTab">
+          <li class="nav-item border-top border-2 border-primary">
+            <a href="#crea_rando" class="nav-link fw-bolder p-2 text-primary fs-5 " data-bs-toggle="tab">
               <h3>Création de randonnée</h3>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#crea_programme" class="nav-link text-dark" data-bs-toggle="tab">
+          <li class="nav-item border-top border-2 border-primary">
+            <a href="#crea_programme" class="nav-link fw-bolder p-2 text-primary fs-5 " data-bs-toggle="tab">
               <h3>Création de programme</h3>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#crea_profile" class="nav-link text-dark" data-bs-toggle="tab">
+          <li class="nav-item border-top border-2 border-primary">
+            <a href="#crea_profile" class="nav-link fw-bolder p-2 text-primary fs-5 " data-bs-toggle="tab">
               <h3>Création de profile</h3>
             </a>
           </li>
-          <li class="nav-item">
-            <a href="#membres" class="nav-link text-dark" data-bs-toggle="tab">
+          <li class="nav-item border-top border-2 border-primary">
+            <a href="#membres" class="nav-link fw-bolder p-2 text-primary fs-5 " data-bs-toggle="tab">
               <h3>Liste des membres</h3>
             </a>
           </li>
@@ -48,18 +48,13 @@
                 </optgroup>
               </select>
 
-              <legend for="nb_rando">Nombre de randonneurs</legend>
-              <div class="def-number-input number-input safari_only">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-                <input class="quantity" min="1" name="quantity" value="1" type="number">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              </div>
+
 
               <legend for="prix_pers">Prix par personne</legend>
               <div class="def-number-input number-input safari_only">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
+                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-danger">-</button>
                 <input class="quantity" min="0" name="prixExcursion" value="0" type="number" step="0.1" date-prefix="€">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-primary">+</button>
               </div>
 
               <legend for="selection">Départ</legend>
@@ -163,6 +158,13 @@
               <option value="">Randonnée placeholder</option>
               </optgroup>
             </select>
+
+            <legend for="nb_rando">Nombre de randonneurs</legend>
+            <div class="def-number-input number-input safari_only">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-danger">-</button>
+              <input class="quantity" min="1" name="quantity" value="1" type="number">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-primary">+</button>
+            </div>
 
             <legend for="selection_rando">Type de programme</legend><br>
 
