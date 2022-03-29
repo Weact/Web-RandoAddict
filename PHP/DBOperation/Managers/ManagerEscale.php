@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerEscale.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerEscale.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Escale.
 *
 * Classe        : ManagerEscale
 * Fonctions     : arrayConstructor($stmt)
@@ -16,10 +17,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/EscaleObject.php");
+require_once("DBOperation/Objects/EscaleObject.php");
 require_once("Manager.php");
 
 class ManagerEscale extends Manager

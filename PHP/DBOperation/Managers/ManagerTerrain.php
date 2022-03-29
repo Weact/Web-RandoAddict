@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerTerrain.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Terrain.
 *
 * Classe        : ManagerTerrain
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/TerrainObject.php");
+require_once("DBOperation/Objects/TerrainObject.php");
 require_once("Manager.php");
 
 class ManagerTerrain extends Manager

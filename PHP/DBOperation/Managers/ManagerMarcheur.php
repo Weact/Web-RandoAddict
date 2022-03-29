@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerMarcheur.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Marcheur.
 *
 * Classe        : ManagerMarcheur
 * Fonctions     : arrayConstructor($stmt)
@@ -17,9 +18,8 @@
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
 require_once("DBOperation/Objects/MarcheurObject.php");
 require_once("Manager.php");
 class ManagerMarcheur extends Manager
@@ -64,7 +64,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":MAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":TEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
-      $stmt->bindValue(":MDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":MDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
       $stmt->bindValue(":ROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
       $stmt->execute();
 
@@ -205,7 +205,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
       $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
 			$stmt->execute();
 

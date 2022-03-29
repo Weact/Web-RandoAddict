@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerExcursion.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Excursion.
 *
 * Classe        : ManagerExcursion
 * Fonctions     : arrayConstructor($stmt)
@@ -16,9 +17,8 @@
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
 require_once("DBOperation/Objects/ExcursionObject.php");
 require_once("Manager.php");
 

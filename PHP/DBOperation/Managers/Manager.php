@@ -1,7 +1,11 @@
-<!--/*******************************************************************************\
+<?php
+/*******************************************************************************\
 * Fichier       : /PHP/DBOperation/Managers/Manager.php
 *
-* Description   : ---.
+* Description   : La classe Manager, dont tous les autres Managers héritent.
+* 				  Elle possède en variable la connexion à la base de donnée.
+* 				  Les Managers servent à envoyer des requêtes à la BDD à l'aide de PDO_Connect.
+* 				  Chaque classes incluent les objets correspondants, il n'est donc pas nécessaire de l'inclure manuellement si le Manager est inclue.
 *
 * Classe        : Manager
 * Fonctions     : __construct($_db)
@@ -12,10 +16,8 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-
-<?php
 class Manager
 {
   // Private members

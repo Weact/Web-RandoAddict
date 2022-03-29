@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/MaterielObject.php
+*
+* Description   : L'objet Materiel.
+*
+* Classe        : Materiel
+* Fonctions     : hydrate(array $donnees)
+*				  __destruct()
+*				  Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Materiel
 {
 	// Private members
