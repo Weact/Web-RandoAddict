@@ -13,267 +13,330 @@
 \*******************************************************************************/-->
 <?php
 
-function sendMail($mailClient, $titre, $texte)
-//BUT : Envoyer un mail à un client.
-//ENTREE : Le mail du client, le titre du mail et le texte du mail.
-//SORTIE : Le mail envoyé au client avec une image de pingouin.
-{
-    //----------------------------------
-    // Construction de l'entête
-    //----------------------------------
-    $delimiteur = "-----=".md5(uniqid(rand()));
+//error_reporting(-1);
+//ini_set('display_errors', 'On');
+//set_error_handler("var_dump");
 
-    $entete = "MIME-Version: 1.0\r\n";
-    $entete .= "Content-Type: multipart/related; boundary=\"$delimiteur\"\r\n";
-    $entete .= "\r\n";
+    function sendMail($mailClient, $titre, $etat, $Date, $Date2, 
+                    $guide, $Lieu,$Lieu2, $NbGens, $difficult, $Materiel, $image)
+    //BUT : Envoyer un mail à un client.
+    //ENTREE : Le mail du client, le titre du mail et le texte du mail.
+    //SORTIE : Le mail envoyé au client avec une image de pingouin.
+    {
+        //----------------------------------
+        // Construction de l'entête
+        //----------------------------------
+        $delimiteur = "-----=".md5(uniqid(rand()));
 
-    //--------------------------------------------------
-    // Construction du message proprement dit
-    //--------------------------------------------------
+        $entete = "MIME-Version: 1.0\r\n";
+        $entete .= "Content-Type: multipart/related; boundary=\"$delimiteur\"\r\n";
+        $entete .= "\r\n";
 
-    $msg = "";
+        //--------------------------------------------------
+        // Construction du message proprement dit
+        //--------------------------------------------------
 
-    //---------------------------------
-    // 1ère partie du message
-    // Le code HTML
-    //---------------------------------
-    $msg .= "--$delimiteur\r\n";
-    $msg .= "Content-Type: text/html; charset=\"utf-8\"\r\n";
-    $msg .= "Content-Transfer-Encoding:8bit\r\n";
-    $msg .= "\r\n";
-    /*$msg .= "<html><body>";
-    //$msg .= "<h1>Email HTML avec 1 image</h1>"; //Corps du mail
-    $msg .= "<div>".$texte."</div>";
-    $msg .= "<img src=\"cid:image1\"><br/>"; //L'id cid: correspond au Content-ID du fichier joint.
-    $msg .= "</html>\r\n";*/
+        $msg = "";
 
-    $msg .= "<html>
-        <head>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-        <title>Email</title>
-        <style>
+        //---------------------------------
+        // 1ère partie du message
+        // Le code HTML
+        //---------------------------------
+        $msg .= "--$delimiteur\r\n";
+        $msg .= "Content-Type: text/html; charset=\"utf-8\"\r\n";
+        $msg .= "Content-Transfer-Encoding:8bit\r\n";
+        $msg .= "\r\n";
+        /*$msg .= "<html><body>";
+        //$msg .= "<h1>Email HTML avec 1 image</h1>"; //Corps du mail
+        $msg .= "<div>".$texte."</div>";
+        $msg .= "<img src=\"cid:image1\"><br/>"; //L'id cid: correspond au Content-ID du fichier joint.
+        $msg .= "</html>\r\n";*/
+        if ($etat == 1)
+        {
+            //echo('1');
+            $msg .= "
+            <html>
+
+            <body>
+            <style>
+
+            * { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; line-height: 1.65; }
+
+            img { max-width: 256px; margin: 0 auto; display: block; }
+
+            body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
+
+            a { color: #71bc37; text-decoration: none; }
+
+            a:hover { text-decoration: underline; }
+
+            .text-center { text-align: center; }
+
+            .text-right { text-align: right; }
+
+            .text-left { text-align: left; }
+
+            .button { display: inline-block; color: white; background: #71bc37; border: solid #71bc37; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
+
+            .button:hover { text-decoration: none; }
+
+            h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
+
+            h1 { font-size: 32px; }
+
+            h2 { font-size: 28px; }
+
+            h3 { font-size: 24px; }
+
+            h4 { font-size: 20px; }
+
+            h5 { font-size: 16px; }
+
+            p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
+
+            .container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
+
+            .container table { width: 100% !important; border-collapse: collapse; }
+
+            .container .masthead { padding: 80px 0; color: white; }
+
+            .container .masthead h1 { margin: 0 auto !important; max-width: 90%; text-transform: uppercase; }
+
+            .container .content { background: white; padding: 30px 35px; }
+
+            .container .content.footer { background: none; }
+
+            .container .content.footer p { margin-bottom: 0; color: #888; text-align: center; font-size: 14px; }
+
+            .container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
+
+            .container .content.footer a:hover { text-decoration: underline; }    
+            </style>    
+
+            <table class='body-wrap'>
+                <tr>
+                    <td class='container'>
+
+                        <table>
+                            <tr>
+                                <td class='content'>
+
+                                    <h2 style='color: green'> Excursion Valide,</h2>
+
+                                    <p> Votre excursion du <span>$Date</span> à <span>$Lieu </span>est préte et demare dans 72 heures!
+                                    il y a actuellement <span>$NbGens</span> personnes dans le groupe <br> parmi eux, <span>$guide</span> votre guide. <br>
+                                    La randonnée a une difficulté de <span>$difficult</span>, elle commence le $Date à $Lieu et fini le $Date2 à $Lieu2<br> n'oubliez pas de prendre <span>$Materiel</span>. <br>
+                                    Si vous avez besoin de plus d informations, <br> veuillez consulter la page de la randonnée sur notre site web.</p>
+                                
     
-            body {
-            font-family: sans-serif;
-            font-size: 14px;
-            line-height: 1.4;
-            margin: 0;
-            padding: 0;
-            -ms-text-size-adjust: 100%;
-            -webkit-text-size-adjust: 100%; 
-            }
-    
-            table {
-            border-collapse: separate;
-            width: 100%; }
-            table td {
-                font-family: sans-serif;
-                font-size: 14px;
-                vertical-align: top; 
-            }
-    
-            .body {
-            width: 100%; 
-            }
-            .container {
-            display: block;
-            margin: 0 auto !important;
-            max-width: 580px;
-            padding: 10px;
-            width: 580px; 
-            }
-            .content {
-            box-sizing: border-box;
-            display: block;
-            margin: 0 auto;
-            max-width: 580px;
-            padding: 10px; 
-            }
-    
-            .main {
-            border-radius: 3px;
-            width: 100%; 
-            }
-    
-            .wrapper {
-            box-sizing: border-box;
-            padding: 20px; 
-            }
-    
-            .content-block {
-            padding-bottom: 10px;
-            padding-top: 10px;
-            }
-    
-            .footer {
-            clear: both;
-            margin-top: 10px;
-            text-align: center;
-            width: 100%; 
-            }
-            .footer td,
-            .footer p,
-            .footer span,
-            .footer  {
-                
-                font-size: 15px;
-                text-align: center; 
-            }
-    
-            h1,
-            {
-            color: #000000;
-            font-family: sans-serif;
-            font-weight: 400;
-            line-height: 1.4;
-            margin: 0;
-            margin-bottom: 30px; 
-            font-size: 35px;
-            font-weight: 300;
-            text-align: center;
-            text-transform: capitalize; 
-            }
-    
-            p,
-            ul,
-            ol {
-            font-family: sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            margin: 0;
-            margin-bottom: 15px; 
-            }
-            p li,
-            ul li,
-            ol li {
-                list-style-position: inside;
-                margin-left: 5px; 
-            }
-    
-    
-        button {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            font-size: 16px;
-            margin-left: 28%;
-        }
-    
-    
-        </style>
-        </head>
-        <body>
-        <img style='z-index: -1; position: absolute' src='\"cid:image1\"' >
-        <table role='presentation' border='0' cellpadding='0' cellspacing='0' class='body'>
-    
-            <tr>
-            <td>&nbsp;</td>
-            <td class='container'>
-                <div class='content'>
-                <table role='presentation' class='main'>
-                    <tr style='background: rgba(215,215,215,0.8);  ' >
-                    <td class='wrapper'>
-                        <table role='presentation' border='0' cellpadding='0' cellspacing='0'>
-                        <tr>
-                            <td>
-                            <h1><span style='color: blue' >RANDO</span><span style='color: green'>ADDICT</span></h1>
-                            <p>Bonjour,</p>
-                            <p> <span style='color: green;'>Bonne nouvelle :<br> </span> Votre excursion du <span>[Date]</span>  à <span>[Lieu] </span>est complète et a un guide <span>[Nom du guide]</span>  ! <br> Vous trouverez ci-dessous un résumé de la randonnée </p>
-                            <table role='presentation' border='0' cellpadding='0' cellspacing='0'>
-                                <tbody>
-                                <tr>
-                                    <td align='left'>
-                                    <table role='presentation' border='0' cellpadding='0' cellspacing='0'>
-                                        <tbody>
+                                    <table>
                                         <tr>
-                                    
-                                            <h4>[NOM DE LA RANDO]</h4>
+                                        <td class='button'>
+                                            <a  class='link' href='https://randoaddictludus.000webhostapp.com' target='_blank'>
+                                            Votre Excursion             
+                                            </a>
+                                        </td>
                                         </tr>
-                                        <tr>
-                                            <div style='display: flex;
-                                                        justify-content : center; margin-bottom: 30px '>
-                                                <iframe src='https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking' width='500' height='450' style='border:0;' allowfullscreen='' loading='lazy'></iframe>
-    
-                                            </div>                                    
-                                            </tr>
-                                        <tr>
-                                            <td>
-                                                <p>
-                                                    La randonnée commence le <span>[Date]</span>  a <span>[Lieu] </span> il y a actuellement <span>[Nombre de personnes]</span> personnes dans le groupe, parmi eux, <span>[Nom du guide]</span> votre guide. 
-                                                    La randonnée a une difficulté de <span>[Difficulté]</span>, n'oubliez pas de prendre <span>[Materiel]</span>. 
-                                                    Si vous avez besoin de plus d'informations, veuillez consulter la page de la randonnée sur notre site web.</p>
-                                                    <button type='button' class='btn btn-primary '> <a href='PageRandonee.html'> Page de la randonnée</a></button>
-                                            </td>  
-                                        </tr>
-                                        </tbody>
                                     </table>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            </td>
-                        </tr>
+
+                                    <p>Par ailleurs, si vous voulez vous inscrire à d'autres randonnées, n'hésitez pas à venir voir notre site <a href='https://randoaddictludus.000webhostapp.com'>Randoaddict</a>.</p>
+
+                                    <p><em>– l'équipe de Randoaddict</em></p>
+
+                                </td>
+                            </tr>
                         </table>
+
                     </td>
-                    </tr>
-    
+                </tr>
+                <img width='512' src='cid:image1'/>
+                <tr>
+                    <td class='container'>
+
+                        <table>
+                            <tr>
+                                <td class='content footer' align='center'>
+                                    <center><p> <a href='#'>Se desabonner</a></p></center>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+            </table>
+            </body>
+            </html>
+            \r\n"; 
+        }
+        else
+        {
+            //echo('2');
+            $msg .= "
+                <html>
+
+                <body>
+                <style>
+
+                * { margin: 0; padding: 0; font-size: 100%; font-family: 'Avenir Next', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; line-height:   1.65; }
+
+                img { max-width: 256px; margin: 0 auto; display: block; }
+
+                body, .body-wrap { width: 100% !important; height: 100%; background: #f8f8f8; }
+
+                a { color: #71bc37; text-decoration: none; }
+
+                a:hover { text-decoration: underline; }
+
+                .text-center { text-align: center; }
+
+                .text-right { text-align: right; }
+
+            .text-  left { text-align: left; }
+
+            .button { display: inline-block; color: white; background: #71bc37; border: solid #71bc37; border-width: 10px 20px 8px; font-weight: bold; border-radius: 4px; }
+
+            .button:hover { text-decoration: none; }
+
+            h1, h2, h3, h4, h5, h6 { margin-bottom: 20px; line-height: 1.25; }
+
+            h1 { font-size: 32px; }
+
+            h2 { font-size: 28px; }
+
+            h3 { font-size: 24px; }
+
+            h4 { font-size: 20px; }
+
+            h5 { font-size: 16px; }
+
+            p, ul, ol { font-size: 16px; font-weight: normal; margin-bottom: 20px; }
+
+            .container { display: block !important; clear: both !important; margin: 0 auto !important; max-width: 580px !important; }
+
+            .container table { width: 100% !important; border-collapse: collapse; }
+
+            .container .masthead { padding: 80px 0; color: white; }
+
+            .container .masthead h1 { margin: 0 auto !important; max-width: 90%; text-transform: uppercase; }
+
+            .container .content { background: white; padding: 30px 35px; }
+
+            .container .content.footer { background: none; }
+
+            .container .content.footer p { margin-bottom: 0; color: #888; text-align: center; font-size: 14px; }
+
+            .container .content.footer a { color: #888; text-decoration: none; font-weight: bold; }
+
+            .container .content.footer a:hover { text-decoration: underline; }    
+            </style>    
+
+                <table class='body-wrap'>
+                <tr>
+                    <td class='container'>
+
+                        <table>
+                            <tr>
+                                <td class='content'>
+
+                                    <h2 style='color: red'> Excursion Annulée,</h2>
+
+                                    <p> Votre excursion du <span>$Date</span> à <span>$Lieu </span>est annulée !
+                                        Malheureusement, l'excursion ne pourra pas avoir lieu, <br> n'hésitez pas à consulter et à vous inscrire à nos nombreuses autres excursions. 
+                                    </p>
+
+                                    
+                                    <table>
+                                        <tr>
+                                        <td class='button'>
+                                            <a  class='link' href='https://randoaddictludus.000webhostapp.com' target='_blank'>
+                                            randoaddict             
+                                            </a>
+                                        </td>
+                                        </tr>
+                                    </table>
+
+                                    <p><em>– l'équipe de Randoaddict</em></p>
+
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+                <img width='512' src='cid:image1'/>
+                <tr>
+                    <td class='container'>
+
+                        <table>
+                            <tr>
+                                <td class='content footer' align='center'>
+                                    <center><p> <a href='#'>Se desabonner</a></p></center>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
                 </table>
+                </body>
+                </html>
+                \r\n"; 
+            }
+
+        //---------------------------------
+        // 2nde partie du message
+        // Le 1er fichier (inline)
+        //---------------------------------
+        $fichier = "../../ASSETS/".$image; //VariableASSETS/
+        //var_dump($fichier);
+
+        $fp      = fopen($fichier, "rb");
+        $fichierattache = fread($fp, filesize($fichier));
+        fclose($fp);
+        $fichierattache = chunk_split(base64_encode($fichierattache));
+
+        $msg .= "--$delimiteur\r\n";
+        $msg .= "Content-Type: application/octet-stream; name=\"$fichier\"\r\n";
+        $msg .= "Content-Transfer-Encoding: base64\r\n";
+        $msg .= "Content-ID: <image1>\r\n"; //Content-ID du fichier joint qui correspond au cid appelé
+        $msg .= "\r\n";
+        $msg .= $fichierattache . "\r\n";
+        $msg .= "\r\n\r\n";
+
+        $destinataire = $mailClient;//'romain.schlotter@gmail.com';//'r.schlotter@ludus-academie.com'; //Variable
+        $expediteur   = 'randoaddictludus@gmail.com'; //Constante
+        $reponse      = $expediteur;
+        $replyTo      = "Reply-to: no-reply\r\n".$entete;
+
+        //echo "Ce script envoie un mail au format HTML avec 1 image à $destinataire";
+        
+        mail($destinataire,
+            $titre,
+            $msg,
+            $replyTo);
+        //echo "<br/>mail appelé";
+    }
+
+
     
-                <div class='footer'>
-                    <table role='presentation' border='0' cellpadding='0' cellspacing='0'>
-                    <tr>
-                        <td class='content-block' style='background: rgba(215,215,215,0.8);'>
-                        <span class=''>© 2022 Rando Addict Ludus, Inc. All rights reserved.</span>
-                        <br>Vous n'aimez pas ces courriels ? <a href='http://randoaddict/PHP/Accueil.php'>Se désabonner</a>.
-                        </td>
-                    </tr>
-                    <tr>
-    
-                    </tr>
-                    </table>
-                </div>
-    
-                </div>
-            </td>
-            </tr>
-        </table>
-        </body>
-    </html>\r\n";
+    //1 = La randonnée est ok
+    //2 = La randonnée est annulé
+    $Date = "";// La date de départ
+    $Date2 = "";// La date d'arriver
+    $guide = "";//Le pseudo du guide
+    $Lieu = "";//Le lieu d'arriver 
+    $Lieu2 = "";//Le lieu de départ 
+    $NbGens = "";//Le nombre de gens
+    $difficult = "";///La difficultée de la rando
+    $Materiel = "";//Le matériel nécessaire 
+    $etat = 1;// L'état de la rando :
+                                //1 = La randonnée est ok
+                                //2 = La randonnée est annulé
+    $mailClient = "skyfulle68@gmail.com";//Le mail
+    $titre = "Titre";//Le titre du mail 
+    $image = 'PaysageRandonnee_2.jpg'; //VariableASSETS/
+    //Test du sendMail
+    sendMail($mailClient,$titre, $etat, $Date, $Date2, 
+                 $guide, $Lieu,$Lieu2,$NbGens,$difficult,$Materiel,$image);
 
-    //---------------------------------
-    // 2nde partie du message
-    // Le 1er fichier (inline)
-    //---------------------------------
-    $fichier = './PaysageRandonnee_2.jpg'; //VariableASSETS/
-    $fp      = fopen($fichier, "rb");
-    $fichierattache = fread($fp, filesize($fichier));
-    fclose($fp);
-    $fichierattache = chunk_split(base64_encode($fichierattache));
-
-    $msg .= "--$delimiteur\r\n";
-    $msg .= "Content-Type: application/octet-stream; name=\"$fichier\"\r\n";
-    $msg .= "Content-Transfer-Encoding: base64\r\n";
-    $msg .= "Content-ID: <image1>\r\n"; //Content-ID du fichier joint qui correspond au cid appelé
-    $msg .= "\r\n";
-    $msg .= $fichierattache . "\r\n";
-    $msg .= "\r\n\r\n";
-
-    $destinataire = $mailClient;//'romain.schlotter@gmail.com';//'r.schlotter@ludus-academie.com'; //Variable
-    $expediteur   = 'randoaddictludus@gmail.com'; //Constante
-    $reponse      = $expediteur;
-    $replyTo      = "Reply-to: no-reply\r\n".$entete;
-
-    echo "Ce script envoie un mail au format HTML avec 1 image à $destinataire";
-    
-    mail($destinataire,
-        $titre,
-        $msg,
-        $replyTo);
-}
-
-//Test du sendMail
-sendMail("romain.schlotter@gmail.com","Le Titre !","Le message");
-
-?>
+    ?>
