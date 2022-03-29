@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerExcursion.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Excursion.
 *
 * Classe        : ManagerExcursion
 * Fonctions     : arrayConstructor($stmt)
@@ -12,14 +13,13 @@
 *                 selectExcursionsByLabel($text)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/ExcursionObject.php");
+require_once("DBOperation/Objects/ExcursionObject.php");
 require_once("Manager.php");
 
 class ManagerExcursion extends Manager
@@ -70,19 +70,19 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -106,14 +106,14 @@ class ManagerExcursion extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -135,22 +135,22 @@ class ManagerExcursion extends Manager
 			$stmt->execute();
 
 			$e = new Excursion;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
 			$e->hydrate($tab);
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['excursion'] = $e;
-      echo json_encode($result);
+      return($result);
 
 		} catch(PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -177,14 +177,14 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch(PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -205,15 +205,15 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
- 
+      return($result);
+
 			exit();
 
     }
@@ -238,14 +238,14 @@ class ManagerExcursion extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -271,14 +271,14 @@ class ManagerExcursion extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 

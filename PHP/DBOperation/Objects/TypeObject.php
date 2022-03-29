@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/TypeObject.php
+*
+* Description   : L'objet Type.
+*
+* Classe        : Type
+* Fonctions     : hydrate(array $donnees)
+*				  __destruct()
+*				  Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Type
 {
 	// Private members

@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerMarcheur.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Marcheur.
 *
 * Classe        : ManagerMarcheur
 * Fonctions     : arrayConstructor($stmt)
@@ -17,9 +18,8 @@
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
 require_once("DBOperation/Objects/MarcheurObject.php");
 require_once("Manager.php");
 class ManagerMarcheur extends Manager
@@ -27,7 +27,7 @@ class ManagerMarcheur extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount > 0)
+    if($stmt->rowCount() > 0)
 		{
       $valueStmt = $stmt->fetchAll()[0];
 
@@ -64,7 +64,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":MAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":TEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
-      $stmt->bindValue(":MDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":MDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
       $stmt->bindValue(":ROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
       $stmt->execute();
 
@@ -72,14 +72,14 @@ class ManagerMarcheur extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -97,7 +97,7 @@ class ManagerMarcheur extends Manager
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
-			if($stmt->rowCount > 0)
+			if($stmt->rowCount() > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
 
@@ -105,8 +105,8 @@ class ManagerMarcheur extends Manager
         $result['success'] = true;
         $result['error'] = false;
         $result['message'] = "success";
-        $result['passwordVerify'] = password_verify($mdp, $valueStmt["mdpMarcheur"]);
-        echo json_encode($result);
+        $result['passwordVerify'] = (md5($mdp) == $valueStmt["mdpMarcheur"]);
+        return($result);
 
 			}else{
         // Return error
@@ -114,7 +114,7 @@ class ManagerMarcheur extends Manager
         $result['error'] = true;
         $result['message'] = "Mot de passe invalide";
         $result['passwordVerify'] = false;
-        echo json_encode($result);
+        return($result);
 			}
 
     } catch (PDOException $error) {
@@ -122,7 +122,7 @@ class ManagerMarcheur extends Manager
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -146,14 +146,14 @@ class ManagerMarcheur extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -172,7 +172,7 @@ class ManagerMarcheur extends Manager
 			$stmt->execute();
 
 		  $m = new Marcheur;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $m->hydrate($tab);
 
       // Retour success
@@ -180,14 +180,14 @@ class ManagerMarcheur extends Manager
       $result['error'] = true;
       $result['message'] = "success";
       $result['marcheur'] = $m;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -205,7 +205,7 @@ class ManagerMarcheur extends Manager
       $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
       $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -213,14 +213,14 @@ class ManagerMarcheur extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -241,14 +241,14 @@ class ManagerMarcheur extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 

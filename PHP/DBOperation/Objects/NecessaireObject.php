@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/NecessaireObject.php
+*
+* Description   : L'objet Necessaire.
+*
+* Classe        : Necessaire
+* Fonctions     : hydrate(array $donnees)
+*				  __destruct()
+*				  Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Necessaire
 {
 	// Private members

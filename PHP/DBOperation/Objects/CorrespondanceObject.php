@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/CorrepondanceObject.php
+*
+* Description   : L'objet Correspondance.
+*
+* Classe        : Correspondance
+* Fonctions     : hydrate(array $donnees)
+*				  __destruct()
+*				  Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Correspondance
 {
 	// Private members
@@ -29,25 +43,25 @@ class Correspondance
 	}
 
 	// Getters & Setters
-  public function getnId_Prog()
-  {
-    return $this->nId_Prog;
-  }
+	public function getnId_Prog()
+	{
+		return $this->nId_Prog;
+	}
 
-  public function setnId_Prog($num)
-  {
-    $this->nId_Prog = $num;
-  }
+	public function setnId_Prog($num)
+	{
+		$this->nId_Prog = $num;
+	}
 
-  public function getsLabel_Type()
-  {
-    return $this->sLabel_Type;
-  }
+	public function getsLabel_Type()
+	{
+		return $this->sLabel_Type;
+	}
 
-  public function setsLabel_Type($text)
-  {
-    $this->sLabel_Type = $text;
-  }
+	public function setsLabel_Type($text)
+	{
+		$this->sLabel_Type = $text;
+	}
 
 }
 ?>

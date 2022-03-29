@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerTerrain.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Terrain.
 *
 * Classe        : ManagerTerrain
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/TerrainObject.php");
+require_once("DBOperation/Objects/TerrainObject.php");
 require_once("Manager.php");
 
 class ManagerTerrain extends Manager
@@ -60,14 +60,14 @@ class ManagerTerrain extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -91,14 +91,14 @@ class ManagerTerrain extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -120,7 +120,7 @@ class ManagerTerrain extends Manager
 			$stmt->execute();
 
 			$t = new Terrain;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
       
       // Return success
@@ -128,14 +128,14 @@ class ManagerTerrain extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['terrain'] = $t;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -161,14 +161,14 @@ class ManagerTerrain extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -192,14 +192,14 @@ class ManagerTerrain extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 

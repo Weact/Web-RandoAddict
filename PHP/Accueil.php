@@ -13,6 +13,8 @@
 \*******************************************************************************/
 ?>
 
+  include_once('Include/gestionFormBDD.php')
+?>
 <!DOCTYPE html>
 <html lang="en">
 

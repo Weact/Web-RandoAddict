@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerParticipation.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerParticipation.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Participation.
 *
 * Classe        : ManagerParticipation
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/ParticipationObject.php");
+require_once("DBOperation/Objects/ParticipationObject.php");
 require_once("Manager.php");
 
 class ManagerParticipation extends Manager
@@ -61,14 +61,14 @@ class ManagerParticipation extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -90,14 +90,14 @@ class ManagerParticipation extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -116,7 +116,7 @@ class ManagerParticipation extends Manager
 			$stmt->execute();
 
       $p = new Participation;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $p->hydrate($tab);
 			
       // Return success
@@ -124,14 +124,14 @@ class ManagerParticipation extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['participation'] = $p;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -155,14 +155,14 @@ class ManagerParticipation extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -183,14 +183,14 @@ class ManagerParticipation extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 

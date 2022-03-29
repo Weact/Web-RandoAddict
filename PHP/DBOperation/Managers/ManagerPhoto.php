@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerPhoto.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Photo.
 *
 * Classe        : ManagerPhoto
 * Fonctions     : arrayConstructor($stmt)
@@ -14,10 +15,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/PhotoObject.php");
+require_once("DBOperation/Objects/PhotoObject.php");
 require_once("Manager.php");
 
 class ManagerPhoto extends Manager
@@ -67,14 +67,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -98,14 +98,14 @@ class ManagerPhoto extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -127,7 +127,7 @@ class ManagerPhoto extends Manager
 			$stmt->execute();
 
 			$p = new Photo;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
 			$p->hydrate($tab);
 
       // Return success
@@ -135,7 +135,7 @@ class ManagerPhoto extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['photo'] = $p;
-      echo json_encode($result);
+      return($result);
 			
 
 		} catch (PDOException $error) {
@@ -143,7 +143,7 @@ class ManagerPhoto extends Manager
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -168,14 +168,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "Photo mise à jour";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -198,14 +198,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "Photo supprimée";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -228,14 +228,14 @@ class ManagerPhoto extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 

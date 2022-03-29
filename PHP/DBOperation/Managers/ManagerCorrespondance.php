@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerExcursion.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table correspondance_type.
 *
 * Classe        : ManagerExcursion
 * Fonctions     : arrayConstructor($stmt)
@@ -16,11 +17,9 @@
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-
-<?php
-require_once("../Objects/CorrespondanceObject.php");
+require_once("DBOperation/Objects/CorrespondanceObject.php");
 require_once("Manager.php");
 
 class ManagerCorrespondance extends Manager
@@ -62,14 +61,14 @@ class ManagerCorrespondance extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -91,14 +90,14 @@ class ManagerCorrespondance extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -117,7 +116,7 @@ class ManagerCorrespondance extends Manager
 			$stmt->execute();
 
       $c = new Correspondance;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $c->hydrate($tab);
 			
       // Return success
@@ -125,14 +124,14 @@ class ManagerCorrespondance extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['correspondance'] = $c;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -155,14 +154,14 @@ class ManagerCorrespondance extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -183,14 +182,14 @@ class ManagerCorrespondance extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
