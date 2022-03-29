@@ -97,7 +97,7 @@ class ManagerProgramme extends Manager
       var_dump($p);
 
       // Creation of an row in Escale
-      $this->autoInsertEscale($a, $last_id = $getdb()->lastInsertId());
+      $this->autoInsertEscale($a, $last_id = $this->getdb()->lastInsertId());
 
       // Return success
       $result['success'] = true;

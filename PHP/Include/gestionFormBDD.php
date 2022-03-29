@@ -91,7 +91,7 @@
 
           $new_item = new Programme();
           $new_item->hydrate($donnees);
-          $mng->insertProgramme($new_item);
+          $mng->insertProgramme($new_item, []);
 
         }
 
