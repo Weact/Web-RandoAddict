@@ -67,14 +67,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -98,14 +98,14 @@ class ManagerPhoto extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -135,7 +135,7 @@ class ManagerPhoto extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['photo'] = $p;
-      echo json_encode($result);
+      return($result);
 			
 
 		} catch (PDOException $error) {
@@ -143,7 +143,7 @@ class ManagerPhoto extends Manager
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -168,14 +168,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "Photo mise à jour";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -198,14 +198,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "Photo supprimée";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 
@@ -228,14 +228,14 @@ class ManagerPhoto extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
  
 			exit();
 

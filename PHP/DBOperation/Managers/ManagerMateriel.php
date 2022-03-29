@@ -56,9 +56,18 @@ class ManagerMateriel extends Manager
       $stmt->bindValue(":INFO", $m->getsDesc_Materiel(), PDO::PARAM_STR);
       $stmt->execute();
 
+      // Retour success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Retour error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
 
     }
   }
@@ -74,11 +83,20 @@ class ManagerMateriel extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Retour success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Retour error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
 
     }
   }
@@ -101,11 +119,19 @@ class ManagerMateriel extends Manager
       $tab = $this->arrayConstructor($stmt);
       $m->hydrate($tab);
       
-      return $m;
+      // Retour success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['materiel'] = $m;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Retour error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
 
     }
   }
@@ -125,9 +151,18 @@ class ManagerMateriel extends Manager
       $stmt->bindValue(":NEWINFO", $m->getsDesc_Materiel(), PDO::PARAM_STR);
       $stmt->execute();
 
+      // Retour success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch(PDOException $error) {
-			echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+			// Retour error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
 
 		}
   }
@@ -144,9 +179,18 @@ class ManagerMateriel extends Manager
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Retour success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-			exit();
+      // Retour error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
 
     }
   }
