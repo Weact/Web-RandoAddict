@@ -6,8 +6,8 @@
 *
 * Classe        : Type
 * Fonctions     : hydrate(array $donnees)
-*				          __destruct()
-*				          Getters & Setters
+*				  __destruct()
+*				  Getters & Setters
 *
 * Créateur      : Luc Cornu
 * 

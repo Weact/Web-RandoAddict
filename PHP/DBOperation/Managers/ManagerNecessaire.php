@@ -59,14 +59,14 @@ class ManagerNecessaire extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -88,14 +88,14 @@ class ManagerNecessaire extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -114,7 +114,7 @@ class ManagerNecessaire extends Manager
 			$stmt->execute();
 
       $n = new Necessaire;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $n->hydrate($tab);
 			
       // Return success
@@ -122,14 +122,14 @@ class ManagerNecessaire extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['necessaire'] = $n;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -152,14 +152,14 @@ class ManagerNecessaire extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -180,14 +180,14 @@ class ManagerNecessaire extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 

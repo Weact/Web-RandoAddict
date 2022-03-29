@@ -6,8 +6,11 @@ All notable changes to this project will be documented in this file.
 - Le mot de passe est hashé.
 - Création automatique d'une escale lors de la création d'un programme
 
+### Changed
+- Les méthodes des Managers retournent un tableau.
+
 ### HOTFIX
-- Correction d'une erreur dans les Managers.
+- Correction d'erreurs dans les Managers.
 - Correction d'une erreur dans les Objets.
 - Correction sur les commentaires en HTML.
 - Correction du chemin des includes dans les classes Managers.
@@ -15,7 +18,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.8] - 2022-03-28
 ### HOTFIX
 - Correction d'une erreur dans la requête d'insertion de la table Photo.
-- Correction d'une erreur dans la requeête d'insertion de la table Programme.
+- Correction d'une erreur dans la requête d'insertion de la table Programme.
 
 ## [0.0.7] - 2022-03-28
 ### Added
