@@ -17,9 +17,11 @@
 <?php
     /* Remplace la balise HEAD des pages HTML */
     include_once('Structure/Head.php');
+
 ?>
 
 <body class="h-100 text-center text-white bg-dark">
+
 
     <main id="main">
 
