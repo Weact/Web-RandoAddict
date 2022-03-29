@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/TerrainObject.php
+*
+* Description   : L'objet Terrain.
+*
+* Classe        : Terrain
+* Fonctions     : hydrate(array $donnees)
+*				  __destruct()
+*				  Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Terrain
 {
 	// Private members

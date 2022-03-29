@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
+<?php
+/*******************************************************************************\
 * Fichier       : /PHP/getdb()Operation/Managers/ManagerParticipation.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Participation.
 *
 * Classe        : ManagerParticipation
 * Fonctions     : arrayConstructor($stmt)
@@ -13,9 +14,8 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
 require_once("../Objects/ParticipationObject.php");
 require_once("Manager.php");
 

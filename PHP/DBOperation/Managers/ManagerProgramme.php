@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
+<?php
+/*******************************************************************************\
 * Fichier       : /PHP/getdb()Operation/Managers/ManagerProgramme.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Programme.
 *
 * Classe        : ManagerProgramme
 * Fonctions     : arrayConstructor($stmt)
@@ -16,9 +17,8 @@
 *
 * Créateur      : Luc Cornu
 *
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
 require_once("../Objects/ProgrammeObject.php");
 require_once("Manager.php");
 

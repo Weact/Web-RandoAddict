@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
+<?php
+/*******************************************************************************\
 * Fichier       : /PHP/getdb()Operation/Managers/ManagerExcursion.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table correspondance_type.
 *
 * Classe        : ManagerExcursion
 * Fonctions     : arrayConstructor($stmt)
@@ -16,10 +17,8 @@
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-
-<?php
 require_once("../Objects/CorrespondanceObject.php");
 require_once("Manager.php");
 
