@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerExcursion.php
 *
 * Description   : ---.
 *
@@ -53,9 +53,9 @@ class ManagerCorrespondance extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":ID", $c->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":LABEL", $c->getsLabel_Type, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $c->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":LABEL", $c->getsLabel_Type(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
@@ -83,7 +83,7 @@ class ManagerCorrespondance extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			
       // Return success
@@ -112,7 +112,7 @@ class ManagerCorrespondance extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -145,10 +145,10 @@ class ManagerCorrespondance extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEW_ID", $c->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWLABEL", $c->getsLabel_Type, PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $c->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLABEL", $c->getsLabel_Type(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -175,7 +175,7 @@ class ManagerCorrespondance extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
