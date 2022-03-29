@@ -1,5 +1,5 @@
 <?php
-define('BASE','DB_SALON');
+define('BASE','randoaddict');
 define('SERVER','localhost');
 define('USER','root');
 define('PASSWD','');
