@@ -85,8 +85,10 @@ CREATE TABLE IF NOT EXISTS Marcheur(
 	mdpMarcheur varchar(128) not null,										# mot de passe de l'utilisateur/marcheur
 	roleMarcheur varchar(128) not null CHECK (								# role de l'utilisateur/marcheur (s'il est simple marcheur ou s'il est guide)
 		roleMarcheur = 'Marcheur'
-		OR																		# on vérifie que le rôle de l'utilisateur/marcheur est bien "Marcheur" ou "Guide"
+		OR																		# on vérifie que le rôle de l'utilisateur/marcheur est bien "Marcheur", "Guide" ou "Admin"
 		roleMarcheur = 'Guide'
+		OR
+		roleMarcheur = 'Admin'
 	)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
@@ -153,6 +155,7 @@ CREATE TABLE IF NOT EXISTS Traversee(
 CREATE TABLE IF NOT EXISTS Escale(
 	idExcursion int not null,												# identifiant unique de l'excursion à laquelle l'escale est liée
 	idProgramme int not null,												# identifiant unique du programme auquel l'escale est liée
+	ordreEscale int not null auto_increment,								# definit l'ordre dans lequel les escales se font au sein d'un programme
 	CONSTRAINT pk_Escale													# création de l'identifiant unique de l'escale à partir des identifiants de l'excursion et du programme
 		PRIMARY KEY(idExcursion, idProgramme),
 	CONSTRAINT fk_EscaleExcursion											# contrainte de clé étrangère pour l'identifiant de l'excursion

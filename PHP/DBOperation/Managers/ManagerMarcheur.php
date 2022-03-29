@@ -72,14 +72,14 @@ class ManagerMarcheur extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -106,7 +106,7 @@ class ManagerMarcheur extends Manager
         $result['error'] = false;
         $result['message'] = "success";
         $result['passwordVerify'] = password_verify($mdp, $valueStmt["mdpMarcheur"]);
-        return $result;
+        return($result);
 
 			}else{
         // Return error
@@ -114,7 +114,7 @@ class ManagerMarcheur extends Manager
         $result['error'] = true;
         $result['message'] = "Mot de passe invalide";
         $result['passwordVerify'] = false;
-        return $result;
+        return($result);
 			}
 
     } catch (PDOException $error) {
@@ -122,7 +122,7 @@ class ManagerMarcheur extends Manager
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -146,14 +146,14 @@ class ManagerMarcheur extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -180,14 +180,14 @@ class ManagerMarcheur extends Manager
       $result['error'] = true;
       $result['message'] = "success";
       $result['marcheur'] = $m;
-      return $result;
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -213,14 +213,14 @@ class ManagerMarcheur extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -241,14 +241,14 @@ class ManagerMarcheur extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
