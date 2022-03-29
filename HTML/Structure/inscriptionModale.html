@@ -1,59 +1,67 @@
 <div class="modal fade text-dark" id="inscriptionModale">
   <div class="modal-dialog modal-dialog-centered">
-<div class="modal-content">
-  <div class="modal-header">
-    <h5 class="modal-title">Inscription en tant que marcheur</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-  </div>
-  <div class="modal-body">
-    <form class="form" action="../action_page.php">
-      <!--Mail-->
-       <div class="row">
-        <div class="col">
-          <div class="mb-3 mt-3 form-floating">
-            <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email" placeholder="EMail" name="email">
-            <label for="email" class="form-label">Email</label>
-          </div>
-        </div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Inscription en tant que marcheur</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="row">
-       <div class="col">
-          <!--Pseudo-->
-          <div class="mb-3 form-floating">
-            <input type="name" class="form-control" id="name" placeholder="Pseudonyme" name="name">
-            <label for="name" class="form-label">Pseudonyme</label>
+      <div class="modal-body">
+        <form class="form" action="../action_page.php">
+          <!--Mail-->
+          <div class="row">
+            <div class="col">
+              <div class="mb-3 mt-3 form-floating">
+                <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email"
+                  placeholder="EMail" name="email">
+                <label for="email" class="form-label">Email</label>
+              </div>
+            </div>
           </div>
-        </div>
-         <div class="col">
-          <!--Phone-->
-          <div class="mb-3 form-floating">
-            <input required placeholder ="0123456789" id="phone" class="form-control" title="Format : 0123456789" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
-             <label for="phone" class="form-label">Numéro de téléphone</label>
+          <div class="row">
+            <div class="col">
+              <!--Pseudo-->
+              <div class="mb-3 form-floating">
+                <input type="name" class="form-control" id="name" placeholder="Pseudonyme" name="name">
+                <label for="name" class="form-label">Pseudonyme</label>
+              </div>
+            </div>
+            <div class="col">
+              <!--Phone-->
+              <div class="mb-3 form-floating">
+                <input required placeholder="0123456789" id="phone" class="form-control" title="Format : 0123456789"
+                  pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
+                <label for="phone" class="form-label">Numéro de téléphone</label>
+              </div>
+            </div>
           </div>
-        </div>
-    </div>
-      <div class="row">
-        <div class="col">
-        <!--Birth Date-->
-        <div class="mb-3 form-floating">
-          <input type="date" class="form-control" id="birthdate" placeholder="Date De Naissance" name="date" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
-           <label for="date" class="form-label">Mot de passe</label>
+          <div class="row">
+            <div class="col">
+              <!--Birth Date-->
+              <div class="mb-3 form-floating">
+                <input type="date" class="form-control" id="birthdate" placeholder="Date De Naissance" name="date"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus."
+                  required>
+                <label for="date" class="form-label">Mot de passe</label>
+              </div>
+            </div>
+            <div class="col">
+              <!--Password-->
+              <div class="mb-3 form-floating">
+                <input type="password" class="form-control" id="password" placeholder="Mot De Passe" name="password"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus."
+                  required>
+                <label for="password" class="form-label">Mot de passe</label>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col">
-        <!--Password-->
-        <div class="mb-3 form-floating">
-          <input type="password" class="form-control" id="password" placeholder="Mot De Passe" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
-           <label for="password" class="form-label">Mot de passe</label>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
           </div>
-        </div>
-    </div>
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-      </div>
-    </form>
+        </form>
 
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>
