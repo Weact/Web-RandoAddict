@@ -17,8 +17,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/PhotoObject.php")
-require_once("Manager.php")
+require_once("../Objects/PhotoObject.php");
+require_once("Manager.php");
 
 class ManagerPhoto extends Manager
 {

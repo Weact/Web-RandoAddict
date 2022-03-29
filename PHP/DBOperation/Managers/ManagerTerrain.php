@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/TerrainObject.php")
-require_once("Manager.php")
+require_once("../Objects/TerrainObject.php");
+require_once("Manager.php");
 
 class ManagerTerrain extends Manager
 {

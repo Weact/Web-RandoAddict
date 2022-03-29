@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/TypeObject.php")
-require_once("Manager.php")
+require_once("../Objects/TypeObject.php");
+require_once("Manager.php");
 
 class ManagerType extends Manager
 {

@@ -14,7 +14,7 @@ class Photo
 		foreach($donnees as $key => $value)
 		{
       // We get the name of the setter corresponding to the attribut
-			$method = "set".ucfirst($key);
+			$method = "set".$key;
 
 			// If the setter exists
 			if(method_exists($this, $method))

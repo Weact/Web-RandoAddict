@@ -20,8 +20,8 @@
 
 
 <?php
-require_once("../Objects/CorrespondanceObject.php")
-require_once("Manager.php")
+require_once("../Objects/CorrespondanceObject.php");
+require_once("Manager.php");
 
 class ManagerCorrespondance extends Manager
 {

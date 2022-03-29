@@ -19,8 +19,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/ProgrammeObject.php")
-require_once("Manager.php")
+require_once("../Objects/ProgrammeObject.php");
+require_once("Manager.php");
 
 class ManagerProgramme extends Manager
 {

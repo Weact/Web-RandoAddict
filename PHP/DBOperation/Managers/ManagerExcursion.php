@@ -19,8 +19,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/ExcursionObject.php")
-require_once("Manager.php")
+require_once("../Objects/ExcursionObject.php");
+require_once("Manager.php");
 
 class ManagerExcursion extends Manager
 {
