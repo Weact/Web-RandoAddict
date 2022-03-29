@@ -1,4 +1,5 @@
-<!--/*******************************************************************************\
+<?php
+/*******************************************************************************\
 * Fichier       : /PHP/PageRandonee.php
 *
 * Description   : Fichier PHP incluant les ressources php et html nécéssaires pour la page
@@ -10,8 +11,9 @@
 /*******************************************************************************\
 * 23-03-2022    : Création page
 * 28-03-2022    : Pull Request et mise en commun avec le travail général
-\*******************************************************************************/-->
+\*******************************************************************************/
+?>
 
 <?php
-    include_once('../HTML/Structure/PageRandonee.html');
+    include_once('../../HTML/Structure/PageRandonee.html');
 ?>
