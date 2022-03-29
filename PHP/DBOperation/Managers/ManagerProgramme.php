@@ -20,6 +20,7 @@
 \*******************************************************************************/
 
 require_once("DBOperation/Objects/ProgrammeObject.php");
+require_once("ManagerEscale.php");
 require_once("Manager.php");
 
 class ManagerProgramme extends Manager
@@ -57,8 +58,26 @@ class ManagerProgramme extends Manager
     return $tab;
   }
 
+  private function autoInsertEscale(array $a, $id)
+  {
+    $m_e = new ManagerEscale(connect_bd());
+
+    foreach($a as $excursionId)
+    {
+      $donnees = array (
+        "nId_Excursion"  => last_id,
+        "nId_Prog" => excursionId
+      );
+
+      $e = new Escale;
+      $e->hydrate($donnees);
+
+      $m_e->insertEscale($e);
+    }
+  }
+
   // Database commands
-  public function insertProgramme(Programme $p)
+  public function insertProgramme(Programme $p, array $a)
   // Goal : Insert a program in the database
   // Entry : A program object
   {
@@ -75,6 +94,9 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":DIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":VALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
       $stmt->execute();
+
+      // Creation of an row in Escale
+      $this->autoInsertEscale($a, $last_id = $getdb()->lastInsertId());
 
       // Return success
       $result['success'] = true;
@@ -101,8 +123,7 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
@@ -133,8 +154,7 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE idProgramme = :ID";
 
 		//Envoie de la requête à la base
-		try
-		{
+		try {
 			$stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
@@ -168,8 +188,7 @@ class ManagerProgramme extends Manager
   {
     $req = "UPDATE PROGRAMME SET labelProgramme = :NEWLABEL, descProgramme = :NEWINFO, dateDepartProgramme = :NEWDEPART, dateArriveeProgramme = :NEWARRIVEE, capaciteProgramme = :NEWCAP, difficulteProgramme = :NEWDIF, valideProgramme = :NEWVALIDE WHERE idProgramme = :ID";
 
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
       $stmt->bindValue(":NEWLABEL", $p->getsLabel_Prog(), PDO::PARAM_STR);
@@ -237,8 +256,7 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE labelProg = :LABEL";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
@@ -269,8 +287,7 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE departProg > (CURDATE() + INTERVAL 3 DAY)"; // TO-DO : Verify this one
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
@@ -301,8 +318,7 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE difficulteProg <= :DIF";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":DIF", $num, PDO::PARAM_STR);
       $stmt->execute();

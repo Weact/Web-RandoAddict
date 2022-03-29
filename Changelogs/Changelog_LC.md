@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [0.0.9] - 2022-03-29
 ### Added
 - Le mot de passe est hashé.
+- Création automatique d'une escale lors de la création d'un programme
 
 ### Changed
 - Les méthodes des Managers retournent un tableau.
