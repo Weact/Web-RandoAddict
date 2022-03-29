@@ -98,7 +98,7 @@ class ManagerMateriel extends Manager
 			$stmt->execute();
 
 			$m = new Materiel;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $m->hydrate($tab);
       
       return $m;

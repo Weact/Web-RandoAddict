@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 - Le mot de passe est hashé.
 
 ### HOTFIX
-- Correction d'une erreur dans les Managers.
+- Correction d'erreurs dans les Managers.
 - Correction d'une erreur dans les Objets.
 - Correction sur les commentaires en HTML.
 - Correction du chemin des includes dans les classes Managers.

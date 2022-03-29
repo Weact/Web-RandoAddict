@@ -114,7 +114,7 @@ class ManagerNecessaire extends Manager
 			$stmt->execute();
 
       $n = new Necessaire;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $n->hydrate($tab);
 			
       // Return success

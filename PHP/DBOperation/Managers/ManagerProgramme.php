@@ -140,7 +140,7 @@ class ManagerProgramme extends Manager
 			$stmt->execute();
 
 			$p = new Programme;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
 			$p->hydrate($tab);
 
       // Return success

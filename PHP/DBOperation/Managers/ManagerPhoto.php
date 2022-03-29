@@ -127,7 +127,7 @@ class ManagerPhoto extends Manager
 			$stmt->execute();
 
 			$p = new Photo;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
 			$p->hydrate($tab);
 
       // Return success

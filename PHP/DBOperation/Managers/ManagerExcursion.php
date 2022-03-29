@@ -135,7 +135,7 @@ class ManagerExcursion extends Manager
 			$stmt->execute();
 
 			$e = new Excursion;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
 			$e->hydrate($tab);
       
       // Return success

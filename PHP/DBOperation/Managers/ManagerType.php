@@ -120,7 +120,7 @@ class ManagerType extends Manager
 			$stmt->execute();
 
 			$t = new Type;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
       
       // Return success

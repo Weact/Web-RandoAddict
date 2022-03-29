@@ -116,7 +116,7 @@ class ManagerCorrespondance extends Manager
 			$stmt->execute();
 
       $c = new Correspondance;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $c->hydrate($tab);
 			
       // Return success

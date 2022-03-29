@@ -113,7 +113,7 @@ class ManagerTraversee extends Manager
 			$stmt->execute();
 
       $t = new Traversee;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
 			
       // Return success

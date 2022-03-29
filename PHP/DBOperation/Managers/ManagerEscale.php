@@ -117,7 +117,7 @@ class ManagerEscale extends Manager
 			$stmt->execute();
 
       $e = new Escale;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $e->hydrate($tab);
 			
       // Return success
@@ -151,7 +151,7 @@ class ManagerEscale extends Manager
 			$stmt->execute();
 
       $e = new Escale;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $e->hydrate($tab);
 			
       // Return success

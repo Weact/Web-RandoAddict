@@ -27,7 +27,7 @@ class ManagerMarcheur extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount > 0)
+    if($stmt->rowCount() > 0)
 		{
       $valueStmt = $stmt->fetchAll()[0];
 
@@ -172,7 +172,7 @@ class ManagerMarcheur extends Manager
 			$stmt->execute();
 
 		  $m = new Marcheur;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $m->hydrate($tab);
 
       // Retour success
