@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/ProgrammeObject.php
+*
+* Description   : L'objet Programme.
+*
+* Classe        : Programme
+* Fonctions     : hydrate(array $donnees)
+*				          __destruct()
+*				          Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Programme
 {
 	// Private members
@@ -18,7 +32,7 @@ class Programme
 		foreach($donnees as $key => $value)
 		{
       // We get the name of the setter corresponding to the attribut
-			$method = "set".ucfirst($key);
+			$method = "set".$key;
 
 			// If the setter exists
 			if(method_exists($this, $method))

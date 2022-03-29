@@ -1,6 +1,24 @@
 <?php
-require_once("../Objects/PhotoObject.php")
-require_once("Manager.php")
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
+*
+* Description   : Le Manager pour la table Photo.
+*
+* Classe        : ManagerPhoto
+* Fonctions     : arrayConstructor($stmt)
+*                 insertPhoto(Photo $p)
+*                 selectPhotos()
+*                 selectPhotoById($num)
+*                 updatePhotoById(Photo $p, $num)
+*                 deletePhotoById($num)
+*                 selectPhotosByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
+require_once("DBOperation/Objects/PhotoObject.php");
+require_once("Manager.php");
 
 class ManagerPhoto extends Manager
 {
@@ -34,20 +52,31 @@ class ManagerPhoto extends Manager
   // Goal : Insert a photo in the database
   // Entry : A photo object
   {
-    $req = "INSERT INTO PHOTO(lienPhoto, labelPhoto, idPhoto) VALUES (:LIEN, :LABEL, :ID)";
+    $req = "INSERT INTO PHOTO(lienPhoto, labelPhoto, idExcursion) VALUES (:LIEN, :LABEL, :ID)";
 
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LIEN", $p->getsLien_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":LABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":ID", $p->nId_Photo, PDO::PARAM_INT);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":LABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":ID", $p->nId_Excursion(), PDO::PARAM_INT);
       $stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+ 
+			exit();
 
     }
   }
@@ -61,12 +90,23 @@ class ManagerPhoto extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+ 
 			exit();
 
     }
@@ -82,22 +122,32 @@ class ManagerPhoto extends Manager
 		//Envoie de la requête à la base
 		try
 		{
-			$stmt = $this->db->prepare($req);
+			$stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
 			$p = new Photo;
-
-      $tab = arrayConstructor($stmt);
-
+      $tab = $this->arrayConstructor($stmt);
 			$p->hydrate($tab);
-			return $p;
 
-		} catch(PDOException $error) {
-			echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['photo'] = $p;
+      return($result);
+			
+
+		} catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+ 
 			exit();
 
-		}
+    }
   }
 
   public function updatePhotoById(Photo $p, $num)
@@ -108,17 +158,28 @@ class ManagerPhoto extends Manager
 
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWLIEN", $p->getsLien_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":NEW_ID", $p->getnId_Excursion, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $p->getnId_Excursion(), PDO::PARAM_INT);
 
-    } catch(PDOException $error) {
-			echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "Photo mise à jour";
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+ 
 			exit();
 
-		}
+    }
   }
 
   public function deletePhotoById($num)
@@ -129,12 +190,23 @@ class ManagerPhoto extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "Photo supprimée";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+ 
 			exit();
 
     }
@@ -147,13 +219,24 @@ class ManagerPhoto extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+ 
 			exit();
 
     }

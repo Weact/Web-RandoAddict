@@ -1,31 +1,34 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/ManagerMarcheur.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Marcheur.
 *
-* Classe        : ManagerExcursion
+* Classe        : ManagerMarcheur
 * Fonctions     : arrayConstructor($stmt)
 *                 insertMarcheur(Marcheur $m)
 *                 existMarcheurByMail($mail, $mdp)
 *                 selectMarcheurs()
+*                 selectMarcheurByMail($mail)
+*                 updateMarcheurByMail(Marcheur $m, $mail)
+*                 deleteMarcheurByMail($mail)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/MarcheurObject.php")
-require_once("Manager.php")
+require_once("DBOperation/Objects/MarcheurObject.php");
+require_once("Manager.php");
 class ManagerMarcheur extends Manager
 {
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
     if($stmt->rowCount() > 0)
-    {
+		{
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
@@ -34,14 +37,15 @@ class ManagerMarcheur extends Manager
         "sTel_Marcheur" => $valueStmt["telMarcheur"],
         "sMdp_Marcheur" => $valueStmt["mdpMarcheur"],
         "sRole_Marcheur" => $valueStmt["roleMarcheur"]
-    }else{
+      );
+    } else {
       $tab = array(
         "sMail_Marcheur" => "",
         "sPseudo_Marcheur" => "",
         "sTel_Marcheur" => "",
         "sMdp_Marcheur" => "",
         "sRole_Marcheur" => ""
-        );
+      );
     }
 
     return $tab;
@@ -56,27 +60,26 @@ class ManagerMarcheur extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":MAIL", $m->getsMail_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":TEL", $m->getsTel_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":MDP", $m->getsMdp_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":ROLE", $m->getsRole_Marcheur, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":MAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":TEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":MDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
+      $stmt->bindValue(":ROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -88,22 +91,22 @@ class ManagerMarcheur extends Manager
   {
     $req = "SELECT * FROM MARCHEUR WHERE mailMarcheur = :MAIL";
 
-    // Send the request to the Database
+    // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
 			if($stmt->rowCount > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
-        
+
         // Retour success
         $result['success'] = true;
         $result['error'] = false;
         $result['message'] = "success";
         $result['passwordVerify'] = password_verify($mdp, $valueStmt["mdpMarcheur"]);
-        echo json_encode($result);
+        return($result);
 
 			}else{
         // Return error
@@ -111,15 +114,15 @@ class ManagerMarcheur extends Manager
         $result['error'] = true;
         $result['message'] = "Mot de passe invalide";
         $result['passwordVerify'] = false;
-        echo json_encode($result);
+        return($result);
 			}
 
-    } catch (PDOException $error) {      
+    } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
 
@@ -135,7 +138,7 @@ class ManagerMarcheur extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
       // Return success
@@ -143,14 +146,14 @@ class ManagerMarcheur extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      echo json_encode($result);
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
 			exit();
 
@@ -161,43 +164,93 @@ class ManagerMarcheur extends Manager
   {
     $req = "SELECT * FROM MARCHEUR WHERE mailMarcheur = :MAIL";
 
-    // Send the request to the Database
-    try {
-      $stmt = $this->db->prepare($req);
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
-			if($stmt->rowCount > 0)
-			{
-				$valueStmt = $stmt->fetchAll()[0];
+		  $m = new Marcheur;
+      $tab = $this->arrayConstructor($stmt);
+      $m->hydrate($tab);
 
-        $m = new Marcheur;
-        $tab = arrayConstructor($valueStmt);
-        $m->hydrate($tab);
-        
-        // Retour success
-        $result['success'] = true;
-        $result['error'] = true;
-        $result['message'] = "success";
-        $result['marcheur'] = ;
-        echo json_encode($result);
-
-			}else{
-        // Return error
-        $result['success'] = true;
-        $result['error'] = true;
-        $result['message'] = "Mail invalide";
-        echo json_encode($result);
-			}
+      // Retour success
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = "success";
+      $result['marcheur'] = $m;
+      return($result);
 
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      echo json_encode($result);
+      return($result);
 
       exit();
+
+    }
+  }
+
+  public function updateMarcheurByMail(Marcheur $m, $mail)
+  {
+    $req = "UPDATE MARCHEUR SET mailMarcheur = :NEWMAIL, pseudoMarcheur = :NEWPSEUDO, telMarcheur = :NEWTEL, mdpMarcheur = :NEWMDP, roleMarcheur = :NEWROLE WHERE mailMarcheur = :MAIL";
+
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
+			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMDP", md5($m->getsMdp_Marcheur()), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+      exit();
+
+    }
+  }
+
+  public function deleteMarcheurByMail($mail)
+  {
+    $req = "DELETE FROM MARCHEUR WHERE mailMarcheur = :MAIL";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->getdb()->prepare($req);
+			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
 
     }
   }

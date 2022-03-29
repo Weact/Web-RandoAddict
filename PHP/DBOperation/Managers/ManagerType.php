@@ -1,6 +1,23 @@
 <?php
-require_once("../Objects/TypeObject.php")
-require_once("Manager.php")
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerType.php
+*
+* Description   : Le Manager pour la table Type.
+*
+* Classe        : ManagerType
+* Fonctions     : arrayConstructor($stmt)
+*                 insertType(Type $t)
+*                 selectTypes()
+*                 selectTypeByLabel($text)
+*                 updateTypeByLabel(Type $t, $text)
+*                 deleTypeByLabel($text)
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
+require_once("DBOperation/Objects/TypeObject.php");
+require_once("Manager.php");
 
 class ManagerType extends Manager
 {
@@ -34,14 +51,25 @@ class ManagerType extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LABEL", $t->getsLabel_Type, PDO::PARAM_STR);
-      $stmt->bindValue(":INFO", $t->getsDesc_Type, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LABEL", $t->getsLabel_Type(), PDO::PARAM_STR);
+      $stmt->bindValue(":INFO", $t->getsDesc_Type(), PDO::PARAM_STR);
       $stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
 
     }
   }
@@ -55,12 +83,23 @@ class ManagerType extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			return $stmt;
+			
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
@@ -76,23 +115,34 @@ class ManagerType extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
 			$t = new Type;
-      $tab = arrayConstructor($stmt);
+      $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
-      return $t;
+      
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['type'] = $t;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
   }
 
-  public function updateTypeByLabel(TYPE $t, $text)
+  public function updateTypeByLabel(Type $t, $text)
   // Goal : Update a type with a given name
   // Entry : A text for the name
   {
@@ -100,14 +150,25 @@ class ManagerType extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Type, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWINFO", $t->getsDesc_Type, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Type(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $t->getsDesc_Type(), PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
@@ -121,12 +182,23 @@ class ManagerType extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }

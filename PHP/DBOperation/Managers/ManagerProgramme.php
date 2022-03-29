@@ -1,6 +1,27 @@
 <?php
-require_once("../Objects/ProgrammeObject.php")
-require_once("Manager.php")
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerProgramme.php
+*
+* Description   : Le Manager pour la table Programme.
+*
+* Classe        : ManagerProgramme
+* Fonctions     : arrayConstructor($stmt)
+*                 insertProgramme(Programme $p)
+*                 selectProgrammes()
+*                 selectProgrammeById($num)
+*                 updateProgrammeById(Programme $p, $num)
+*                 deleteProgrammeById($num)
+*                 selectProgrammesByLabel($text)
+*                 selectProgrammesWithValideDate()
+*                 selectProgrammesByDifficulty($num)
+*
+* Créateur      : Luc Cornu
+*
+\*******************************************************************************/
+
+require_once("DBOperation/Objects/ProgrammeObject.php");
+require_once("ManagerEscale.php");
+require_once("Manager.php");
 
 class ManagerProgramme extends Manager
 {
@@ -37,28 +58,60 @@ class ManagerProgramme extends Manager
     return $tab;
   }
 
+  private function autoInsertEscale(array $a, $id)
+  {
+    $m_e = new ManagerEscale(connect_bd());
+
+    foreach($a as $excursionId)
+    {
+      $donnees = array (
+        "nId_Excursion"  => last_id,
+        "nId_Prog" => excursionId
+      );
+
+      $e = new Escale;
+      $e->hydrate($donnees);
+
+      $m_e->insertEscale($e);
+    }
+  }
+
   // Database commands
-  public function insertProgramme(Programme $p)
+  public function insertProgramme(Programme $p, array $a)
   // Goal : Insert a program in the database
   // Entry : A program object
   {
-    $req = "INSERT INTO PROGRAMME(labelProgramme, descProgramme, dateDepartProgramme, dateAriveeProgramme, capaciteProgramme, difficulteProgramme, valideProgramme) VALUES (:LABEL, :INFO, :DEPART, :ARIVEE, :CAP, :DIF, :VALIDE)";
+    $req = "INSERT INTO PROGRAMME(labelProgramme, descProgramme, dateDepartProgramme, dateArriveeProgramme, capaciteProgramme, difficulteProgramme, valideProgramme) VALUES (:LABEL, :INFO, :DEPART, :ARIVEE, :CAP, :DIF, :VALIDE)";
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LABEL", $p->getsLabel_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":INFO", $p->getsDesc_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":DEPART", $p->getsDepart_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":ARIVEE", $p->getsLabel_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":CAP", $p->getnCapacite_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":DIF", $p->getnDifficulte_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":VALIDE", $p->getsValide_Prog, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LABEL", $p->getsLabel_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":INFO", $p->getsDesc_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":DEPART", $p->getsDepart_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":ARIVEE", $p->getsLabel_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":CAP", $p->getnCapacite_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":DIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":VALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
       $stmt->execute();
 
+      // Creation of an row in Escale
+      $this->autoInsertEscale($a, $last_id = $getdb()->lastInsertId());
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
 
     }
   }
@@ -70,14 +123,24 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME";
 
     // Send the request to the database
-    try
-    {
-      $stmt = $this->db->prepare($req);
+    try {
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			return $stmt;
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
@@ -91,26 +154,32 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE idProgramme = :ID";
 
 		//Envoie de la requête à la base
-		try
-		{
-			$stmt = $this->db->prepare($req);
+		try {
+			$stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
 			$p = new Programme;
-
-      $tab = arrayConstructor($stmt);
-
+      $tab = $this->arrayConstructor($stmt);
 			$p->hydrate($tab);
-			return $p;
 
-		}
-		catch(PDOException $error)
-		{
-			echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['programme'] = $p;
+      return($result);
+
+		} catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
-		}
+    }
   }
 
   public function updateProgrammeById(Programme $p, $num)
@@ -118,22 +187,32 @@ class ManagerProgramme extends Manager
   // Entry : A number for the ID
   {
     $req = "UPDATE PROGRAMME SET labelProgramme = :NEWLABEL, descProgramme = :NEWINFO, dateDepartProgramme = :NEWDEPART, dateArriveeProgramme = :NEWARRIVEE, capaciteProgramme = :NEWCAP, difficulteProgramme = :NEWDIF, valideProgramme = :NEWVALIDE WHERE idProgramme = :ID";
-  
-    try
-    {
-      $stmt = $this->db->prepare($req);
+
+    try {
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWINFO", $p->getsDesc_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWDEPART", $p->getsDepart_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWARRIVEE", $p->getsArrivee_Prog, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWCAP", $p->getsCapacite_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWDIF", $p->getsDifficulte_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWVALIDE", $p->getsValide_Prog, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $p->getsDesc_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWDEPART", $p->getsDepart_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWARRIVEE", $p->getsArrivee_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWCAP", $p->getsCapacite_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWDIF", $p->getsDifficulte_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWVALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
@@ -147,12 +226,23 @@ class ManagerProgramme extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
@@ -166,15 +256,25 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE labelProg = :LABEL";
 
     // Send the request to the database
-    try
-    {
-      $stmt = $this->db->prepare($req);
+    try {
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
-			return $stmt;
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
@@ -187,25 +287,27 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE departProg > (CURDATE() + INTERVAL 3 DAY)"; // TO-DO : Verify this one
 
     // Send the request to the database
-    try
-    {
-      $stmt = $this->db->prepare($req);
+    try {
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			return $stmt;
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
 			exit();
 
     }
-  }
-
-  public function selectProgrammesByValidation($bool)
-  // Goal : Select a program with validation or not
-  // Entry : A boolean
-  // Return : An array holding all the programs valid
-  {
-    // TO-DO <--
   }
 
   public function selectProgrammesByDifficulty($num)
@@ -216,16 +318,26 @@ class ManagerProgramme extends Manager
     $req = "SELECT * FROM PROGRAMME WHERE difficulteProg <= :DIF";
 
     // Send the request to the database
-    try
-    {
-      $stmt = $this->db->prepare($req);
+    try {
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":DIF", $num, PDO::PARAM_STR);
       $stmt->execute();
-      return $stmt;
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
 
     } catch (PDOException $error) {
-      echo "<script>console.log('".$error->getMessage()."')</script>";
-      exit();
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
 
     }
   }

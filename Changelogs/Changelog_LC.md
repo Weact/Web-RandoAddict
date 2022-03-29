@@ -1,9 +1,43 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.9] - 2022-03-29
+### Added
+- Le mot de passe est hashé.
+- Création automatique d'une escale lors de la création d'un programme
+
+### Changed
+- Les méthodes des Managers retournent un tableau.
+
+### HOTFIX
+- Correction d'erreurs dans les Managers.
+- Correction d'une erreur dans les Objets.
+- Correction sur les commentaires en HTML.
+- Correction du chemin des includes dans les classes Managers.
+
+## [0.0.8] - 2022-03-28
+### HOTFIX
+- Correction d'une erreur dans la requête d'insertion de la table Photo.
+- Correction d'une erreur dans la requête d'insertion de la table Programme.
+
+## [0.0.7] - 2022-03-28
+### Added
+- Ajout de l'entête pour tous les fichiers Managers.
+
+### Changed
+- cheminExcursion modifié en departExcursion & arriveeExcursion dans la classe Objet et le Manager, conformément à la BDD.
+
+## [0.0.6] - 2022-03-28
+### Changed
+- Retours des méthodes dans les Managers.
+- deleTerrainByLabel renommée en deleteTerrainByLabel.
+
+### TO-DO
+- Terminer le CRUD dans les tables de liaison.
+
 ## [0.0.5] - 2022-03-28
 ### Added
-- Méthodes Update & Delete pour plus de Managers
+- Méthodes Update & Delete pour plus de Managers.
 
 ### Merge with develop
 
