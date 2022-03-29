@@ -10,7 +10,7 @@
 *				          Getters & Setters
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
 class Programme
@@ -124,7 +124,7 @@ class Programme
     return $this->sValide_Prog;
   }
 
-  public function setsValideProg($text)
+  public function setsValide_Prog($text)
   {
     $this->sValide_Prog = $text;
   }

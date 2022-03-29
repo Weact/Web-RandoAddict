@@ -39,7 +39,7 @@ class ManagerProgramme extends Manager
         "sArrivee_Prog" => $valueStmt["dateArriveeProgramme"],
         "nCapacite_Prog" => $valueStmt["capaciteProgramme"],
         "nDifficulte_Prog" => $valueStmt["difficulteProgramme"],
-        "sValideProg" => $valueStmt["valideProgramme"]
+        "sValide_Prog" => $valueStmt["valideProgramme"]
         );
     }else{
       $tab = array(
@@ -50,7 +50,7 @@ class ManagerProgramme extends Manager
         "sArrivee_Prog" => "",
         "nCapacite_Prog" => "",
         "nDifficulte_Prog" => "",
-        "sValideProg" => ""
+        "sValide_Prog" => ""
         );
     }
 
@@ -70,7 +70,7 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":LABEL", $p->getsLabel_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":INFO", $p->getsDesc_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":DEPART", $p->getsDepart_Prog(), PDO::PARAM_STR);
-      $stmt->bindValue(":ARIVEE", $p->getsLabel_Prog(), PDO::PARAM_STR);
+      $stmt->bindValue(":ARIVEE", $p->getsArrivee_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":CAP", $p->getnCapacite_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":DIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":VALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
