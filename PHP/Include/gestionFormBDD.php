@@ -22,19 +22,122 @@
     }
 
     //Gestion de toutes les réceptions de tous les formulaires formulaires.
-    if ($_POST['dataForm'])
-    {
-       if (true)
-       {
-            header("HTTP/1.1 303 See Other");
-            header("Location: ./");
-            exit();
-       }
-       else
-       {
-            header("HTTP/1.1 303 See Other");
-            header("Location: ./");
-            exit();
-       }
+      if(isset($_POST["sMail_Marcheur_Inscription"]))
+      {
+        $donnees = array(
+          'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
+          'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
+          'sTel_Marcheur' => $_POST['sTel_Marcheur'],
+          'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
+          'sRole_Marcheur' => 'Marcheur'
+          );
+
+          if($donnees['sPseudo_Marcheur'] == "admin"){
+            $donnees['sRole_Marcheur'] = "Guide";
+          }
+          makeNewUser($donnees);
+          connectUser($_POST['sMail_Marcheur_Inscription']);
+         exit();
+
+
+      }
+      if(isset($_POST["sMail_Marcheur_Connexion"])) {
+          //CONNEXION AUTOMATIQUE
+          $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
+          var_dump($isValidMarcheur);
+          if ($isValidMarcheur){
+            connectUser($_POST["sMail_Marcheur_Connexion"]);
+          }
+      }
+      elseif(isset($_POST["departExcursion"]))
+        {
+        require_once("Structure/HeaderAdmin.php");
+          require_once("DBOperation/Managers/ManagerExcursion.php");
+          require_once("DBOperation/PDO_Connect.php");
+          $conn = connect_bd();
+          $mng = new ManagerExcursion($conn);
+
+          $donnees = array(
+            'sDesc_Excursion' => $_POST['descExcursion'],
+            'sLabel_Excursion' => "TITRE",
+            'sDepart_Excursion' => $_POST['departExcursion'],
+            'sArrivee_Excursion' => $_POST['arriveeExcursion'],
+            'fPrix_Excursion' => $_POST['prixExcursion']
+            );
+
+          $new_item = new Excursion();
+          $new_item->hydrate($donnees);
+          $result = $mng->insertExcursion($new_item);
+
+        }
+      elseif(isset($_POST["sLabel_Prog"]))
+        {
+        require_once("Structure/HeaderAdmin.php");
+          require_once("DBOperation/Managers/ManagerProgramme.php");
+          require_once("DBOperation/PDO_Connect.php");
+          $conn = connect_bd();
+          $mng = new ManagerProgramme($conn);
+
+          //TO DO : ADD sExcur_Prog
+          $donnees = array(
+            'sLabel_Prog' => $_POST['sLabel_Prog'],
+            'sDesc_Prog' => $_POST['sDesc_Prog'],
+            'sDepart_Prog' => $_POST['sDepart_Prog'] . " " . $_POST['sDepartHeure_Prog'].":00",
+            'sArrivee_Prog' => $_POST['sArrivee_Prog'] . " " . $_POST['sArriveHeure_Prog'].":00",
+            'nCapacite_Prog' => 5,
+            'nDifficulte_Prog' => 2,
+            'sValide_Prog' => "En attente"
+            );
+
+          $new_item = new Programme();
+          $new_item->hydrate($donnees);
+          $mng->insertProgramme($new_item, []);
+
+        }
+
+        if(isset($_POST["disconnect"])){
+        connectUser("");
+
+        }
+
+      function makeNewUser($donnees) {
+          require_once("DBOperation/Managers/ManagerMarcheur.php");
+          require_once("DBOperation/PDO_Connect.php");
+          $conn = connect_bd();
+          $mng = new ManagerMarcheur($conn);
+
+          $new_marcheur = new Marcheur();
+          $new_marcheur->hydrate($donnees);
+          $result = $mng->insertMarcheur($new_marcheur);
+          $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
+
+      }
+
+    function connectUser($mail){
+        require_once("DBOperation/Managers/ManagerMarcheur.php");
+        require_once("DBOperation/PDO_Connect.php");
+        $conn = connect_bd();
+
+        $mng = new ManagerMarcheur($conn);
+        $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
+
+        $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
+        $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
+
+         header("HTTP/1.1 303 See Other");
+         header("Location: ./Accueil.php");
+         exit();
+    }
+
+    function checkUserPw($mail, $pw) {
+        require_once("DBOperation/Managers/ManagerMarcheur.php");
+        require_once("DBOperation/PDO_Connect.php");
+        $conn = connect_bd();
+        $mng = new ManagerMarcheur($conn);
+        $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
+
+        $resulteotjea = $mng->existMarcheurByMail($mail, $pw)['passwordVerify'];
+        var_dump($resulteotjea);
+        return $resulteotjea;
     }
 ?>

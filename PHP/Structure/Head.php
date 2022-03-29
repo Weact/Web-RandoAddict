@@ -25,44 +25,20 @@
 </head>
 
 <?php
-
-  if(isset($_SESSION)){
-    //CONNEXION AUTOMATIQUE
-  }
-
-  if(isset($_POST["sMail_Marcheur_Inscription"]))
-  {
-    require_once("DBOperation/Managers/ManagerMarcheur.php");
-    require_once("DBOperation/PDO_Connect.php");
-    $conn = connect_bd();
-    $mng = new ManagerMarcheur($conn);
-
-    $donnees = array(
-      'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
-      'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
-      'sTel_Marcheur' => $_POST['sTel_Marcheur'],
-      'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
-      'sRole_Marcheur' => 'Marcheur'
-      );
-
-    $new_marcheur = new Marcheur();
-    $new_marcheur->hydrate($donnees);
-    $result = $mng->insertMarcheur($new_marcheur);
-
-
-    //CONNEXION AUTOMATIQUE
-    require_once("Structure/HeaderOnline.php");
-
-  }
-  elseif(isset($_POST["sMail_Marcheur_Connexion"])) {
-      //CONNEXION AUTOMATIQUE
+  //CONNEXION AUTOMATIQUE
+    //Vérification et initialisation des variables de session le cas échéant.
+    if ($_SESSION['typeUtilisateur'] == "Guide")
+    {
+      require_once("Structure/HeaderAdmin.php");
+    }
+    elseif($_SESSION['typeUtilisateur'] == "Marcheur")
+    {
       require_once("Structure/HeaderOnline.php");
+    }
+    else
+    {
+      require_once("Structure/Header.php");
+    }
 
-
-  }
-  else {
-  require_once("Structure/Header.php");
-
-  }
 
 ?>

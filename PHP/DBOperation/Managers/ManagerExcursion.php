@@ -13,7 +13,7 @@
 *                 selectExcursionsByLabel($text)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
@@ -70,7 +70,7 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -137,7 +137,7 @@ class ManagerExcursion extends Manager
 			$e = new Excursion;
       $tab = $this->arrayConstructor($stmt);
 			$e->hydrate($tab);
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -213,7 +213,7 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }
