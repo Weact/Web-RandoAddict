@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.9] - 2022-03-29
+### HOTFIX
+- Correction d'une erreur dans les Managers.
+- Correction d'une erreur dans les Objets.
+
 ## [0.0.8] - 2022-03-28
 ### HOTFIX
 - Correction d'une erreur dans la requête d'insertion de la table Photo.

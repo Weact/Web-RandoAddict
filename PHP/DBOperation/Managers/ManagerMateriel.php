@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerMateriel.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerMateriel.php
 *
 * Description   : ---.
 *
@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/MaterielObject.php")
-require_once("Manager.php")
+require_once("../Objects/MaterielObject.php");
+require_once("Manager.php");
 
 class ManagerMateriel extends Manager
 {
@@ -51,9 +51,9 @@ class ManagerMateriel extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LABEL", $m->getsLabel_Materiel, PDO::PARAM_STR);
-      $stmt->bindValue(":INFO", $m->getsDesc_Materiel, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LABEL", $m->getsLabel_Materiel(), PDO::PARAM_STR);
+      $stmt->bindValue(":INFO", $m->getsDesc_Materiel(), PDO::PARAM_STR);
       $stmt->execute();
 
     } catch (PDOException $error) {
@@ -72,7 +72,7 @@ class ManagerMateriel extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			return $stmt;
 
@@ -93,7 +93,7 @@ class ManagerMateriel extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -119,10 +119,10 @@ class ManagerMateriel extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWLABEL", $m->getsLabel_Materiel, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWINFO", $m->getsDesc_Materiel, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $m->getsLabel_Materiel(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $m->getsDesc_Materiel(), PDO::PARAM_STR);
       $stmt->execute();
 
     } catch(PDOException $error) {
@@ -140,7 +140,7 @@ class ManagerMateriel extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 

@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerMarcheur.php
 *
 * Description   : ---.
 *
@@ -93,7 +93,7 @@ class ManagerMarcheur extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -138,7 +138,7 @@ class ManagerMarcheur extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
       // Return success
@@ -167,7 +167,7 @@ class ManagerMarcheur extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -200,13 +200,13 @@ class ManagerMarcheur extends Manager
 
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -233,7 +233,7 @@ class ManagerMarcheur extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 

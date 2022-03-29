@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerEscale.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerEscale.php
 *
 * Description   : ---.
 *
@@ -19,8 +19,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/EscaleObject.php")
-require_once("Manager.php")
+require_once("../Objects/EscaleObject.php");
+require_once("Manager.php");
 
 class ManagerEscale extends Manager
 {
@@ -53,9 +53,9 @@ class ManagerEscale extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":IDEXC", $e->getnId_Excursion, PDO::PARAM_INT);
-      $stmt->bindValue(":IDPROG", $e->getnId_Prog, PDO::PARAM_INT);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":IDEXC", $e->getnId_Excursion(), PDO::PARAM_INT);
+      $stmt->bindValue(":IDPROG", $e->getnId_Prog(), PDO::PARAM_INT);
       $stmt->execute();
 
       // Return success
@@ -83,7 +83,7 @@ class ManagerEscale extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			
       // Return success
@@ -112,7 +112,7 @@ class ManagerEscale extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -146,7 +146,7 @@ class ManagerEscale extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -179,10 +179,10 @@ class ManagerEscale extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":IDPROG", $e->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":IDEXC", $e->getnId_Excursion, PDO::PARAM_INT);
+      $stmt->bindValue(":IDPROG", $e->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":IDEXC", $e->getnId_Excursion(), PDO::PARAM_INT);
 			$stmt->execute();
 
       // Return success
@@ -209,10 +209,10 @@ class ManagerEscale extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":IDPROG", $e->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":IDEXC", $e->getnId_Excursion, PDO::PARAM_INT);
+      $stmt->bindValue(":IDPROG", $e->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":IDEXC", $e->getnId_Excursion(), PDO::PARAM_INT);
 			$stmt->execute();
 
       // Return success
@@ -239,7 +239,7 @@ class ManagerEscale extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -267,7 +267,7 @@ class ManagerEscale extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 

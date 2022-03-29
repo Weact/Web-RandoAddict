@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerExcursion.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerExcursion.php
 *
 * Description   : ---.
 *
@@ -19,8 +19,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/ExcursionObject.php")
-require_once("Manager.php")
+require_once("../Objects/ExcursionObject.php");
+require_once("Manager.php");
 
 class ManagerExcursion extends Manager
 {
@@ -62,13 +62,13 @@ class ManagerExcursion extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       // $stmt->bindValue(":ID", $e->getnId_Excursion, PDO::PARAM_INT)
-      $stmt->bindValue(":LABEL", $e->getsLabel_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":INFO", $e->getsDesc_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":DEPART", $e->getsDepart_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":PRIX", $e->getfPrix_Excursion, PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
+      $stmt->bindValue(":LABEL", $e->getsLabel_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":INFO", $e->getsDesc_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":DEPART", $e->getsDepart_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":PRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
       
       // Return success
@@ -98,7 +98,7 @@ class ManagerExcursion extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
       // Return success
@@ -130,7 +130,7 @@ class ManagerExcursion extends Manager
 		//Envoie de la requête à la base
 		try
 		{
-			$stmt = $this->db->prepare($req);
+			$stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -163,14 +163,14 @@ class ManagerExcursion extends Manager
 
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEW_ID", $e->getnId_Excursion, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWLABEL", $e->getsLabel_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWINFO", $e->getsDesc_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWDEPART", $e->getsDepart_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWARRIVEE", $e->getsArrivee_Excursion, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWPRIX", $m->getfPrix_Excursion, PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $e->getnId_Excursion(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLABEL", $e->getsLabel_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $e->getsDesc_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWDEPART", $e->getsDepart_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPRIX", $m->getfPrix_Excursion(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -197,7 +197,7 @@ class ManagerExcursion extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -229,7 +229,7 @@ class ManagerExcursion extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":PRIX", $float, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -262,7 +262,7 @@ class ManagerExcursion extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 

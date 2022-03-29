@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerNecessaire.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerNecessaire.php
 *
 * Description   : ---.
 *
@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/NecessaireObject.php")
-require_once("Manager.php")
+require_once("../Objects/NecessaireObject.php");
+require_once("Manager.php");
 
 class ManagerNecessaire extends Manager
 {
@@ -50,9 +50,9 @@ class ManagerNecessaire extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":ID", $n->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":LABEL", $n->getsLabel_Materiel, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $n->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":LABEL", $n->getsLabel_Materiel(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
@@ -80,7 +80,7 @@ class ManagerNecessaire extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			
       // Return success
@@ -109,7 +109,7 @@ class ManagerNecessaire extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -142,10 +142,10 @@ class ManagerNecessaire extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEW_ID", $n->getnId_Prog, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWLABEL", $n->getsLabel_Materiel, PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $n->getnId_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLABEL", $n->getsLabel_Materiel(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -172,7 +172,7 @@ class ManagerNecessaire extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 

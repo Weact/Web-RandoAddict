@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerTerrain.php
 *
 * Description   : ---.
 *
@@ -16,8 +16,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/TerrainObject.php")
-require_once("Manager.php")
+require_once("../Objects/TerrainObject.php");
+require_once("Manager.php");
 
 class ManagerTerrain extends Manager
 {
@@ -51,9 +51,9 @@ class ManagerTerrain extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LABEL", $t->getsLabel_Terrain, PDO::PARAM_STR);
-      $stmt->bindValue(":INFO", $t->getsDesc_Terrain, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LABEL", $t->getsLabel_Terrain(), PDO::PARAM_STR);
+      $stmt->bindValue(":INFO", $t->getsDesc_Terrain(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
@@ -83,7 +83,7 @@ class ManagerTerrain extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
       
       // Return success
@@ -115,7 +115,7 @@ class ManagerTerrain extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -151,10 +151,10 @@ class ManagerTerrain extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Terrain, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWINFO", $t->getsDesc_Terrain, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $t->getsLabel_Terrain(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWINFO", $t->getsDesc_Terrain(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -184,7 +184,7 @@ class ManagerTerrain extends Manager
     // Send the request to the Database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
