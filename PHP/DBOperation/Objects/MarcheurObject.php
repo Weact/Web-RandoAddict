@@ -2,12 +2,12 @@
 /*******************************************************************************\
 * Fichier       : /PHP/DBOperation/Objects/MarcheurObject.php
 *
-* Description   : L'objet Correspondance.
+* Description   : L'objet Marcheur.
 *
-* Classe        : Correspondance
+* Classe        : Marcheur
 * Fonctions     : hydrate(array $donnees)
-*				  __destruct()
-*				  Getters & Setters
+*				          __destruct()
+*				          Getters & Setters
 *
 * Créateur      : Luc Cornu
 * 
