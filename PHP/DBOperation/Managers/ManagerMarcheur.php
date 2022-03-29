@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerMarcheur.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerMarcheur.php
 *
 * Description   : ---.
 *
@@ -13,15 +13,15 @@
 *                 deleteMarcheurByMail($mail)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/MarcheurObject.php")
-require_once("Manager.php")
+require_once("DBOperation/Objects/MarcheurObject.php");
+require_once("Manager.php");
 class ManagerMarcheur extends Manager
 {
   private function arrayConstructor($stmt)
@@ -60,12 +60,12 @@ class ManagerMarcheur extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":MAIL", $m->getsMail_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":TEL", $m->getsTel_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":MDP", $m->getsMdp_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":ROLE", $m->getsRole_Marcheur, PDO::PARAM_STR);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":MAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":PSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":TEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":MDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":ROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
       $stmt->execute();
 
       // Return success
@@ -93,14 +93,14 @@ class ManagerMarcheur extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
 			if($stmt->rowCount > 0)
 			{
 				$valueStmt = $stmt->fetchAll()[0];
-        
+
         // Retour success
         $result['success'] = true;
         $result['error'] = false;
@@ -117,7 +117,7 @@ class ManagerMarcheur extends Manager
         echo json_encode($result);
 			}
 
-    } catch (PDOException $error) {      
+    } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
@@ -138,7 +138,7 @@ class ManagerMarcheur extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
       // Return success
@@ -167,14 +167,14 @@ class ManagerMarcheur extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
 		  $m = new Marcheur;
       $tab = arrayConstructor($stmt);
       $m->hydrate($tab);
-        
+
       // Retour success
       $result['success'] = true;
       $result['error'] = true;
@@ -197,16 +197,16 @@ class ManagerMarcheur extends Manager
   public function updateMarcheurByMail(Marcheur $m, $mail)
   {
     $req = "UPDATE MARCHEUR SET mailMarcheur = :NEWMAIL, pseudoMarcheur = :NEWPSEUDO, telMarcheur = :NEWTEL, mdpMarcheur = :NEWMDP, roleMarcheur = :NEWROLE WHERE mailMarcheur = :MAIL";
-  
+
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur, PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMAIL", $m->getsMail_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPSEUDO", $m->getsPseudo_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWTEL", $m->getsTel_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWMDP", $m->getsMdp_Marcheur(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWROLE", $m->getsRole_Marcheur(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -233,7 +233,7 @@ class ManagerMarcheur extends Manager
 
     // Send the request to the database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -249,7 +249,7 @@ class ManagerMarcheur extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       echo json_encode($result);
- 
+
 			exit();
 
     }

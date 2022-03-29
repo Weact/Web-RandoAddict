@@ -1,5 +1,5 @@
 <!--/*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
+* Fichier       : /PHP/getdb()Operation/Managers/ManagerPhoto.php
 *
 * Description   : ---.
 *
@@ -17,8 +17,8 @@
 \*******************************************************************************/-->
 
 <?php
-require_once("../Objects/PhotoObject.php")
-require_once("Manager.php")
+require_once("../Objects/PhotoObject.php");
+require_once("Manager.php");
 
 class ManagerPhoto extends Manager
 {
@@ -57,10 +57,10 @@ class ManagerPhoto extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
-      $stmt->bindValue(":LIEN", $p->getsLien_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":LABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":ID", $p->nId_Excursion, PDO::PARAM_INT);
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":LIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":LABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":ID", $p->nId_Excursion(), PDO::PARAM_INT);
       $stmt->execute();
 
       // Return success
@@ -90,7 +90,7 @@ class ManagerPhoto extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 			
       // Return success
@@ -122,7 +122,7 @@ class ManagerPhoto extends Manager
 		//Envoie de la requête à la base
 		try
 		{
-			$stmt = $this->db->prepare($req);
+			$stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -158,11 +158,11 @@ class ManagerPhoto extends Manager
 
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-      $stmt->bindValue(":NEWLIEN", $p->getsLien_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo, PDO::PARAM_STR);
-      $stmt->bindValue(":NEW_ID", $p->getnId_Excursion, PDO::PARAM_INT);
+      $stmt->bindValue(":NEWLIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEW_ID", $p->getnId_Excursion(), PDO::PARAM_INT);
 
       // Return success
       $result['success'] = true;
@@ -190,7 +190,7 @@ class ManagerPhoto extends Manager
 
     // Send the request to the Database
     try {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
@@ -219,7 +219,7 @@ class ManagerPhoto extends Manager
     // Send the request to the database
     try
     {
-      $stmt = $this->db->prepare($req);
+      $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
 			$stmt->execute();
 			

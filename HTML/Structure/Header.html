@@ -29,7 +29,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                <form class="w-100 text-primary fw-bolder mr-3 mt-3">
+                <form id='rechercheForm' name='rechercheForm' method='POST' action='#' class="w-100 text-primary fw-bolder mr-3 mt-3">
                     <div class="input-group justify-content-end">
                         <div class="form-floating g-0 w-50">
                             <input type="email" name="randonneeRecherche" id="randonneeRecherche" class="form-control" placeholder="Adresse E-Mail">
@@ -71,12 +71,13 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form class="form" method="POST" action="../action_page.php">
+            <form id='inscriptionForm' name='inscriptionForm' class="form" method="POST" action="#">
               <!--Mail-->
                <div class="row">
                 <div class="col">
                   <div class="mb-3 mt-3 form-floating">
-                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email" placeholder="Entrer email" name="email">
+                    <input name="sMail_Marcheur_Inscription" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control"
+                     placeholder="Entrer email" name="email">
                     <label for="email" class="form-label">Email</label>
                   </div>
                 </div>
@@ -85,30 +86,22 @@
                <div class="col">
                   <!--Pseudo-->
                   <div class="mb-3 form-floating">
-                    <input type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name">
+                    <input name="sPseudo_Marcheur" type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name">
                     <label for="name" class="form-label">Pseudonyme</label>
                   </div>
                 </div>
                  <div class="col">
                   <!--Phone-->
                   <div class="mb-3 form-floating">
-                    <input required placeholder ="0123456789" id="phone" class="form-control" title="Format : 0123456789" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
+                    <input name="sTel_Marcheur" required placeholder ="0123456789" id="phone" class="form-control" title="Format : 0123456789" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
                      <label for="phone" class="form-label">Numéro de téléphone</label>
                   </div>
                 </div>
             </div>
-              <div class="row">
                 <div class="col">
                 <!--Password-->
                 <div class="mb-3 form-floating">
-                  <input type="date" class="form-control" id="password" placeholder="Entrer date" name="date"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
-                   <label for="date" class="form-label">Date de naissance</label>
-                  </div>
-                </div>
-                <div class="col">
-                <!--Password-->
-                <div class="mb-3 form-floating">
-                  <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe" name="password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
+                  <input name="sMdp_Marcheur" type="password" class="form-control" placeholder="Entrer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
                    <label for="password" class="form-label">Mot de passe</label>
                   </div>
                 </div>
@@ -129,13 +122,13 @@
             <h5 class="modal-title">Connexion au compte</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <form class="form" method="POST" action="../action_page.php">
+          <form id="connexionForm" class="form" method="POST" action="#">
           <div class="modal-body">
             <!--Mail-->
              <div class="row">
               <div class="col">
                 <div class="mb-3 mt-3 form-floating">
-                  <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email" placeholder="Entrer email" name="email">
+                  <input name="sMail_Marcheur_Connexion" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Entrer email" name="email">
                   <label for="email" class="form-label">Email</label>
                 </div>
               </div>
@@ -144,7 +137,7 @@
               <div class="col">
               <!--Password-->
               <div class="mb-3 form-floating">
-                <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe" name="password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
+                <input name="sMdp_Marcheur" type="password" class="form-control" id="password" placeholder="Entrer mot de passe" name="password"pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required >
                  <label for="password" class="form-label">Mot de passe</label>
                 </div>
               </div>
