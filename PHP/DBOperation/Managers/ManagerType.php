@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerType.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerType.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Type.
 *
 * Classe        : ManagerType
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/TypeObject.php");
+require_once("DBOperation/Objects/TypeObject.php");
 require_once("Manager.php");
 
 class ManagerType extends Manager

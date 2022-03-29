@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerPhoto.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Photo.
 *
 * Classe        : ManagerPhoto
 * Fonctions     : arrayConstructor($stmt)
@@ -14,10 +15,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/PhotoObject.php");
+require_once("DBOperation/Objects/PhotoObject.php");
 require_once("Manager.php");
 
 class ManagerPhoto extends Manager

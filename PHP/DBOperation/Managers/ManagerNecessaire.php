@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerNecessaire.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerNecessaire.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Necessaire.
 *
 * Classe        : ManagerNecessaire
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/NecessaireObject.php");
+require_once("DBOperation/Objects/NecessaireObject.php");
 require_once("Manager.php");
 
 class ManagerNecessaire extends Manager

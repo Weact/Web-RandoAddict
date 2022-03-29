@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/ProgrammeObject.php
+*
+* Description   : L'objet Programme.
+*
+* Classe        : Programme
+* Fonctions     : hydrate(array $donnees)
+*				          __destruct()
+*				          Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Programme
 {
 	// Private members

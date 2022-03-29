@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/ExcursionObject.php
+*
+* Description   : L'objet Excursion.
+*
+* Classe        : Excursion
+* Fonctions     : hydrate(array $donnees)
+*				          __destruct()
+*				          Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Excursion
 {
   // Private members

@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/EscaleObject.php
+*
+* Description   : L'objet Escale.
+*
+* Classe        : Escale
+* Fonctions     : hydrate(array $donnees)
+*				  __destruct()
+*				  Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Escale
 {
 	// Private members

@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerMateriel.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerMateriel.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Materiel.
 *
 * Classe        : ManagerMateriel
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/MaterielObject.php");
+require_once("DBOperation/Objects/MaterielObject.php");
 require_once("Manager.php");
 
 class ManagerMateriel extends Manager

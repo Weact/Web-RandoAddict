@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/PhotoObject.php
+*
+* Description   : L'objet Photo.
+*
+* Classe        : Photo
+* Fonctions     : hydrate(array $donnees)
+*				          __destruct()
+*				          Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Photo
 {
   // Private members

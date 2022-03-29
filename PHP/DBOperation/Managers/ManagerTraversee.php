@@ -1,7 +1,8 @@
-<!--/*******************************************************************************\
-* Fichier       : /PHP/getdb()Operation/Managers/ManagerTraversee.php
+<?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Managers/ManagerTraversee.php
 *
-* Description   : ---.
+* Description   : Le Manager pour la table Traversée.
 *
 * Classe        : ManagerTraversee
 * Fonctions     : arrayConstructor($stmt)
@@ -13,10 +14,9 @@
 *
 * Créateur      : Luc Cornu
 * 
-\*******************************************************************************/-->
+\*******************************************************************************/
 
-<?php
-require_once("../Objects/TraverseeObject.php");
+require_once("DBOperation/Objects/TraverseeObject.php");
 require_once("Manager.php");
 
 class ManagerTraversee extends Manager
