@@ -1,3 +1,7 @@
+## [0.0.5] - 2022-03-29
+### Ajout
+-Ajout du role d'admin pour la table marcheur
+
 ## [0.0.4] - 2022-03-29
 ### Ajout
 -Ajout de l'ordre des escales au sein d'un programme
