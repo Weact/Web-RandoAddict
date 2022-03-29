@@ -38,7 +38,7 @@
     $mng = new ManagerMarcheur($conn);
 
     $donnees = array(
-      'sMail_Marcheur' => $_POST['sMail_Marcheur'],
+      'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
       'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
       'sTel_Marcheur' => $_POST['sTel_Marcheur'],
       'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
