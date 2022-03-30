@@ -32,7 +32,7 @@
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
                 <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
                   <legend for="selection_rando">Nom de la randonnée</legend>
-                  <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee"></textarea>
+                  <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
                     <div class="form-group">
 
                         <legend for="selection_rando">Type de terrain</legend><br>
@@ -105,7 +105,7 @@
                         <legend for="selection">Arrivée</legend>
                         <textarea name="arriveeExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
 
-                        <div id="map-container-google-1" class="z-depth-1-half map-container mb-3" style="height: 450px">
+                        <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
                             <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
 
@@ -121,7 +121,7 @@
             <div class="tab-pane fade bg-white rounded p-2 col-6" id="crea_programme">
                 <form id='creation_programme' name='creation_programme' class="form" method="POST" action="#">
                     <legend for="selection_rando">Nom du programme</legend>
-                    <textarea name="sLabel_Prog" class="form-control" aria-label="Description"></textarea>
+                    <input type="text" name="sLabel_Prog" class="form-control" aria-label="NomExcursion" required>
 
                     <legend for="selection_rando">Sélection de randonnée</legend>
                     <select multiple name="sExcur_Prog[]" id="selection_rando" class="form-control" required>
@@ -184,19 +184,19 @@
                     </div>
 
                     <legend for="startDate">Date de départ</legend>
-                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" />
+                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required/>
 
                     <legend for="startDate">Heure de départ</legend>
                     <div class="cs-form">
-                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" />
+                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required/>
                     </div>
 
                     <legend for="arriveDate">Date d'arriver</legend>
-                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" />
+                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required/>
 
                     <legend for="arriveDate">Heure d'arrivée</legend>
                     <div class="cs-form">
-                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" />
+                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required/>
                     </div>
                   <div>
                     <legend for="selection">Matériel</legend>
@@ -445,9 +445,7 @@
                   </div>
                   <div class="modal-body">
                     <label for="email" class="form-label h6">Nom du nouveau materiel</label>
-                    <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre" required></textarea>
-                    <label for="email" class="form-label h6">Description du nouveau materiel</label>
-                    <textarea name="Description materiel_autres" class="form-control" aria-label="Description materiel_autres"></textarea>
+                    <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
@@ -466,9 +464,7 @@
                   </div>
                   <div class="modal-body">
                     <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
-                    <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre" required></textarea>
-                    <label for="description" class="form-label h6">Description du nouveau terrain</label>
-                    <textarea name="Description_terrain_autres" class="form-control" aria-label="Description_terrain_autres"></textarea>
+                    <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
