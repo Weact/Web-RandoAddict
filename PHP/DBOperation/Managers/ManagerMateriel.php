@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/MaterielObject.php");
+require_once(__DIR__."/../../DBOperation/Objects/MaterielObject.php");
 require_once("Manager.php");
 
 class ManagerMateriel extends Manager
@@ -106,7 +106,7 @@ class ManagerMateriel extends Manager
   // Entry : A text for the name
   // Return : A material object
   {
-    $req = "SELECT * FROM MATERIEL WHERE labelMateriel = :LABEL"
+    $req = "SELECT * FROM MATERIEL WHERE labelMateriel = :LABEL";
 
     // Send the request to the database
     try
