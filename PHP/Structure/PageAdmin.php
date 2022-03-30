@@ -432,7 +432,9 @@
                     <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
                   </div>
                   <div class="modal-body">
+                    <label for="email" class="form-label h6">Nom du nouveau materiel</label>
                     <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
+                    <label for="email" class="form-label h6">Descritpion du nouveau materiel</label>
                     <textarea name="Description materiel_autres" class="form-control" aria-label="Description materiel_autres"></textarea>
                   </div>
                   <div class="modal-footer">
