@@ -63,11 +63,12 @@ class ManagerProgramme extends Manager
   {
     $m_e = new ManagerEscale(connect_bd());
 
+        var_dump($a);
     foreach($a as $excursionId)
     {
       $donnees = array (
-        "nId_Excursion"  => last_id,
-        "nId_Prog" => excursionId
+        "nId_Excursion"  => $excursionId,
+        "nId_Prog" => $id
       );
 
       $e = new Escale;
@@ -95,7 +96,6 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":DIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":VALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
       $stmt->execute();
-      var_dump($p);
 
       // Creation of an row in Escale
       $this->autoInsertEscale($a, $last_id = $this->getdb()->lastInsertId());
