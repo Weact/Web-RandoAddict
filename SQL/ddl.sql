@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Excursion(
 	descExcursion text not null,											# description de l'excursion
 	departExcursion text not null,											# point de départ de l'excursion sur google maps
 	arriveeExcursion text not null,											# point d'arrivée de l'excursion sur google maps
-	prixExcursion decimal not null CHECK(									# prix de l'excursion en euros
+	prixExcursion decimal(10,2) not null CHECK(									# prix de l'excursion en euros
 		prixExcursion >= 0														# on vérifie que le prix de l'excursion est positif ou nul
 	)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
