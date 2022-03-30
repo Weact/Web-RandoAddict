@@ -27,11 +27,29 @@
 
       }
 
+      function makeNewMat($donnees) {
+        $conn = connect_bd();
+        $mng = new ManagerMateriel($conn);
+
+        $new_item = new Materiel();
+        $new_item->hydrate($donnees);
+        $result = $mng->insertMateriel($new_item);
+      }
+
     function getAllExc() {
           $conn = connect_bd();
           $mng = new ManagerExcursion($conn);
 
           $users = $mng->selectExcursions()['stmt'];
+
+          return $users;
+    }
+
+    function getAllMat() {
+          $conn = connect_bd();
+          $mng = new ManagerMateriel($conn);
+
+          $users = $mng->selectMateriels()['stmt'];
 
           return $users;
     }
