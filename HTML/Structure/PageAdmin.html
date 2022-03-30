@@ -1,370 +1,376 @@
-<div class="container bg-info rounded p-3">
-  <h2 class="text-center text-dark text-bold">Page administrateur<h2>
+<div class="container bg-light p-3">
+  <h2 class="text-center text-success">Page administrateur</h2>
 
-      <!---------------------------------------------------------------------------------------------------------------------------------------------->
-      <!---Onglets------------>
-      <div class="m-5">
-        <ul class="nav nav-tabs" id="myTab">
-          <li class="nav-item">
-            <a href="#crea_rando" class="nav-link active text-dark" data-bs-toggle="tab">
-              <h3>Création de randonnée</h3>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#crea_programme" class="nav-link text-dark" data-bs-toggle="tab">
-              <h3>Création de programme</h3>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#crea_profile" class="nav-link text-dark" data-bs-toggle="tab">
-              <h3>Création de profile</h3>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#membres" class="nav-link text-dark" data-bs-toggle="tab">
-              <h3>Liste des membres</h3>
-            </a>
-          </li>
-        </ul>
-        <!---------------------------------------------------------------------------------------------------------------------------------------------->
-        <!---Contenus des onglets------------>
-        <div class="tab-content text-dark m-5">
-          <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
-            <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
-            <div class="form-group">
-              <legend for="selectionTerrain">Difficulté de la randonnée</legend>
-              <select name="difficulty_excursion" id="selectionTerrain" class="form-control" required>
-                <option value="">Choisissez la difficultée du terrain</option>
-                <optgroup>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
-                </optgroup>
-              </select>
-
-              <legend for="nb_rando">Nombre de randonneurs</legend>
-              <div class="def-number-input number-input safari_only">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-                <input class="quantity" min="1" name="quantity" value="1" type="number">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              </div>
-
-              <legend for="prix_pers">Prix par personne</legend>
-              <div class="def-number-input number-input safari_only">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus"></button>
-                <input class="quantity" min="0" name="prixExcursion" value="0" type="number" step="0.1" date-prefix="€">
-                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              </div>
-
-              <legend for="selection">Départ</legend>
-              <textarea name="departExcursion" class="form-control" aria-label="Départ et arriver"></textarea>
-
-              <legend for="selection">Arrivée</legend>
-              <textarea name="arriveeExcursion" class="form-control" aria-label="Départ et arriver"></textarea>
-
-              <div id="map-container-google-1" class="z-depth-1-half map-container mb-3" style="height: 450px">
-                <iframe
-                  src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking"
-                  width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-              </div>
-
-              <legend for="selection">Matériel</legend>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
-                <label class="form-check-label h6" for="ck1">Chaussure de randonnée</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c2" id="cc_ck2">
-                <label class="form-check-label h6" for="ck2">Corde</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c3" id="cc_ck3">
-                <label class="form-check-label h6" for="ck3">Raquettes</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c4" id="cc_ck4">
-                <label class="form-check-label h6" for="ck4">Mousqueton et suspension d'escalade</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c5" id="cc_ck5">
-                <label class="form-check-label h6" for="ck5">Lunettes d'eclipse</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c6" id="cc_ck6">
-                <label class="form-check-label h6" for="ck6">Tente</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c7" id="cc_ck7">
-                <label class="form-check-label h6" for="ck7">Sac de couchage</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c1" id="ck_ck1">
-                <label class="form-check-label h6" for="ck1">Réchaud et cantine</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c2" id="ck_ck2">
-                <label class="form-check-label h6" for="ck2">Hamac</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c3" id="ck_ck3">
-                <label class="form-check-label h6" for="ck3">Matelas</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c4" id="ck_ck4">
-                <label class="form-check-label h6" for="ck4">Désinfectant d'eau</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c5" id="ck_ck5">
-                <label class="form-check-label h6" for="ck5">Rations / casse croute</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c5" id="ck_ck6">
-                <label class="form-check-label h6" for="ck5">Combinaison de plongée</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c5" id="ck_ck7">
-                <label class="form-check-label h6" for="ck5">Palme</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c5" id="ck_ck8">
-                <label class="form-check-label h6" for="ck5">Masque et tuba</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" value="c5" id="ck_ck9">
-                <label class="form-check-label h6" for="ck5">Bouteille d'oxygene</label>
-              </div>
-              <legend for="selection">Autres</legend>
-              <textarea class="form-control" aria-label="Autres"></textarea>
-
-              <legend for="selection">Description</legend>
-              <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
-
-              <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
-
-            </div>
-            </form>
-          </div>
-          <!---------------------------------------------------------------------------------------------------------------------------------------------->
-          <div class="tab-pane fade bg-white rounded p-2 col-6" id="crea_programme">
-            <form id='creation_programme' name='creation_programme' class="form" method="POST" action="#">
-              <legend for="selection_rando">Nom du programme</legend>
-            <textarea name="sLabel_Prog" class="form-control" aria-label="Description"></textarea>
-
-            <legend for="selection_rando">Sélection de randonnée</legend>
-            <select name="sExcur_Prog" id="selection_rando" class="form-control" required>
+  <!---------------------------------------------------------------------------------------------------------------------------------------------->
+  <!---Onglets------------>
+  <div class="m-5">
+    <ul class="nav nav-tabs justify-content-center" id="myTab">
+      <li class="nav-item border-top border-2 border-primary">
+        <a href="#crea_rando" class="nav-link fw-bolder p-2 text-primary fs-5" data-bs-toggle="tab">
+          <h3>Création de randonnée</h3>
+        </a>
+      </li>
+      <li class="nav-item border-top border-2 border-primary">
+        <a href="#crea_programme" class="nav-link fw-bolder p-2 text-primary fs-5" data-bs-toggle="tab">
+          <h3>Création de programme</h3>
+        </a>
+      </li>
+      <li class="nav-item border-top border-2 border-primary">
+        <a href="#crea_profile" class="nav-link fw-bolder p-2 text-primary fs-5" data-bs-toggle="tab">
+          <h3>Création de profile</h3>
+        </a>
+      </li>
+      <li class="nav-item border-top border-2 border-primary">
+        <a href="#membres" class="nav-link fw-bolder p-2 text-primary fs-5" data-bs-toggle="tab">
+          <h3>Liste des membres</h3>
+        </a>
+      </li>
+    </ul>
+    <!---------------------------------------------------------------------------------------------------------------------------------------------->
+    <!---Contenus des onglets------------>
+    <div class="tab-content text-dark m-5">
+      <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
+        <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
+          <div class="form-group">
+            <legend for="selectionTerrain">Difficulté de la randonnée</legend>
+            <select name="difficulty_excursion" id="selectionTerrain" class="form-control" required>
+              <option value="">Choisissez la difficultée du terrain</option>
               <optgroup>
-                <option value="">Choisissez la randonnée</option>
-                <option value="">Randonnée placeholder</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+                <option value="">6</option>
+                <option value="">7</option>
+                <option value="">8</option>
+                <option value="">9</option>
               </optgroup>
             </select>
 
-            <legend for="selection_rando">Type de programme</legend><br>
-
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-              <label class="form-check-label h6" for="ck1">Senior</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-              <label class="form-check-label h6" for="ck2">Junior</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-              <label class="form-check-label h6" for="ck3">Majeur</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-              <label class="form-check-label h6" for="ck4">Nature</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-              <label class="form-check-label h6" for="ck5">Histoire</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c6" id="ck6">
-              <label class="form-check-label h6" for="ck6">Fitness</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c7" id="ck7">
-              <label class="form-check-label h6" for="ck7">Restaurant</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
-              <label class="form-check-label h6" for="ck1">Forêt</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
-              <label class="form-check-label h6" for="ck2">Montagne</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
-              <label class="form-check-label h6" for="ck3">Plaine</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
-              <label class="form-check-label h6" for="ck4">Désert</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
-              <label class="form-check-label h6" for="ck5">Glacier</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
-              <label class="form-check-label h6" for="ck6">Vignes</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
-              <label class="form-check-label h6" for="ck7">Ruines</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
-              <label class="form-check-label h6" for="ck8">Milieu urbain</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
-              <label class="form-check-label h6" for="ck9">Jungle</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
-              <label class="form-check-label h6" for="ck10">Tundra</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
-              <label class="form-check-label h6" for="ck11">Profondeur océanique</label>
+            <legend for="prix_pers">Prix par personne</legend>
+            <div class="def-number-input number-input safari_only">
+              <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
+              <input
+                class="quantity fs-4 text-center border-0 border-bottom border-bottom-5 border-secondary g-0 fw-bold"
+                min="0" name="prixExcursion" value="0" type="number" step="0.1" date-prefix="€">
+              <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
             </div>
 
-            <legend for="startDate">Date de départ</legend>
-            <input name="sDepart_Prog" id="startDate" class="form-control" type="date" />
+            <legend for="selection">Départ</legend>
+            <textarea name="departExcursion" class="form-control" aria-label="Départ et arriver"></textarea>
 
-            <legend for="startDate">Heure de départ</legend>
-            <div class="cs-form">
-              <input name="sDepartHeure_Prog" type="time" class="form-control" value="" />
+            <legend for="selection">Arrivée</legend>
+            <textarea name="arriveeExcursion" class="form-control" aria-label="Départ et arriver"></textarea>
+
+            <div id="map-container-google-1" class="z-depth-1-half map-container mb-3" style="height: 450px">
+              <iframe
+                src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking"
+                width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
 
-            <legend for="arriveDate">Date d'arriver</legend>
-            <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" />
-
-            <legend for="arriveDate">Heure d'arrivée</legend>
-            <div class="cs-form">
-              <input name="sArriveHeure_Prog" type="time" class="form-control" value="" />
+            <legend for="selection">Matériel</legend>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
+              <label class="form-check-label h6" for="ck1">Chaussure de randonnée</label>
             </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c2" id="cc_ck2">
+              <label class="form-check-label h6" for="ck2">Corde</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c3" id="cc_ck3">
+              <label class="form-check-label h6" for="ck3">Raquettes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c4" id="cc_ck4">
+              <label class="form-check-label h6" for="ck4">Mousqueton et suspension d'escalade</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c5" id="cc_ck5">
+              <label class="form-check-label h6" for="ck5">Lunettes d'eclipse</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c6" id="cc_ck6">
+              <label class="form-check-label h6" for="ck6">Tente</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c7" id="cc_ck7">
+              <label class="form-check-label h6" for="ck7">Sac de couchage</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c1" id="ck_ck1">
+              <label class="form-check-label h6" for="ck1">Réchaud et cantine</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c2" id="ck_ck2">
+              <label class="form-check-label h6" for="ck2">Hamac</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c3" id="ck_ck3">
+              <label class="form-check-label h6" for="ck3">Matelas</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c4" id="ck_ck4">
+              <label class="form-check-label h6" for="ck4">Désinfectant d'eau</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c5" id="ck_ck5">
+              <label class="form-check-label h6" for="ck5">Rations / casse croute</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c5" id="ck_ck6">
+              <label class="form-check-label h6" for="ck5">Combinaison de plongée</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c5" id="ck_ck7">
+              <label class="form-check-label h6" for="ck5">Palme</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c5" id="ck_ck8">
+              <label class="form-check-label h6" for="ck5">Masque et tuba</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="checkbox" value="c5" id="ck_ck9">
+              <label class="form-check-label h6" for="ck5">Bouteille d'oxygene</label>
+            </div>
+            <legend for="selection">Autres</legend>
+            <textarea class="form-control" aria-label="Autres"></textarea>
 
-            <legend for="selection_rando">Description</legend>
-            <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes"></textarea>
-
+            <legend for="selection">Description</legend>
+            <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
+            <br>
             <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
-            </form>
-          </div>
-          <!---------------------------------------------------------------------------------------------------------------------------------------------->
-          <div class="tab-pane fade bg-white rounded p-2 col-6" id="crea_profile">
-            <div class="container mt-3">
-              <form id='creation_compte' name='creation_compte' class="form" method="POST" action="#">
-                <h3>Création d'un compte</h3>
-                <!--Mail-->
-                <div class="row">
-                  <div class="col">
-                    <div class="mb-3 mt-3 form-floating">
-                      <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control"
-                        id="email" placeholder="Entrer email" name="email">
-                      <label for="email" class="form-label h6">Email</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <!--Pseudo-->
-                    <div class="mb-3 form-floating">
-                      <input type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name">
-                      <label for="name" class="form-label h6">Pseudonyme</label>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <!--Phone-->
-                    <div class="mb-3 form-floating">
-                      <input required placeholder="01234567890" id="phone" class="form-control"
-                        title="Format : 01234567890" pattern="[0][0-9]{9}" type="tel"
-                        onchange="inputValidation(this)" />
-                      <label for="phone" class="form-label h6">Numéro de téléphone portable</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <!--Password-->
-                    <div class="mb-3 form-floating">
-                      <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe"
-                        name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                        title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus."
-                        required>
-                      <label for="password" class="form-label h6">Mot de passe</label>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <!--Is guide-->
-                    <div class="mb-3 form-floating">
-                      <select class="form-select">
-                        <option>Visiteur</option>
-                        <option>Guide</option>
-                        <option>Administrateur</option>
-                      </select>
-                      <label for="guide" class="form-label h6">Création en tant que :</label>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-outline-success mb-1 h6">Créer</button>
-                </div>
-              </form>
-            </div>
 
-            <div class="container mt-3">
-              <form id='changer_compte' name='changer_compte' class="form" method="POST" action="#">
-                <h3>Changer le status d'un compte</h3>
-                <div class="row">
-                  <div class="col">
-                    <!--Password-->
-                    <select id="selection" class="form-control" required>
-                      <optgroup>
-                        <option value="">Choisissez leprofil à modifier</option>
-                        <option value="">Nom placeholder</option>
-                      </optgroup>
-                    </select>
-                  </div>
-                  <div class="col">
-                    <!--Is guide-->
-                    <div class="mb-3 form-floating">
-                      <select class="form-select">
-                        <option>Visiteur</option>
-                        <option>Guide</option>
-                        <option>Administrateur</option>
-                      </select>
-                      <label for="guide" class="form-label h6">Changer en tant que :</label>
-                    </div>
-                  </div>
-                  <button type="submit" class="btn btn-outline-success mb-1 h6">Modifier</button>
-                </div>
-              </form>
-            </div>
           </div>
-          <!---------------------------------------------------------------------------------------------------------------------------------------------->
-          <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
-            <div class="card">
-              <label for="guide" class="form-label h6">Nom</label>
-              <div class="card-header h5">Nom placeholder</div>
-              <label for="guide" class="form-label h6">Statut</label>
-              <div class="card-body h5">Randonneur / guide</div>
-              <label for="guide" class="form-label h6">Mail</label>
-              <div class="card-body h5">Mail placeholder</div>
-              <label for="guide" class="form-label h6">Téléphone</label>
-              <div class="card-body h5">Tel placeholder</div>
+        </form>
+      </div>
+      <!---------------------------------------------------------------------------------------------------------------------------------------------->
+      <div class="tab-pane fade bg-white rounded p-2 col-6" id="crea_programme">
+        <form id='creation_programme' name='creation_programme' class="form" method="POST" action="#">
+          <legend for="selection_rando">Nom du programme</legend>
+          <textarea name="sLabel_Prog" class="form-control" aria-label="Description"></textarea>
 
-              <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
-            </div>
+          <legend for="selection_rando">Sélection de randonnée</legend>
+          <select name="sExcur_Prog" id="selection_rando" class="form-control" required>
+            <optgroup>
+              <option value="">Choisissez la randonnée</option>
+              <option value="">Randonnée placeholder</option>
+            </optgroup>
+          </select>
+
+          <legend for="nb_rando">Nombre de randonneurs</legend>
+          <div class="def-number-input number-input safari_only">
+            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+              class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
+            <input class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary"
+              min="1" name="quantity" value="1" type="number">
+            <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+              class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
           </div>
+
+          <legend for="selection_rando">Type de programme</legend><br>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c1" id="ck1">
+            <label class="form-check-label h6" for="ck1">Senior</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c2" id="ck2">
+            <label class="form-check-label h6" for="ck2">Junior</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c3" id="ck3">
+            <label class="form-check-label h6" for="ck3">Majeur</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c4" id="ck4">
+            <label class="form-check-label h6" for="ck4">Nature</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c5" id="ck5">
+            <label class="form-check-label h6" for="ck5">Histoire</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c6" id="ck6">
+            <label class="form-check-label h6" for="ck6">Fitness</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c7" id="ck7">
+            <label class="form-check-label h6" for="ck7">Restaurant</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
+            <label class="form-check-label h6" for="ck1">Forêt</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
+            <label class="form-check-label h6" for="ck2">Montagne</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
+            <label class="form-check-label h6" for="ck3">Plaine</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
+            <label class="form-check-label h6" for="ck4">Désert</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
+            <label class="form-check-label h6" for="ck5">Glacier</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
+            <label class="form-check-label h6" for="ck6">Vignes</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
+            <label class="form-check-label h6" for="ck7">Ruines</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
+            <label class="form-check-label h6" for="ck8">Milieu urbain</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
+            <label class="form-check-label h6" for="ck9">Jungle</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
+            <label class="form-check-label h6" for="ck10">Tundra</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
+            <label class="form-check-label h6" for="ck11">Profondeur océanique</label>
+          </div>
+
+          <legend for="startDate">Date de départ</legend>
+          <input name="sDepart_Prog" id="startDate" class="form-control" type="date" />
+
+          <legend for="startDate">Heure de départ</legend>
+          <div class="cs-form">
+            <input name="sDepartHeure_Prog" type="time" class="form-control" value="" />
+          </div>
+
+          <legend for="arriveDate">Date d'arriver</legend>
+          <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" />
+
+          <legend for="arriveDate">Heure d'arrivée</legend>
+          <div class="cs-form">
+            <input name="sArriveHeure_Prog" type="time" class="form-control" value="" />
+          </div>
+
+          <legend for="selection_rando">Description</legend>
+          <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes"></textarea>
+          <br>
+          <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
+        </form>
+      </div>
+      <!---------------------------------------------------------------------------------------------------------------------------------------------->
+      <div class="tab-pane fade bg-white rounded p-2 col-6" id="crea_profile">
+        <div class="container mt-3">
+          <form id='creation_compte' name='creation_compte' class="form" method="POST" action="#">
+            <h3>Création d'un compte</h3>
+            <!--Mail-->
+            <div class="row">
+              <div class="col">
+                <div class="mb-3 mt-3 form-floating">
+                  <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email"
+                    placeholder="Entrer email" name="email">
+                  <label for="email" class="form-label h6">Email</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <!--Pseudo-->
+                <div class="mb-3 form-floating">
+                  <input type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name">
+                  <label for="name" class="form-label h6">Pseudonyme</label>
+                </div>
+              </div>
+              <div class="col">
+                <!--Phone-->
+                <div class="mb-3 form-floating">
+                  <input required placeholder="01234567890" id="phone" class="form-control" title="Format : 01234567890"
+                    pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
+                  <label for="phone" class="form-label h6">Numéro de téléphone portable</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <!--Password-->
+                <div class="mb-3 form-floating">
+                  <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe"
+                    name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus."
+                    required>
+                  <label for="password" class="form-label h6">Mot de passe</label>
+                </div>
+              </div>
+              <div class="col">
+                <!--Is guide-->
+                <div class="mb-3 form-floating">
+                  <select class="form-select">
+                    <option>Visiteur</option>
+                    <option>Guide</option>
+                    <option>Administrateur</option>
+                  </select>
+                  <label for="guide" class="form-label h6">Création en tant que :</label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-outline-success mb-1 h6">Créer</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="container mt-3">
+          <form id='changer_compte' name='changer_compte' class="form" method="POST" action="#">
+            <h3>Changer le status d'un compte</h3>
+            <div class="row">
+              <div class="col">
+                <!--Password-->
+                <select id="selection" class="form-control" required>
+                  <optgroup>
+                    <option value="">Choisissez leprofil à modifier</option>
+                    <option value="">Nom placeholder</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="col">
+                <!--Is guide-->
+                <div class="mb-3 form-floating">
+                  <select class="form-select">
+                    <option>Visiteur</option>
+                    <option>Guide</option>
+                    <option>Administrateur</option>
+                  </select>
+                  <label for="guide" class="form-label h6">Changer en tant que :</label>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-outline-success mb-1 h6">Modifier</button>
+            </div>
+          </form>
         </div>
       </div>
+      <!---------------------------------------------------------------------------------------------------------------------------------------------->
+      <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
+        <div class="card">
+          <label for="guide" class="form-label h6">Nom</label>
+          <div class="card-header h5">Nom placeholder</div>
+          <label for="guide" class="form-label h6">Statut</label>
+          <div class="card-body h5">Randonneur / guide</div>
+          <label for="guide" class="form-label h6">Mail</label>
+          <div class="card-body h5">Mail placeholder</div>
+          <label for="guide" class="form-label h6">Téléphone</label>
+          <div class="card-body h5">Tel placeholder</div>
+
+          <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
