@@ -9,7 +9,13 @@
 /*******************************************************************************\
 * 29-03-2022   : Création du fichier
 \*******************************************************************************/
+
     session_start();
+
+    require_once(__DIR__."/../DBOperation/PDO_Connect.php");
+    $conn = connect_bd();
+    require_once("userManager.php");
+
 
     //Vérification et initialisation des variables de session le cas échéant.
     if (!isset($_SESSION['typeUtilisateur']))
@@ -33,8 +39,37 @@
           );
 
           if($donnees['sPseudo_Marcheur'] == "admin"){
-            $donnees['sRole_Marcheur'] = "Guide";
+            $donnees['sRole_Marcheur'] = "Admin";
           }
+
+          if(isset($_POST['sRole_Marcheur'])) {
+            $donnees['sRole_Marcheur'] = $_POST('sRole_Marcheur');
+          }
+
+          makeNewUser($donnees);
+          connectUser($_POST['sMail_Marcheur_Inscription']);
+         exit();
+
+
+      }
+      if(isset($_POST["update_role_marcheur"]))
+      {
+        $donnees = array(
+          'sMail_Marcheur' => $_POST['update_mail_marcheur'],
+          'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
+          'sTel_Marcheur' => $_POST['sTel_Marcheur'],
+          'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
+          'sRole_Marcheur' => $_POST['update_role_marcheur']
+          );
+
+          if($donnees['sPseudo_Marcheur'] == "admin"){
+            $donnees['sRole_Marcheur'] = "Admin";
+          }
+
+          if(isset($_POST['sRole_Marcheur'])) {
+            $donnees['sRole_Marcheur'] = $_POST('sRole_Marcheur');
+          }
+
           makeNewUser($donnees);
           connectUser($_POST['sMail_Marcheur_Inscription']);
          exit();
@@ -44,17 +79,12 @@
       if(isset($_POST["sMail_Marcheur_Connexion"])) {
           //CONNEXION AUTOMATIQUE
           $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
-          var_dump($isValidMarcheur);
           if ($isValidMarcheur){
             connectUser($_POST["sMail_Marcheur_Connexion"]);
           }
       }
       elseif(isset($_POST["departExcursion"]))
         {
-        require_once("Structure/HeaderAdmin.php");
-          require_once("DBOperation/Managers/ManagerExcursion.php");
-          require_once("DBOperation/PDO_Connect.php");
-          $conn = connect_bd();
           $mng = new ManagerExcursion($conn);
 
           $donnees = array(
@@ -70,12 +100,8 @@
           $result = $mng->insertExcursion($new_item);
 
         }
-      elseif(isset($_POST["sLabel_Prog"]))
+      if(isset($_POST["sLabel_Prog"]))
         {
-        require_once("Structure/HeaderAdmin.php");
-          require_once("DBOperation/Managers/ManagerProgramme.php");
-          require_once("DBOperation/PDO_Connect.php");
-          $conn = connect_bd();
           $mng = new ManagerProgramme($conn);
 
           //TO DO : ADD sExcur_Prog
@@ -95,49 +121,10 @@
 
         }
 
+
         if(isset($_POST["disconnect"])){
         connectUser("");
 
         }
 
-      function makeNewUser($donnees) {
-          require_once("DBOperation/Managers/ManagerMarcheur.php");
-          require_once("DBOperation/PDO_Connect.php");
-          $conn = connect_bd();
-          $mng = new ManagerMarcheur($conn);
-
-          $new_marcheur = new Marcheur();
-          $new_marcheur->hydrate($donnees);
-          $result = $mng->insertMarcheur($new_marcheur);
-          $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
-
-      }
-
-    function connectUser($mail){
-        require_once("DBOperation/Managers/ManagerMarcheur.php");
-        require_once("DBOperation/PDO_Connect.php");
-        $conn = connect_bd();
-
-        $mng = new ManagerMarcheur($conn);
-        $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
-
-        $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
-        $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
-
-         header("HTTP/1.1 303 See Other");
-         header("Location: ./Accueil.php");
-         exit();
-    }
-
-    function checkUserPw($mail, $pw) {
-        require_once("DBOperation/Managers/ManagerMarcheur.php");
-        require_once("DBOperation/PDO_Connect.php");
-        $conn = connect_bd();
-        $mng = new ManagerMarcheur($conn);
-        $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
-
-        $resulteotjea = $mng->existMarcheurByMail($mail, $pw)['passwordVerify'];
-        var_dump($resulteotjea);
-        return $resulteotjea;
-    }
 ?>
