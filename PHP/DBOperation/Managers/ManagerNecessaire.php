@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/NecessaireObject.php");
+require_once(__DIR__."/../../DBOperation/Objects/NecessaireObject.php");
 require_once("Manager.php");
 
 class ManagerNecessaire extends Manager

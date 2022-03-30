@@ -62,16 +62,19 @@
                     <div class="card-body h5">Description placeholder</div>
 
                     <div class="inline center">
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Modifier</button>
                         <button class="btn  btn-outline-danger mb-1" type="edit">Supprimer</button>
 
                         <!--Modal formulaire de mofification-->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Formulaire de modification</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
@@ -91,11 +94,19 @@
                                                 </optgroup>
                                             </select>
 
-                                            <legend for="prix_pers">Prix par personne <span class="text-muted">€</span></legend>
+                                            <legend for="prix_pers">Prix par personne <span class="text-muted">€</span>
+                                            </legend>
                                             <div class="def-number-input number-input">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
-                                                <input class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" style="outline: none!important;" min="0" name="quantity" value="0" type="number" step="1.0" date-prefix="€">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
+                                                <button
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                                    class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
+                                                <input
+                                                    class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary"
+                                                    style="outline: none!important;" min="0" name="quantity" value="0"
+                                                    type="number" step="1.0" date-prefix="€">
+                                                <button
+                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                                    class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                                             </div>
 
                                             <legend for="selection">Départ</legend>
@@ -104,14 +115,19 @@
                                             <legend for="selection">Arrivée</legend>
                                             <textarea class="form-control" aria-label="Départ et arriver"></textarea>
 
-                                            <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
-                                                <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                            <div id="map-container-google-1" class="z-depth-1-half map-container m-3"
+                                                style="height: 450px">
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking"
+                                                    width="450" height="450" style="border:0;" allowfullscreen=""
+                                                    loading="lazy"></iframe>
                                             </div>
 
                                             <legend for="selection">Matériel</legend>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                                                <label class="form-check-label h6" for="ck1">Chaussure de randonnée</label>
+                                                <label class="form-check-label h6" for="ck1">Chaussure de
+                                                    randonnée</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c2" id="ck2">
@@ -123,7 +139,8 @@
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                                                <label class="form-check-label h6" for="ck4">Mousqueton et suspension d'escalade</label>
+                                                <label class="form-check-label h6" for="ck4">Mousqueton et suspension
+                                                    d'escalade</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c5" id="ck5">
@@ -155,11 +172,13 @@
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Rations / casse croute</label>
+                                                <label class="form-check-label h6" for="ck5">Rations / casse
+                                                    croute</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Combinaison de plongée</label>
+                                                <label class="form-check-label h6" for="ck5">Combinaison de
+                                                    plongée</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c5" id="ck5">
@@ -181,7 +200,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Fermer</button>
                                         <button type="button" class="btn btn-success">Modifier</button>
                                     </div>
                                 </div>
