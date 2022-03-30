@@ -129,47 +129,47 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
-                        <label class="form-check-label h6" for="ck1">Forêt</label>
+                        <label class="form-check-label h6" for="c_ck1">Forêt</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
-                        <label class="form-check-label h6" for="ck2">Montagne</label>
+                        <label class="form-check-label h6" for="c_ck2">Montagne</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
-                        <label class="form-check-label h6" for="ck3">Plaine</label>
+                        <label class="form-check-label h6" for="c_ck3">Plaine</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
-                        <label class="form-check-label h6" for="ck4">Désert</label>
+                        <label class="form-check-label h6" for="c_ck4">Désert</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
-                        <label class="form-check-label h6" for="ck5">Glacier</label>
+                        <label class="form-check-label h6" for="c_ck5">Glacier</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
-                        <label class="form-check-label h6" for="ck6">Vignes</label>
+                        <label class="form-check-label h6" for="c_ck6">Vignes</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
-                        <label class="form-check-label h6" for="ck7">Ruines</label>
+                        <label class="form-check-label h6" for="c_ck7">Ruines</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
-                        <label class="form-check-label h6" for="ck8">Milieu urbain</label>
+                        <label class="form-check-label h6" for="c_ck8">Milieu urbain</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
-                        <label class="form-check-label h6" for="ck9">Jungle</label>
+                        <label class="form-check-label h6" for="c_ck9">Jungle</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
-                        <label class="form-check-label h6" for="ck10">Tundra</label>
+                        <label class="form-check-label h6" for="c_ck10">Tundra</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
-                        <label class="form-check-label h6" for="ck11">Profondeur océanique</label>
+                        <label class="form-check-label h6" for="c_ck11">Profondeur océanique</label>
                     </div>
 
                     <legend for="startDate">Date de départ</legend>
@@ -191,67 +191,67 @@
                     <legend for="selection">Matériel</legend>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
-                        <label class="form-check-label h6" for="ck1">Chaussure de randonnée</label>
+                        <label class="form-check-label h6" for="cc_ck1">Chaussure de randonnée</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c2" id="cc_ck2">
-                        <label class="form-check-label h6" for="ck2">Corde</label>
+                        <label class="form-check-label h6" for="cc_ck2">Corde</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c3" id="cc_ck3">
-                        <label class="form-check-label h6" for="ck3">Raquettes</label>
+                        <label class="form-check-label h6" for="cc_ck3">Raquettes</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c4" id="cc_ck4">
-                        <label class="form-check-label h6" for="ck4">Mousqueton et suspension d'escalade</label>
+                        <label class="form-check-label h6" for="cc_ck4">Mousqueton et suspension d'escalade</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="cc_ck5">
-                        <label class="form-check-label h6" for="ck5">Lunettes d'eclipse</label>
+                        <label class="form-check-label h6" for="cc_ck5">Lunettes d'eclipse</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c6" id="cc_ck6">
-                        <label class="form-check-label h6" for="ck6">Tente</label>
+                        <label class="form-check-label h6" for="cc_ck6">Tente</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c7" id="cc_ck7">
-                        <label class="form-check-label h6" for="ck7">Sac de couchage</label>
+                        <label class="form-check-label h6" for="cc_ck7">Sac de couchage</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c1" id="ck_ck1">
-                        <label class="form-check-label h6" for="ck1">Réchaud et cantine</label>
+                        <label class="form-check-label h6" for="ck_ck1">Réchaud et cantine</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c2" id="ck_ck2">
-                        <label class="form-check-label h6" for="ck2">Hamac</label>
+                        <label class="form-check-label h6" for="ck_ck2">Hamac</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c3" id="ck_ck3">
-                        <label class="form-check-label h6" for="ck3">Matelas</label>
+                        <label class="form-check-label h6" for="ck_ck3">Matelas</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c4" id="ck_ck4">
-                        <label class="form-check-label h6" for="ck4">Désinfectant d'eau</label>
+                        <label class="form-check-label h6" for="ck_ck4">Désinfectant d'eau</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="ck_ck5">
-                        <label class="form-check-label h6" for="ck5">Rations / casse croute</label>
+                        <label class="form-check-label h6" for="ck_ck5">Rations / casse croute</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="ck_ck6">
-                        <label class="form-check-label h6" for="ck5">Combinaison de plongée</label>
+                        <label class="form-check-label h6" for="ck_ck6">Combinaison de plongée</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="ck_ck7">
-                        <label class="form-check-label h6" for="ck5">Palme</label>
+                        <label class="form-check-label h6" for="ck_ck7">Palme</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="ck_ck8">
-                        <label class="form-check-label h6" for="ck5">Masque et tuba</label>
+                        <label class="form-check-label h6" for="ck_ck8">Masque et tuba</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="ck_ck9">
-                        <label class="form-check-label h6" for="ck5">Bouteille d'oxygene</label>
+                        <label class="form-check-label h6" for="ck_ck9">Bouteille d'oxygene</label>
                     </div>
                     <br>
                     <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
