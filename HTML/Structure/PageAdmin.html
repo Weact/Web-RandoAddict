@@ -374,22 +374,43 @@
                                 if (this.readyState == 4 && this.status == 200)
                                 {
                                   response = JSON.parse(this.responseText);
+                                  if(response){
+                                      $('#toastSuccess').toast('show');
+                                  }
+                                  else{
+                                      $('#toastError').toast('show');
+                                  }
+                                  update();
                                 }
                               };
                               xmlhttp.open("GET", "Include/userManager.php?mail_user=" + userMail + "&role_user=" + userRole, true);
                               xmlhttp.send();
 
-                              update();
                             }
                             </script>
                       </select>
+
                       <label for="guide" class="form-label h6">Changer en tant que :</label>
                     </div>
                   </div>
+
                   <button onclick="updateUserRole()" class="btn btn-outline-success mb-1 h6">Modifier role</button>
                 </div>
             </div>
           </div>
+          <div class="container">
+      <div class="toast bg-success" id="toastSuccess" data-delay="3000" style=" top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+          Succès !
+        </div>
+      </div>
+
+      <div class="toast bg-danger" id="toastError" data-delay="3000" style=" top: 1rem; left: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+        <div class="toast-body">
+          Erreur !
+        </div>
+      </div>
+    </div>
           <!---------------------------------------------------------------------------------------------------------------------------------------------->
           <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
             <div class="card">

@@ -104,7 +104,7 @@ class ManagerMarcheur extends Manager
         $result['success'] = true;
         $result['error'] = false;
         $result['message'] = "success";
-        $result['passwordVerify'] = password_verify($mdp, $valueStmt["mdpMarcheur"]);
+        $result['passwordVerify'] = (md5($mdp) == $valueStmt["mdpMarcheur"]);
         return($result);
 
 			}else{
