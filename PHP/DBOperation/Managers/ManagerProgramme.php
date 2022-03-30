@@ -266,7 +266,8 @@ class ManagerProgramme extends Manager
   // Entry : A text for the name
   // Return : An array holding all the programs with the same name
   {
-    $req = "SELECT * FROM PROGRAMME WHERE labelProgramme = :LABEL";
+    $req = "SELECT * FROM PROGRAMME WHERE labelProgramme LIKE :LABEL";
+    $text = "%".$text."%";
 
     // Send the request to the database
     try {

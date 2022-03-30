@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 - Ajout de méthodes pour récupérer les Programmes passés ou à venir d'un Marcheur.
 - Ajout d'une méthode pour récupérer le matériel nécessaire d'un Programme.
 
+### Changed
+- Méthodes selectTableByLabel modifié. Les requêtes incluent désormais un LIKE.
+
 ### HOTFIX
 - Correction des require_once dans les classes Managers.
 - Correction de ManagerProgramme.
