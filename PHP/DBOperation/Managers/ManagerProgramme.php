@@ -117,7 +117,7 @@ class ManagerProgramme extends Manager
       $stmt->execute();
 
       // Creation of a row in Escale & Necessaire
-      $last_id = $this->getdb()->lastInsertId()
+      $last_id = $this->getdb()->lastInsertId();
       $this->autoInsertEscale($ids, $last_id);
       $this->autoInsertNecessaire($labels, $last_id);
 
