@@ -212,8 +212,8 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":NEWINFO", $p->getsDesc_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWDEPART", $p->getsDepart_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWARRIVEE", $p->getsArrivee_Prog(), PDO::PARAM_STR);
-      $stmt->bindValue(":NEWCAP", $p->getsCapacite_Prog(), PDO::PARAM_INT);
-      $stmt->bindValue(":NEWDIF", $p->getsDifficulte_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWCAP", $p->getnCapacite_Prog(), PDO::PARAM_INT);
+      $stmt->bindValue(":NEWDIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":NEWVALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
 			$stmt->execute();
 
@@ -266,7 +266,8 @@ class ManagerProgramme extends Manager
   // Entry : A text for the name
   // Return : An array holding all the programs with the same name
   {
-    $req = "SELECT * FROM PROGRAMME WHERE labelProgramme = :LABEL";
+    $req = "SELECT * FROM PROGRAMME WHERE labelProgramme LIKE :LABEL";
+    $text = "%".$text."%";
 
     // Send the request to the database
     try {

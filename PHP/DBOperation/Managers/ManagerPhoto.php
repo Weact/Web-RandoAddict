@@ -76,8 +76,6 @@ class ManagerPhoto extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -106,8 +104,6 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
@@ -145,8 +141,6 @@ class ManagerPhoto extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -177,8 +171,6 @@ class ManagerPhoto extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -207,14 +199,13 @@ class ManagerPhoto extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
   public function selectPhotosByLabel($text)
   {
-    $req = "SELECT * FROM PHOTO WHERE labelPhoto = :LABEL";
+    $req = "SELECT * FROM PHOTO WHERE labelPhoto LIKE :LABEL";
+    $text = "%".$text."%";
 
     // Send the request to the database
     try
@@ -236,8 +227,6 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
