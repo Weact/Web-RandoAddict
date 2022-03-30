@@ -148,17 +148,23 @@
                     <textarea name="sLabel_Prog" class="form-control" aria-label="Description"></textarea>
 
                     <legend for="selection_rando">Sélection de randonnée</legend>
-                    <select name="sExcur_Prog" id="selection_rando" class="form-control" required>
+                    <select multiple name="sExcur_Prog[]" id="selection_rando" class="form-control" required>
                         <optgroup>
-                            <option value="">Choisissez la randonnée</option>
-                            <option value="">Randonnée placeholder</option>
+                            <?php
+                            require_once(__DIR__ . '/../Include/programManager.php');
+                            $excursions = getAllExc();
+                            foreach ($excursions as $excursion) {
+                                echo "<option value='" . $excursion[0] . "'>" . $excursion[1] . "</option>";
+                            }
+
+                            ?>
                         </optgroup>
                     </select>
 
                     <legend for="nb_rando">Nombre de randonneurs</legend>
                     <div class="def-number-input number-input safari_only">
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
-                        <input class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" min="1" name="quantity" value="1" type="number">
+                        <input name="nCapacite_Prog" class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" min="1" name="quantity" value="1" type="number">
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                     </div>
 
