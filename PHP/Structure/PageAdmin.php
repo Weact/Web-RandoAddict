@@ -254,7 +254,7 @@
                         <label class="form-check-label h6" for="ck_ck9">Bouteille d'oxygene</label>
                     </div>
                     <br>
-                    <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
                       data-bs-target="#materielModal">Ajouter un materiel</button>
 
                     <legend for="selection_rando">Description</legend>
@@ -434,12 +434,12 @@
                   <div class="modal-body">
                     <label for="email" class="form-label h6">Nom du nouveau materiel</label>
                     <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
-                    <label for="email" class="form-label h6">Descritpion du nouveau materiel</label>
+                    <label for="email" class="form-label h6">Description du nouveau materiel</label>
                     <textarea name="Description materiel_autres" class="form-control" aria-label="Description materiel_autres"></textarea>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-warning">Ajouter</button>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                 </div>
               </div>
