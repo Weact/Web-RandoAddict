@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/TraverseeObject.php");
+require_once(__DIR__."/../Objects/TraverseeObject.php");
 require_once("Manager.php");
 
 class ManagerTraversee extends Manager
