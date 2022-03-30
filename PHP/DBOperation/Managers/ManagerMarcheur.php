@@ -19,8 +19,7 @@
 /*******************************************************************************\
 * 25-03-2022 Romain Schlotter   : Création de l'objet de retour $return et de sa conversion en json
 \*******************************************************************************/
-
-require_once("DBOperation/Objects/MarcheurObject.php");
+require_once(__DIR__."/../Objects/MarcheurObject.php");
 require_once("Manager.php");
 class ManagerMarcheur extends Manager
 {
@@ -141,6 +140,7 @@ class ManagerMarcheur extends Manager
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
+      var_dump($stmt);
       // Return success
       $result['success'] = true;
       $result['error'] = false;

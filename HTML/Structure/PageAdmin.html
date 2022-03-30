@@ -328,49 +328,111 @@
         </div>
 
         <div class="container mt-3">
-          <form id='changer_compte' name='changer_compte' class="form" method="POST" action="#">
-            <h3>Changer le status d'un compte</h3>
-            <div class="row">
-              <div class="col">
-                <!--Password-->
-                <select id="selection" class="form-control" required>
-                  <optgroup>
-                    <option value="">Choisissez leprofil à modifier</option>
-                    <option value="">Nom placeholder</option>
-                  </optgroup>
-                </select>
-              </div>
-              <div class="col">
-                <!--Is guide-->
-                <div class="mb-3 form-floating">
-                  <select class="form-select">
-                    <option>Visiteur</option>
-                    <option>Guide</option>
-                    <option>Administrateur</option>
-                  </select>
-                  <label for="guide" class="form-label h6">Changer en tant que :</label>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-outline-success mb-1 h6">Modifier</button>
+          <h3>Changer le status d'un compte</h3>
+          <div class="row">
+            <div class="col">
+              <!--Password-->
+              <select id="selection" class="form-control" id="roles_choice" required>
+                <optgroup>
+                  <?php
+                    require_once(__DIR__.'/../../PHP/Include/userManager.php');
+                      $users = getAllUsers();
+                      foreach($users as $user) {
+                        echo "<option value='".$user[4]."'>".$user[0]."</option>";
+                      }
+
+                    ?>
+                </optgroup>
+              </select>
             </div>
-          </form>
+            <div class="col">
+              <!--Is guide-->
+              <div class="mb-3 form-floating">
+                <select class="form-select">
+                  <option>Visiteur</option>
+                  <option>Guide</option>
+                  <option>Administrateur</option>
+                  <script>
+                    let user_selector = document.getElementById('selection_user');
+                    update();
+                    user_selector.addEventListener("change", () => {
+                      update()
+                    });
+                    function update() {
+                      let roles = document.getElementById('roles_choice').children
+                      for (let i of roles) {
+                        i.disabled = i.innerHTML == user_selector.value;
+                      }
+                    }
+                    function updateUserRole() {
+                      let mails = document.getElementById('selection_user')
+                      let roles = document.getElementById('roles_choice')
+                      let userRole = roles.options[roles.selectedIndex].value;
+                      let userMail = mails.options[mails.selectedIndex].innerHTML;
+
+                      console.log(userRole + userMail);
+
+                      var xmlhttp = new XMLHttpRequest();
+                      let response;
+                      xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                          response = JSON.parse(this.responseText);
+                          if (response) {
+                            $('#toastSuccess').toast('show');
+                          }
+                          else {
+                            $('#toastError').toast('show');
+                          }
+                          update();
+                        }
+                      };
+                      xmlhttp.open("GET", "Include/userManager.php?mail_user=" + userMail + "&role_user=" + userRole, true);
+                      xmlhttp.send();
+
+                    }
+                  </script>
+                </select>
+
+                <label for="guide" class="form-label h6">Changer en tant que :</label>
+              </div>
+            </div>
+
+            <button onclick="updateUserRole()" class="btn btn-outline-success mb-1 h6">Modifier role</button>
+          </div>
         </div>
       </div>
-      <!---------------------------------------------------------------------------------------------------------------------------------------------->
-      <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
-        <div class="card">
-          <label for="guide" class="form-label h6">Nom</label>
-          <div class="card-header h5">Nom placeholder</div>
-          <label for="guide" class="form-label h6">Statut</label>
-          <div class="card-body h5">Randonneur / guide</div>
-          <label for="guide" class="form-label h6">Mail</label>
-          <div class="card-body h5">Mail placeholder</div>
-          <label for="guide" class="form-label h6">Téléphone</label>
-          <div class="card-body h5">Tel placeholder</div>
+      <div class="container">
+        <div class="toast bg-success" id="toastSuccess" data-delay="3000"
+          style=" top: 1rem; right: 1rem; min-width:250px;" aria-live="assertive" aria-atomic="true">
+          <div class="toast-body">
+            Succès !
+          </div>
+        </div>
 
-          <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+        <div class="toast bg-danger" id="toastError" data-delay="3000" style=" top: 1rem; left: 1rem; min-width:250px;"
+          aria-live="assertive" aria-atomic="true">
+          <div class="toast-body">
+            Erreur !
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <!---------------------------------------------------------------------------------------------------------------------------------------------->
+  <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
+    <div class="card">
+      <label for="guide" class="form-label h6">Nom</label>
+      <div class="card-header h5">Nom placeholder</div>
+      <label for="guide" class="form-label h6">Statut</label>
+      <div class="card-body h5">Randonneur / guide</div>
+      <label for="guide" class="form-label h6">Mail</label>
+      <div class="card-body h5">Mail placeholder</div>
+      <label for="guide" class="form-label h6">Téléphone</label>
+      <div class="card-body h5">Tel placeholder</div>
+
+      <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+    </div>
+  </div>
+</div>
+</div>
 </div>

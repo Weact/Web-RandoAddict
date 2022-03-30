@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS Photo(
 	labelPhoto varchar(128) not null,										# label (ou nom) de la photo, pouvant servir également de placeholder
 	idExcursion int not null,												# identifiant unique de l'excursion à laquelle la photo est liée
 	CONSTRAINT fk_PhotoExcursion											# contrainte de clé étrangère pour l'identifiant de l'excursion
-		FOREIGN KEY(idExcursion) 
+		FOREIGN KEY(idExcursion)
 		REFERENCES Excursion(idExcursion)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
@@ -144,10 +144,10 @@ CREATE TABLE IF NOT EXISTS Traversee(
 	CONSTRAINT pk_Traversee 												# création de l'identifiant unique de la traversée à partir des identifiants de l'excursion et du terrain
 		PRIMARY KEY(idExcursion, labelTerrain),
 	CONSTRAINT fk_TraverseeExcursion										# contrainte de clé étrangère pour l'identifiant de l'excursion
-		FOREIGN KEY(idExcursion) 
+		FOREIGN KEY(idExcursion)
 		REFERENCES Excursion(idExcursion),
 	CONSTRAINT fk_TraverseeTerrain											# contrainte de clé étrangère pour l'identifiant du terrain
-		FOREIGN KEY(labelTerrain) 
+		FOREIGN KEY(labelTerrain)
 		REFERENCES Terrain(labelTerrain)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS Traversee(
 CREATE TABLE IF NOT EXISTS Escale(
 	idExcursion int not null,												# identifiant unique de l'excursion à laquelle l'escale est liée
 	idProgramme int not null,												# identifiant unique du programme auquel l'escale est liée
-	ordreEscale int not null auto_increment,								# definit l'ordre dans lequel les escales se font au sein d'un programme
+	ordreEscale int not null,								# definit l'ordre dans lequel les escales se font au sein d'un programme
 	CONSTRAINT pk_Escale													# création de l'identifiant unique de l'escale à partir des identifiants de l'excursion et du programme
 		PRIMARY KEY(idExcursion, idProgramme),
 	CONSTRAINT fk_EscaleExcursion											# contrainte de clé étrangère pour l'identifiant de l'excursion
