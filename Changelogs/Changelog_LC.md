@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.0.10] - 2022-03-30
+### Added
+- Ajout de méthodes pour récupérer les Programmes passés ou à venir d'un Marcheur.
+- Ajout d'une méthode pour récupérer le matériel nécessaire d'un Programme.
+
 ## [0.0.9] - 2022-03-29
 ### Added
 - Le mot de passe est hashé.
