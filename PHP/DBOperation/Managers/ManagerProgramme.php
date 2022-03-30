@@ -21,7 +21,9 @@
 
 require_once(__DIR__."/../Objects/ProgrammeObject.php");
 require_once("ManagerEscale.php");
-require_once("ManagerNecessaire.php")
+require_once("ManagerNecessaire.php");
+require_once("ManagerMateriel.php");
+
 require_once("Manager.php");
 
 class ManagerProgramme extends Manager
@@ -132,8 +134,6 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -161,8 +161,6 @@ class ManagerProgramme extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
@@ -198,8 +196,6 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -234,8 +230,6 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -264,8 +258,6 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -274,7 +266,7 @@ class ManagerProgramme extends Manager
   // Entry : A text for the name
   // Return : An array holding all the programs with the same name
   {
-    $req = "SELECT * FROM PROGRAMME WHERE labelProg = :LABEL";
+    $req = "SELECT * FROM PROGRAMME WHERE labelProgramme = :LABEL";
 
     // Send the request to the database
     try {
@@ -296,8 +288,6 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -305,7 +295,7 @@ class ManagerProgramme extends Manager
   // Goal : Select a program still valid considering the date
   // Return : An array holding all the programs valid
   {
-    $req = "SELECT * FROM PROGRAMME WHERE departProg > (CURDATE() + INTERVAL 3 DAY)"; // TO-DO : Verify this one
+    $req = "SELECT * FROM PROGRAMME WHERE departProgramme > (CURDATE() + INTERVAL 3 DAY)"; // TO-DO : Verify this one
 
     // Send the request to the database
     try {
@@ -326,8 +316,6 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -336,7 +324,7 @@ class ManagerProgramme extends Manager
   // Entry : A num for the difficulty
   // Return : An array holding all the programs with a lesser difficulty
   {
-    $req = "SELECT * FROM PROGRAMME WHERE difficulteProg <= :DIF";
+    $req = "SELECT * FROM PROGRAMME WHERE difficulteProgramme <= :DIF";
 
     // Send the request to the database
     try {
@@ -358,7 +346,86 @@ class ManagerProgramme extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
+    }
+  }
+
+  public function selectPassedProgrammeByMailMarcheur($mail)
+  {
+    $req = "SELECT * FROM PROGRAMME WHERE PROGRAMME.dateDepartProgramme < CURDATE() AND PROGRAMME.idProgramme IN (SELECT PARTICIPATION.idProgramme FROM PARTICIPATION WHERE PARTICIPATION.mailMarcheur = :MAIL)";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
+      $stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+    }
+  }
+
+  public function selectFuturProgrammeByMailMarcheur($mail)
+  {
+    $req = "SELECT * FROM PROGRAMME WHERE PROGRAMME.dateDepartProgramme > CURDATE() AND PROGRAMME.idProgramme IN (SELECT PARTICIPATION.idProgramme FROM PARTICIPATION WHERE PARTICIPATION.mailMarcheur = :MAIL)";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":MAIL", $mail, PDO::PARAM_STR);
+      $stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+    }
+  }
+
+  public function selectMaterielByProgrammeId($id)
+  {
+    $req = "SELECT * FROM MATERIEL WHERE MATERIEL.labelMateriel IN (SELECT NECESSAIRE.labelMateriel FROM NECESSAIRE WHERE NECESSAIRE.idProgramme = :ID)";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $id PDO::PARAM_INT);
+      $stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt;
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
 
     }
   }

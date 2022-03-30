@@ -110,14 +110,14 @@
             'sDesc_Prog' => $_POST['sDesc_Prog'],
             'sDepart_Prog' => $_POST['sDepart_Prog'] . " " . $_POST['sDepartHeure_Prog'].":00",
             'sArrivee_Prog' => $_POST['sArrivee_Prog'] . " " . $_POST['sArriveHeure_Prog'].":00",
-            'nCapacite_Prog' => 5,
+            'nCapacite_Prog' => $_POST['nCapacite_Prog'],
             'nDifficulte_Prog' => 2,
             'sValide_Prog' => "En attente"
             );
 
           $new_item = new Programme();
           $new_item->hydrate($donnees);
-          $mng->insertProgramme($new_item, []);
+          $mng->insertProgramme($new_item, $_POST['sExcur_Prog']);
 
         }
 
