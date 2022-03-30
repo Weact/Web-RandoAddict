@@ -17,7 +17,6 @@
     require_once("userManager.php");
     require_once("programManager.php");
 
-
     //Vérification et initialisation des variables de session le cas échéant.
     if (!isset($_SESSION['typeUtilisateur']))
     {
@@ -84,6 +83,14 @@
             connectUser($_POST["sMail_Marcheur_Connexion"]);
           }
       }
+      if(isset($_POST["Nom_materiel_autre"])) {
+          $donnees = array(
+            'sLabel_Materiel' => $_POST['Nom_materiel_autre'],
+            'sDesc_Materiel' => "desc"
+            );
+          makeNewMat($donnees);
+      }
+
       elseif(isset($_POST["labelExcursion"]))
       {
         $nomImage = "";
@@ -117,6 +124,8 @@
         {
           $mng = new ManagerProgramme($conn);
 
+          $materiels = $_POST['materiel'];
+          var_dump($materiels);
           //TO DO : ADD sExcur_Prog
           $donnees = array(
             'sLabel_Prog' => $_POST['sLabel_Prog'],
@@ -131,7 +140,7 @@
             var_dump($donnees);
           $new_item = new Programme();
           $new_item->hydrate($donnees);
-          $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], []);
+          $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
 
         }
 

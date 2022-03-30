@@ -209,70 +209,18 @@
                     </div>
                   <div>
                     <legend for="selection">Matériel</legend>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
-                        <label class="form-check-label h6" for="cc_ck1">Chaussure de randonnée</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c2" id="cc_ck2">
-                        <label class="form-check-label h6" for="cc_ck2">Corde</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c3" id="cc_ck3">
-                        <label class="form-check-label h6" for="cc_ck3">Raquettes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c4" id="cc_ck4">
-                        <label class="form-check-label h6" for="cc_ck4">Mousqueton et suspension d'escalade</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="cc_ck5">
-                        <label class="form-check-label h6" for="cc_ck5">Lunettes d'eclipse</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c6" id="cc_ck6">
-                        <label class="form-check-label h6" for="cc_ck6">Tente</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c7" id="cc_ck7">
-                        <label class="form-check-label h6" for="cc_ck7">Sac de couchage</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c1" id="ck_ck1">
-                        <label class="form-check-label h6" for="ck_ck1">Réchaud et cantine</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c2" id="ck_ck2">
-                        <label class="form-check-label h6" for="ck_ck2">Hamac</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c3" id="ck_ck3">
-                        <label class="form-check-label h6" for="ck_ck3">Matelas</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c4" id="ck_ck4">
-                        <label class="form-check-label h6" for="ck_ck4">Désinfectant d'eau</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck5">
-                        <label class="form-check-label h6" for="ck_ck5">Rations / casse croute</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck6">
-                        <label class="form-check-label h6" for="ck_ck6">Combinaison de plongée</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck7">
-                        <label class="form-check-label h6" for="ck_ck7">Palme</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck8">
-                        <label class="form-check-label h6" for="ck_ck8">Masque et tuba</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck9">
-                        <label class="form-check-label h6" for="ck_ck9">Bouteille d'oxygene</label>
-                    </div>
+                    <?php
+                    require_once(__DIR__ . '/../Include/programManager.php');
+                    $materiels = getAllMat();
+                    foreach ($materiels as $materiel) {
+                        echo '<div class="form-check form-check-inline">
+                            <input class="form-check-input" name="materiel[]" type="checkbox" id="'. $materiel[0] . '" value="'. $materiel[0] . '">
+                            <label class="form-check-label h6" for="'. $materiel[0] . '">' . $materiel[0] . "</label>
+                        </div>";
+                    }
+
+                    ?>
+
                     <br>
                   </div>
                     <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
@@ -452,12 +400,14 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
                   </div>
+                  <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
                   <div class="modal-body">
                     <label for="email" class="form-label h6">Nom du nouveau materiel</label>
                     <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
                   </div>
                   <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                  </form>
                     <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                 </div>
@@ -471,12 +421,14 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
                   </div>
+                  <form id='add_terrain_form' name='creation_rando' class="form" method="POST" action="#">
                   <div class="modal-body">
                     <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
                     <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
                   </div>
                   <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                  </form>
                     <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                 </div>
