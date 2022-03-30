@@ -1,3 +1,7 @@
+## [0.0.6] - 2022-03-30
+### Modification
+-Retrait de l'auto increment sur l'ordre des escales qui ne fonctionnait pas lors de la création de la base de données
+
 ## [0.0.5] - 2022-03-29
 ### Ajout
 -Ajout du role d'admin pour la table marcheur

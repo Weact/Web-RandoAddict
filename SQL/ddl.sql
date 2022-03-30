@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS Traversee(
 CREATE TABLE IF NOT EXISTS Escale(
 	idExcursion int not null,												# identifiant unique de l'excursion à laquelle l'escale est liée
 	idProgramme int not null,												# identifiant unique du programme auquel l'escale est liée
-	ordreEscale int not null,								# definit l'ordre dans lequel les escales se font au sein d'un programme
+	ordreEscale int not null,												# definit l'ordre dans lequel les escales se font au sein d'un programme
 	CONSTRAINT pk_Escale													# création de l'identifiant unique de l'escale à partir des identifiants de l'excursion et du programme
 		PRIMARY KEY(idExcursion, idProgramme),
 	CONSTRAINT fk_EscaleExcursion											# contrainte de clé étrangère pour l'identifiant de l'excursion
