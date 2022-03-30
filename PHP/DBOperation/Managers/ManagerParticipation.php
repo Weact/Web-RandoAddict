@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/ParticipationObject.php");
+require_once(__DIR__."/../Objects/ParticipationObject.php");
 require_once("Manager.php");
 
 class ManagerParticipation extends Manager

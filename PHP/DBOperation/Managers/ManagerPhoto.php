@@ -17,7 +17,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/PhotoObject.php");
+require_once(__DIR__."/../Objects/PhotoObject.php");
 require_once("Manager.php");
 
 class ManagerPhoto extends Manager

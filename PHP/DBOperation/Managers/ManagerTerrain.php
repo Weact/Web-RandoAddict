@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/TerrainObject.php");
+require_once(__DIR__."/../Objects/TerrainObject.php");
 require_once("Manager.php");
 
 class ManagerTerrain extends Manager

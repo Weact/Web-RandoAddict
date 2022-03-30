@@ -16,7 +16,7 @@
 * 
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/TypeObject.php");
+require_once(__DIR__."/../Objects/TypeObject.php");
 require_once("Manager.php");
 
 class ManagerType extends Manager
