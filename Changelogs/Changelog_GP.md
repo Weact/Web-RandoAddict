@@ -1,3 +1,7 @@
+## [0.0.7] - 2022-03-30
+### Modification
+-Modification du decimal pour le prix
+
 ## [0.0.6] - 2022-03-30
 ### Modification
 -Retrait de l'auto increment sur l'ordre des escales qui ne fonctionnait pas lors de la création de la base de données
