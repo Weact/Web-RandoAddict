@@ -21,7 +21,9 @@
 
 require_once(__DIR__."/../Objects/ProgrammeObject.php");
 require_once("ManagerEscale.php");
-require_once("ManagerMateriel.php")
+require_once("ManagerNecessaire.php");
+require_once("ManagerMateriel.php");
+
 require_once("Manager.php");
 
 class ManagerProgramme extends Manager
@@ -59,16 +61,15 @@ class ManagerProgramme extends Manager
     return $tab;
   }
 
-  private function autoInsertEscale(array $a, $id)
+  private function autoInsertEscale(array $ids, $prog_id)
   {
     $m_e = new ManagerEscale(connect_bd());
 
-        var_dump($a);
-    foreach($a as $excursionId)
+    foreach($ids as $excursionId)
     {
       $donnees = array (
-        "nId_Excursion"  => $excursionId,
-        "nId_Prog" => $id
+        "nId_Prog"  => $prog_id,
+        "nId_Excursion" => $excursionId
       );
 
       $e = new Escale;
@@ -78,8 +79,26 @@ class ManagerProgramme extends Manager
     }
   }
 
+  private function autoInsertNecessaire(array $labels, $prog_id)
+  {
+    $m_n = new ManagerNecessaire(connect_bd());
+
+    foreach($labels as $materielLabel)
+    {
+      $donnees = array (
+        "nId_Prog"  => $prog_id,
+        "sLabel_Materiel" => $materielLabel
+      );
+
+      $n = new Necessaire;
+      $n->hydrate($donnees);
+
+      $m_n->insertEscale($n);
+    }
+  }
+
   // Database commands
-  public function insertProgramme(Programme $p, array $a)
+  public function insertProgramme(Programme $p, array $ids, array $labels)
   // Goal : Insert a program in the database
   // Entry : A program object
   {
@@ -97,8 +116,10 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":VALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
       $stmt->execute();
 
-      // Creation of an row in Escale
-      $this->autoInsertEscale($a, $last_id = $this->getdb()->lastInsertId());
+      // Creation of a row in Escale & Necessaire
+      $last_id = $this->getdb()->lastInsertId();
+      $this->autoInsertEscale($ids, $last_id);
+      $this->autoInsertNecessaire($labels, $last_id);
 
       // Return success
       $result['success'] = true;
@@ -381,7 +402,7 @@ class ManagerProgramme extends Manager
 
     }
   }
-  
+
   public function selectMaterielByProgrammeId($id)
   {
     $req = "SELECT * FROM MATERIEL WHERE MATERIEL.labelMateriel IN (SELECT NECESSAIRE.labelMateriel FROM NECESSAIRE WHERE NECESSAIRE.idProgramme = :ID)";
