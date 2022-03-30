@@ -1,12 +1,11 @@
 //Wait page finish loading
-//let accueil = "Structure/ListeRandonneesAccueil.php"
-let test = "Structure/PageFAQ.php"
+let accueil = "Structure/ListeRandonneesAccueil.php"
 window.addEventListener("load", function () {
-  //goTo(accueil);
-goTo(test);
+  goTo(accueil);
   goToOnClick(document.getElementsByClassName("goToMyRando"), "Structure/ListeRandonneesAdminPage.php");
   goToOnClick(document.getElementsByClassName("goToDispRando"), "Structure/ListeRandonneesAccueil.php");
   goToOnClick(document.getElementsByClassName("goToAdmin"), "Structure/PageAdmin.php");
+  goToOnClick(document.getElementsByClassName("goToContactFAQ"), "Structure/PageFAQ.php");
 });
 
 function goToOnClick(btnArray, page) {

@@ -15,3 +15,17 @@
 }.nav-custom-link>a:hover {
     color: green!important;
 }
+
+.buttonFooter{
+    -webkit-appearance: none!important;
+    -webkit-user-select: none!important;
+    -moz-user-select: none!important;
+    border: none!important;
+    outline: none!important;
+    box-shadow: none!important;
+    user-select: none!important;
+}
+.buttonFooter:focus{
+    outline: none!important;
+    box-shadow: none!important;
+}
