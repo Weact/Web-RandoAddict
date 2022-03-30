@@ -14,10 +14,10 @@
 *                 selectPhotosByLabel($text)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/PhotoObject.php");
+require_once(__DIR__."/../Objects/PhotoObject.php");
 require_once("Manager.php");
 
 class ManagerPhoto extends Manager
@@ -60,7 +60,7 @@ class ManagerPhoto extends Manager
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
       $stmt->bindValue(":LABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
-      $stmt->bindValue(":ID", $p->nId_Excursion(), PDO::PARAM_INT);
+      $stmt->bindValue(":ID", $p->getnId_Excursion(), PDO::PARAM_INT);
       $stmt->execute();
 
       // Return success
@@ -75,7 +75,7 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }
@@ -92,7 +92,7 @@ class ManagerPhoto extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -106,7 +106,7 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }
@@ -136,7 +136,7 @@ class ManagerPhoto extends Manager
       $result['message'] = "success";
       $result['photo'] = $p;
       return($result);
-			
+
 
 		} catch (PDOException $error) {
       // Return error
@@ -144,7 +144,7 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }
@@ -176,7 +176,7 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }
@@ -206,7 +206,7 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }
@@ -222,7 +222,7 @@ class ManagerPhoto extends Manager
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -236,7 +236,7 @@ class ManagerPhoto extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
- 
+
 			exit();
 
     }

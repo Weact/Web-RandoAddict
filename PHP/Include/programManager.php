@@ -13,6 +13,7 @@
     require_once(__DIR__."/../DBOperation/PDO_Connect.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerProgramme.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerExcursion.php");
+    require_once(__DIR__."/../DBOperation/Managers/ManagerPhoto.php");
     $conn = connect_bd();
 
       function makeNewProgram($donnees) {
@@ -33,6 +34,31 @@
           $users = $mng->selectExcursions()['stmt'];
 
           return $users;
+    }
+
+    function makeNewExcursion($donnees) {
+        $conn = connect_bd();
+
+        $mng = new ManagerExcursion($conn);
+        $new_item = new Excursion();
+        $new_item->hydrate($donnees);
+        $result = $mng->insertExcursion($new_item);
+
+        $new_item = $result['newExcursionId'];
+
+        $CONNARDDEROMAIN = "IAMGEDEFILSDEPUTE.png";
+        $donnees_photo = array(
+          'sLien_Photo' => $CONNARDDEROMAIN,
+          'sLabel_Photo' => "TG",
+          'nId_Excursion' => $new_item
+          );
+
+        var_dump($donnees_photo);
+        $mng_photo = new ManagerPhoto($conn);
+        $new_photo = new Photo();
+        $new_photo->hydrate($donnees_photo);
+        $result = $mng_photo->insertPhoto($new_photo);
+
     }
 
     function getAllPrograms() {

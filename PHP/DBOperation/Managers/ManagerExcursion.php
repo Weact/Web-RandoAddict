@@ -75,6 +75,7 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
+      $result['newExcursionId'] = $this->getdb()->lastInsertId();
       return($result);
 
     } catch (PDOException $error) {

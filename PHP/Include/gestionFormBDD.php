@@ -15,6 +15,7 @@
     require_once(__DIR__."/../DBOperation/PDO_Connect.php");
     $conn = connect_bd();
     require_once("userManager.php");
+    require_once("programManager.php");
 
 
     //Vérification et initialisation des variables de session le cas échéant.
@@ -85,8 +86,6 @@
       }
       elseif(isset($_POST["labelExcursion"]))
         {
-          $mng = new ManagerExcursion($conn);
-
           $donnees = array(
             'sDesc_Excursion' => $_POST['descExcursion'],
             'sLabel_Excursion' => $_POST['labelExcursion'],
@@ -95,9 +94,7 @@
             'fPrix_Excursion' => $_POST['prixExcursion']
             );
 
-          $new_item = new Excursion();
-          $new_item->hydrate($donnees);
-          $result = $mng->insertExcursion($new_item);
+          makeNewExcursion($donnees);
 
         }
       if(isset($_POST["sLabel_Prog"]))
