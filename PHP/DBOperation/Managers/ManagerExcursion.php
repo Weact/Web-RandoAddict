@@ -258,7 +258,8 @@ class ManagerExcursion extends Manager
   // Entry : A text for the label
   // Return : An array holding all the corresponding excursions
   {
-    $req = "SELECT * FROM EXCURSION WHERE labelExcursion = :LABEL";
+    $req = "SELECT * FROM EXCURSION WHERE labelExcursion LIKE :LABEL";
+    $text = "%".$text."%";
 
     // Send the request to the database
     try
