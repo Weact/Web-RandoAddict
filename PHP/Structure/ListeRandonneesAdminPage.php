@@ -65,148 +65,164 @@
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal"
                             data-bs-target="#exampleModal">Modifier</button>
                         <button class="btn  btn-outline-danger mb-1" type="edit">Supprimer</button>
+                  <!-------------------------------------------------------------------------------------------------------------------------------->
+                        <!--Modal formulaire de mofification randonnee-->
+                        <form id='U_creation_programme' name='U_creation_programme' class="form" method="POST" action="#">
+                            <legend for="U_selection_rando">Nom du programme</legend>
+                            <input type="text" name="U_sLabel_Prog" class="form-control" aria-label="NomExcursion" required>
 
-                        <!--Modal formulaire de mofification-->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Formulaire de modification</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <legend for="selection">Difficulté de la randonnée</legend>
-                                            <select id="selection" class="form-control" required>
-                                                <optgroup>
-                                                    <option value="">Choisissez la difficultée du terrain</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
-                                                    <option value="">4</option>
-                                                    <option value="">5</option>
-                                                    <option value="">6</option>
-                                                    <option value="">7</option>
-                                                    <option value="">8</option>
-                                                    <option value="">9</option>
-                                                </optgroup>
-                                            </select>
+                            <legend for="U_selection_rando">Sélection de randonnée</legend>
+                            <select multiple name="sExcur_Prog[]" id="U_selection_rando" class="form-control" required>
+                                <optgroup>
+                                    <?php
+                                    require_once(__DIR__ . '/../Include/programManager.php');
+                                    $excursions = getAllExc();
+                                    foreach ($excursions as $excursion) {
+                                        echo "<option value='" . $excursion[0] . "'>" . $excursion[1] . "</option>";
+                                    }
 
-                                            <legend for="prix_pers">Prix par personne <span class="text-muted">€</span>
-                                            </legend>
-                                            <div class="def-number-input number-input">
-                                                <button
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                                    class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
-                                                <input
-                                                    class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary"
-                                                    style="outline: none!important;" min="0" name="quantity" value="0"
-                                                    type="number" step="1.0" date-prefix="€">
-                                                <button
-                                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                                    class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
-                                            </div>
+                                    ?>
+                                </optgroup>
+                            </select>
 
-                                            <legend for="selection">Départ</legend>
-                                            <textarea class="form-control" aria-label="Départ et arriver"></textarea>
+                            <legend for="selectionTerrain">Difficulté de la randonnée</legend>
+                            <select name="U_nDifficulte_Prog" id="selectionTerrain" class="form-control" required>
+                                <option value="">Choisissez la difficultée du terrain</option>
+                                <optgroup>
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                    <option>6</option>
+                                    <option>7</option>
+                                    <option>8</option>
+                                    <option>9</option>
+                                </optgroup>
+                            </select>
 
-                                            <legend for="selection">Arrivée</legend>
-                                            <textarea class="form-control" aria-label="Départ et arriver"></textarea>
-
-                                            <div id="map-container-google-1" class="z-depth-1-half map-container m-3"
-                                                style="height: 450px">
-                                                <iframe
-                                                    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking"
-                                                    width="450" height="450" style="border:0;" allowfullscreen=""
-                                                    loading="lazy"></iframe>
-                                            </div>
-
-                                            <legend for="selection">Matériel</legend>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                                                <label class="form-check-label h6" for="ck1">Chaussure de
-                                                    randonnée</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-                                                <label class="form-check-label h6" for="ck2">Corde</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-                                                <label class="form-check-label h6" for="ck3">Raquettes</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                                                <label class="form-check-label h6" for="ck4">Mousqueton et suspension
-                                                    d'escalade</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Lunettes d'eclipse</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c6" id="ck6">
-                                                <label class="form-check-label h6" for="ck6">Tente</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c7" id="ck7">
-                                                <label class="form-check-label h6" for="ck7">Sac de couchage</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                                                <label class="form-check-label h6" for="ck1">Réchaud et cantine</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-                                                <label class="form-check-label h6" for="ck2">Hamac</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-                                                <label class="form-check-label h6" for="ck3">Matelas</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                                                <label class="form-check-label h6" for="ck4">Désinfectant d'eau</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Rations / casse
-                                                    croute</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Combinaison de
-                                                    plongée</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Palme</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Masque et tuba</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Bouteille d'oxygene</label>
-                                            </div>
-                                            <legend for="selection">Autres</legend>
-                                            <textarea class="form-control" aria-label="Autres"></textarea>
-
-                                            <legend for="selection">Description</legend>
-                                            <textarea class="form-control" aria-label="Description"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Fermer</button>
-                                        <button type="button" class="btn btn-success">Modifier</button>
-                                    </div>
-                                </div>
+                            <legend for="nb_rando">Nombre de randonneurs</legend>
+                            <div class="def-number-input number-input safari_only">
+                                <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
+                                <input name="U_nCapacite_Prog" class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" min="1" name="quantity" value="1" type="number">
+                                <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                             </div>
-                        </div>
+
+                            <legend for="selection_rando">Type de programme</legend><br>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c1" id="U_ck1">
+                                <label class="form-check-label h6" for="U_ck1">Senior</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c2" id="U_ck2">
+                                <label class="form-check-label h6" for="U_ck2">Junior</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c3" id="U_ck3">
+                                <label class="form-check-label h6" for="U_ck3">Majeur</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c4" id="U_ck4">
+                                <label class="form-check-label h6" for="U_ck4">Nature</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c5" id="U_ck5">
+                                <label class="form-check-label h6" for="U_ck5">Histoire</label>
+                            </div>
+
+                            <legend for="startDate">Date de départ</legend>
+                            <input name="U_sDepart_Prog" id="startDate" class="form-control" type="date" required/>
+
+                            <legend for="startDate">Heure de départ</legend>
+                            <div class="cs-form">
+                                <input name="U_sDepartHeure_Prog" type="time" class="form-control" value="" required/>
+                            </div>
+
+                            <legend for="arriveDate">Date d'arriver</legend>
+                            <input name="U_sArrivee_Prog" id="arriveDate" class="form-control" type="date" required/>
+
+                            <legend for="arriveDate">Heure d'arrivée</legend>
+                            <div class="cs-form">
+                                <input name="U_sArriveHeure_Prog" type="time" class="form-control" value="" required/>
+                            </div>
+                          <div>
+                            <legend for="selection">Matériel</legend>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c1" id="U_cc_ck1">
+                                <label class="form-check-label h6" for="U_cc_ck1">Chaussure de randonnée</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c2" id="U_cc_ck2">
+                                <label class="form-check-label h6" for="U_cc_ck2">Corde</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c3" id="U_cc_ck3">
+                                <label class="form-check-label h6" for="U_cc_ck3">Raquettes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c4" id="U_cc_ck4">
+                                <label class="form-check-label h6" for="U_cc_ck4">Mousqueton et suspension d'escalade</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c5" id="U_cc_ck5">
+                                <label class="form-check-label h6" for="U_cc_ck5">Lunettes d'eclipse</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c6" id="U_cc_ck6">
+                                <label class="form-check-label h6" for="U_cc_ck6">Tente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c7" id="U_cc_ck7">
+                                <label class="form-check-label h6" for="U_cc_ck7">Sac de couchage</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c1" id="U_ck_ck1">
+                                <label class="form-check-label h6" for="U_ck_ck1">Réchaud et cantine</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c2" id="U_ck_ck2">
+                                <label class="form-check-label h6" for="U_ck_ck2">Hamac</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c3" id="U_ck_ck3">
+                                <label class="form-check-label h6" for="U_ck_ck3">Matelas</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c4" id="U_ck_ck4">
+                                <label class="form-check-label h6" for="U_ck_ck4">Désinfectant d'eau</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c5" id="U_ck_ck5">
+                                <label class="form-check-label h6" for="U_ck_ck5">Rations / casse croute</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c5" id="U_ck_ck6">
+                                <label class="form-check-label h6" for="U_ck_ck6">Combinaison de plongée</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="c5" id="U_ck_ck7">
+                                <label class="form-check-label h6" for="U_ck_ck7">Palme</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c5" id="U_ck_ck8">
+                                <label class="form-check-label h6" for="U_ck_ck8">Masque et tuba</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="U_c5" id="U_ck_ck9">
+                                <label class="form-check-label h6" for="U_ck_ck9">Bouteille d'oxygene</label>
+                            </div>
+                            <br>
+                          </div>
+                            <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
+                              data-bs-target="#materielModal">Ajouter un materiel</button>
+
+                            <legend for="selection_rando">Description</legend>
+                            <textarea name="U_sDesc_Prog" class="form-control" aria-label="Background et notes" required></textarea>
+                            <br>
+                            <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
+                        </form>
+
                     </div>
                 </div>
             </div>
