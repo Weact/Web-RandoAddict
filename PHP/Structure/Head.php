@@ -27,11 +27,11 @@
 <?php
   //CONNEXION AUTOMATIQUE
     //Vérification et initialisation des variables de session le cas échéant.
-    if ($_SESSION['typeUtilisateur'] == "Guide")
+    if ($_SESSION['typeUtilisateur'] == "Admin")
     {
       require_once("Structure/HeaderAdmin.php");
     }
-    elseif($_SESSION['typeUtilisateur'] == "Marcheur")
+    elseif($_SESSION['typeUtilisateur'] == "Guide" || $_SESSION["typeUtilisateur"] == "Marcheur")
     {
       require_once("Structure/HeaderOnline.php");
     }

@@ -16,10 +16,10 @@
 *                 deleteEscaleByIdExcursion($num)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/EscaleObject.php");
+require_once(__DIR__."/../Objects/EscaleObject.php");
 require_once("Manager.php");
 
 class ManagerEscale extends Manager
@@ -85,7 +85,7 @@ class ManagerEscale extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -119,7 +119,7 @@ class ManagerEscale extends Manager
       $e = new Escale;
       $tab = $this->arrayConstructor($stmt);
       $e->hydrate($tab);
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -153,7 +153,7 @@ class ManagerEscale extends Manager
       $e = new Escale;
       $tab = $this->arrayConstructor($stmt);
       $e->hydrate($tab);
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;

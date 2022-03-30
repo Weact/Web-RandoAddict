@@ -1,4 +1,6 @@
-<!--/*******************************************************************************\
+
+<?php
+/*******************************************************************************\
 * Fichier       : index.php
 *
 * Description   : Fichier permettant la redirection de l'utilisateur vers la page d'accueil du site
@@ -11,9 +13,7 @@
 /*******************************************************************************
 * NOTE : MERCI DE NE JAMAIS MODIFIER DE FICHIER                                *
 ********************************************************************************/
--->
 
-<?php
     header("Location: PHP/Accueil.php");
     exit;
 ?>

@@ -1,3 +1,4 @@
+
 <div class="container bg-info rounded p-3">
   <h2 class="text-center text-dark text-bold">Page administrateur<h2>
 
@@ -36,15 +37,15 @@
               <select name="difficulty_excursion" id="selectionTerrain" class="form-control" required>
                 <option value="">Choisissez la difficultée du terrain</option>
                 <optgroup>
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
-                  <option value="">5</option>
-                  <option value="">6</option>
-                  <option value="">7</option>
-                  <option value="">8</option>
-                  <option value="">9</option>
+                <option value="">1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+                <option value="">6</option>
+                <option value="">7</option>
+                <option value="">8</option>
+                <option value="">9</option>
                 </optgroup>
               </select>
 
@@ -159,8 +160,8 @@
             <legend for="selection_rando">Sélection de randonnée</legend>
             <select name="sExcur_Prog" id="selection_rando" class="form-control" required>
               <optgroup>
-                <option value="">Choisissez la randonnée</option>
-                <option value="">Randonnée placeholder</option>
+              <option value="">Choisissez la randonnée</option>
+              <option value="">Randonnée placeholder</option>
               </optgroup>
             </select>
 
@@ -322,32 +323,71 @@
             </div>
 
             <div class="container mt-3">
-              <form id='changer_compte' name='changer_compte' class="form" method="POST" action="#">
-                <h3>Changer le status d'un compte</h3>
+            <h3>Changer le status d'un compte</h3>
                 <div class="row">
                   <div class="col">
                     <!--Password-->
-                    <select id="selection" class="form-control" required>
+                    <select id="selection_user" class="form-control" required>
                       <optgroup>
-                        <option value="">Choisissez leprofil à modifier</option>
-                        <option value="">Nom placeholder</option>
+                        <?php
+                        require_once(__DIR__.'/../../PHP/Include/userManager.php');
+                          $users = getAllUsers();
+                          foreach($users as $user) {
+                            echo "<option value='".$user[4]."'>".$user[0]."</option>";
+                          }
+
+                        ?>
                       </optgroup>
                     </select>
                   </div>
                   <div class="col">
                     <!--Is guide-->
                     <div class="mb-3 form-floating">
-                      <select class="form-select">
-                        <option>Visiteur</option>
+                      <select id="roles_choice" class="form-select">
+                        <option>Marcheur</option>
                         <option>Guide</option>
-                        <option>Administrateur</option>
+                        <option>Admin</option>
+                          <script>
+                            let user_selector = document.getElementById('selection_user');
+                            update();
+                            user_selector.addEventListener("change", () => {
+                              update()
+                            });
+                            function update(){
+                              let roles = document.getElementById('roles_choice').children
+                              for(let i of roles){
+                                i.disabled = i.innerHTML == user_selector.value;
+                              }
+                            }
+                            function updateUserRole(){
+                              let mails = document.getElementById('selection_user')
+                              let roles = document.getElementById('roles_choice')
+                              let userRole = roles.options[roles.selectedIndex].value;
+                              let userMail = mails.options[mails.selectedIndex].innerHTML;
+
+                              console.log(userRole + userMail);
+
+                              var xmlhttp = new XMLHttpRequest();
+                              let response;
+                              xmlhttp.onreadystatechange = function()
+                              {
+                                if (this.readyState == 4 && this.status == 200)
+                                {
+                                  response = JSON.parse(this.responseText);
+                                }
+                              };
+                              xmlhttp.open("GET", "Include/userManager.php?mail_user=" + userMail + "&role_user=" + userRole, true);
+                              xmlhttp.send();
+
+                              update();
+                            }
+                            </script>
                       </select>
                       <label for="guide" class="form-label h6">Changer en tant que :</label>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-outline-success mb-1 h6">Modifier</button>
+                  <button onclick="updateUserRole()" class="btn btn-outline-success mb-1 h6">Modifier role</button>
                 </div>
-              </form>
             </div>
           </div>
           <!---------------------------------------------------------------------------------------------------------------------------------------------->

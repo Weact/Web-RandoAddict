@@ -19,7 +19,7 @@
 *
 \*******************************************************************************/
 
-require_once("DBOperation/Objects/ProgrammeObject.php");
+require_once(__DIR__."/../Objects/ProgrammeObject.php");
 require_once("ManagerEscale.php");
 require_once("Manager.php");
 
