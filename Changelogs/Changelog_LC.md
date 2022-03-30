@@ -7,7 +7,8 @@ All notable changes to this project will be documented in this file.
 - Ajout d'une méthode pour récupérer le matériel nécessaire d'un Programme.
 
 ### HOTFIX
-- Correction des require_once dans les classes Managers
+- Correction des require_once dans les classes Managers.
+- Correction de ManagerProgramme.
 
 ## [0.0.9] - 2022-03-29
 ### Added
