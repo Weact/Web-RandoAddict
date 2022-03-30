@@ -32,7 +32,7 @@
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
                 <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
                   <legend for="selection_rando">Nom de la randonnée</legend>
-                  <textarea name="sLabel_Prog" class="form-control" aria-label="nom_randonnee"></textarea>
+                  <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee"></textarea>
                     <div class="form-group">
 
                         <legend for="prix_pers">Prix par personne</legend>
@@ -81,18 +81,18 @@
                     </select>
 
                     <legend for="selectionTerrain">Difficulté de la randonnée</legend>
-                    <select name="difficulty_excursion" id="selectionTerrain" class="form-control" required>
+                    <select name="nDifficulte_Prog" id="selectionTerrain" class="form-control" required>
                         <option value="">Choisissez la difficultée du terrain</option>
                         <optgroup>
-                            <option value="">1</option>
-                            <option value="">2</option>
-                            <option value="">3</option>
-                            <option value="">4</option>
-                            <option value="">5</option>
-                            <option value="">6</option>
-                            <option value="">7</option>
-                            <option value="">8</option>
-                            <option value="">9</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
                         </optgroup>
                     </select>
 
@@ -193,7 +193,7 @@
                     <div class="cs-form">
                         <input name="sArriveHeure_Prog" type="time" class="form-control" value="" />
                     </div>
-
+                  <div>
                     <legend for="selection">Matériel</legend>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
@@ -260,6 +260,7 @@
                         <label class="form-check-label h6" for="ck_ck9">Bouteille d'oxygene</label>
                     </div>
                     <br>
+                  </div>
                     <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
                       data-bs-target="#materielModal">Ajouter un materiel</button>
 
