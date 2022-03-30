@@ -31,22 +31,9 @@
         <div class="tab-content text-dark m-5">
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
                 <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
+                  <legend for="selection_rando">Nom de la randonnée</legend>
+                  <textarea name="sLabel_Prog" class="form-control" aria-label="nom_randonnee"></textarea>
                     <div class="form-group">
-                        <legend for="selectionTerrain">Difficulté de la randonnée</legend>
-                        <select name="difficulty_excursion" id="selectionTerrain" class="form-control" required>
-                            <option value="">Choisissez la difficultée du terrain</option>
-                            <optgroup>
-                                <option value="">1</option>
-                                <option value="">2</option>
-                                <option value="">3</option>
-                                <option value="">4</option>
-                                <option value="">5</option>
-                                <option value="">6</option>
-                                <option value="">7</option>
-                                <option value="">8</option>
-                                <option value="">9</option>
-                            </optgroup>
-                        </select>
 
                         <legend for="prix_pers">Prix par personne</legend>
                         <div class="def-number-input number-input safari_only">
@@ -64,74 +51,6 @@
                         <div id="map-container-google-1" class="z-depth-1-half map-container mb-3" style="height: 450px">
                             <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
-
-                        <legend for="selection">Matériel</legend>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
-                            <label class="form-check-label h6" for="ck1">Chaussure de randonnée</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c2" id="cc_ck2">
-                            <label class="form-check-label h6" for="ck2">Corde</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c3" id="cc_ck3">
-                            <label class="form-check-label h6" for="ck3">Raquettes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c4" id="cc_ck4">
-                            <label class="form-check-label h6" for="ck4">Mousqueton et suspension d'escalade</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="cc_ck5">
-                            <label class="form-check-label h6" for="ck5">Lunettes d'eclipse</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="cc_ck6">
-                            <label class="form-check-label h6" for="ck6">Tente</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="cc_ck7">
-                            <label class="form-check-label h6" for="ck7">Sac de couchage</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c1" id="ck_ck1">
-                            <label class="form-check-label h6" for="ck1">Réchaud et cantine</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c2" id="ck_ck2">
-                            <label class="form-check-label h6" for="ck2">Hamac</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c3" id="ck_ck3">
-                            <label class="form-check-label h6" for="ck3">Matelas</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c4" id="ck_ck4">
-                            <label class="form-check-label h6" for="ck4">Désinfectant d'eau</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="ck_ck5">
-                            <label class="form-check-label h6" for="ck5">Rations / casse croute</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="ck_ck6">
-                            <label class="form-check-label h6" for="ck5">Combinaison de plongée</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="ck_ck7">
-                            <label class="form-check-label h6" for="ck5">Palme</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="ck_ck8">
-                            <label class="form-check-label h6" for="ck5">Masque et tuba</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="ck_ck9">
-                            <label class="form-check-label h6" for="ck5">Bouteille d'oxygene</label>
-                        </div>
-                        <legend for="selection">Autres</legend>
-                        <textarea class="form-control" aria-label="Autres"></textarea>
 
                         <legend for="selection">Description</legend>
                         <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
@@ -152,6 +71,22 @@
                         <optgroup>
                             <option value="">Choisissez la randonnée</option>
                             <option value="">Randonnée placeholder</option>
+                        </optgroup>
+                    </select>
+
+                    <legend for="selectionTerrain">Difficulté de la randonnée</legend>
+                    <select name="difficulty_excursion" id="selectionTerrain" class="form-control" required>
+                        <option value="">Choisissez la difficultée du terrain</option>
+                        <optgroup>
+                            <option value="">1</option>
+                            <option value="">2</option>
+                            <option value="">3</option>
+                            <option value="">4</option>
+                            <option value="">5</option>
+                            <option value="">6</option>
+                            <option value="">7</option>
+                            <option value="">8</option>
+                            <option value="">9</option>
                         </optgroup>
                     </select>
 
@@ -194,47 +129,47 @@
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
-                        <label class="form-check-label h6" for="ck1">Forêt</label>
+                        <label class="form-check-label h6" for="c_ck1">Forêt</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
-                        <label class="form-check-label h6" for="ck2">Montagne</label>
+                        <label class="form-check-label h6" for="c_ck2">Montagne</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
-                        <label class="form-check-label h6" for="ck3">Plaine</label>
+                        <label class="form-check-label h6" for="c_ck3">Plaine</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
-                        <label class="form-check-label h6" for="ck4">Désert</label>
+                        <label class="form-check-label h6" for="c_ck4">Désert</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
-                        <label class="form-check-label h6" for="ck5">Glacier</label>
+                        <label class="form-check-label h6" for="c_ck5">Glacier</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
-                        <label class="form-check-label h6" for="ck6">Vignes</label>
+                        <label class="form-check-label h6" for="c_ck6">Vignes</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
-                        <label class="form-check-label h6" for="ck7">Ruines</label>
+                        <label class="form-check-label h6" for="c_ck7">Ruines</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
-                        <label class="form-check-label h6" for="ck8">Milieu urbain</label>
+                        <label class="form-check-label h6" for="c_ck8">Milieu urbain</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
-                        <label class="form-check-label h6" for="ck9">Jungle</label>
+                        <label class="form-check-label h6" for="c_ck9">Jungle</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
-                        <label class="form-check-label h6" for="ck10">Tundra</label>
+                        <label class="form-check-label h6" for="c_ck10">Tundra</label>
                     </div>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
-                        <label class="form-check-label h6" for="ck11">Profondeur océanique</label>
+                        <label class="form-check-label h6" for="c_ck11">Profondeur océanique</label>
                     </div>
 
                     <legend for="startDate">Date de départ</legend>
@@ -252,6 +187,75 @@
                     <div class="cs-form">
                         <input name="sArriveHeure_Prog" type="time" class="form-control" value="" />
                     </div>
+
+                    <legend for="selection">Matériel</legend>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c1" id="cc_ck1">
+                        <label class="form-check-label h6" for="cc_ck1">Chaussure de randonnée</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c2" id="cc_ck2">
+                        <label class="form-check-label h6" for="cc_ck2">Corde</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c3" id="cc_ck3">
+                        <label class="form-check-label h6" for="cc_ck3">Raquettes</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c4" id="cc_ck4">
+                        <label class="form-check-label h6" for="cc_ck4">Mousqueton et suspension d'escalade</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c5" id="cc_ck5">
+                        <label class="form-check-label h6" for="cc_ck5">Lunettes d'eclipse</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c6" id="cc_ck6">
+                        <label class="form-check-label h6" for="cc_ck6">Tente</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c7" id="cc_ck7">
+                        <label class="form-check-label h6" for="cc_ck7">Sac de couchage</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c1" id="ck_ck1">
+                        <label class="form-check-label h6" for="ck_ck1">Réchaud et cantine</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c2" id="ck_ck2">
+                        <label class="form-check-label h6" for="ck_ck2">Hamac</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c3" id="ck_ck3">
+                        <label class="form-check-label h6" for="ck_ck3">Matelas</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c4" id="ck_ck4">
+                        <label class="form-check-label h6" for="ck_ck4">Désinfectant d'eau</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck5">
+                        <label class="form-check-label h6" for="ck_ck5">Rations / casse croute</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck6">
+                        <label class="form-check-label h6" for="ck_ck6">Combinaison de plongée</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck7">
+                        <label class="form-check-label h6" for="ck_ck7">Palme</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck8">
+                        <label class="form-check-label h6" for="ck_ck8">Masque et tuba</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" value="c5" id="ck_ck9">
+                        <label class="form-check-label h6" for="ck_ck9">Bouteille d'oxygene</label>
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
+                      data-bs-target="#materielModal">Ajouter un materiel</button>
 
                     <legend for="selection_rando">Description</legend>
                     <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes"></textarea>
@@ -417,6 +421,28 @@
 
                     <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
                 </div>
+            </div>
+
+            <!----------------------------------------------------------------------------------------------------------------------------------------------->
+            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
+                  </div>
+                  <div class="modal-body">
+                    <label for="email" class="form-label h6">Nom du nouveau materiel</label>
+                    <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
+                    <label for="email" class="form-label h6">Description du nouveau materiel</label>
+                    <textarea name="Description materiel_autres" class="form-control" aria-label="Description materiel_autres"></textarea>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
     </div>
