@@ -83,13 +83,13 @@
             connectUser($_POST["sMail_Marcheur_Connexion"]);
           }
       }
-      elseif(isset($_POST["departExcursion"]))
+      elseif(isset($_POST["labelExcursion"]))
         {
           $mng = new ManagerExcursion($conn);
 
           $donnees = array(
             'sDesc_Excursion' => $_POST['descExcursion'],
-            'sLabel_Excursion' => "TITRE",
+            'sLabel_Excursion' => $_POST['labelExcursion'],
             'sDepart_Excursion' => $_POST['departExcursion'],
             'sArrivee_Excursion' => $_POST['arriveeExcursion'],
             'fPrix_Excursion' => $_POST['prixExcursion']
@@ -110,14 +110,15 @@
             'sDesc_Prog' => $_POST['sDesc_Prog'],
             'sDepart_Prog' => $_POST['sDepart_Prog'] . " " . $_POST['sDepartHeure_Prog'].":00",
             'sArrivee_Prog' => $_POST['sArrivee_Prog'] . " " . $_POST['sArriveHeure_Prog'].":00",
-            'nCapacite_Prog' => 5,
-            'nDifficulte_Prog' => 2,
+            'nCapacite_Prog' => $_POST['nCapacite_Prog'],
+            'nDifficulte_Prog' => $_POST['nDifficulte_Prog'],
             'sValide_Prog' => "En attente"
             );
 
+            var_dump($donnees);
           $new_item = new Programme();
           $new_item->hydrate($donnees);
-          $mng->insertProgramme($new_item, []);
+          $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], []);
 
         }
 

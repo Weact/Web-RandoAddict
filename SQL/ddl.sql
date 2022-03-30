@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS Excursion(
 	descExcursion text not null,											# description de l'excursion
 	departExcursion text not null,											# point de départ de l'excursion sur google maps
 	arriveeExcursion text not null,											# point d'arrivée de l'excursion sur google maps
-	prixExcursion decimal not null CHECK(									# prix de l'excursion en euros
+	prixExcursion decimal(10,2) not null CHECK(									# prix de l'excursion en euros
 		prixExcursion >= 0														# on vérifie que le prix de l'excursion est positif ou nul
 	)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS Traversee(
 CREATE TABLE IF NOT EXISTS Escale(
 	idExcursion int not null,												# identifiant unique de l'excursion à laquelle l'escale est liée
 	idProgramme int not null,												# identifiant unique du programme auquel l'escale est liée
-	ordreEscale int not null,								# definit l'ordre dans lequel les escales se font au sein d'un programme
+	ordreEscale int not null,												# definit l'ordre dans lequel les escales se font au sein d'un programme
 	CONSTRAINT pk_Escale													# création de l'identifiant unique de l'escale à partir des identifiants de l'excursion et du programme
 		PRIMARY KEY(idExcursion, idProgramme),
 	CONSTRAINT fk_EscaleExcursion											# contrainte de clé étrangère pour l'identifiant de l'excursion

@@ -1,5 +1,5 @@
 <?php
-for ($i=0; $i < 9; $i++) { 
+for ($i=0; $i < 15; $i++) { 
     ?>
 
     <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase">
