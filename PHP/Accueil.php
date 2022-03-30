@@ -24,8 +24,6 @@
 ?>
 
 <body class="h-100 text-center text-white bg-dark">
-
-
     <main id="main">
 
     </main>

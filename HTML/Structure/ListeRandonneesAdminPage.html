@@ -1,6 +1,6 @@
 
     <div class="container bg-light p-3  text-dark">
-      <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir<h2>
+      <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir</h2>
 
     <!---------------------------------------------------------------------------------------------------------------------------------------------->
         <!---Onglets------------>
@@ -39,16 +39,28 @@
                   </div>
                 </div>
               </div>
-              <!---------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="tab-pane fade bg-white rounded p-2 col-6" id="rando_a_venir">
-              <div class="card">
-                <div class="inline">
-                  <label for="guide" class="form-label h4">Randonnée</label>
-                  <div class="card-body h5">Randonnée placeholder</div>
-                  <label for="guide" class="form-label h4">Difficulté</label>
-                  <div class="card-body ">
-                    <label class="bg-success text-centered">0</label>
-                  </div>
+              <img src="" class="img-fluid" alt="...">
+              <label for="guide" class="form-label h4">Date départ</label>
+              <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+              <label for="guide" class="form-label h4">Date arrivée</label>
+              <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+              <label for="guide" class="form-label h4">Description</label>
+              <div class="card-body h5">Description placeholder</div>
+
+              <div class="inline center">
+                <button class="btn  btn-outline-success mb-1" type="edit">Consulter</button>
+              </div>
+            </div>
+          </div>
+          <!---------------------------------------------------------------------------------------------------------------------------------------------->
+          <div class="tab-pane fade bg-white rounded p-2 col-6" id="rando_a_venir">
+            <div class="card">
+              <div class="inline">
+                <label for="guide" class="form-label h4">Randonnée</label>
+                <div class="card-body h5">Randonnée placeholder</div>
+                <label for="guide" class="form-label h4">Difficulté</label>
+                <div class="card-body ">
+                  <label class="bg-success text-centered">0</label>
                 </div>
                 <img src="" class="img-fluid" alt="...">
                 <label for="guide" class="form-label h4">Date départ</label>
@@ -182,37 +194,14 @@
                           <button type="button" class="btn btn-success">Modifier</button>
                         </div>
                       </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                        <button type="button" class="btn btn-success">Modifier</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
-                <!---------------------------------------------------------------------------------------------------------------------------------------------->
-
-                <!-- Vertically centered scrollable modal -->
-                <!--<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" id="modal_form">
-        	        <div class="modal-dialog" role="document">
-        	          <div class="modal-content">
-        	            <div class="modal-header">
-        	              <h5 class="modal-title">Moi même je modalise</h5>
-        	              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
-        	            </div>
-        	            <div class="modal-body">
-        	              <p>Ca modalise bien ouais...</p>
-        	            </div>
-        	            <div class="modal-footer">
-        	              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-        	              <button type="button" class="btn btn-primary">Spamer</button>
-        	            </div>
-        	          </div>
-        	        </div>
-        	      </div>-->
-
           </div>
         </div>
-
-
-
-    </div>
