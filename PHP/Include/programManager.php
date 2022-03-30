@@ -46,14 +46,14 @@
 
         $new_item = $result['newExcursionId'];
 
-        $CONNARDDEROMAIN = "IAMGEDEFILSDEPUTE.png";
+        $CONNARDDEROMAIN = $donnees['sNom_Image']; //C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
         $donnees_photo = array(
           'sLien_Photo' => $CONNARDDEROMAIN,
-          'sLabel_Photo' => "TG",
+          'sLabel_Photo' => "LabelPhoto",
           'nId_Excursion' => $new_item
           );
 
-        var_dump($donnees_photo);
+        //var_dump($donnees_photo);
         $mng_photo = new ManagerPhoto($conn);
         $new_photo = new Photo();
         $new_photo->hydrate($donnees_photo);

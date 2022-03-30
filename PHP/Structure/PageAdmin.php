@@ -30,7 +30,7 @@
         <!---Contenus des onglets------------>
         <div class="tab-content text-dark m-5">
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
-                <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
+                <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#" enctype="multipart/form-data">
                   <legend for="selection_rando">Nom de la randonnée</legend>
                   <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
                     <div class="form-group">
@@ -112,7 +112,16 @@
                         <legend for="selection">Description</legend>
                         <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
                         <br>
+                        
+                        <!--Inclusion d'une image-->
+                        <legend for="fileInput">Image de l'excursion</legend>
+                        <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary"/>
+                        <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
+                        <br/>
+                        <br/>
+
                         <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
+
 
                     </div>
                 </form>
