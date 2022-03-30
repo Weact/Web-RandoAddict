@@ -1,5 +1,5 @@
 //Wait page finish loading
-let accueil = "Structure/Accueil.php"
+let accueil = "Structure/ListeRandonneesAccueil.php"
 window.addEventListener("load", function () {
   goTo(accueil);
   goToOnClick(document.getElementsByClassName("goToMyRando"), "Structure/ListeRandonneesAdminPage.php");
