@@ -59,7 +59,7 @@
         $mng = new ManagerMarcheur($conn);
         $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
 
-        $resulteotjea = $current_marcheur->getsMdp_Marcheur() == md5($pw);
+        $resulteotjea = $mng->existMarcheurByMail($mail, $pw)['passwordVerify'];
         return $resulteotjea;
     }
 

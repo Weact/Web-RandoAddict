@@ -79,7 +79,8 @@
       if(isset($_POST["sMail_Marcheur_Connexion"])) {
           //CONNEXION AUTOMATIQUE
           $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
-          if ($isValidMarcheur){
+
+            if ($isValidMarcheur){
             connectUser($_POST["sMail_Marcheur_Connexion"]);
           }
       }
