@@ -5,6 +5,7 @@ window.addEventListener("load", function () {
   goToOnClick(document.getElementsByClassName("goToMyRando"), "Structure/ListeRandonneesAdminPage.php");
   goToOnClick(document.getElementsByClassName("goToDispRando"), "Structure/ListeRandonneesAccueil.php");
   goToOnClick(document.getElementsByClassName("goToAdmin"), "Structure/PageAdmin.php");
+  goToOnClick(document.getElementsByClassName("goToContactFAQ"), "Structure/PageFAQ.php");
 });
 
 function goToOnClick(btnArray, page) {
