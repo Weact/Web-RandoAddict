@@ -1,10 +1,24 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/ParticipationObject.php
+*
+* Description   : L'objet Participation.
+*
+* Classe        : Participation
+* Fonctions     : hydrate(array $donnees)
+*				          __destruct()
+*				          Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Participation
 {
 	// Private members
 	private $nId_Prog;
-	private $sMail_Utilisateur;
-  private $sRole_Utilisateur;
+	private $sMail_Marcheur;
+  private $sRole_Marcheur;
 
 	// Methods
 	// Hydrate
@@ -13,7 +27,7 @@ class Participation
 		foreach($donnees as $key => $value)
 		{
       // We get the name of the setter corresponding to the attribut
-			$method = "set".ucfirst($key);
+			$method = "set".$key;
 
 			// If the setter exists
 			if(method_exists($this, $method))
@@ -40,24 +54,24 @@ class Participation
     $this->nId_Prog = $num;
   }
 
-  public function getsMail_Utilisateur()
+  public function getsMail_Marcheur()
   {
-    return $this->sMail_Utilisateur;
+    return $this->sMail_Marcheur;
   }
 
-  public function setsMail_Utilisateur($text)
+  public function setsMail_Marcheur($text)
   {
-    $this->sMail_Utilisateur = $text;
+    $this->sMail_Marcheur = $text;
   }
 
-  public function getsRole_Utilisateur()
+  public function getsRole_Marcheur()
   {
-    return $this->sRole_Utilisateur;
+    return $this->sRole_Marcheur;
   }
 
-  public function setsRole_Utilisateur($text)
+  public function setsRole_Marcheur($text)
   {
-    $this->sRole_Utilisateur = $text;
+    $this->sRole_Marcheur = $text;
   }
 
 }

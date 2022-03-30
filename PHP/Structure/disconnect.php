@@ -13,5 +13,5 @@
 \*******************************************************************************/-->
 
 <?php
-    include_once('../HTML/Structure/PageRandonee.html');
+  require_once("../Accueil.php");
 ?>

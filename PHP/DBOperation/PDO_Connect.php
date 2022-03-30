@@ -1,5 +1,5 @@
 <?php
-define('BASE','DB_SALON');
+define('BASE','randoaddict');
 define('SERVER','localhost');
 define('USER','root');
 define('PASSWD','');
@@ -10,7 +10,7 @@ function connect_bd()
 	try
 	{
 		$connexion = new PDO($dsn, USER, PASSWD);
-		echo "<script>console.log('Connexion réussie')</script>";
+		//echo "<script>console.log('Connexion réussie')</script>";
 		return $connexion;
 	}
 	catch(PDOException $e)

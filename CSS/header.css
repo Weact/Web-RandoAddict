@@ -1,0 +1,23 @@
+/*******************************************************************************\
+* Fichier       : /CSS/header.css
+*
+* Description   : Fichier CSS inclu dans Head.php, pour du css header
+* Fonction      : -.
+*
+* Créateur      : Lucas DRUCKES
+\*******************************************************************************/
+/*******************************************************************************\
+* 28-03-2022    : Création fichier
+\*******************************************************************************/
+
+.nav-custom-link:hover{
+    border-color: green!important;
+}.nav-custom-link>a:hover {
+    color: green!important;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

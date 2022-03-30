@@ -1,4 +1,5 @@
-<!--/*******************************************************************************\
+<?php
+/*******************************************************************************\
 * Fichier       : Accueil.php
 *
 * Description   : Fichier PHP principal du site; SEUL le header et le body de la
@@ -9,29 +10,23 @@
 \*******************************************************************************/
 /*******************************************************************************\
 * 21-03-2022    : Création page
-\*******************************************************************************/-->
+\*******************************************************************************/
 
+  include_once('Include/gestionFormBDD.php')
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
-    /* Changez la variable header_to_load pour ; HeaderOnline ; HeaderAdmin */
-    $header_to_load = 'HeaderAdmin';
-    $header_path = 'Structure/' . $header_to_load . '.php';
-
     /* Remplace la balise HEAD des pages HTML */
     include_once('Structure/Head.php');
-    /* Inclu le header online dans la page */
-    include_once($header_path);
-    
+
 ?>
 
 <body class="h-100 text-center text-white bg-dark">
+    <main id="main">
 
-    <?php
-        include_once('Structure/ListeRandonneesAccueil.php'); /* PAGE PHP A INCLURE DE BASE DANS ACCUEIL.PHP */
-        /*include_once('PageRandonee.php'); /* PAGE RANDONEE, CETTE PAGE SERA INCLU DANS L'UTILISATEUR VOUDRA CONSULTER UNE RANDONEE */
-    ?>
+    </main>
 
     <?php
     /* Inclu le footer dans la page */

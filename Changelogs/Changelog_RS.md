@@ -1,3 +1,21 @@
+## [0.0.4] - 2022-03-29
+### Ajout
+-Mise en place de l'hébergement avec https://fr.000webhost.com/ à l'adresse https://randoaddictludus.000webhostapp.com
+-Mise en place des sessions.
+### Gestion de Projet
+-Aide à la mise en place du style du mail.
+-Aide à la mise en place de l'AJAX et de l'inclusion de pages relative aux sessions.
+### Modification
+-Reprise et vraie mise en place du style du mail.
+-Suppression des images hors de /ASSETS
+
+## [0.0.3] - 2022-03-28
+### Gestion de Projet
+-Aide à la mise en place du style du mail.
+-Aide à la correction des formulaires
+-Aide à la corrections des objets php.
+-Aide à la mise en place de l'AJAX.
+
 ## [0.0.2] - 2022-03-23
 ### Ajout
 -Création d'une clef d'API Googlemap au nom de romain.schloter@gmail.com

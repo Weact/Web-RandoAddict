@@ -1,4 +1,18 @@
 <?php
+/*******************************************************************************\
+* Fichier       : /PHP/DBOperation/Objects/TraverséeObject.php
+*
+* Description   : L'objet Traversée.
+*
+* Classe        : Traversée
+* Fonctions     : hydrate(array $donnees)
+*				          __destruct()
+*				          Getters & Setters
+*
+* Créateur      : Luc Cornu
+* 
+\*******************************************************************************/
+
 class Traversee
 {
   // Private members
@@ -12,7 +26,7 @@ class Traversee
 		foreach($donnees as $key => $value)
 		{
       // We get the name of the setter corresponding to the attribut
-			$method = "set".ucfirst($key);
+			$method = "set".$key;
 
 			// If the setter exists
 			if(method_exists($this, $method))
