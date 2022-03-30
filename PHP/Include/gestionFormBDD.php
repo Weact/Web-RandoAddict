@@ -85,18 +85,34 @@
           }
       }
       elseif(isset($_POST["labelExcursion"]))
+      {
+        $nomImage = "";
+        $uploaddir = '.././ASSETS/';
+        $uploadfile = $uploaddir.basename($_FILES["image"]["name"]);
+        $imageFileType = strtolower(pathinfo($uploadfile,PATHINFO_EXTENSION));
+
+        if($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif" )
         {
-          $donnees = array(
-            'sDesc_Excursion' => $_POST['descExcursion'],
-            'sLabel_Excursion' => $_POST['labelExcursion'],
-            'sDepart_Excursion' => $_POST['departExcursion'],
-            'sArrivee_Excursion' => $_POST['arriveeExcursion'],
-            'fPrix_Excursion' => $_POST['prixExcursion']
-            );
+          $nomImage = time().uniqid(rand()).".".$imageFileType;
+          $uploadfile = $uploaddir.basename($nomImage);
+          move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile);
+
+          //var_dump($_FILES["image"]["tmp_name"]);
+          //var_dump($uploadfile);
+        }
+
+
+        $donnees = array(
+          'sDesc_Excursion' => $_POST['descExcursion'],
+          'sLabel_Excursion' => $_POST['labelExcursion'],
+          'sDepart_Excursion' => $_POST['departExcursion'],
+          'sArrivee_Excursion' => $_POST['arriveeExcursion'],
+          'fPrix_Excursion' => $_POST['prixExcursion'],
+          'sNom_Image' => $nomImage
+          );
 
           makeNewExcursion($donnees);
-
-        }
+      }
       if(isset($_POST["sLabel_Prog"]))
         {
           $mng = new ManagerProgramme($conn);
