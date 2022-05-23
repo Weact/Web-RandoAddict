@@ -90,7 +90,7 @@ class ManagerType extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -110,7 +110,7 @@ class ManagerType extends Manager
   // Entry : A text for the name
   // Return : A type object
   {
-    $req = "SELECT * FROM TYPE WHERE labelType = :LABEL"
+    $req = "SELECT * FROM TYPE WHERE labelType = :LABEL";
 
     // Send the request to the Database
     try

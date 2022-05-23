@@ -31,8 +31,10 @@ class ManagerParticipation extends Manager
       $tab = array(
         "nId_Prog" => $valueStmt["idProg"],
         "sMail_Utilisateur" => $valueStmt["mailUtilisateur"],
-        "sRole_Utilisateur" => $valueStmt["roleUtilisateur"]
-    }else{
+        "sRole_Utilisateur" => $valueStmt["roleUtilisateur"]);
+    }
+    else
+    {
       $tab = array(
         "nId_Prog" => "",
         "sMail_Utilisateur" => "",
@@ -89,7 +91,7 @@ class ManagerParticipation extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {

@@ -28,13 +28,13 @@ class ManagerTerrain extends Manager
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
-        "sLabel_Terrain" => $valueStmt["labelTerrain"];
-        "sDesc_Terrain" => $valueStmt["descTerrain"];
+        "sLabel_Terrain" => $valueStmt["labelTerrain"],
+        "sDesc_Terrain" => $valueStmt["descTerrain"]
       );
     }else{
       $tab = array(
-        "sLabel_Terrain" => "";
-        "sDesc_Terrain" => "";
+        "sLabel_Terrain" => "",
+        "sDesc_Terrain" => ""
       );
     }
 
@@ -90,7 +90,7 @@ class ManagerTerrain extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -110,7 +110,7 @@ class ManagerTerrain extends Manager
   // Entry : A text
   // Return : A terrain identified by the text
   {
-    $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL"
+    $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL";
 
     // Send the request to the database
     try
@@ -129,8 +129,8 @@ class ManagerTerrain extends Manager
       $result['message'] = "success";
       $result['terrain'] = $t;
       return($result);
-
-    } catch (PDOException $error) {
+    }
+    catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;

@@ -28,13 +28,13 @@ class ManagerTraversee extends Manager
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
-        "nId_Excursion" => $valueStmt["idExcursion"];
-        "sLabel_Terrain" => $valueStmt["labelTerrain"];
+        "nId_Excursion" => $valueStmt["idExcursion"],
+        "sLabel_Terrain" => $valueStmt["labelTerrain"]
       );
     }else{
       $tab = array(
-        "nId_Excursion" => "";
-        "sLabel_Terrain" => "";
+        "nId_Excursion" => "",
+        "sLabel_Terrain" => ""
       );
     }
 
@@ -86,7 +86,7 @@ class ManagerTraversee extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
