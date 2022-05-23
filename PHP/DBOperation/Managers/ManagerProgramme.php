@@ -1,25 +1,26 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerProgramme.php
-*
-* Description   : Le Manager pour la table Programme.
-*
-* Classe        : ManagerProgramme
-* Fonctions     : arrayConstructor($stmt)
-*                 insertProgramme(Programme $p)
-*                 selectProgrammes()
-*                 selectProgrammeById($num)
-*                 updateProgrammeById(Programme $p, $num)
-*                 deleteProgrammeById($num)
-*                 selectProgrammesByLabel($text)
-*                 selectProgrammesWithValideDate()
-*                 selectProgrammesByDifficulty($num)
-*
-* Créateur      : Luc Cornu
-*
+ * Fichier       : /PHP/DBOperation/Managers/ManagerProgramme.php
+ *
+ * Description   : Le Manager pour la table Programme.
+ *
+ * Classe        : ManagerProgramme
+ * Fonctions     : arrayConstructor($stmt)
+ *                 insertProgramme(Programme $p)
+ *                 selectProgrammes()
+ *                 selectProgrammeById($num)
+ *                 updateProgrammeById(Programme $p, $num)
+ *                 deleteProgrammeById($num)
+ *                 selectProgrammesByLabel($text)
+ *                 selectProgrammesWithValideDate()
+ *                 selectProgrammesByDifficulty($num)
+ *
+ * Créateur      : Luc Cornu
+ *
 \*******************************************************************************/
 
-require_once(__DIR__."/../Objects/ProgrammeObject.php");
+require_once(__DIR__ . "/../Objects/ProgrammeObject.php");
 require_once("ManagerEscale.php");
 require_once("ManagerNecessaire.php");
 require_once("ManagerMateriel.php");
@@ -31,8 +32,7 @@ class ManagerProgramme extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount() > 0)
-    {
+    if ($stmt->rowCount() > 0) {
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
@@ -44,8 +44,8 @@ class ManagerProgramme extends Manager
         "nCapacite_Prog" => $valueStmt["capaciteProgramme"],
         "nDifficulte_Prog" => $valueStmt["difficulteProgramme"],
         "sValide_Prog" => $valueStmt["valideProgramme"]
-        );
-    }else{
+      );
+    } else {
       $tab = array(
         "nId_Prog" => "",
         "sLabel_Prog" => "",
@@ -55,7 +55,7 @@ class ManagerProgramme extends Manager
         "nCapacite_Prog" => "",
         "nDifficulte_Prog" => "",
         "sValide_Prog" => ""
-        );
+      );
     }
 
     return $tab;
@@ -65,9 +65,8 @@ class ManagerProgramme extends Manager
   {
     $m_e = new ManagerEscale(connect_bd());
 
-    foreach($ids as $excursionId)
-    {
-      $donnees = array (
+    foreach ($ids as $excursionId) {
+      $donnees = array(
         "nId_Prog"  => $prog_id,
         "nId_Excursion" => $excursionId
       );
@@ -83,9 +82,8 @@ class ManagerProgramme extends Manager
   {
     $m_n = new ManagerNecessaire(connect_bd());
 
-    foreach($labels as $materielLabel)
-    {
-      $donnees = array (
+    foreach ($labels as $materielLabel) {
+      $donnees = array(
         "nId_Prog"  => $prog_id,
         "sLabel_Materiel" => $materielLabel
       );
@@ -125,15 +123,13 @@ class ManagerProgramme extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -146,22 +142,20 @@ class ManagerProgramme extends Manager
     // Send the request to the database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -172,30 +166,28 @@ class ManagerProgramme extends Manager
   {
     $req = "SELECT * FROM PROGRAMME WHERE idProgramme = :ID";
 
-		//Envoie de la requête à la base
-		try {
-			$stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-			$stmt->execute();
+    //Envoie de la requête à la base
+    try {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->execute();
 
-			$p = new Programme;
+      $p = new Programme;
       $tab = $this->arrayConstructor($stmt);
-			$p->hydrate($tab);
+      $p->hydrate($tab);
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['programme'] = $p;
-      return($result);
-
-		} catch (PDOException $error) {
+      return ($result);
+    } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -207,7 +199,7 @@ class ManagerProgramme extends Manager
 
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
       $stmt->bindValue(":NEWLABEL", $p->getsLabel_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWINFO", $p->getsDesc_Prog(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWDEPART", $p->getsDepart_Prog(), PDO::PARAM_STR);
@@ -215,21 +207,19 @@ class ManagerProgramme extends Manager
       $stmt->bindValue(":NEWCAP", $p->getnCapacite_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":NEWDIF", $p->getnDifficulte_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":NEWVALIDE", $p->getsValide_Prog(), PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -242,22 +232,20 @@ class ManagerProgramme extends Manager
     // Send the request to the Database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-			$stmt->execute();
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -267,28 +255,26 @@ class ManagerProgramme extends Manager
   // Return : An array holding all the programs with the same name
   {
     $req = "SELECT * FROM PROGRAMME WHERE labelProgramme LIKE :LABEL";
-    $text = "%".$text."%";
+    $text = "%" . $text . "%";
 
     // Send the request to the database
     try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -301,22 +287,20 @@ class ManagerProgramme extends Manager
     // Send the request to the database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -338,15 +322,13 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -365,15 +347,13 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -392,15 +372,13 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -419,18 +397,13 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
-
 }
-
-?>

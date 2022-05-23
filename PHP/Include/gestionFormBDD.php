@@ -50,7 +50,7 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
     }
     makeNewUser($donnees);
     redirectUser(); // does the exit();
-    
+
   } else { // ENTRER DANS CETTE CONDITION ELSE SIGNIFIE QU'UNE INSCRIPTION EST EFFECTUE PAR L'UTILISATEUR
     if (isset($_POST['sPseudo_Marcheur'])) {
       $donnees = array(
@@ -105,6 +105,15 @@ if (isset($_POST["sMail_Marcheur_Connexion"])) {
     connectUser($_POST["sMail_Marcheur_Connexion"]);
   }
 }
+
+if (isset($_POST["Nom_terrain_autre"])) {
+  $donnees = array(
+    'sLabel_Terrain' => $_POST['Nom_terrain_autre'],
+    'sDesc_Terrain' => "desc"
+  );
+  makeNewTer($donnees);
+}
+
 if (isset($_POST["Nom_materiel_autre"])) {
   $donnees = array(
     'sLabel_Materiel' => $_POST['Nom_materiel_autre'],
