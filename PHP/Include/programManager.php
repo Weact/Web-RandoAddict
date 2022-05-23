@@ -115,3 +115,38 @@ function getAllPrograms()
 
   return $users;
 }
+
+function getAllPhotos()
+{
+  $conn = connect_bd();
+  $mng = new ManagerPhoto($conn);
+
+  $users = $mng->selectPhotos();
+
+  return $users;
+}
+
+function getPhotoOfExcursion($excursionId)
+{
+  $photos = getAllPhotos()['stmt'];
+  foreach ($photos as $photo) {
+    if ($photo['idExcursion'] == $excursionId) {
+      return $photo;
+    }
+  }
+  return $photos[0];
+}
+
+function getExcsOfProg($prog)
+{
+  $conn = connect_bd();
+  $mng2 = new ManagerExcursion($conn);
+  $mng3 = new ManagerEscale($conn);
+
+  $excursions = [];
+  $escales = $mng3->selectEscaleByIdProg($prog['idProgramme'])['stmt'];
+  foreach ($escales as $escale) {
+    array_push($excursions, $mng2->selectExcursionById($escale));
+  }
+  return $excursions;
+}

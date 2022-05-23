@@ -1,4 +1,4 @@
-<footer>
+<footer class="sticky-bottom">
     <!-- Footer de la page incluant des liens vers différentes sections du site, le copyright et les réseaux sociaux -->
     <div class="bg-light text-dark p-3 pb-0" style="height: fit-content!important;">
         <div class="row align-items-center">
