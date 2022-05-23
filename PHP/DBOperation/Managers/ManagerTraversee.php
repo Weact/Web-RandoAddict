@@ -13,7 +13,7 @@
 *                 deleteTraverseeById($num)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
 require_once(__DIR__."/../Objects/TraverseeObject.php");
@@ -81,7 +81,7 @@ class ManagerTraversee extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -115,7 +115,7 @@ class ManagerTraversee extends Manager
       $t = new Traversee;
       $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
