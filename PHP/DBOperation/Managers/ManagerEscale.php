@@ -32,13 +32,13 @@ class ManagerEscale extends Manager
 
       $tab = array(
         "nId_Excursion" => $valueStmt["idExcursion"],
-        "nId_Prog" => $valueStmt["idProg"],
+        "nId_Prog" => $valueStmt["idProgramme"]
 
         );
     }else{
       $tab = array(
         "nId_Excursion" => "",
-        "nId_Prog" => "",
+        "nId_Prog" => ""
         );
     }
 
