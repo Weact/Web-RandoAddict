@@ -1,8 +1,8 @@
 <?php
 define('BASE','randoaddict');
 define('SERVER','localhost');
-define('USER','moi');
-define('PASSWD','');
+define('USER','Luc');
+define('PASSWD','lemdp');
 
 function connect_bd()
 {

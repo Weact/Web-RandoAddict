@@ -65,6 +65,7 @@
         $new_item = $result['newExcursionId'];
 
         $CONNARDDEROMAIN = $donnees['sNom_Image']; //C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
+        // Validé par Luc CORNU, je n'ai pas le droit de le changer
         $donnees_photo = array(
           'sLien_Photo' => $CONNARDDEROMAIN,
           'sLabel_Photo' => "LabelPhoto",

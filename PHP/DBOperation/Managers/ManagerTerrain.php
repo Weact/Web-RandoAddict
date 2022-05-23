@@ -28,13 +28,13 @@ class ManagerTerrain extends Manager
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
-        "sLabel_Terrain" => $valueStmt["labelTerrain"];
-        "sDesc_Terrain" => $valueStmt["descTerrain"];
+        "sLabel_Terrain" => $valueStmt["labelTerrain"],
+        "sDesc_Terrain" => $valueStmt["descTerrain"]
       );
     }else{
       $tab = array(
-        "sLabel_Terrain" => "";
-        "sDesc_Terrain" => "";
+        "sLabel_Terrain" => "",
+        "sDesc_Terrain" => ""
       );
     }
 

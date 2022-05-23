@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.0] - 2022-05-23
+### Added
+- Affichage de la liste des membres de manière dynamique.
+
 ## [0.0.10] - 2022-03-30
 ### Added
 - Ajout de méthodes pour récupérer les Programmes passés ou à venir d'un Marcheur.
