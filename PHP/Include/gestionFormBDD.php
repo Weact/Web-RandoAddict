@@ -18,8 +18,6 @@ $conn = connect_bd();
 require_once("userManager.php");
 require_once("programManager.php");
 
-var_dump($_SESSION);
-
 //Vérification et initialisation des variables de session le cas échéant.
 if (!isset($_SESSION['typeUtilisateur'])) {
   $_SESSION['typeUtilisateur'] = "anon";
@@ -50,13 +48,9 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
     if (strtolower($donnees['sPseudo_Marcheur']) == "admin") {
       $donnees['sRole_Marcheur'] = "Admin";
     }
-
-    
-
-    var_dump($donnees);
-
     makeNewUser($donnees);
-    exit();
+    redirectUser(); // does the exit();
+    
   } else { // ENTRER DANS CETTE CONDITION ELSE SIGNIFIE QU'UNE INSCRIPTION EST EFFECTUE PAR L'UTILISATEUR
     if (isset($_POST['sPseudo_Marcheur'])) {
       $donnees = array(
@@ -77,7 +71,7 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
 
       makeNewUser($donnees);
       connectUser($_POST['sMail_Marcheur_Inscription']);
-      exit();
+      redirectUser(); // does the exit();
     }
   }
 }

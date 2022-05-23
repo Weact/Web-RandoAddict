@@ -41,23 +41,25 @@ function updateUserRole($mail, $role)
   $new_marcheur->setsRole_Marcheur($role);
   $result = $mng->updateMarcheurByMail($new_marcheur, $mail);
 
-  echo json_encode($result);
+  //echo json_encode($result);
 }
 
+function redirectUser()
+{
+  header("HTTP/1.1 303 See Other");
+  header("Location: ./Accueil.php");
+  exit();
+}
+
+// MUST USE REDIRECTUSER() AFTER CALLING THIS METHOD
 function connectUser($mail)
 {
   $conn = connect_bd();
   $mng = new ManagerMarcheur($conn);
   $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
 
-  var_dump($current_marcheur);
-
   $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
   $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
-
-  header("HTTP/1.1 303 See Other");
-  header("Location: ./Accueil.php");
-  exit();
 }
 
 function checkUserPw($mail, $pw)
