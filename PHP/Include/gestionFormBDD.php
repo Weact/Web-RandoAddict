@@ -115,7 +115,6 @@
           //var_dump($uploadfile);
         }
 
-
         $donnees = array(
           'sDesc_Excursion' => $_POST['descExcursion'],
           'sLabel_Excursion' => $_POST['labelExcursion'],
@@ -125,14 +124,12 @@
           'sNom_Image' => $nomImage
           );
 
-          makeNewExcursion($donnees);
+          makeNewExcursion($donnees, $_POST['terrain']);
       }
       if(isset($_POST["sLabel_Prog"]))
         {
           $mng = new ManagerProgramme($conn);
 
-          $materiels = $_POST['materiel'];
-          var_dump($materiels);
           //TO DO : ADD sExcur_Prog
           $donnees = array(
             'sLabel_Prog' => $_POST['sLabel_Prog'],
@@ -144,7 +141,6 @@
             'sValide_Prog' => "En attente"
             );
 
-            var_dump($donnees);
           $new_item = new Programme();
           $new_item->hydrate($donnees);
           $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
@@ -153,7 +149,7 @@
 
 
         if(isset($_POST["disconnect"])){
-        connectUser("");
+          connectUser("");
 
         }
 
