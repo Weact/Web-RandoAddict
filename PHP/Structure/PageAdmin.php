@@ -375,18 +375,29 @@
             </div>
 
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
-                <div class="card">
-                    <label for="guide" class="form-label h6">Nom</label>
-                    <div class="card-header h5">Nom placeholder</div>
-                    <label for="guide" class="form-label h6">Statut</label>
-                    <div class="card-body h5">Randonneur / guide</div>
-                    <label for="guide" class="form-label h6">Mail</label>
-                    <div class="card-body h5">Mail placeholder</div>
-                    <label for="guide" class="form-label h6">Téléphone</label>
-                    <div class="card-body h5">Tel placeholder</div>
+            <div class="tab-pane fade bg-white rounded" id="membres">
+                <div class="row p-1 justify-content-around">
+                    <?php
+                    require_once(__DIR__ . "/../Include/userManager.php");
+                    $users = getAllUsers();
 
-                    <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+                    foreach ($users as $user) {
+                        echo '
+                            <div class="card col-sm-12 col-md-5 mt-3 mb-3 border border-2 border-primary">
+                                <label for="guide" class="form-label h3 text-success">Nom</label>
+                                <div class="card-header h5 text-primary">' . $user[1] . '</div>
+                                <label for="guide" class="form-label h3 text-success">Mail</label>
+                                <div class="card-body h5 text-primary">' . $user[0] . '</div>
+                                <label for="guide" class="form-label h3 text-success">Téléphone</label>
+                                <div class="card-body h3 text-primary">' . $user[2] . '</div>
+                                <label for="guide" class="form-label h3 text-success">Statut</label>
+                                <div class="card-body h5 text-primary">' . $user[4] . '</div>
+
+                                <button class="btn btn-outline-success mb-1 fs-3" type="submit">Randonnées</button>
+                            </div>
+                        ';
+                    }
+                    ?>
                 </div>
             </div>
 
