@@ -28,13 +28,13 @@ class ManagerTerrain extends Manager
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
-        "sLabel_Terrain" => $valueStmt["labelTerrain"];
-        "sDesc_Terrain" => $valueStmt["descTerrain"];
+        "sLabel_Terrain" => $valueStmt["labelTerrain"],
+        "sDesc_Terrain" => $valueStmt["descTerrain"]
       );
     }else{
       $tab = array(
-        "sLabel_Terrain" => "";
-        "sDesc_Terrain" => "";
+        "sLabel_Terrain" => "",
+        "sDesc_Terrain" => ""
       );
     }
 
@@ -110,7 +110,7 @@ class ManagerTerrain extends Manager
   // Entry : A text
   // Return : A terrain identified by the text
   {
-    $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL"
+    $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL";
 
     // Send the request to the database
     try
