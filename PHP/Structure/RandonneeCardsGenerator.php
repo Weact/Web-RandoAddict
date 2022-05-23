@@ -5,13 +5,14 @@ require_once(__DIR__ . '/../Include/programManager.php');
 $programs = getAllPrograms();
 $photos = getAllPhotos();
 foreach ($programs as $program) {
-var_dump((getExcsOfProg($program)));
 ?>
     <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase">
         <div class="card text-dark fw-bold">
             <img src=<?php
-            $photo = getPhotoOfExcursion(getExcsOfProg($program)[0]);
-            echo $photo['lienPhoto'];?> alt="randonne image top" class="card-img-top">
+            $photo = getPhotoOfExcursion(getExcsOfProg($program)[0]['idExcursion']);
+
+            $photolink = '/../../ASSETS/' . $photo['lienPhoto'];
+            echo $photolink;?> alt="randonne image top" class="card-img-top">
             <div class="card-img-overlay d-flex flex-column align-items-center">
                 <div class="row">
                     <div class="col">

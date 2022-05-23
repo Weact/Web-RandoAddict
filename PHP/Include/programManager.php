@@ -117,7 +117,7 @@
     }
 
     function getPhotoOfExcursion($excursionId){
-        $photos = getAllPhotos();
+        $photos = getAllPhotos()['stmt'];
         foreach($photos as $photo){
           if ($photo['idExcursion'] == $excursionId){
             return $photo;
@@ -128,17 +128,11 @@
 
     function getExcsOfProg($prog){
         $conn = connect_bd();
-        $mng = new ManagerProgramme($conn);
         $mng2 = new ManagerExcursion($conn);
         $mng3 = new ManagerEscale($conn);
 
-        $excursions = [];
-        $escales = $mng3->selectEscaleByIdProg(16)['escale'];
-        var_dump($escales);
-        foreach($escales as $escale){
-          var_dump($escale);
-          array_push($excursions, $mng2->selectExcursionById($escale));
-        }
+        $escales = $mng3->selectEscaleByIdProg($prog['idProgramme'])['stmt'];
+        $excursions= $mng2->selectExcursionById($escales['idExcursion'])['stmt'];
         return $excursions;
 
     }

@@ -159,15 +159,12 @@ class ManagerExcursion extends Manager
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-			$e = new Excursion;
-      $tab = $this->arrayConstructor($stmt);
-			$e->hydrate($tab);
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['excursion'] = $e;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
 		} catch(PDOException $error) {
