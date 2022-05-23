@@ -14,6 +14,7 @@
     require_once(__DIR__."/../DBOperation/Managers/ManagerProgramme.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerExcursion.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerPhoto.php");
+    require_once(__DIR__."/../DBOperation/Managers/ManagerEscale.php");
     $conn = connect_bd();
 
       function makeNewProgram($donnees) {
@@ -64,7 +65,7 @@
 
         $new_item = $result['newExcursionId'];
 
-        $CONNARDDEROMAIN = $donnees['sNom_Image']; //C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
+        $CONNARDDEROMAIN = $donnees['sNom_Image']; // C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
         // Validé par Luc CORNU, je n'ai pas le droit de le changer
         $donnees_photo = array(
           'sLien_Photo' => $CONNARDDEROMAIN,
@@ -89,12 +90,14 @@
           return $users;
     }
 
-    function getProgramById($num) {
+    function getFirstPhotoByProgrammeId($id) {
       $conn = connect_bd();
-      $mng = new ManagerProgramme($conn);
+      $mng_Exc = new ManagerExcursion($conn);
+      $mng_Photo = new ManagerPhoto($conn);
 
-      var_dump($mng->selectProgrammeById($num)['programme']);
+      $excursions = $mng_Exc->selectExcursionsByProgrammeId($id)['stmt'];
 
+      return $mng_Photo->selectPhotosByExcursionId($excursions[0]['idExcursion'])['stmt'][0];
     }
 
 ?>

@@ -2,18 +2,31 @@
 require_once(__DIR__."/../Include/programManager.php");
 $programs = getAllPrograms();
 
-// require_once(__DIR__."/../Include/programManager.php");
-// $escales = getProgramById(19);
-// var_dump($escales);
+require_once(__DIR__."/../Include/programManager.php");
 
 foreach ($programs as $program) {
+    $name = $program[1];
+
+    if (strlen($program[1]) > 6) {
+        $name = substr($name, 0, 7)."...";
+    }
+
+    $FirstPhoto = getFirstPhotoByProgrammeId($program['idProgramme']);
+    // var_dump($FirstPhoto);
+
+    $photo = '../ASSETS/'.$FirstPhoto['lienPhoto'];
+    if (!file_exists($photo)) {
+        $photo = '../ASSETS/1653296326286979518628b4cc61c715.png';
+
+    }
+
     echo '<div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase">
         <div class="card text-dark fw-bold">
-            <img src="../ASSETS/RandoPaysage_KFC.png" alt="randonne image top" class="card-img-top">
+            <img src="../ASSETS/'.$photo.'" alt="randonne image top" class="card-img-top">
             <div class="card-img-overlay d-flex flex-column align-items-center">
                 <div class="row">
                     <div class="col">
-                        <h3 class="card-title display-3" id="randonneeTitre" name="randonneeTitre">'.$program[1].'</h3>
+                        <h3 class="card-title display-3" id="randonneeTitre" name="randonneeTitre">'.$name.'</h3>
                     </div>
                     <div class="col d-flex justify-content-center align-items-center">
                         <span class="badge bg-primary fs-3 p-2">1</span>

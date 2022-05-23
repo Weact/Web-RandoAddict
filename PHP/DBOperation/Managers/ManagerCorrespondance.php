@@ -89,7 +89,7 @@ class ManagerCorrespondance extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {

@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.2] - 2022-05-23
+### Added
+- Affichage des images dans la liste des programmes de manière dynamique dans Accueil.php.
+
+### Changed
+- Correction d'un bug avec les Managers.
+
+### To-Be Fixed
+- Erreur lorsque l'index '0' n'existe pas dans la fonction 'getFirstPhotoByProgrammeId()';
+
 ## [0.1.1] - 2022-05-23
 ### Added
 - Affichage de la liste des programmes de manière dynamique dans Accueil.php.

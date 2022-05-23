@@ -95,7 +95,7 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -211,14 +211,42 @@ class ManagerPhoto extends Manager
     try
     {
       $stmt = $this->getdb()->prepare($req);
-      $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+    }
+  }
+
+  public function selectPhotosByExcursionId($id)
+  {
+    $req = "SELECT * FROM PHOTO WHERE idExcursion = :ID";
+
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $id, PDO::PARAM_INT);
+			$stmt->execute();
+      
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {

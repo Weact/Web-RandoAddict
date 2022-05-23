@@ -32,7 +32,7 @@ class ManagerEscale extends Manager
 
       $tab = array(
         "nId_Excursion" => $valueStmt["idExcursion"],
-        "nId_Prog" => $valueStmt["idProg"],
+        "nId_Prog" => $valueStmt["idProgramme"],
 
         );
     }else{
@@ -90,7 +90,7 @@ class ManagerEscale extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -105,7 +105,7 @@ class ManagerEscale extends Manager
     }
   }
 
-  public function selectEscaleByIdProg($num)
+  public function selectEscalesByIdProg($num)
   {
     $req = "SELECT * FROM ESCALE WHERE idProgramme = :ID";
 
@@ -116,15 +116,15 @@ class ManagerEscale extends Manager
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-      $e = new Escale;
-      $tab = $this->arrayConstructor($stmt);
-      $e->hydrate($tab);
+      // $e = new Escale;
+      // $tab = $this->arrayConstructor($stmt);
+      // $e->hydrate($tab);
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['escale'] = $e;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -139,7 +139,7 @@ class ManagerEscale extends Manager
     }
   }
 
-  public function selectEscaleByIdExcursion($num)
+  public function selectEscalesByIdExcursion($num)
   {
     $req = "SELECT * FROM ESCALE WHERE idExcursion = :ID";
 
@@ -150,15 +150,11 @@ class ManagerEscale extends Manager
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-      $e = new Escale;
-      $tab = $this->arrayConstructor($stmt);
-      $e->hydrate($tab);
-
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['escale'] = $e;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
