@@ -81,14 +81,14 @@ function getAllMat()
   return $users;
 }
 
-function makeNewExcursion($donnees)
+function makeNewExcursion($donnees, $terrains)
 {
   $conn = connect_bd();
 
   $mng = new ManagerExcursion($conn);
   $new_item = new Excursion();
   $new_item->hydrate($donnees);
-  $result = $mng->insertExcursion($new_item);
+  $result = $mng->insertExcursion($new_item, $terrains);
 
   $new_item = $result['newExcursionId'];
 

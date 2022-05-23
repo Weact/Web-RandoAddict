@@ -145,7 +145,7 @@ if (isset($_POST["Nom_materiel_autre"])) {
     'sNom_Image' => $nomImage
   );
 
-  makeNewExcursion($donnees);
+  makeNewExcursion($donnees, $_POST['terrain']);
 }
 if (isset($_POST["sLabel_Prog"])) {
   $mng = new ManagerProgramme($conn);

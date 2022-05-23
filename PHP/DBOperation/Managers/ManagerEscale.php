@@ -107,7 +107,7 @@ class ManagerEscale extends Manager
 
   public function selectEscaleByIdProg($num)
   {
-    $req = "SELECT * FROM ESCALE WHERE idProgramme = :ID";
+    $req = 'SELECT * FROM ESCALE WHERE idProgramme = :ID';
 
     // Send the request to the database
     try
@@ -120,7 +120,7 @@ class ManagerEscale extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt->fetchAll();
+      $result['stmt'] = $stmt->fetchAll()[0];
       return($result);
 
     } catch (PDOException $error) {

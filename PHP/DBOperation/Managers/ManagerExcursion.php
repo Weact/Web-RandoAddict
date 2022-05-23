@@ -20,6 +20,8 @@
 \*******************************************************************************/
 
 require_once(__DIR__."/../Objects/ExcursionObject.php");
+require_once("ManagerTerrain.php");
+require_once("ManagerTraversee.php");
 require_once("Manager.php");
 
 class ManagerExcursion extends Manager
@@ -53,7 +55,7 @@ class ManagerExcursion extends Manager
   }
 
   // Database commands
-  public function insertExcursion(Excursion $e)
+  public function insertExcursion(Excursion $e, $ids)
   // Goal : Insert an excursion in the database
   // Entry : A excursion object
   {
@@ -70,6 +72,10 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
+
+      // Creation of a row in Escale & Necessaire
+      $last_id = $this->getdb()->lastInsertId();
+      $this->autoInsertTraversee($ids, $last_id);
 
       // Return success
       $result['success'] = true;
@@ -90,6 +96,24 @@ class ManagerExcursion extends Manager
     }
   }
 
+  private function autoInsertTraversee(array $ids, $excursionId)
+  {
+    $m_e = new ManagerTraversee(connect_bd());
+
+    foreach($ids as $material_id)
+    {
+      $donnees = array (
+        "nId_Excursion"  => $excursionId,
+        "sLabel_Terrain" => $material_id
+      );
+
+      $e = new Traversee;
+      $e->hydrate($donnees);
+
+      $m_e->insertTraversee($e);
+    }
+  }
+
   public function selectExcursions()
   // Goal : Select all excursions in the database
   // Return : An array holding all the excursions
@@ -106,7 +130,7 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -238,7 +262,7 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -272,7 +296,7 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -288,4 +312,3 @@ class ManagerExcursion extends Manager
   }
 
 }
-?>
