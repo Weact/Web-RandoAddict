@@ -89,4 +89,12 @@
           return $users;
     }
 
+    function getProgramById($num) {
+      $conn = connect_bd();
+      $mng = new ManagerProgramme($conn);
+
+      var_dump($mng->selectProgrammeById($num)['programme']);
+
+    }
+
 ?>

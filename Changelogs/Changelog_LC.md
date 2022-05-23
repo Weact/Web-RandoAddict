@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.1] - 2022-05-23
+### Added
+- Affichage de la liste des programmes de manière dynamique dans Accueil.php.
+
 ## [0.1.0] - 2022-05-23
 ### Added
 - Affichage de la liste des membres de manière dynamique.
