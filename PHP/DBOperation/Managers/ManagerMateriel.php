@@ -13,7 +13,7 @@
 *                 deleteMaterielByLabel($text)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
 require_once(__DIR__."/../../DBOperation/Objects/MaterielObject.php");
@@ -83,7 +83,7 @@ class ManagerMateriel extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			
+
       // Retour success
       $result['success'] = true;
       $result['error'] = false;
@@ -118,7 +118,7 @@ class ManagerMateriel extends Manager
 			$m = new Materiel;
       $tab = $this->arrayConstructor($stmt);
       $m->hydrate($tab);
-      
+
       // Retour success
       $result['success'] = true;
       $result['error'] = false;

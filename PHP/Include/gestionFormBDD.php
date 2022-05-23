@@ -83,7 +83,14 @@
             connectUser($_POST["sMail_Marcheur_Connexion"]);
           }
       }
-      if(isset($_POST["Nom_materiel_autre"])) {
+      if(isset($_POST["Nom_terrain_autre"])) {
+          $donnees = array(
+            'sLabel_Terrain' => $_POST['Nom_terrain_autre'],
+            'sDesc_Terrain' => "desc"
+            );
+          makeNewTer($donnees);
+      }
+      elseif(isset($_POST["Nom_materiel_autre"])) {
           $donnees = array(
             'sLabel_Materiel' => $_POST['Nom_materiel_autre'],
             'sDesc_Materiel' => "desc"

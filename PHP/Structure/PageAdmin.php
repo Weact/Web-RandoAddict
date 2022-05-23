@@ -36,6 +36,17 @@
                     <div class="form-group">
 
                         <legend for="selection_rando">Type de terrain</legend><br>
+                        <?php
+                        require_once(__DIR__ . '/../Include/programManager.php');
+                        $terrains = getAllTer();
+                        foreach ($terrains as $terrain) {
+                            echo '<div class="form-check form-check-inline">
+                                <input class="form-check-input" name="terrain[]" type="checkbox" id="'. $terrain[0] . '" value="'. $terrain[0] . '">
+                                <label class="form-check-label h6" for="'. $terrain[0] . '">' . $terrain[0] . "</label>
+                            </div>";
+                        }
+
+                        ?>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="c6" id="ck6">
                             <label class="form-check-label h6" for="ck6">Fitness</label>
@@ -43,50 +54,6 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" value="c7" id="ck7">
                             <label class="form-check-label h6" for="ck7">Restaurant</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
-                            <label class="form-check-label h6" for="c_ck1">Forêt</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
-                            <label class="form-check-label h6" for="c_ck2">Montagne</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
-                            <label class="form-check-label h6" for="c_ck3">Plaine</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
-                            <label class="form-check-label h6" for="c_ck4">Désert</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
-                            <label class="form-check-label h6" for="c_ck5">Glacier</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
-                            <label class="form-check-label h6" for="c_ck6">Vignes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
-                            <label class="form-check-label h6" for="c_ck7">Ruines</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
-                            <label class="form-check-label h6" for="c_ck8">Milieu urbain</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
-                            <label class="form-check-label h6" for="c_ck9">Jungle</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
-                            <label class="form-check-label h6" for="c_ck10">Tundra</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
-                            <label class="form-check-label h6" for="c_ck11">Profondeur océanique</label>
                         </div>
 
                         <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
@@ -112,7 +79,7 @@
                         <legend for="selection">Description</legend>
                         <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
                         <br>
-                        
+
                         <!--Inclusion d'une image-->
                         <legend for="fileInput">Image de l'excursion</legend>
                         <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary"/>
@@ -308,7 +275,7 @@
                             <!--Is guide-->
                             <div class="mb-3 form-floating">
                                 <select class="form-select" id="roles_choice">
-                                    <option>Visiteur</option>
+                                    <option>Marcheur</option>
                                     <option>Guide</option>
                                     <option>Admin</option>
                                     <script>
@@ -402,7 +369,7 @@
                   </div>
                   <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
                   <div class="modal-body">
-                    <label for="email" class="form-label h6">Nom du nouveau materiel</label>
+                    <label for="text" class="form-label h6">Nom du nouveau materiel</label>
                     <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
                   </div>
                   <div class="modal-footer justify-content-between">

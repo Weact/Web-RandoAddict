@@ -13,6 +13,7 @@
     require_once(__DIR__."/../DBOperation/PDO_Connect.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerProgramme.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerExcursion.php");
+    require_once(__DIR__."/../DBOperation/Managers/ManagerTerrain.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerPhoto.php");
     $conn = connect_bd();
 
@@ -25,6 +26,15 @@
           $result = $mng->insertMarcheur($new_marcheur);
           $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
 
+      }
+
+      function makeNewTer($donnees) {
+        $conn = connect_bd();
+        $mng = new ManagerTerrain($conn);
+
+        $new_item = new Terrain();
+        $new_item->hydrate($donnees);
+        $result = $mng->insertTerrain($new_item);
       }
 
       function makeNewMat($donnees) {
@@ -50,6 +60,15 @@
           $mng = new ManagerMateriel($conn);
 
           $users = $mng->selectMateriels()['stmt'];
+
+          return $users;
+    }
+
+    function getAllTer() {
+          $conn = connect_bd();
+          $mng = new ManagerTerrain($conn);
+
+          $users = $mng->selectTerrains()['stmt'];
 
           return $users;
     }
