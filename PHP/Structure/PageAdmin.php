@@ -31,8 +31,8 @@
         <div class="tab-content text-dark m-5">
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
                 <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#" enctype="multipart/form-data">
-                  <legend for="selection_rando">Nom de la randonnée</legend>
-                  <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
+                    <legend for="selection_rando">Nom de la randonnée</legend>
+                    <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
                     <div class="form-group">
 
                         <legend for="selection_rando">Type de terrain</legend><br>
@@ -89,8 +89,7 @@
                             <label class="form-check-label h6" for="c_ck11">Profondeur océanique</label>
                         </div>
 
-                        <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
-                          data-bs-target="#terrainModal">Ajouter un terrain</button>
+                        <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#terrainModal">Ajouter un terrain</button>
 
                         <legend for="prix_pers">Prix par personne</legend>
                         <div class="def-number-input number-input safari_only">
@@ -112,13 +111,13 @@
                         <legend for="selection">Description</legend>
                         <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
                         <br>
-                        
+
                         <!--Inclusion d'une image-->
                         <legend for="fileInput">Image de l'excursion</legend>
-                        <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary"/>
+                        <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary" />
                         <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
 
                         <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
 
@@ -193,38 +192,37 @@
                     </div>
 
                     <legend for="startDate">Date de départ</legend>
-                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required/>
+                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required />
 
                     <legend for="startDate">Heure de départ</legend>
                     <div class="cs-form">
-                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required/>
+                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
 
                     <legend for="arriveDate">Date d'arriver</legend>
-                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required/>
+                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required />
 
                     <legend for="arriveDate">Heure d'arrivée</legend>
                     <div class="cs-form">
-                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required/>
+                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
-                  <div>
-                    <legend for="selection">Matériel</legend>
-                    <?php
-                    require_once(__DIR__ . '/../Include/programManager.php');
-                    $materiels = getAllMat();
-                    foreach ($materiels as $materiel) {
-                        echo '<div class="form-check form-check-inline">
-                            <input class="form-check-input" name="materiel[]" type="checkbox" id="'. $materiel[0] . '" value="'. $materiel[0] . '">
-                            <label class="form-check-label h6" for="'. $materiel[0] . '">' . $materiel[0] . "</label>
+                    <div>
+                        <legend for="selection">Matériel</legend>
+                        <?php
+                        require_once(__DIR__ . '/../Include/programManager.php');
+                        $materiels = getAllMat();
+                        foreach ($materiels as $materiel) {
+                            echo '<div class="form-check form-check-inline">
+                            <input class="form-check-input" name="materiel[]" type="checkbox" id="' . $materiel[0] . '" value="' . $materiel[0] . '">
+                            <label class="form-check-label h6" for="' . $materiel[0] . '">' . $materiel[0] . "</label>
                         </div>";
-                    }
+                        }
 
-                    ?>
+                        ?>
 
-                    <br>
-                  </div>
-                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
-                      data-bs-target="#materielModal">Ajouter un materiel</button>
+                        <br>
+                    </div>
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#materielModal">Ajouter un materiel</button>
 
                     <legend for="selection_rando">Description</legend>
                     <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes" required></textarea>
@@ -241,8 +239,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3 mt-3 form-floating">
-                                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email" placeholder="Entrer email" name="email" required>
-                                    <label for="email" class="form-label h6">Email</label>
+                                    <input id="sMail_Marcheur_Inscription" name="sMail_Marcheur_Inscription" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Entrer email">
+                                    <label for="email" class="form-label">Email</label>
                                 </div>
                             </div>
                         </div>
@@ -250,15 +248,15 @@
                             <div class="col">
                                 <!--Pseudo-->
                                 <div class="mb-3 form-floating">
-                                    <input type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name" required>
-                                    <label for="name" class="form-label h6">Pseudonyme</label>
+                                    <input id="crea_sPseudo_Marcheur" name="crea_sPseudo_Marcheur" type="name" class="form-control" placeholder="Entrer pseudonyme" name="name">
+                                    <label for="name" class="form-label">Pseudonyme</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Phone-->
                                 <div class="mb-3 form-floating">
-                                    <input required placeholder="01234567890" id="phone" class="form-control" title="Format : 01234567890" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
-                                    <label for="phone" class="form-label h6">Numéro de téléphone portable</label>
+                                    <input id="crea_sTel_Marcheur" name="crea_sTel_Marcheur" required placeholder="0123456789" class="form-control" title="Format : 0123456789" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
+                                    <label for="phone" class="form-label">Numéro de téléphone</label>
                                 </div>
                             </div>
                         </div>
@@ -266,15 +264,15 @@
                             <div class="col">
                                 <!--Password-->
                                 <div class="mb-3 form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
-                                    <label for="password" class="form-label h6">Mot de passe</label>
+                                    <input id="crea_sMdp_Marcheur" name="crea_sMdp_Marcheur" type="password" class="form-control" placeholder="Entrer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
+                                    <label for="password" class="form-label">Mot de passe</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Is guide-->
                                 <div class="mb-3 form-floating">
-                                    <select class="form-select">
-                                        <option>Visiteur</option>
+                                    <select id="crea_sRole_Marcheur" name="crea_sRole_Marcheur" class="form-select">
+                                        <option>Marcheur</option>
                                         <option>Guide</option>
                                         <option>Administrateur</option>
                                     </select>
@@ -308,7 +306,7 @@
                             <!--Is guide-->
                             <div class="mb-3 form-floating">
                                 <select class="form-select" id="roles_choice">
-                                    <option>Visiteur</option>
+                                    <option>Marcheur</option>
                                     <option>Guide</option>
                                     <option>Admin</option>
                                     <script>
@@ -393,47 +391,45 @@
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
-                  </div>
-                  <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
-                  <div class="modal-body">
-                    <label for="email" class="form-label h6">Nom du nouveau materiel</label>
-                    <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
-                  </form>
-                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
+                        </div>
+                        <form id='creation_material' name='creation_material' class="form" method="POST" action="#">
+                            <div class="modal-body">
+                                <label for="email" class="form-label h6">Nom du nouveau materiel</label>
+                                <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                        </form>
+                        <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <!----------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="modal fade" id="terrainModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
+        </div>
+        <!----------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="modal fade" id="terrainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
-                  </div>
-                  <form id='add_terrain_form' name='creation_rando' class="form" method="POST" action="#">
-                  <div class="modal-body">
-                    <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
-                    <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
-                  </form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
+                    </div>
+                    <form id='add_terrain_form' name='add_terrain_form' class="form" method="POST" action="#">
+                        <div class="modal-body">
+                            <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
+                            <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    </form>
                     <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>

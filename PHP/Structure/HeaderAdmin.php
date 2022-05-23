@@ -36,7 +36,7 @@
                         <span id="session_username" class="fw-bolder fs-5 ">AdminPlaceholder</span>
 
                         <script type="text/javascript">
-                            document.getElementById("session_username").innerHTML = '<?php echo $_SESSION['nomUtilisateur'] ?>';
+                            document.getElementById("session_username").innerHTML = "<?php echo $_SESSION['nomUtilisateur'] ?>";
                         </script>
 
                     </div>
