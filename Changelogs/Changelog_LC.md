@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.3] - 2022-05-24
+### Added
+- Suppression des programmes lors de l'appuie du bouton 'supprimer'.
+- Affichage des boutons 'admin' seulement si l'utilisateur s'appelle 'admin'.
+
+### Changed
+- BDD : ajout des délétions en cascade.
+
 ## [0.1.2] - 2022-05-23
 ### Added
 - Affichage des images dans la liste des programmes de manière dynamique dans Accueil.php.
