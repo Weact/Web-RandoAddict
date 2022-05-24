@@ -41,18 +41,23 @@
         echo json_encode($result);
       }
 
-    function connectUser($mail){
+      function redirectUser()
+      {
+        header("HTTP/1.1 303 See Other");
+        header("Location: ./Accueil.php");
+        exit();
+      }
+
+      // MUST USE REDIRECTUSER() AFTER CALLING THIS METHOD
+      function connectUser($mail)
+      {
         $conn = connect_bd();
         $mng = new ManagerMarcheur($conn);
         $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
 
         $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
         $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
-
-         header("HTTP/1.1 303 See Other");
-         header("Location: ./Accueil.php");
-         exit();
-    }
+      }
 
     function checkUserPw($mail, $pw) {
     $conn = connect_bd();

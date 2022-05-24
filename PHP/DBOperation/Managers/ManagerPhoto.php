@@ -211,7 +211,7 @@ class ManagerPhoto extends Manager
     try
     {
       $stmt = $this->getdb()->prepare($req);
-      $stmt->bindValue(":ID", $num, PDO::PARAM_STR);
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success

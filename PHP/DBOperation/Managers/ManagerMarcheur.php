@@ -140,7 +140,7 @@ class ManagerMarcheur extends Manager
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
-      var_dump($stmt);
+      //var_dump($stmt);
       // Return success
       $result['success'] = true;
       $result['error'] = false;

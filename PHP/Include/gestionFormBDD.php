@@ -17,6 +17,9 @@
     require_once("userManager.php");
     require_once("programManager.php");
 
+    $_SESSION['message']="";
+    $_SESSION['status']="";
+
     //Vérification et initialisation des variables de session le cas échéant.
     if (!isset($_SESSION['typeUtilisateur']))
     {
@@ -28,30 +31,54 @@
     }
 
     //Gestion de toutes les réceptions de tous les formulaires formulaires.
-      if(isset($_POST["sMail_Marcheur_Inscription"]))
-      {
-        $donnees = array(
-          'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
-          'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
-          'sTel_Marcheur' => $_POST['sTel_Marcheur'],
-          'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
-          'sRole_Marcheur' => 'Marcheur'
-          );
 
-          if($donnees['sPseudo_Marcheur'] == "admin"){
+    if (isset($_POST["sMail_Marcheur_Inscription"])) {
+
+      // GERE L'INSCRIPTION UTILISATEUR PAR ADMIN
+      if (isset($_POST['crea_sPseudo_Marcheur'])) {
+        $donnees = $arrayName = array(
+          'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
+          'sPseudo_Marcheur' => $_POST['crea_sPseudo_Marcheur'],
+          'sTel_Marcheur' => $_POST['crea_sTel_Marcheur'],
+          'sMdp_Marcheur' => $_POST['crea_sMdp_Marcheur'],
+          'sRole_Marcheur' => 'Marcheur'
+        );
+    
+        if (isset($_POST['crea_sRole_Marcheur'])) {
+          $donnees['sRole_Marcheur'] = $_POST['crea_sRole_Marcheur'];
+        }
+    
+        if (strtolower($donnees['sPseudo_Marcheur']) == "admin") {
+          $donnees['sRole_Marcheur'] = "Admin";
+        }
+        makeNewUser($donnees);
+        redirectUser(); // does the exit();
+    
+      } else { // ENTRER DANS CETTE CONDITION ELSE SIGNIFIE QU'UNE INSCRIPTION EST EFFECTUE PAR L'UTILISATEUR
+        if (isset($_POST['sPseudo_Marcheur'])) {
+          $donnees = array(
+            'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
+            'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
+            'sTel_Marcheur' => $_POST['sTel_Marcheur'],
+            'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
+            'sRole_Marcheur' => 'Marcheur'
+          );
+    
+          if ($donnees['sPseudo_Marcheur'] == "admin") {
             $donnees['sRole_Marcheur'] = "Admin";
           }
-
-          if(isset($_POST['sRole_Marcheur'])) {
-            $donnees['sRole_Marcheur'] = $_POST('sRole_Marcheur');
+    
+          if (isset($_POST['sRole_Marcheur'])) {
+            $donnees['sRole_Marcheur'] = $_POST['sRole_Marcheur'];
           }
-
+    
           makeNewUser($donnees);
           connectUser($_POST['sMail_Marcheur_Inscription']);
-         exit();
-
-
+          redirectUser(); // does the exit();
+        }
       }
+    }
+      
       if(isset($_POST["update_role_marcheur"]))
       {
         $donnees = array(
@@ -73,16 +100,21 @@
           makeNewUser($donnees);
           connectUser($_POST['sMail_Marcheur_Inscription']);
          exit();
-
-
       }
+
       if(isset($_POST["sMail_Marcheur_Connexion"])) {
           //CONNEXION AUTOMATIQUE
           $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
           if ($isValidMarcheur){
             connectUser($_POST["sMail_Marcheur_Connexion"]);
           }
+          else
+          {
+            $_SESSION['message'] = "Email ou Mot de Passe invalide";
+            $_SESSION['status'] = "Erreur Connexion";
+          }
       }
+
       if(isset($_POST["Nom_materiel_autre"])) {
           $donnees = array(
             'sLabel_Materiel' => $_POST['Nom_materiel_autre'],
@@ -90,7 +122,6 @@
             );
           makeNewMat($donnees);
       }
-
       elseif(isset($_POST["labelExcursion"]))
       {
         $nomImage = "";
@@ -120,12 +151,13 @@
 
           makeNewExcursion($donnees);
       }
+
       if(isset($_POST["sLabel_Prog"]))
-        {
+      {
           $mng = new ManagerProgramme($conn);
 
           $materiels = $_POST['materiel'];
-          var_dump($materiels);
+          //var_dump($materiels);
           //TO DO : ADD sExcur_Prog
           $donnees = array(
             'sLabel_Prog' => $_POST['sLabel_Prog'],
@@ -137,17 +169,17 @@
             'sValide_Prog' => "En attente"
             );
 
-            var_dump($donnees);
+            //var_dump($donnees);
           $new_item = new Programme();
           $new_item->hydrate($donnees);
           $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
 
-        }
+      }
 
 
-        if(isset($_POST["disconnect"])){
-        connectUser("");
-
+        if(isset($_POST["disconnect"]))
+        {
+          connectUser("");
         }
 
 ?>

@@ -12,7 +12,7 @@
 * 21-03-2022    : Création page
 \*******************************************************************************/
 
-  include_once('Include/gestionFormBDD.php')
+  include_once('Include/gestionFormBDD.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">    

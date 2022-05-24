@@ -241,8 +241,8 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3 mt-3 form-floating">
-                                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email" placeholder="Entrer email" name="email" required>
-                                    <label for="email" class="form-label h6">Email</label>
+                                    <input id="sMail_Marcheur_Inscription" name="sMail_Marcheur_Inscription" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Entrer email">
+                                    <label for="email" class="form-label">Email</label>
                                 </div>
                             </div>
                         </div>
@@ -250,15 +250,15 @@
                             <div class="col">
                                 <!--Pseudo-->
                                 <div class="mb-3 form-floating">
-                                    <input type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name" required>
-                                    <label for="name" class="form-label h6">Pseudonyme</label>
+                                    <input id="crea_sPseudo_Marcheur" name="crea_sPseudo_Marcheur" type="name" class="form-control" placeholder="Entrer pseudonyme" name="name">
+                                    <label for="name" class="form-label">Pseudonyme</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Phone-->
                                 <div class="mb-3 form-floating">
-                                    <input required placeholder="01234567890" id="phone" class="form-control" title="Format : 01234567890" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
-                                    <label for="phone" class="form-label h6">Numéro de téléphone portable</label>
+                                    <input id="crea_sTel_Marcheur" name="crea_sTel_Marcheur" required placeholder="0123456789" class="form-control" title="Format : 0123456789" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
+                                    <label for="phone" class="form-label">Numéro de téléphone</label>
                                 </div>
                             </div>
                         </div>
@@ -266,17 +266,17 @@
                             <div class="col">
                                 <!--Password-->
                                 <div class="mb-3 form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
-                                    <label for="password" class="form-label h6">Mot de passe</label>
+                                    <input id="crea_sMdp_Marcheur" name="crea_sMdp_Marcheur" type="password" class="form-control" placeholder="Entrer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
+                                    <label for="password" class="form-label">Mot de passe</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Is guide-->
                                 <div class="mb-3 form-floating">
-                                    <select class="form-select">
-                                        <option>Visiteur</option>
+                                    <select id="crea_sRole_Marcheur" name="crea_sRole_Marcheur" class="form-select">
+                                        <option>Marcheur</option>
                                         <option>Guide</option>
-                                        <option>Administrateur</option>
+                                        <option>Admin</option>
                                     </select>
                                     <label for="guide" class="form-label h6">Création en tant que :</label>
                                 </div>
@@ -308,7 +308,7 @@
                             <!--Is guide-->
                             <div class="mb-3 form-floating">
                                 <select class="form-select" id="roles_choice">
-                                    <option>Visiteur</option>
+                                    <option>Marcheur</option>
                                     <option>Guide</option>
                                     <option>Admin</option>
                                     <script>
@@ -378,18 +378,26 @@
 
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
-                <div class="card">
-                    <label for="guide" class="form-label h6">Nom</label>
-                    <div class="card-header h5">Nom placeholder</div>
-                    <label for="guide" class="form-label h6">Statut</label>
-                    <div class="card-body h5">Randonneur / guide</div>
-                    <label for="guide" class="form-label h6">Mail</label>
-                    <div class="card-body h5">Mail placeholder</div>
-                    <label for="guide" class="form-label h6">Téléphone</label>
-                    <div class="card-body h5">Tel placeholder</div>
+                <?php
+                    require_once(__DIR__ ."/../Include/userManager.php");
+                    $users = getAllUsers();
+                    foreach($users as $user)
+                    {?>
+                        <div class="card">
+                            <label for="guide" class="form-label h6">Nom</label>
+                        <div class="card-header h5"><?=$user[1]?></div>
+                            <label for="guide" class="form-label h6">Statut</label>
+                        <div class="card-body h5"><?=$user[4]?></div>
+                            <label for="guide" class="form-label h6">Mail</label>
+                        <div class="card-body h5"><?=$user[0]?></div>
+                            <label for="guide" class="form-label h6">Téléphone</label>
+                        <div class="card-body h5"><?=$user[3]?></div>
 
-                    <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
-                </div>
+                            <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+                        </div>
+                    <?php
+                    }
+                ?>
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------------------------->
@@ -400,7 +408,7 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
                   </div>
-                  <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
+                  <form id='creation_materiel' name='creation_materiel' class="form" method="POST" action="#">
                   <div class="modal-body">
                     <label for="email" class="form-label h6">Nom du nouveau materiel</label>
                     <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
@@ -421,7 +429,7 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
                   </div>
-                  <form id='add_terrain_form' name='creation_rando' class="form" method="POST" action="#">
+                  <form id='add_terrain_form' name='ajout_terrain_form' class="form" method="POST" action="#">
                   <div class="modal-body">
                     <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
                     <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>

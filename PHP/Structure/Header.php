@@ -57,6 +57,19 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarText">
+
+
+      <?php
+        //GESTION AFFICHAGE MAIL OU MOT DE PASSE INVALIDE
+        if ($_SESSION['status'] == "Erreur Connexion")
+        {
+        ?>
+          <p id="message" class="bg-danger text-light"><?php echo $_SESSION['message']?></p>  
+        <?php
+        }
+      ?>
+
+
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <!-- Boutons/Liens à gauche de la navbar ici-->
         </ul>
