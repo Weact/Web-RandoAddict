@@ -79,7 +79,7 @@
 
                         <!--Inclusion d'une image-->
                         <legend><label for="fileInput">Image de l'excursion</label></legend>
-                        <input type="file" id="fileInput" name="fileInput" accept="image/png, image/jpeg, image/jpg" required class="btn-outline-primary" />
+                        <input type="file" id="fileInput" name="image" accept="image/png, image/jpeg, image/jpg" required class="btn-outline-primary" />
                         <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
                         <br />
                         <br />
