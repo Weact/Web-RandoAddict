@@ -120,9 +120,19 @@ function getAllPrograms()
   $conn = connect_bd();
   $mng = new ManagerProgramme($conn);
 
-  $users = $mng->selectProgrammes()['stmt'];
+  $progs = $mng->selectProgrammes()['stmt'];
 
-  return $users;
+  return $progs;
+}
+
+function getProgramsByName($prog_name)
+{
+  $conn = connect_bd();
+  $mng = new ManagerProgramme($conn);
+
+  $progs = $mng->selectProgrammesByLabel($prog_name)['stmt'];
+
+  return $progs;
 }
 
 function getAllPhotos()
