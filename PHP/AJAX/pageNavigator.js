@@ -15,7 +15,8 @@ function goToOnClick(btnArray, page) {
       goTo(page)
     });
   }
-}
+};
+
 
 function goTo(page) {
     console.log("Go to " + page);
@@ -24,4 +25,26 @@ function goTo(page) {
             $("#main").html(result);
         }
     });
-}
+};
+
+function goToPost(page, id) {
+    console.log("Go to " + page);
+    $.post(page,{
+          idProg: id
+        },
+        function(data, status){
+            $("#main").html(data);
+        }
+    );
+};
+
+function setIdProg(id) {
+  $.post("ajaxmarchestp.php",
+  {
+    idProg: id
+  },
+  function(data, status){
+    console.log("Data: " + data + "\nStatus: " + status);
+  });
+
+};

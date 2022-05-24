@@ -1,3 +1,4 @@
+<?php session_start();?>
 <div class="container bg-light p-3  text-dark">
     <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir</h2>
 

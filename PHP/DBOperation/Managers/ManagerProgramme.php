@@ -178,15 +178,11 @@ class ManagerProgramme extends Manager
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-			$p = new Programme;
-      $tab = $this->arrayConstructor($stmt);
-			$p->hydrate($tab);
-
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['programme'] = $p;
+      $result['programme'] = $stmt->fetchAll()[0];
       return($result);
 
 		} catch (PDOException $error) {

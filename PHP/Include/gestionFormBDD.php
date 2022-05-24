@@ -10,7 +10,6 @@
 * 29-03-2022   : Création du fichier
 \*******************************************************************************/
 
-    session_start();
 
     require_once(__DIR__."/../DBOperation/PDO_Connect.php");
     $conn = connect_bd();
@@ -28,6 +27,12 @@
     }
 
     //Gestion de toutes les réceptions de tous les formulaires formulaires.
+      if(isset($_POST["idProg"])){
+        var_dump($_POST["idProg"]);
+        echo "<script>console.log('omg');
+        goTo('Structure/PageRandonee.php');</script>";
+      }
+
       if(isset($_POST["sMail_Marcheur_Inscription"]))
       {
         $donnees = array(

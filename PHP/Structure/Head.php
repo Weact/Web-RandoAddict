@@ -18,10 +18,10 @@
 
     <link rel="icon" type="image/x-icon" href="../ASSETS/favicon.ico">
 
-    <script src="AJAX/pageNavigator.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
+        <script src="AJAX/pageNavigator.js"></script>
 </head>
 
 <?php

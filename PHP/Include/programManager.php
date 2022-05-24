@@ -46,6 +46,15 @@
         $result = $mng->insertMateriel($new_item);
       }
 
+      function getMatsOfProg($idProg){
+        $conn = connect_bd();
+        $mng = new ManagerNecessaire($conn);
+
+        $users = $mng->selectNecessaireById($idProg)['stmt'];
+
+        return $users;
+      }
+
     function getAllExc() {
           $conn = connect_bd();
           $mng = new ManagerExcursion($conn);
@@ -103,6 +112,14 @@
           $mng = new ManagerProgramme($conn);
 
           $users = $mng->selectProgrammes()['stmt'];
+
+          return $users;
+    }
+    function getProgramById($id) {
+          $conn = connect_bd();
+          $mng = new ManagerProgramme($conn);
+
+          $users = $mng->selectProgrammeById($id)['programme'];
 
           return $users;
     }

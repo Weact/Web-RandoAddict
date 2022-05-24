@@ -1,3 +1,4 @@
+<?php session_start();?>
 <section class="container-fluid w-100 h-100" id="randonneesection">
     <div id="randoPaysages" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
