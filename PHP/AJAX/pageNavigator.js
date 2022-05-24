@@ -52,6 +52,17 @@ function goToPost(page, id) {
   );
 };
 
+function setIdProg(id) {
+  $.post("ajaxmarchestp.php",
+  {
+    idProg: id
+  },
+  function(data, status){
+    console.log("Data: " + data + "\nStatus: " + status);
+  });
+
+};
+
 function searchRandonnee(page, label){
   console.log("Searching randonne in " + page + " with " + label + "...");
 

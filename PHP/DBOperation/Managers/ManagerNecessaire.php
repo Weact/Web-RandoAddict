@@ -87,7 +87,7 @@ class ManagerNecessaire extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -112,16 +112,12 @@ class ManagerNecessaire extends Manager
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
-
-      $n = new Necessaire;
-      $tab = $this->arrayConstructor($stmt);
-      $n->hydrate($tab);
 			
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['necessaire'] = $n;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {

@@ -125,12 +125,21 @@ function getAllPrograms()
   return $progs;
 }
 
+function getAllExcursionsFromProgram($pgrm){
+  $conn = connect_bd();
+
+  $mng_excur = new ManagerExcursion($conn);
+  $excurs = $mng_excur->selectExcursionsByProgrammeId($pgrm['idProgramme'])['stmt'];
+
+  return $excurs;
+}
+
 function getProgramsByName($prog_name)
 {
   $conn = connect_bd();
   $mng = new ManagerProgramme($conn);
 
-  $progs = $mng->selectProgrammesByLabel($prog_name)['stmt'];
+  $progs = $mng->selectProgrammesByLabel(strtolower($prog_name))['stmt'];
 
   return $progs;
 }
@@ -165,4 +174,22 @@ function getExcsOfProg($prog)
   $escales = $mng3->selectEscaleByIdProg($prog['idProgramme'])['stmt'];
   $excursions = $mng2->selectExcursionById($escales['idExcursion'])['stmt'];
   return $excursions;
+}
+
+function getMatsOfProg($idProg){
+  $conn = connect_bd();
+  $mng = new ManagerNecessaire($conn);
+
+  $mats = $mng->selectNecessaireById($idProg)['stmt'];
+
+  return $mats;
+}
+
+function getProgramById($id) {
+  $conn = connect_bd();
+  $mng = new ManagerProgramme($conn);
+
+  $program = $mng->selectProgrammeById($id)['stmt'];
+
+  return $program;
 }
