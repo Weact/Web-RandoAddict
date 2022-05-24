@@ -294,7 +294,7 @@
                                             let userRole = roles.options[roles.selectedIndex].value;
                                             let userMail = mails.options[mails.selectedIndex].innerHTML;
 
-                                            console.log(userRole + userMail);
+                                            console.log(userRole + " " + userMail);
 
                                             var xmlhttp = new XMLHttpRequest();
                                             let response;
