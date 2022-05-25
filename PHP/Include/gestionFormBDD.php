@@ -25,12 +25,14 @@
     {
         $_SESSION['nomUtilisateur'] = "anon";
     }
+    if (!isset($_SESSION['mailUtilisateur']))
+    {
+        $_SESSION['mailUtilisateur'] = "anon";
+    }
 
     //Gestion de toutes les réceptions de tous les formulaires formulaires.
-      if(isset($_POST["idProg"])){
-        var_dump($_POST["idProg"]);
-        echo "<script>console.log('omg');
-        goTo('Structure/PageRandonee.php');</script>";
+      if(isset($_POST["idMarcheurJoin"])){
+        participateProg($_POST["idMarcheurJoin"], $_POST["roleMarcheurJoin"], $_POST["idProgJoin"]);
       }
 
       if(isset($_POST["sMail_Marcheur_Inscription"]))

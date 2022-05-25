@@ -1,7 +1,6 @@
 <?php
 require_once(__DIR__ . '/../Include/programManager.php');
 $programs = getAllPrograms();
-$photos = getAllPhotos();
 foreach ($programs as $program) {
 ?>
     <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase">
@@ -25,7 +24,7 @@ foreach ($programs as $program) {
                     <p class="card-text"><?php echo $program["descProgramme"]?></p>
                 </div>
 
-                <input type="button" value="Consulter" onclick="goToPost('Structure/PageRandonee.php',<?php echo $program['idProgramme']?>);" class="btn btn-success w-100 mt-auto">
+                <input type="button" value="Consulter" onclick="goToPost('Structure/PageRandonee.php',<?php echo $program['idProgramme'];?>)" class="btn btn-success w-100 mt-auto">
 
                 </div>
                 </div>

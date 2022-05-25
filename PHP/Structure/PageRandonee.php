@@ -69,16 +69,26 @@ $program = getProgramById($_POST['idProg']);
                 {
                   if($_SESSION['typeUtilisateur'] != "anon")
                   {
-                    echo '<button type="button" class="btn btn-primary ">Rejoindre comme randonneur</button>';
+                    echo '<form id="join_prog" name="join_prog" class="form" method="POST" action="#">
+                    <input hidden name="idMarcheurJoin" value="'.$_SESSION["mailUtilisateur"].'"></input>
+                    <input hidden name="roleMarcheurJoin" value="Marcheur"></input>
+                    <input hidden name="idProgJoin" value="'.$program['idProgramme'].'"></input>
+                    <button type="submit" class="btn btn-primary ">Rejoindre comme randonneur</button>
+                    </form>';
                   }
                   if($_SESSION['typeUtilisateur'] == "Admin" || $_SESSION['typeUtilisateur'] == "Guide")
                   {
-                    echo '<button type="button" class="btn btn-success ">Rejoindre comme Guide</button>';
+                    echo '<form id="join_prog" name="join_prog" class="form" method="POST" action="#">
+                    <input hidden name="idMarcheurJoin" value="'.$_SESSION["mailUtilisateur"].'"></input>
+                    <input hidden name="roleMarcheurJoin" value="Guide"></input>
+                    <input hidden name="idProgJoin" value="'.$program['idProgramme'].'"></input>
+                    <button type="submit" class="btn btn-primary ">Rejoindre comme Guide</button>
+                    </form>';
                   }
                 }?>
                 <p
                     style="display: flex; color: white; display: flex; justify-content : center; font-size: larger; background-color: black;">
-                    <span>0 </span> <span> / </span> <span> <?php echo $program['capaciteProgramme']?> </span> Participants
+                    <span><?php echo count(getParticipantsProg($program['idProgramme'])); ?> </span> <span> / </span> <span> <?php echo $program['capaciteProgramme']?> </span> Participants
                 </p>
             </div>
         </div>

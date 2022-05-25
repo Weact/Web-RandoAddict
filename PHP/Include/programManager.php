@@ -15,6 +15,7 @@
     require_once(__DIR__."/../DBOperation/Managers/ManagerExcursion.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerTerrain.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerPhoto.php");
+    require_once(__DIR__."/../DBOperation/Managers/ManagerParticipation.php");
     $conn = connect_bd();
 
       function makeNewProgram($donnees) {
@@ -53,6 +54,20 @@
         $users = $mng->selectNecessaireById($idProg)['stmt'];
 
         return $users;
+      }
+
+      function getProgOfUser($userId) {
+        $conn = connect_bd();
+        $mng = new ManagerParticipation($conn);
+
+        $parts = $mng->selectPartcipationByUserId($userId)['stmt'];
+        $progs = [];
+
+        foreach($parts as $part){
+            array_push($progs, getProgramById($part['idProgramme']));
+        }
+
+        return $progs;
       }
 
     function getAllExc() {
@@ -151,6 +166,28 @@
         $escales = $mng3->selectEscaleByIdProg($prog['idProgramme'])['stmt'];
         $excursions= $mng2->selectExcursionById($escales['idExcursion'])['stmt'];
         return $excursions;
+      }
+
+    function participateProg($idUser, $roleUser, $idProg){
+        $conn = connect_bd();
+
+        $mng = new ManagerParticipation($conn);
+        $new_item = new Participation();
+        $new_item->setnId_Prog($idProg);
+        $new_item->setsMail_Marcheur($idUser);
+        $new_item->setsRole_Marcheur($roleUser);
+
+        $result = $mng->insertParticipation($new_item);
+
+
+    }
+    function getParticipantsProg($idProg){
+        $conn = connect_bd();
+        $mng = new ManagerParticipation($conn);
+
+        $users = $mng->selectPartcipationById($idProg)['stmt'];
+
+        return $users;
 
     }
 
