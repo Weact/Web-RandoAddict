@@ -160,4 +160,9 @@
 
         }
 
+        if(isset($_POST["deleteProgId"])){
+          deleteProgId($_POST["deleteProgId"]);
+
+        }
+
 ?>

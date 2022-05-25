@@ -47,14 +47,6 @@
                         }
 
                         ?>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="ck6">
-                            <label class="form-check-label h6" for="ck6">Fitness</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="ck7">
-                            <label class="form-check-label h6" for="ck7">Restaurant</label>
-                        </div>
 
                         <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
                           data-bs-target="#terrainModal">Ajouter un terrain</button>

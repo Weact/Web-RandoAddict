@@ -63,7 +63,7 @@ $program = getProgramById($_POST['idProg']);
                 <span
                     class="col-1 d-flex justify-content-center fs-5 bg-dark text-light border rounded-pill border-5 border-primary m-3">
 
-                <?php echo $program['idProgramme']?>0.00 $</span>
+                <?php echo getPriceOfProg($program)?>0$</span>
                 <?php
                 if(isset($_SESSION['typeUtilisateur']))
                 {
@@ -98,9 +98,12 @@ $program = getProgramById($_POST['idProg']);
     if ($_SESSION['typeUtilisateur'] == "Admin"){
     ?>
     <div class="d-flex p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
-        <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;">
-            <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
-        </button>
+      <form id='disconnectForm' name='disconnectForm' class="form" method="POST" action="#">
+          <button value="<?php echo $program['idProgramme'];?>" name="deleteProgId" type="submit" class="btn btn-outline-danger mt-2 m-1" style="width: 10em;">
+              <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
+          </button>
+      </form>
+
     </div>
     <?php
   }}?>
