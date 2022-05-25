@@ -13,7 +13,7 @@
 *
 \*******************************************************************************/
 
-class Programme
+class Programme implements JsonSerializable
 {
 	// Private members
 	private $nId_Prog;
@@ -47,6 +47,18 @@ class Programme
 	{
 		// None
 	}
+
+  public function jsonSerialize () {
+    return array(
+        'idProg'=>$this->nId_Prog,
+        'labelProg'=>$this->sLabel_Prog,
+        'descProg'=>$this->sDesc_Prog,
+        'diffProg'=>$this->nDifficulte_Prog,
+        'capaciteProg'=>$this->nCapacite_Prog,
+        'departProg'=>$this->sDepart_Prog,
+        'arriveeProg'=>$this->sArrivee_Prog
+    );
+  }
 
 	// Getters & Setters
   public function getnId_Prog()

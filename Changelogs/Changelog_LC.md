@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.4] - 2022-05-25
+### Added
+- Affichage du formulaire lorsque le bouton 'edit' est appuyé par un admin.
+- Préremplissage du formulaire à partir de la base de donnée.
+
 ## [0.1.3] - 2022-05-24
 ### Added
 - Suppression des programmes lors de l'appuie du bouton 'supprimer'.

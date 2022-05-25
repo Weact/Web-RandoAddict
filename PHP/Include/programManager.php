@@ -19,11 +19,20 @@
     if (isset($_POST['action'])) {
       switch ($_POST['action']) {
         case 'edit':
+          $conn = connect_bd();
+          $mng_Prog = new ManagerProgramme($conn);
+
+          echo json_encode($mng_Prog->selectProgrammeById($_POST["idProg"]));
           break;
+
         case 'delete':
           // echo '<script> alert("'.$_POST["idProg"].'"); </script>';
           deleteProgramme($_POST["idProg"]);
           break;
+
+        case 'edit2':
+          $conn = connect_bd();
+
       }
     }
 

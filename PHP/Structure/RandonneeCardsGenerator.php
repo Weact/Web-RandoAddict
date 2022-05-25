@@ -8,10 +8,10 @@
             </div>
             <div class="modal-body text-dark">
                 <legend for="selection_rando">Nom du programme</legend>
-                <input type="text" name="sLabel_Prog" class="form-control" aria-label="NomExcursion" required>
+                <input type="text" name="sLabel_Prog" class="form-control" id="selectionNom" aria-label="NomExcursion" required>
 
                 <legend for="selection_rando">Sélection de randonnée</legend>
-                <select multiple name="sExcur_Prog[]" id="selection_rando" class="form-control" required>
+                <select multiple name="sExcur_Prog[]" id="selectionRando" class="form-control" required>
                     <optgroup>
                         <?php
                         require_once(__DIR__ . '/../Include/programManager.php');
@@ -43,7 +43,7 @@
                 <legend for="nb_rando">Nombre de randonneurs</legend>
                 <div class="def-number-input number-input safari_only">
                     <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
-                    <input name="nCapacite_Prog" class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" min="1" name="quantity" value="1" type="number">
+                    <input name="nCapacite_Prog" class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" id="selectionQuantite" min="1" name="quantity" value="1" type="number">
                     <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                 </div>
 
@@ -75,7 +75,7 @@
 
                 <legend for="startDate">Heure de départ</legend>
                 <div class="cs-form">
-                    <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required />
+                    <input name="sDepartHeure_Prog" id="startHour" type="time" class="form-control" value="" required />
                 </div>
 
                 <legend for="arriveDate">Date d'arriver</legend>
@@ -83,10 +83,10 @@
 
                 <legend for="arriveDate">Heure d'arrivée</legend>
                 <div class="cs-form">
-                    <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required />
+                    <input name="sArriveHeure_Prog" id="arriveHour" type="time" class="form-control" value="" required />
                 </div>
                 <div>
-                    <legend for="selection">Matériel</legend>
+                    <legend for="selection" id="selectionMateriel">Matériel</legend>
                     <?php
                     require_once(__DIR__ . '/../Include/programManager.php');
                     $materiels = getAllMat();
@@ -104,7 +104,7 @@
                 <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#materielModal">Ajouter un materiel</button>
 
                 <legend for="selection_rando">Description</legend>
-                <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes" required></textarea>
+                <textarea name="sDesc_Prog" class="form-control" id="descProg" aria-label="Background et notes" required></textarea>
                 <br>
                 <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
             </div>
@@ -119,6 +119,10 @@
 <?php
 require_once(__DIR__ . "/../Include/programManager.php");
 $programs = getAllPrograms();
+
+// $conn = connect_bd();
+// $mng_Prog = new ManagerProgramme($conn)
+// var_dump ($mng_Prog->selectProgrammeById(137)["programme"]);
 
 foreach ($programs as $program) {
     $name = $program[1];
@@ -165,6 +169,27 @@ foreach ($programs as $program) {
 
             <script>
                 function editSelf(id) {
+                    $.post("./Include/programManager.php", {action: "edit", idProg: id}, function (data, status) {
+                        let result = jQuery.parseJSON(data);
+                        if (result["success"]) {
+                            console.log(result["programme"]);
+                            document.getElementById("selectionNom").value = result["programme"]["labelProg"];
+                            document.getElementById("descProg").value = result["programme"]["descProg"];
+                            document.getElementById("selectionTerrain").value = result["programme"]["diffProg"];
+                            document.getElementById("selectionQuantite").value = result["programme"]["capaciteProg"];
+
+                            let depart = result["programme"]["departProg"].split(" ");
+                            document.getElementById("startDate").value = depart[0]; 
+                            document.getElementById("startHour").value = depart[1];
+                            let arrivee = result["programme"]["arriveeProg"].split(" ");
+                            document.getElementById("arriveDate").value = arrivee[0];
+                            document.getElementById("arriveHour").value = arrivee[1];
+                            
+                        }else{
+                            alert("erreur");
+                        }
+                    });
+
                 }
 
                 function deleteSelf(id) {
@@ -186,3 +211,9 @@ foreach ($programs as $program) {
     </div>';
 }
 ?>
+
+let elem = document.getElementById("selectionRando");
+for (let i = 0; i < element.options.length; i++)
+{
+    element.options[i].selected = 
+}
