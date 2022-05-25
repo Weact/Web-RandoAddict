@@ -18,7 +18,7 @@ foreach ($programs as $program) {
         $name = substr($name, 0, 9) . "";
         $name = str_replace(" ", "_", $name);
     }
-    if (strlen($description) > 250){
+    if (strlen($description) > 250) {
         $description = substr($description, 0, 251) . "";
     }
 
@@ -31,7 +31,6 @@ foreach ($programs as $program) {
     if (!file_exists($photo)) {
         $photo = '../ASSETS/' . $FirstPhoto[1] . '';
     }
-
 ?>
 
     <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase">
@@ -66,11 +65,31 @@ foreach ($programs as $program) {
                                     <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
                                 </button>
                             </form>
+                            <?php
+                        }
+                        if (isset($_SESSION["mailUtilisateur"])) {
+                            $participations = getParticipantsProg($program['idProgramme']);
+
+                            foreach ($participations as $participation) {
+                                $real_participant_mail = str_replace(" ", "", $participation["mailMarcheur"]);
+                                $mail_logged_user = str_replace(" ", "", $_SESSION["mailUtilisateur"]);
+
+                                if ($real_participant_mail == $mail_logged_user) {
+                            ?>
+                                    <form method="POST" action="#" id="leavePartiProgID">
+                                        <button class="btn btn-outline-light mt-2 m-1" style="width: 10em;" type="submit" name="leaveProgID" value="<?php echo $program['idProgramme'] ?>">
+                                            <i class="bi bi-door-open-fill fs-3 fw-bold" aria-hidden="true"></i>
+                                        </button>
+                                    </form>
+                        <?php
+                                }
+                            }
+                        }
+                        ?>
                         </div>
-                <?php
-                    }
+                    <?php
                 }
-                ?>
+                    ?>
             </div>
         </div>
     </div>

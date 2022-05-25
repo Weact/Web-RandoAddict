@@ -247,6 +247,7 @@ function participateProg($idUser, $roleUser, $idProg)
 
   $result = $mng->insertParticipation($new_item);
 }
+
 function getParticipantsProg($idProg)
 {
   $conn = connect_bd();
@@ -265,4 +266,14 @@ function deleteProgId($idProg)
   $msg = $mng->deleteProgrammeById($idProg)['message'];
 
   return $msg;
+}
+
+function leaveProg($mailUtilisateur, $idProg){
+  $conn = connect_bd();
+
+  $mng_parti = new ManagerParticipation($conn);
+
+  $result = $mng_parti->deleteParticipationByIdFromParticipant($idProg, $mailUtilisateur);
+  
+  return $result;
 }

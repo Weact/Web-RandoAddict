@@ -80,6 +80,10 @@ if (isset($_POST["deleteProgID"])) {
   $msg = deleteProgId($_POST["deleteProgID"]);
 }
 
+if(isset($_POST["leaveProgID"])){
+  $result = leaveProg($_SESSION['mailUtilisateur'], $_POST["leaveProgID"] );
+}
+
 if (isset($_POST["update_role_marcheur"])) {
   $donnees = array(
     'sMail_Marcheur' => $_POST['update_mail_marcheur'],

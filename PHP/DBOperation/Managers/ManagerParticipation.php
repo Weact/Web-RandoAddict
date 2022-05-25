@@ -223,5 +223,29 @@ class ManagerParticipation extends Manager
     }
   }
 
+  public function deleteParticipationByIdFromParticipant($num, $mailUtilisateur){
+    $req = "DELETE FROM PARTICIPATION WHERE idProgramme = :ID AND mailMarcheur = :MAILMARCHEUR";
+
+    try{
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":MAILMARCHEUR", $mailUtilisateur, PDO::PARAM_STR);
+      $stmt->execute();
+
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+
+      return($result);
+
+    }catch(PDOException $error){
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+
+      exit();
+    }
+  }
+
 }
 ?>
