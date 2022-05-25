@@ -29,12 +29,24 @@ $photoWidth = "200";
 <section class="py-5 text-center container">
     <div class="row py-3 shadow-lg">
         <div class="col mx-auto bg-light">
-            <h1 class="fw-bolder display-3 text-dark shadow-lg p-3 my-4 text-uppercase rounded rounded-5">
+            <h1 class="d-flex justify-content-around align-items-stretch fw-bolder display-3 text-dark shadow-lg p-3 my-4 text-uppercase rounded rounded-5">
 
                 <?php
                 echo $program['labelProgramme'];
                 ?>
-
+                <?php
+                if (isset($_SESSION["typeUtilisateur"])) {
+                    if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
+                ?>
+                        <form id='deleteProgForm' name='deleteProgForm' class="form" method="POST" action="#">
+                            <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;" type="submit" name="deleteProgID" value="<?php echo $program['idProgramme'] ?>">
+                                <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                <?php
+                    }
+                }
+                ?>
             </h1>
             <p class="shadow-sm lead fs-4 text-dark shadow-lg py-3 font-monospace">
 

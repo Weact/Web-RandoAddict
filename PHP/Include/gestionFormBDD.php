@@ -76,6 +76,10 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
   }
 }
 
+if (isset($_POST["deleteProgID"])) {
+  $msg = deleteProgId($_POST["deleteProgID"]);
+}
+
 if (isset($_POST["update_role_marcheur"])) {
   $donnees = array(
     'sMail_Marcheur' => $_POST['update_mail_marcheur'],

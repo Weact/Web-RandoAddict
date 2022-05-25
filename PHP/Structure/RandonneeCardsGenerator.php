@@ -14,12 +14,15 @@ foreach ($programs as $program) {
     $difficulty = $program[6];
     $description = $program[2];
 
-    if (strlen($name) > 6) {
-        $name = substr($name, 0, 7) . "..";
+    if (strlen($name) > 8) {
+        $name = substr($name, 0, 9) . "";
+        $name = str_replace(" ", "_", $name);
+    }
+    if (strlen($description) > 250){
+        $description = substr($description, 0, 251) . "";
     }
 
-    $FirstPhoto = getFirstPhotoByProgrammeId($program['idProgramme']);
-    // var_dump($FirstPhoto);
+    $FirstPhoto = getPhotoOfExcursion(getExcsOfProg($program)[0]['idExcursion']);
 
     $photo = '../ASSETS/' . $FirstPhoto[1] . '';
     $photoWidth = "400";
@@ -46,21 +49,25 @@ foreach ($programs as $program) {
                 <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="background-color: rgba(200,200,200,0.5); height:100%!important;">
                     <p class="card-text"><?php echo $description ?></p>
                 </div>
-                <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php?',<?php echo $program['idProgramme']?>);">
+                <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php?',<?php echo $program['idProgramme'] ?>);">
 
                 <?php
                 if (isset($_SESSION["typeUtilisateur"])) {
                     if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
-                        echo '
-                            <div class="d-flex p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
-                                <button class="btn btn-outline-warning mt-2 m-1" style="width: 10em;">
+                ?>
+                        <div class="d-flex justify-content-around p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
+                            <form method="POST" action="#" id="editProgForm">
+                                <button class="btn btn-outline-warning mt-2 m-1" style="width: 10em;" type="submit" name="editProgID" value="<?php echo $program['idProgramme'] ?>">
                                     <i class="bi bi-pencil-square fs-3 fw-bold" aria-hidden="true"></i>
                                 </button>
-                                <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;">
+                            </form>
+                            <form id='deleteProgForm' name='deleteProgForm' class="form" method="POST" action="#">
+                                <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;" type="submit" name="deleteProgID" value="<?php echo $program['idProgramme'] ?>">
                                     <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
                                 </button>
-                            </div>
-                        ';
+                            </form>
+                        </div>
+                <?php
                     }
                 }
                 ?>
