@@ -13,7 +13,7 @@
 *                 deleteNecessaireById($num)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
 require_once(__DIR__."/../../DBOperation/Objects/NecessaireObject.php");
@@ -82,7 +82,7 @@ class ManagerNecessaire extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -112,7 +112,7 @@ class ManagerNecessaire extends Manager
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;

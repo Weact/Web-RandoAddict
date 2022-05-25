@@ -12,10 +12,11 @@
 * 21-03-2022    : Création page
 \*******************************************************************************/
 
+  session_start();
   include_once('Include/gestionFormBDD.php')
 ?>
 <!DOCTYPE html>
-<html lang="en">    
+<html lang="en">
 <?php
     /* Remplace la balise HEAD des pages HTML */
     include_once('Structure/Head.php');

@@ -101,7 +101,7 @@ class ManagerMateriel extends Manager
     }
   }
 
-  public function selectMaterielByLabel($text)
+  public function selectMaterielByProgrammeId($text)
   // Goal : Select a material by a given name
   // Entry : A text for the name
   // Return : A material object
@@ -115,15 +115,11 @@ class ManagerMateriel extends Manager
 			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
 
-			$m = new Materiel;
-      $tab = $this->arrayConstructor($stmt);
-      $m->hydrate($tab);
-
       // Retour success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['materiel'] = $m;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {

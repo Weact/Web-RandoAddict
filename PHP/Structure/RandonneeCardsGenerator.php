@@ -67,7 +67,7 @@ foreach ($programs as $program) {
             </div>
         </div>
     </div>
-    
+
 <?php
 }
 ?>

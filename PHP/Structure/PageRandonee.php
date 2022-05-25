@@ -1,5 +1,4 @@
 <?php
-
 /*******************************************************************************\
  * Fichier       : /PHP/PageRandonee.php
  *
@@ -111,5 +110,14 @@ $photoWidth = "200";
             ?>
 
         </div>
+    </div><?php
+    if (isset($_SESSION['typeUtilisateur']))
+    {
+    if ($_SESSION['typeUtilisateur'] == "Admin"){
+    ?>
+    <div class="d-flex p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
+        <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;">
+            <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
+        </button>
     </div>
 </div>

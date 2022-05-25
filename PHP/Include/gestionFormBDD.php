@@ -44,6 +44,10 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
     if (isset($_POST['crea_sRole_Marcheur'])) {
       $donnees['sRole_Marcheur'] = $_POST['crea_sRole_Marcheur'];
     }
+    if (!isset($_SESSION['mailUtilisateur']))
+    {
+        $_SESSION['mailUtilisateur'] = "anon";
+    }
 
     if (strtolower($donnees['sPseudo_Marcheur']) == "admin") {
       $donnees['sRole_Marcheur'] = "Admin";
@@ -74,6 +78,10 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
       redirectUser(); // does the exit();
     }
   }
+}
+
+if(isset($_POST["idMarcheurJoin"])){
+  participateProg($_POST["idMarcheurJoin"], $_POST["roleMarcheurJoin"], $_POST["idProgJoin"]);
 }
 
       if(isset($_POST["update_role_marcheur"]))
@@ -121,7 +129,6 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
             );
           makeNewMat($donnees);
       }
-
       elseif(isset($_POST["labelExcursion"]))
       {
         $nomImage = "";

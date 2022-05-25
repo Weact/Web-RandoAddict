@@ -15,6 +15,7 @@ require_once(__DIR__ . "/../DBOperation/PDO_Connect.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerProgramme.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerExcursion.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerTerrain.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerParticipation.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerPhoto.php");
 $conn = connect_bd();
 
@@ -90,6 +91,20 @@ function getAllTer()
   return $users;
 }
 
+function getProgOfUser($userId) {
+  $conn = connect_bd();
+  $mng = new ManagerParticipation($conn);
+
+  $parts = $mng->selectPartcipationByUserId($userId)['stmt'];
+  $progs = [];
+
+  foreach($parts as $part){
+      array_push($progs, getProgramById($part['idProgramme']));
+  }
+
+  return $progs;
+}
+
 function makeNewExcursion($donnees, $terrains)
 {
   $conn = connect_bd();
@@ -134,6 +149,15 @@ function getAllExcursionsFromProgram($pgrm){
   return $excurs;
 }
 
+function getProgramById($id) {
+  $conn = connect_bd();
+  $mng = new ManagerProgramme($conn);
+
+  $program = $mng->selectProgrammeById($id)['stmt'];
+
+  return $program;
+}
+
 function getProgramsByName($prog_name)
 {
   $conn = connect_bd();
@@ -165,6 +189,30 @@ function getPhotoOfExcursion($excursionId)
   return $photos[0];
 }
 
+function participateProg($idUser, $roleUser, $idProg){
+    $conn = connect_bd();
+
+    $mng = new ManagerParticipation($conn);
+    $new_item = new Participation();
+    $new_item->setnId_Prog($idProg);
+    $new_item->setsMail_Marcheur($idUser);
+    $new_item->setsRole_Marcheur($roleUser);
+
+    $result = $mng->insertParticipation($new_item);
+
+
+}
+
+function getParticipantsProg($idProg){
+        $conn = connect_bd();
+        $mng = new ManagerParticipation($conn);
+
+        $users = $mng->selectPartcipationById($idProg)['stmt'];
+
+        return $users;
+
+    }
+
 function getExcsOfProg($prog)
 {
   $conn = connect_bd();
@@ -183,13 +231,4 @@ function getMatsOfProg($idProg){
   $mats = $mng->selectNecessaireById($idProg)['stmt'];
 
   return $mats;
-}
-
-function getProgramById($id) {
-  $conn = connect_bd();
-  $mng = new ManagerProgramme($conn);
-
-  $program = $mng->selectProgrammeById($id)['stmt'];
-
-  return $program;
 }
