@@ -11,7 +11,7 @@
                 <input type="text" name="sLabel_Prog" class="form-control" id="selectionNom" aria-label="NomExcursion" required>
 
                 <legend for="selection_rando">Sélection de randonnée</legend>
-                <select multiple name="sExcur_Prog[]" id="selectionRando" class="form-control" required>
+                <select multiple name="sExcur_Prog[]" id="selectionRando00" class="form-control" required>
                     <optgroup>
                         <?php
                         require_once(__DIR__ . '/../Include/programManager.php');
@@ -168,11 +168,13 @@ foreach ($programs as $program) {
             </div>
 
             <script>
+
+
                 function editSelf(id) {
                     $.post("./Include/programManager.php", {action: "edit", idProg: id}, function (data, status) {
                         let result = jQuery.parseJSON(data);
                         if (result["success"]) {
-                            console.log(result["programme"]);
+                            // console.log(result["programme"]);
                             document.getElementById("selectionNom").value = result["programme"]["labelProg"];
                             document.getElementById("descProg").value = result["programme"]["descProg"];
                             document.getElementById("selectionTerrain").value = result["programme"]["diffProg"];
@@ -184,6 +186,29 @@ foreach ($programs as $program) {
                             let arrivee = result["programme"]["arriveeProg"].split(" ");
                             document.getElementById("arriveDate").value = arrivee[0];
                             document.getElementById("arriveHour").value = arrivee[1];
+
+                            $.post("./Include/programManager.php", {action: "edit2", idProg: id}, function (data, status) {
+                                let response = jQuery.parseJSON(data);
+                                if (response["success"]) {
+                                    // console.log(response["stmt"]);
+                                    let values = [];
+                                    response["stmt"].forEach(returnValue);
+
+                                    function returnValue(item, index, arr) {
+                                        values.push(item[0]);
+                                    }
+
+                                    let element = document.getElementById("selectionRando00");
+                                    for (let i = 0; i < element.options.length; i++)
+                                    {
+                                        element.options[i].selected = values.includes(element.options[i].value);
+                                    }
+
+
+                                }else{
+                                    alert("erreur");
+                                }
+                            });
                             
                         }else{
                             alert("erreur");
@@ -203,6 +228,7 @@ foreach ($programs as $program) {
                     });
 
                 }
+
             </script>';
     }
 
@@ -211,9 +237,3 @@ foreach ($programs as $program) {
     </div>';
 }
 ?>
-
-let elem = document.getElementById("selectionRando");
-for (let i = 0; i < element.options.length; i++)
-{
-    element.options[i].selected = 
-}

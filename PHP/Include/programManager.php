@@ -32,6 +32,10 @@
 
         case 'edit2':
           $conn = connect_bd();
+          $mng_Exc = new ManagerExcursion($conn);
+
+          echo json_encode($mng_Exc->selectExcursionsByProgrammeId($_POST["idProg"]));
+          break;
 
       }
     }
