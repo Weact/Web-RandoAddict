@@ -41,17 +41,17 @@
                     <div class="form-group col-12">
                         <legend>Type de terrain</legend><br>
                         <div class="list-group mb-3">
-                        <?php
-                        require_once(__DIR__ . '/../Include/programManager.php');
-                        $terrains = getAllTer();
-                        foreach ($terrains as $terrain) {
-                            echo '<label for="'.$terrain[0].'"><div class="form-check form-check-inline list-group-item list-group-item-action text-uppercase btn btn-primary">
+                            <?php
+                            require_once(__DIR__ . '/../Include/programManager.php');
+                            $terrains = getAllTer();
+                            foreach ($terrains as $terrain) {
+                                echo '<label for="' . $terrain[0] . '"><div class="form-check form-check-inline list-group-item list-group-item-action text-uppercase btn btn-primary">
                                 <input class="form-check-input fs-5 mb-3 btn btn-outline-primary border border-2 border-primary rounded" name="terrain[]" type="checkbox" id="' . $terrain[0] . '" value="' . $terrain[0] . '">
                                 <span class="form-check-label h6" for="' . $terrain[0] . '">' . $terrain[0] . "</span>
                             </div></label>";
-                        }
+                            }
 
-                        ?>
+                            ?>
                         </div>
 
                         <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#terrainModal">Ajouter un terrain</button>
