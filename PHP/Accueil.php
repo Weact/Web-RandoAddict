@@ -12,7 +12,6 @@
 * 21-03-2022    : Création page
 \*******************************************************************************/
 
-  session_start();
   include_once('Include/gestionFormBDD.php')
 ?>
 <!DOCTYPE html>

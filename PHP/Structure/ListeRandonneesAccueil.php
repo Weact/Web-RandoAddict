@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SESSION);
 ?>
 
 <section class="container-fluid w-100 h-100" id="randonneesection">

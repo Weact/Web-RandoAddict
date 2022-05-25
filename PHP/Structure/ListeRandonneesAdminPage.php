@@ -49,7 +49,8 @@ $progs = getProgOfUser($_SESSION['mailUtilisateur']);
                     <img src="<?php
                     $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
 
-                    $photolink = '/../../ASSETS/' . $photo['lienPhoto'];
+                    $photolink = '../ASSETS/' . $photo['lienPhoto'];
+
                     echo $photolink; ?>" class="img-fluid" alt="...">
                     <label for="guide" class="form-label h4">Date départ</label>
                     <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
@@ -93,7 +94,7 @@ $progs = getProgOfUser($_SESSION['mailUtilisateur']);
                         <img src="<?php
                         $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
 
-                        $photolink = '/../../ASSETS/' . $photo['lienPhoto'];
+                        $photolink = '../ASSETS/' . $photo['lienPhoto'];
                         echo $photolink; ?>" class="img-fluid" alt="...">
                         <label for="guide" class="form-label h4">Date départ</label>
                         <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
