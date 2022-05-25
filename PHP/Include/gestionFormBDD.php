@@ -131,7 +131,11 @@
           'sNom_Image' => $nomImage
           );
 
-          makeNewExcursion($donnees, $_POST['terrain']);
+          $ter = "";
+          if(isset($_POST['terrain'])){
+            $_POST['terrain'];
+          }
+          makeNewExcursion($donnees, $ter);
       }
       if(isset($_POST["sLabel_Prog"]))
         {
@@ -150,7 +154,11 @@
 
           $new_item = new Programme();
           $new_item->hydrate($donnees);
-          $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
+          $mat = [];
+          if(isset($_POST['materiel'])){
+            $mat = $_POST['materiel'];
+          }
+          $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $mat);
 
         }
 
@@ -158,6 +166,9 @@
         if(isset($_POST["disconnect"])){
           connectUser("");
 
+        }
+        if(isset($_POST["mailMarcheurCheck"])){
+          $_SESSION['checkMailUtilisateur'] = $_POST["mailMarcheurCheck"];
         }
 
         if(isset($_POST["deleteProgId"])){

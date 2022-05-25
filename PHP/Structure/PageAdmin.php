@@ -128,29 +128,6 @@
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                     </div>
 
-                    <legend for="selection_rando">Type de programme</legend><br>
-
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                        <label class="form-check-label h6" for="ck1">Senior</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-                        <label class="form-check-label h6" for="ck2">Junior</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-                        <label class="form-check-label h6" for="ck3">Majeur</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                        <label class="form-check-label h6" for="ck4">Nature</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                        <label class="form-check-label h6" for="ck5">Histoire</label>
-                    </div>
-
                     <legend for="startDate">Date de départ</legend>
                     <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required/>
 
@@ -337,18 +314,26 @@
 
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
+              <?php $users = getAllUsers();
+              foreach($users as $user){
+
+                ?>
                 <div class="card">
                     <label for="guide" class="form-label h6">Nom</label>
-                    <div class="card-header h5">Nom placeholder</div>
+                    <div class="card-header h5"><?php echo $user['pseudoMarcheur'];?></div>
                     <label for="guide" class="form-label h6">Statut</label>
-                    <div class="card-body h5">Randonneur / guide</div>
+                    <div class="card-body h5"><?php echo $user['roleMarcheur'];?></div>
                     <label for="guide" class="form-label h6">Mail</label>
-                    <div class="card-body h5">Mail placeholder</div>
+                    <div class="card-body h5"><?php echo $user['mailMarcheur'];?></div>
                     <label for="guide" class="form-label h6">Téléphone</label>
-                    <div class="card-body h5">Tel placeholder</div>
+                    <div class="card-body h5"><?php echo $user['telMarcheur'];?></div>
 
-                    <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+                      <input type="button" value="Randonnées" onclick="goToPost('Structure/ListeRandonneesAdminPage.php', 'checkMailMarcheur', '<?php echo $user['mailMarcheur'];?>')" class="btn btn-success w-100 mt-auto">
+
+
                 </div>
+                <?php
+              }?>
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------------------------->

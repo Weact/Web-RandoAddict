@@ -75,7 +75,9 @@ class ManagerExcursion extends Manager
 
       // Creation of a row in Escale & Necessaire
       $last_id = $this->getdb()->lastInsertId();
-      $this->autoInsertTraversee($ids, $last_id);
+      if($ids != ""){
+        $this->autoInsertTraversee($ids, $last_id);
+      }
 
       // Return success
       $result['success'] = true;

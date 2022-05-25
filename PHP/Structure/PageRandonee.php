@@ -14,7 +14,7 @@
 \*******************************************************************************/
 session_start();
 require_once(__DIR__ . '/../Include/programManager.php');
-$program = getProgramById($_POST['idProg']);
+$program = getProgramById($_POST['value']);
 ?>
 
 

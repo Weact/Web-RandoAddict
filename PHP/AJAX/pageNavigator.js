@@ -27,24 +27,14 @@ function goTo(page) {
     });
 };
 
-function goToPost(page, id) {
-    console.log("Go to " + page);
+function goToPost(page, keyId, value) {
+    console.log("Go to " + page + "key"+ keyId + value);
     $.post(page,{
-          idProg: id
+          key: keyId,
+          value: value
         },
         function(data, status){
             $("#main").html(data);
         }
     );
-};
-
-function setIdProg(id) {
-  $.post("ajaxmarchestp.php",
-  {
-    idProg: id
-  },
-  function(data, status){
-    console.log("Data: " + data + "\nStatus: " + status);
-  });
-
 };

@@ -210,7 +210,7 @@
     }
     function deleteProgId($idProg){
         $conn = connect_bd();
-        $mng = new ManagerProgramme($conn);
+        $mng = new ManagerProgramme ($conn);
 
         $msg = $mng->deleteProgrammeById($idProg)['message'];
 

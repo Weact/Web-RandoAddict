@@ -119,7 +119,9 @@ class ManagerProgramme extends Manager
       // Creation of a row in Escale & Necessaire
       $last_id = $this->getdb()->lastInsertId();
       $this->autoInsertEscale($ids, $last_id);
-      $this->autoInsertNecessaire($labels, $last_id);
+      if($labels != []){
+        $this->autoInsertNecessaire($labels, $last_id);
+      }
 
       // Return success
       $result['success'] = true;

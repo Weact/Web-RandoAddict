@@ -1,10 +1,19 @@
 <?php session_start();
 require_once(__DIR__ . '/../Include/programManager.php');
-$progs = getProgOfUser($_SESSION['mailUtilisateur']);
+
+if(isset($_POST["key"])){
+  if($_POST["key"] == "checkMailMarcheur"){
+    $_SESSION['checkMailUtilisateur'] = $_POST["value"];
+  }
+}
+
+$progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
+
 ?>
 <div class="container bg-light p-3  text-dark">
-    <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir</h2>
-
+    <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir de <?php echo $_SESSION['checkMailUtilisateur'];?></h2>
+<?php
+$_SESSION['checkMailUtilisateur'] = $_SESSION['mailUtilisateur'];?>
     <!---------------------------------------------------------------------------------------------------------------------------------------------->
     <!---Onglets------------>
     <div class="m-4">
@@ -59,7 +68,7 @@ $progs = getProgOfUser($_SESSION['mailUtilisateur']);
                     <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
 
                     <div class="inline center">
-                        <button class="btn btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme'];?>)" type="edit">Consulter</button>
+                        <button class="btn btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php','idProg', <?php echo $prog['idProgramme'];?>)" type="edit">Consulter</button>
                     </div>
                 </div>
 
@@ -103,8 +112,8 @@ $progs = getProgOfUser($_SESSION['mailUtilisateur']);
                         <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
 
                         <div class="inline center">
-                            <button class="btn  btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme'];?>)" type="edit">Consulter</button>
-                        </div>
+                          <button class="btn btn-outline-success mb-1" onclick='goToPost("Structure/PageRandonee.php", "<?php echo 'idProg",'.$prog['idProgramme'];?>)' type="edit">Consulter</button>
+                    </div>
 
                         <!--Modal formulaire de mofification-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
