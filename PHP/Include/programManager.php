@@ -16,6 +16,7 @@ require_once(__DIR__ . "/../DBOperation/Managers/ManagerProgramme.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerExcursion.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerTerrain.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerPhoto.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerParticipation.php");
 $conn = connect_bd();
 
 function makeNewProgram($donnees)
@@ -47,6 +48,31 @@ function makeNewMat($donnees)
   $new_item = new Materiel();
   $new_item->hydrate($donnees);
   $result = $mng->insertMateriel($new_item);
+}
+
+function getMatsOfProg($idProg)
+{
+  $conn = connect_bd();
+  $mng = new ManagerNecessaire($conn);
+
+  $users = $mng->selectNecessaireById($idProg)['stmt'];
+
+  return $users;
+}
+
+function getProgOfUser($userId)
+{
+  $conn = connect_bd();
+  $mng = new ManagerParticipation($conn);
+
+  $parts = $mng->selectPartcipationByUserId($userId)['stmt'];
+  $progs = [];
+
+  foreach ($parts as $part) {
+    array_push($progs, getProgramById($part['idProgramme']));
+  }
+
+  return $progs;
 }
 
 function getAllExc()
@@ -90,6 +116,17 @@ function getAllTer()
   return $users;
 }
 
+function makeNewPhoto($donnees)
+{
+  $conn = connect_bd();
+
+  //var_dump($donnees_photo);
+  $mng_photo = new ManagerPhoto($conn);
+  $new_photo = new Photo();
+  $new_photo->hydrate($donnees);
+  $result = $mng_photo->insertPhoto($new_photo);
+}
+
 function makeNewExcursion($donnees, $terrains)
 {
   $conn = connect_bd();
@@ -101,18 +138,14 @@ function makeNewExcursion($donnees, $terrains)
 
   $new_item = $result['newExcursionId'];
 
-  $CONNARDDEROMAIN = $donnees['sNom_Image']; //C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
+  $photo_lien = $donnees['sNom_Image'];
   $donnees_photo = array(
-    'sLien_Photo' => $CONNARDDEROMAIN,
+    'sLien_Photo' => $photo_lien,
     'sLabel_Photo' => "LabelPhoto",
     'nId_Excursion' => $new_item
   );
 
-  //var_dump($donnees_photo);
-  $mng_photo = new ManagerPhoto($conn);
-  $new_photo = new Photo();
-  $new_photo->hydrate($donnees_photo);
-  $result = $mng_photo->insertPhoto($new_photo);
+  makeNewPhoto($donnees_photo);
 }
 
 function getAllPrograms()
@@ -120,28 +153,18 @@ function getAllPrograms()
   $conn = connect_bd();
   $mng = new ManagerProgramme($conn);
 
-  $progs = $mng->selectProgrammes()['stmt'];
+  $users = $mng->selectProgrammes()['stmt'];
 
-  return $progs;
+  return $users;
 }
-
-function getAllExcursionsFromProgram($pgrm){
-  $conn = connect_bd();
-
-  $mng_excur = new ManagerExcursion($conn);
-  $excurs = $mng_excur->selectExcursionsByProgrammeId($pgrm['idProgramme'])['stmt'];
-
-  return $excurs;
-}
-
-function getProgramsByName($prog_name)
+function getProgramById($id)
 {
   $conn = connect_bd();
   $mng = new ManagerProgramme($conn);
 
-  $progs = $mng->selectProgrammesByLabel(strtolower($prog_name))['stmt'];
+  $users = $mng->selectProgrammeById($id)['stmt'];
 
-  return $progs;
+  return $users;
 }
 
 function getAllPhotos()
@@ -165,6 +188,26 @@ function getPhotoOfExcursion($excursionId)
   return $photos[0];
 }
 
+function getAllExcursionsFromProgram($pgrm)
+{
+  $conn = connect_bd();
+
+  $mng_excur = new ManagerExcursion($conn);
+  $excurs = $mng_excur->selectExcursionsByProgrammeId($pgrm['idProgramme'])['stmt'];
+
+  return $excurs;
+}
+
+function getProgramsByName($prog_name)
+{
+  $conn = connect_bd();
+  $mng = new ManagerProgramme($conn);
+
+  $progs = $mng->selectProgrammesByLabel(strtolower($prog_name))['stmt'];
+
+  return $progs;
+}
+
 function getExcsOfProg($prog)
 {
   $conn = connect_bd();
@@ -172,24 +215,54 @@ function getExcsOfProg($prog)
   $mng3 = new ManagerEscale($conn);
 
   $escales = $mng3->selectEscaleByIdProg($prog['idProgramme'])['stmt'];
-  $excursions = $mng2->selectExcursionById($escales['idExcursion'])['stmt'];
+  $excursions = [];
+  foreach ($escales as $escale) {
+    array_push($excursions, $mng2->selectExcursionById($escale['idExcursion'])['stmt']);
+  }
   return $excursions;
 }
 
-function getMatsOfProg($idProg){
+function getPriceOfProg($prog)
+{
   $conn = connect_bd();
-  $mng = new ManagerNecessaire($conn);
+  $excs = getExcsOfProg($prog);
 
-  $mats = $mng->selectNecessaireById($idProg)['stmt'];
+  $price = (float)0.0;
+  foreach ($excs as $exc) {
+    $price += (float)$exc['prixExcursion'];
+  }
 
-  return $mats;
+  return $price;
 }
 
-function getProgramById($id) {
+function participateProg($idUser, $roleUser, $idProg)
+{
+  $conn = connect_bd();
+
+  $mng = new ManagerParticipation($conn);
+  $new_item = new Participation();
+  $new_item->setnId_Prog($idProg);
+  $new_item->setsMail_Marcheur($idUser);
+  $new_item->setsRole_Marcheur($roleUser);
+
+  $result = $mng->insertParticipation($new_item);
+}
+function getParticipantsProg($idProg)
+{
+  $conn = connect_bd();
+  $mng = new ManagerParticipation($conn);
+
+  $users = $mng->selectPartcipationById($idProg)['stmt'];
+
+  return $users;
+}
+
+function deleteProgId($idProg)
+{
   $conn = connect_bd();
   $mng = new ManagerProgramme($conn);
 
-  $program = $mng->selectProgrammeById($id)['stmt'];
+  $msg = $mng->deleteProgrammeById($idProg)['message'];
 
-  return $program;
+  return $msg;
 }

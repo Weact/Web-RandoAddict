@@ -59,6 +59,7 @@ function connectUser($mail)
   $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
 
   $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
+  $_SESSION['mailUtilisateur'] = $mail;
   $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
 }
 

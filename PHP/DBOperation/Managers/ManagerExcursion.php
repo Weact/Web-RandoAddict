@@ -164,7 +164,7 @@ class ManagerExcursion extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt->fetchAll();
+      $result['stmt'] = $stmt->fetchAll()[0];
       return($result);
 
 		} catch(PDOException $error) {

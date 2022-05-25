@@ -17,7 +17,8 @@ function goToOnClick(btnArray, page) {
       goTo(page)
     });
   }
-}
+};
+
 
 function goSearchRandonnee(btn, input, page){
   btn.addEventListener("click", ()=>{
@@ -30,7 +31,7 @@ function goSearchRandonnee(btn, input, page){
       e.preventDefault();
     }
   }
-}
+};
 
 function goTo(page) {
     console.log("Go to " + page);
@@ -39,7 +40,7 @@ function goTo(page) {
             $("#main").html(result);
         }
     });
-}
+};
 
 function goToPost(page, id) {
   console.log("Go to " + page);

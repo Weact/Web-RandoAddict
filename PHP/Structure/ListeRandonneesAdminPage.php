@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start();
+require_once(__DIR__ . '/../Include/programManager.php');
+$progs = getProgOfUser($_SESSION['mailUtilisateur']);
+?>
 <div class="container bg-light p-3  text-dark">
     <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir</h2>
 
@@ -20,51 +23,89 @@
         <!---------------------------------------------------------------------------------------------------------------------------------------------->
         <!---Contenus des onglets------------>
         <div class="tab-content">
-            <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="rando_effectuee">
-                <div class="card">
+          <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="rando_effectuee">
+
+          <?php foreach($progs as $prog){
+            $time = $prog['dateArriveeProgramme'];
+            $hour = substr($time, 11, 2);
+            $min = substr($time, 14, 2);
+            $sec = substr($time, 17, 2);
+            $year = substr($time, 0, 4);
+            $month = substr($time, 5, 2);
+            $day = substr($time, 8, 2);
+            if(mktime($hour, $min, $sec, $month, $day, $year) > time())
+            {
+              continue;
+            }?>
+            <div class="card">
                     <div class="inline">
                         <label for="guide" class="form-label h4">Randonnée</label>
-                        <div class="card-body h5">Randonnée placeholder</div>
+                        <div class="card-body h5"><?php echo $prog['labelProgramme']; ?></div>
                         <label for="guide" class="form-label h4">Difficulté</label>
                         <div class="card-body ">
-                            <label class="bg-success text-centered">0</label>
+                            <label class="bg-success text-centered"><?php echo $prog['difficulteProgramme']; ?></label>
                         </div>
                     </div>
-                    <img src="" class="img-fluid" alt="...">
+                    <img src="<?php
+                    $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
+
+                    $photolink = '../ASSETS/' . $photo['lienPhoto'];
+
+                    echo $photolink; ?>" class="img-fluid" alt="...">
                     <label for="guide" class="form-label h4">Date départ</label>
-                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
                     <label for="guide" class="form-label h4">Date arrivée</label>
-                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateArriveeProgramme'], 0, 10); ?>" />
                     <label for="guide" class="form-label h4">Description</label>
-                    <div class="card-body h5">Description placeholder</div>
+                    <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
 
                     <div class="inline center">
-                        <button class="btn  btn-outline-success mb-1" type="edit">Consulter</button>
+                        <button class="btn btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme'];?>)" type="edit">Consulter</button>
                     </div>
                 </div>
-            </div>
+
+            <?php
+          }?>
+
+          </div>
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="tab-pane fade bg-white rounded p-2 col-6" id="rando_a_venir">
+              <?php foreach($progs as $prog){
+                $time = $prog['dateArriveeProgramme'];
+                $hour = substr($time, 11, 2);
+                $min = substr($time, 14, 2);
+                $sec = substr($time, 17, 2);
+                $year = substr($time, 0, 4);
+                $month = substr($time, 5, 2);
+                $day = substr($time, 8, 2);
+                if(mktime($hour, $min, $sec, $month, $day, $year) < time())
+                {
+                  continue;
+                }?>
                 <div class="card">
-                    <div class="inline">
-                        <label for="guide" class="form-label h4">Randonnée</label>
-                        <div class="card-body h5">Randonnée placeholder</div>
-                        <label for="guide" class="form-label h4">Difficulté</label>
-                        <div class="card-body ">
-                            <label class="bg-success text-centered">0</label>
+                        <div class="inline">
+                            <label for="guide" class="form-label h4">Randonnée</label>
+                            <div class="card-body h5"><?php echo $prog['labelProgramme']; ?></div>
+                            <label for="guide" class="form-label h4">Difficulté</label>
+                            <div class="card-body ">
+                                <label class="bg-success text-centered"><?php echo $prog['difficulteProgramme']; ?></label>
+                            </div>
                         </div>
-                    </div>
-                    <img src="" class="img-fluid" alt="...">
-                    <label for="guide" class="form-label h4">Date départ</label>
-                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
-                    <label for="guide" class="form-label h4">Date arrivée</label>
-                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
-                    <label for="guide" class="form-label h4">Description</label>
-                    <div class="card-body h5">Description placeholder</div>
+                        <img src="<?php
+                        $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
 
-                    <div class="inline center">
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
-                        <button class="btn  btn-outline-danger mb-1" type="edit">Supprimer</button>
+                        $photolink = '../ASSETS/' . $photo['lienPhoto'];
+                        echo $photolink; ?>" class="img-fluid" alt="...">
+                        <label for="guide" class="form-label h4">Date départ</label>
+                        <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
+                        <label for="guide" class="form-label h4">Date arrivée</label>
+                        <input id="endDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateArriveeProgramme'], 0, 10); ?>" />
+                        <label for="guide" class="form-label h4">Description</label>
+                        <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
+
+                        <div class="inline center">
+                            <button class="btn  btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme'];?>)" type="edit">Consulter</button>
+                        </div>
 
                         <!--Modal formulaire de mofification-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -194,7 +235,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
+              <?php
+            } ?>
             </div>
         </div>
     </div>

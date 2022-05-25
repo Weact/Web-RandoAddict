@@ -29,12 +29,24 @@ $photoWidth = "200";
 <section class="py-5 text-center container">
     <div class="row py-3 shadow-lg">
         <div class="col mx-auto bg-light">
-            <h1 class="fw-bolder display-3 text-dark shadow-lg p-3 my-4 text-uppercase rounded rounded-5">
+            <h1 class="d-flex justify-content-around align-items-stretch fw-bolder display-3 text-dark shadow-lg p-3 my-4 text-uppercase rounded rounded-5">
 
                 <?php
                 echo $program['labelProgramme'];
                 ?>
-
+                <?php
+                if (isset($_SESSION["typeUtilisateur"])) {
+                    if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
+                ?>
+                        <form id='deleteProgForm' name='deleteProgForm' class="form" method="POST" action="#">
+                            <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;" type="submit" name="deleteProgID" value="<?php echo $program['idProgramme'] ?>">
+                                <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                <?php
+                    }
+                }
+                ?>
             </h1>
             <p class="shadow-sm lead fs-4 text-dark shadow-lg py-3 font-monospace">
 
@@ -48,13 +60,32 @@ $photoWidth = "200";
                 if (isset($_SESSION['typeUtilisateur'])) {
                     if (strtolower($_SESSION['typeUtilisateur']) == "guide" || strtolower($_SESSION['typeUtilisateur']) == "admin") {
                 ?>
-                        <a href="#" class="btn btn-success my-2 fs-3 fw-bold">Rejoindre en tant que Guide</a>
-                <?php
+            <form id="join_prog" name="join_prog" class="form" method="POST" action="#">
+                <input hidden name="idMarcheurJoin" value="<?php echo $_SESSION['mailUtilisateur']; ?> "></input>
+                <input hidden name="roleMarcheurJoin" value="Guide"></input>
+                <input hidden name="idProgJoin" value="<?php echo $program['idProgramme']; ?>"></input>
+                <button type="submit" class="btn btn-success my-2 fs-3 fw-bold">Rejoindre en tant que Guide</button>
+            </form>
+    <?php
                     }
                 }
-                ?>
-                <a href="#" class="btn btn-primary my-2 fs-3 fw-bold">Rejoindre en tant que Marcheur</a>
-            </p>
+    ?>
+    <?php
+    if (isset($_SESSION['typeUtilisateur'])) {
+        if (strtolower($_SESSION['typeUtilisateur']) != "anon" && strtolower($_SESSION['typeUtilisateur'] != '')) {
+    ?>
+            <form id="join_prog" name="join_prog" class="form" method="POST" action="#">
+                <input hidden name="idMarcheurJoin" value="<?php echo $_SESSION['mailUtilisateur']; ?> "></input>
+                <input hidden name="roleMarcheurJoin" value="Marcheur"></input>
+                <input hidden name="idProgJoin" value="<?php echo $program['idProgramme']; ?>"></input>
+                <button type="submit" class="btn btn-primary my-2 fs-3 fw-bold">Rejoindre en tant que Marcheur</button>
+            </form>
+    <?php
+        }
+    }
+    ?>
+
+    </p>
         </div>
     </div>
 </section>
