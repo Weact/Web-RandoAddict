@@ -14,7 +14,7 @@
     require_once(__DIR__."/../DBOperation/Managers/ManagerProgramme.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerExcursion.php");
     require_once(__DIR__."/../DBOperation/Managers/ManagerPhoto.php");
-    require_once(__DIR__."/../DBOperation/Managers/ManagerEscale.php");
+    require_once(__DIR__."/../DBOperation/Managers/ManagerMateriel.php");
 
     if (isset($_POST['action'])) {
       switch ($_POST['action']) {
@@ -35,6 +35,20 @@
           $mng_Exc = new ManagerExcursion($conn);
 
           echo json_encode($mng_Exc->selectExcursionsByProgrammeId($_POST["idProg"]));
+          break;
+
+        case 'edit3':
+          $conn = connect_bd();
+          $mng_Mat = new ManagerMateriel($conn);
+
+          echo json_encode($mng_Mat->selectMaterielByProgrammeId($_POST["idProg"]));
+          break;
+
+        case 'update':
+          $conn = connect_bd();
+          $mng_Prog = new ManagerProgramme($conn);
+
+          echo json_encode($mng_Prog->updateProgrammeById($_POST["idProg"]));
           break;
 
       }

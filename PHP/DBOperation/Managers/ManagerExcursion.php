@@ -85,9 +85,7 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-      exit();
-
+      
     }
   }
 
@@ -116,8 +114,6 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
@@ -154,8 +150,6 @@ class ManagerExcursion extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
 		}
   }
 
@@ -188,8 +182,6 @@ class ManagerExcursion extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
 		}
   }
 
@@ -215,8 +207,6 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
@@ -248,8 +238,6 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
@@ -283,8 +271,6 @@ class ManagerExcursion extends Manager
       $result['message'] = $error->getMessage();
       return($result);
 
-			exit();
-
     }
   }
 
@@ -312,8 +298,6 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-
-			exit();
 
     }
   }
