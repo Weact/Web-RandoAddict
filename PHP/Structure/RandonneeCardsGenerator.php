@@ -97,11 +97,11 @@
                                 <label class="form-check-label h6" for="' . $materiel[0] . '">' . $materiel[0] . "</label>
                             </div>";
                         }
-
                         ?>
-
                         <br>
                     </div>
+                    <input id="typeForm" name="editForm" type="hidden" value="" />
+
                     <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#materielModal">Ajouter un materiel</button>
 
                     <legend for="selection_rando">Description</legend>
@@ -225,6 +225,8 @@ foreach ($programs as $program) {
                                     alert("erreur");
                                 }
                             });
+
+                            document.getElementById("typeForm").value = id;
                             
                         }else{
                             alert("erreur");

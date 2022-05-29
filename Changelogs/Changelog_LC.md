@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.6] - 2022-05-29
+### Added
+- Modification dans la base de donnée du programme lors de l'envoie du formulaire en mode 'éditer'.
+
 ## [0.1.5] - 2022-05-26
 ### Added
 - Affichage du materiel prévue pour la randonnée lors de l'appuie du bouton 'edit'.
