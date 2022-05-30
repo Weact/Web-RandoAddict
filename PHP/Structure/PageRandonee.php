@@ -108,21 +108,16 @@ $photoWidth = "200";
                                 <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
+                                    <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
                                         <?php
                                         if (isset($_SESSION["typeUtilisateur"])) {
                                             if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
                                         ?>
 
-                                                <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
+                                                
                                                 <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button>
 
                                             <?php
-                                            } else {
-                                            ?>
-
-                                                <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
-
-                                        <?php
                                             }
                                         }
                                         ?>
