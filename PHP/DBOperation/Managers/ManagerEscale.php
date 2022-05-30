@@ -116,13 +116,10 @@ class ManagerEscale extends Manager
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-<<<<<<< HEAD
       // $e = new Escale;
       // $tab = $this->arrayConstructor($stmt);
       // $e->hydrate($tab);
 
-=======
->>>>>>> LucasD
       // Return success
       $result['success'] = true;
       $result['error'] = false;

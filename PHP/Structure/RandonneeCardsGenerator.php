@@ -162,7 +162,8 @@ foreach ($programs as $program) {
     }
     // var_dump($FirstPhoto);
 
-    echo '<div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase' . $program[0] . '">
+    ?>
+    <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase' . $program[0] . '">
         <div class="card text-dark fw-bold">
             <img src="<?php echo $photo ?>" width="<?php echo $photoWidth ?>" height="<?php echo $photoHeight ?>" alt="randonne image top" class="card-img-top">
             <div class="card-img-overlay d-flex flex-column align-items-center">
@@ -225,6 +226,7 @@ foreach ($programs as $program) {
             </div> <!-- 6 -->
         </div> <!-- 7 -->
     </div> <!-- 8 -->
+<?php
 
     if (isset($_SESSION) && $_SESSION['nomUtilisateur'] == 'admin') {
         // var_dump($_SESSION);
@@ -322,5 +324,6 @@ foreach ($programs as $program) {
     echo '</div>
         </div>
     </div>';
+  }
 }
 ?>

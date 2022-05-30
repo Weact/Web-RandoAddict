@@ -202,5 +202,6 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
         {
           connectUser("");
         }
-
+      }
+    }
 ?>

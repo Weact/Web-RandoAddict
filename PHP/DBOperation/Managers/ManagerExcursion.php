@@ -173,35 +173,6 @@ class ManagerExcursion extends Manager
 		}
   }
 
-  public function selectExcursionsByProgrammeId($id)
-  {
-    $req = "SELECT * FROM EXCURSION WHERE idExcursion IN(SELECT idExcursion FROM ESCALE WHERE IdProgramme = :ID)";
-
-    // Send the request to the database
-    try
-    {
-      $stmt = $this->getdb()->prepare($req);
-      $stmt->bindvalue(":ID", $id, PDO::PARAM_INT);
-      $stmt->execute();
-
-      // Return success
-      $result['success'] = true;
-      $result['error'] = false;
-      $result['message'] = "success";
-      $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
-    } catch (PDOException $error) {
-      // Return error
-      $result['success'] = false;
-      $result['error'] = true;
-      $result['message'] = $error->getMessage();
-      return($result);
-
-			exit();
-
-    }
-  }
 
   public function updateExcursionById(Excursion $e, $num)
   {

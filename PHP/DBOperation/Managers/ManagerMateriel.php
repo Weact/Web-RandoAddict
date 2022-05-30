@@ -101,37 +101,6 @@ class ManagerMateriel extends Manager
     }
   }
 
-  public function selectMaterielByProgrammeId($text)
-  // Goal : Select a material by a given name
-  // Entry : A text for the name
-  // Return : A material object
-  {
-    $req = "SELECT * FROM MATERIEL WHERE labelMateriel = :LABEL";
-
-    // Send the request to the database
-    try
-    {
-      $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-			$stmt->execute();
-
-      // Retour success
-      $result['success'] = true;
-      $result['error'] = false;
-      $result['message'] = "success";
-      $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
-    } catch (PDOException $error) {
-      // Retour error
-      $result['success'] = false;
-      $result['error'] = true;
-      $result['message'] = $error->getMessage();
-      return($result);
-
-    }
-  }
-
   public function updateMaterielByLabel($m, $text)
   // Goal : Update a material by a given name
   // Entry : A text for the name
@@ -208,7 +177,7 @@ class ManagerMateriel extends Manager
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
       return($result);
-      
+
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;

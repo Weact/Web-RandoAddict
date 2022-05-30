@@ -149,12 +149,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -214,13 +210,9 @@ class ManagerProgramme extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-<<<<<<< HEAD
       $result['stmt'] = $stmt->fetchAll();
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -275,12 +267,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -306,12 +294,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -339,12 +323,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -369,12 +349,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -399,12 +375,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -429,12 +401,8 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-<<<<<<< HEAD
       return($result);
 
-=======
-      return ($result);
->>>>>>> LucasD
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
