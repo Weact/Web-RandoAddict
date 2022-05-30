@@ -231,5 +231,33 @@ class ManagerPhoto extends Manager
     }
   }
 
+  public function selectPhotosByExcursionId($id)
+  {
+    $req = "SELECT * FROM PHOTO WHERE idExcursion = :ID";
+
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $id, PDO::PARAM_INT);
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt->fetchAll();
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+    }
+  }
+
 }
 ?>

@@ -1,21 +1,21 @@
 <?php
 /*******************************************************************************\
-* Fichier       : /PHP/Include/gestionFormBDD.php
-*
-* Description   : Fichier répertoriant les réceptions de formulaires et leur gestion.
-*
-* Créateur      : Romain Schlotter
+ * Fichier       : /PHP/Include/gestionFormBDD.php
+ *
+ * Description   : Fichier répertoriant les réceptions de formulaires et leur gestion.
+ *
+ * Créateur      : Romain Schlotter
 \*******************************************************************************/
 /*******************************************************************************\
-* 29-03-2022   : Création du fichier
+ * 29-03-2022   : Création du fichier
 \*******************************************************************************/
 
-    session_start();
+session_start();
 
-    require_once(__DIR__."/../DBOperation/PDO_Connect.php");
-    $conn = connect_bd();
-    require_once("userManager.php");
-    require_once("programManager.php");
+require_once(__DIR__ . "/../DBOperation/PDO_Connect.php");
+$conn = connect_bd();
+require_once("userManager.php");
+require_once("programManager.php");
 
     $_SESSION['message']="";
     $_SESSION['status']="";
@@ -43,17 +43,14 @@
           'sMdp_Marcheur' => $_POST['crea_sMdp_Marcheur'],
           'sRole_Marcheur' => 'Marcheur'
         );
-    
+
         if (isset($_POST['crea_sRole_Marcheur'])) {
           $donnees['sRole_Marcheur'] = $_POST['crea_sRole_Marcheur'];
         }
-    
-        if (strtolower($donnees['sPseudo_Marcheur']) == "admin") {
-          $donnees['sRole_Marcheur'] = "Admin";
-        }
+
         makeNewUser($donnees);
         redirectUser(); // does the exit();
-    
+
       } else { // ENTRER DANS CETTE CONDITION ELSE SIGNIFIE QU'UNE INSCRIPTION EST EFFECTUE PAR L'UTILISATEUR
         if (isset($_POST['sPseudo_Marcheur'])) {
           $donnees = array(
@@ -63,22 +60,18 @@
             'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
             'sRole_Marcheur' => 'Marcheur'
           );
-    
-          if ($donnees['sPseudo_Marcheur'] == "admin") {
-            $donnees['sRole_Marcheur'] = "Admin";
-          }
-    
+
           if (isset($_POST['sRole_Marcheur'])) {
             $donnees['sRole_Marcheur'] = $_POST['sRole_Marcheur'];
           }
-    
+
           makeNewUser($donnees);
           connectUser($_POST['sMail_Marcheur_Inscription']);
           redirectUser(); // does the exit();
         }
       }
     }
-      
+
       if(isset($_POST["update_role_marcheur"]))
       {
         $donnees = array(
@@ -174,6 +167,16 @@
           $new_item->hydrate($donnees);
           $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
 
+          //var_dump($donnees);
+          $new_item = new Programme();
+          $new_item->hydrate($donnees);
+
+          if (isset($_POST["editForm"])) {
+            echo $_POST["editForm"];
+            $mng->updateProgrammeById($new_item, $_POST["editForm"]);
+          } else {
+            $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
+          }
       }
 
 

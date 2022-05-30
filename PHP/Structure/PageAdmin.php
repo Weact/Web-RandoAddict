@@ -112,7 +112,7 @@
                         <legend for="selection">Description</legend>
                         <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
                         <br>
-                        
+
                         <!--Inclusion d'une image-->
                         <legend for="fileInput">Image de l'excursion</legend>
                         <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary"/>
@@ -377,27 +377,38 @@
             </div>
 
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="tab-pane fade bg-white rounded p-2 col-4" id="membres">
+            <div class="tab-pane fade bg-white rounded p-2 col-4 container" id="membres">
                 <?php
                     require_once(__DIR__ ."/../Include/userManager.php");
                     $users = getAllUsers();
-                    foreach($users as $user)
-                    {?>
-                        <div class="card">
+                    foreach($users as $user) {
+                        echo '<div class="card">
                             <label for="guide" class="form-label h6">Nom</label>
-                        <div class="card-header h5"><?=$user[1]?></div>
+                            <div class="card-header h5">'.$user[1].'</div>
                             <label for="guide" class="form-label h6">Statut</label>
-                        <div class="card-body h5"><?=$user[4]?></div>
+                            <div class="card-body h5">'.$user[4].'</div>
                             <label for="guide" class="form-label h6">Mail</label>
-                        <div class="card-body h5"><?=$user[0]?></div>
+                            <div class="card-body h5">'.$user[0].'</div>
                             <label for="guide" class="form-label h6">Téléphone</label>
-                        <div class="card-body h5"><?=$user[3]?></div>
+                            <div class="card-body h5">'.$user[2].'</div>
 
                             <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
                         </div>
-                    <?php
+                        ';
                     }
                 ?>
+                <!-- <div class="card">
+                    <label for="guide" class="form-label h6">Nom</label>
+                    <div class="card-header h5">Nom placeholder</div>
+                    <label for="guide" class="form-label h6">Statut</label>
+                    <div class="card-body h5">Randonneur / guide</div>
+                    <label for="guide" class="form-label h6">Mail</label>
+                    <div class="card-body h5">Mail placeholder</div>
+                    <label for="guide" class="form-label h6">Téléphone</label>
+                    <div class="card-body h5">Tel placeholder</div>
+
+                    <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
+                </div> -->
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------------------------->

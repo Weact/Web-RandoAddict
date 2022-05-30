@@ -1,6 +1,48 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.6] - 2022-05-29
+### Added
+- Modification dans la base de donnée du programme lors de l'envoie du formulaire en mode 'éditer'.
+
+## [0.1.5] - 2022-05-26
+### Added
+- Affichage du materiel prévue pour la randonnée lors de l'appuie du bouton 'edit'.
+
+### TO-DO
+- Update la base de donnée lors de l'envoie du formulaire à partir de l'édition de programme.
+
+## [0.1.4] - 2022-05-25
+### Added
+- Affichage du formulaire lorsque le bouton 'edit' est appuyé par un admin.
+- Préremplissage du formulaire à partir de la base de donnée [A TERMINER].
+
+## [0.1.3] - 2022-05-24
+### Added
+- Suppression des programmes lors de l'appuie du bouton 'supprimer'.
+- Affichage des boutons 'admin' seulement si l'utilisateur s'appelle 'admin'.
+
+### Changed
+- BDD : ajout des délétions en cascade.
+
+## [0.1.2] - 2022-05-23
+### Added
+- Affichage des images dans la liste des programmes de manière dynamique dans Accueil.php.
+
+### Changed
+- Correction d'un bug avec les Managers.
+
+### To-Be Fixed
+- Erreur lorsque l'index '0' n'existe pas dans la fonction 'getFirstPhotoByProgrammeId()';
+
+## [0.1.1] - 2022-05-23
+### Added
+- Affichage de la liste des programmes de manière dynamique dans Accueil.php.
+
+## [0.1.0] - 2022-05-23
+### Added
+- Affichage de la liste des membres de manière dynamique.
+
 ## [0.0.10] - 2022-03-30
 ### Added
 - Ajout de méthodes pour récupérer les Programmes passés ou à venir d'un Marcheur.

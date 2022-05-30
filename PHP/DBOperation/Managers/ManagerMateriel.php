@@ -195,5 +195,33 @@ class ManagerMateriel extends Manager
     }
   }
 
+  public function selectMaterielByProgrammeId($id)
+  {
+    $req = "SELECT * FROM MATERIEL WHERE labelMateriel IN(SELECT labelMateriel FROM NECESSAIRE WHERE IdProgramme = :ID)";
+
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindvalue(":ID", $id, PDO::PARAM_INT);
+      $stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt->fetchAll();
+      return($result);
+      
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+    }
+  }
+
 }
 ?>

@@ -140,7 +140,11 @@ class ManagerMarcheur extends Manager
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
 
+<<<<<<< HEAD
       //var_dump($stmt);
+=======
+      // var_dump($stmt);
+>>>>>>> LucC
       // Return success
       $result['success'] = true;
       $result['error'] = false;
