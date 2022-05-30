@@ -54,13 +54,25 @@ function redirectUser()
 // MUST USE REDIRECTUSER() AFTER CALLING THIS METHOD
 function connectUser($mail)
 {
-  $conn = connect_bd();
-  $mng = new ManagerMarcheur($conn);
-  $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
+  if ($mail=="")
+  {
+    $_SESSION['nomUtilisateur'] = "";
+    $_SESSION['mailUtilisateur'] = "";
+    $_SESSION['typeUtilisateur'] = "";
+  }
+  else
+  {
+    $conn = connect_bd();
+    $mng = new ManagerMarcheur($conn);
+    $current_marcheur = $mng->selectMarcheurByMail($mail)['marcheur'];
+  
+    $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
+    $_SESSION['mailUtilisateur'] = $mail;
+    $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
 
-  $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
-  $_SESSION['mailUtilisateur'] = $mail;
-  $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
+  }
+
+  var_dump($_SESSION);
 }
 
 function checkUserPw($mail, $pw)
