@@ -13,15 +13,16 @@
 *                 deleteTerrainByLabel($text)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
-require_once(__DIR__."/../Objects/TerrainObject.php");
+require_once(__DIR__."/../../DBOperation/Objects/TerrainObject.php");
 require_once("Manager.php");
 
 class ManagerTerrain extends Manager
 {
   private function arrayConstructor($stmt)
+  // Goal : It should return the array for the corresponding object
   {
     if($stmt->rowCount() > 0)
     {
@@ -49,8 +50,7 @@ class ManagerTerrain extends Manager
     $req = "INSERT INTO TERRAIN(labelTerrain, descTerrain) VALUES (:LABEL, :INFO)";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LABEL", $t->getsLabel_Terrain(), PDO::PARAM_STR);
       $stmt->bindValue(":INFO", $t->getsDesc_Terrain(), PDO::PARAM_STR);
@@ -85,7 +85,7 @@ class ManagerTerrain extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -122,7 +122,7 @@ class ManagerTerrain extends Manager
 			$t = new Terrain;
       $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
-      
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;

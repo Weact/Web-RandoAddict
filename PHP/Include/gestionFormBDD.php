@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************\
  * Fichier       : /PHP/Include/gestionFormBDD.php
  *
@@ -20,14 +21,31 @@ require_once("programManager.php");
     $_SESSION['message']="";
     $_SESSION['status']="";
 
-    //Vérification et initialisation des variables de session le cas échéant.
-    if (!isset($_SESSION['typeUtilisateur']))
-    {
-        $_SESSION['typeUtilisateur'] = "anon";
-    }
-    if (!isset($_SESSION['nomUtilisateur']))
-    {
-        $_SESSION['nomUtilisateur'] = "anon";
+//Vérification et initialisation des variables de session le cas échéant.
+if (!isset($_SESSION['typeUtilisateur'])) {
+  $_SESSION['typeUtilisateur'] = "anon";
+}
+if (!isset($_SESSION['nomUtilisateur'])) {
+  $_SESSION['nomUtilisateur'] = "anon";
+}
+
+//Gestion de toutes les réceptions de tous les formulaires formulaires.
+
+// GERE L'INSCRIPTION UTILISATEUR NORMAL ET INSCRIPTION UTILISATEUR PAR ADMIN
+if (isset($_POST["sMail_Marcheur_Inscription"])) {
+
+  // GERE L'INSCRIPTION UTILISATEUR PAR ADMIN
+  if (isset($_POST['crea_sPseudo_Marcheur'])) {
+    $donnees = $arrayName = array(
+      'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
+      'sPseudo_Marcheur' => $_POST['crea_sPseudo_Marcheur'],
+      'sTel_Marcheur' => $_POST['crea_sTel_Marcheur'],
+      'sMdp_Marcheur' => $_POST['crea_sMdp_Marcheur'],
+      'sRole_Marcheur' => 'Marcheur'
+    );
+
+    if (isset($_POST['crea_sRole_Marcheur'])) {
+      $donnees['sRole_Marcheur'] = $_POST['crea_sRole_Marcheur'];
     }
 
     //Gestion de toutes les réceptions de tous les formulaires formulaires.

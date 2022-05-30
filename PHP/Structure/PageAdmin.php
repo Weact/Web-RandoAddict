@@ -30,67 +30,31 @@
         <!---Contenus des onglets------------>
         <div class="tab-content text-dark m-5">
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
-                <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#" enctype="multipart/form-data">
-                  <legend for="selection_rando">Nom de la randonnée</legend>
-                  <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
-                    <div class="form-group">
+                <form id='creation_rando' name='creation_rando' class="form d-flex flex-wrap justify-content-center" method="POST" action="#" enctype="multipart/form-data">
+                    <legend>
+                        <label for="labelExcursion">
+                            Nom de la randonnée
+                        </label>
+                    </legend>
 
-                        <legend for="selection_rando">Type de terrain</legend><br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="ck6">
-                            <label class="form-check-label h6" for="ck6">Fitness</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="ck7">
-                            <label class="form-check-label h6" for="ck7">Restaurant</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
-                            <label class="form-check-label h6" for="c_ck1">Forêt</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
-                            <label class="form-check-label h6" for="c_ck2">Montagne</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
-                            <label class="form-check-label h6" for="c_ck3">Plaine</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
-                            <label class="form-check-label h6" for="c_ck4">Désert</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
-                            <label class="form-check-label h6" for="c_ck5">Glacier</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
-                            <label class="form-check-label h6" for="c_ck6">Vignes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
-                            <label class="form-check-label h6" for="c_ck7">Ruines</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
-                            <label class="form-check-label h6" for="c_ck8">Milieu urbain</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
-                            <label class="form-check-label h6" for="c_ck9">Jungle</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
-                            <label class="form-check-label h6" for="c_ck10">Tundra</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
-                            <label class="form-check-label h6" for="c_ck11">Profondeur océanique</label>
+                    <textarea name="labelExcursion" id="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
+                    <div class="form-group col-12">
+                        <legend>Type de terrain</legend><br>
+                        <div class="list-group mb-3">
+                            <?php
+                            require_once(__DIR__ . '/../Include/programManager.php');
+                            $terrains = getAllTer();
+                            foreach ($terrains as $terrain) {
+                                echo '<label for="' . $terrain[0] . '"><div class="form-check form-check-inline list-group-item list-group-item-action text-uppercase btn btn-primary">
+                                <input class="form-check-input fs-5 mb-3 btn btn-outline-primary border border-2 border-primary rounded" name="terrain[]" type="checkbox" id="' . $terrain[0] . '" value="' . $terrain[0] . '">
+                                <span class="form-check-label h6" for="' . $terrain[0] . '">' . $terrain[0] . "</span>
+                            </div></label>";
+                            }
+
+                            ?>
                         </div>
 
-                        <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
-                          data-bs-target="#terrainModal">Ajouter un terrain</button>
+                        <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#terrainModal">Ajouter un terrain</button>
 
                         <legend for="prix_pers">Prix par personne</legend>
                         <div class="def-number-input number-input safari_only">
@@ -99,28 +63,28 @@
                             <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                         </div>
 
-                        <legend for="selection">Départ</legend>
-                        <textarea name="departExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
+                        <legend><label for="departExcursion">Départ</label></legend>
+                        <textarea id="departExcursion" name="departExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
 
-                        <legend for="selection">Arrivée</legend>
-                        <textarea name="arriveeExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
+                        <legend><label for="arriveeExcursion">Arrivée</label></legend>
+                        <textarea id="arriveeExcursion" name="arriveeExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
 
                         <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
                             <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                         </div>
 
-                        <legend for="selection">Description</legend>
-                        <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
+                        <legend><label for="descExcursion">Description</label></legend>
+                        <textarea id="descExcursion" name="descExcursion" class="form-control" aria-label="Description"></textarea>
                         <br>
 
                         <!--Inclusion d'une image-->
-                        <legend for="fileInput">Image de l'excursion</legend>
-                        <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary"/>
+                        <legend><label for="fileInput">Image de l'excursion</label></legend>
+                        <input type="file" id="fileInput" name="image" accept="image/png, image/jpeg, image/jpg" required class="btn-outline-primary" />
                         <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
 
-                        <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
+                        <button class="btn fs-3 btn-outline-success mb-1" type="submit">Valider</button>
 
 
                     </div>
@@ -193,38 +157,37 @@
                     </div>
 
                     <legend for="startDate">Date de départ</legend>
-                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required/>
+                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required />
 
-                    <legend for="startDate">Heure de départ</legend>
+                    <legend for="sDepartHeure_Prog">Heure de départ</legend>
                     <div class="cs-form">
-                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required/>
+                        <input name="sDepartHeure_Prog" id="sDepartHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
 
                     <legend for="arriveDate">Date d'arriver</legend>
-                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required/>
+                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required />
 
-                    <legend for="arriveDate">Heure d'arrivée</legend>
+                    <legend for="sArriveHeure_Prog">Heure d'arrivée</legend>
                     <div class="cs-form">
-                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required/>
+                        <input name="sArriveHeure_Prog" id="sArriveHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
-                  <div>
-                    <legend for="selection">Matériel</legend>
-                    <?php
-                    require_once(__DIR__ . '/../Include/programManager.php');
-                    $materiels = getAllMat();
-                    foreach ($materiels as $materiel) {
-                        echo '<div class="form-check form-check-inline">
-                            <input class="form-check-input" name="materiel[]" type="checkbox" id="'. $materiel[0] . '" value="'. $materiel[0] . '">
-                            <label class="form-check-label h6" for="'. $materiel[0] . '">' . $materiel[0] . "</label>
+                    <div>
+                        <legend for="">Matériel</legend>
+                        <?php
+                        require_once(__DIR__ . '/../Include/programManager.php');
+                        $materiels = getAllMat();
+                        foreach ($materiels as $materiel) {
+                            echo '<div class="form-check form-check-inline">
+                            <input class="form-check-input" name="materiel[]" type="checkbox" id="' . $materiel[0] . '" value="' . $materiel[0] . '">
+                            <label class="form-check-label h6" for="' . $materiel[0] . '">' . $materiel[0] . "</label>
                         </div>";
-                    }
+                        }
 
-                    ?>
+                        ?>
 
-                    <br>
-                  </div>
-                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
-                      data-bs-target="#materielModal">Ajouter un materiel</button>
+                        <br>
+                    </div>
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#materielModal">Ajouter un materiel</button>
 
                     <legend for="selection_rando">Description</legend>
                     <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes" required></textarea>
@@ -242,7 +205,7 @@
                             <div class="col">
                                 <div class="mb-3 mt-3 form-floating">
                                     <input id="sMail_Marcheur_Inscription" name="sMail_Marcheur_Inscription" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" placeholder="Entrer email">
-                                    <label for="email" class="form-label">Email</label>
+                                    <label for="sMail_Marcheur_Inscription" class="form-label">Email</label>
                                 </div>
                             </div>
                         </div>
@@ -251,14 +214,14 @@
                                 <!--Pseudo-->
                                 <div class="mb-3 form-floating">
                                     <input id="crea_sPseudo_Marcheur" name="crea_sPseudo_Marcheur" type="name" class="form-control" placeholder="Entrer pseudonyme" name="name">
-                                    <label for="name" class="form-label">Pseudonyme</label>
+                                    <label for="crea_sPseudo_Marcheur" class="form-label">Pseudonyme</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Phone-->
                                 <div class="mb-3 form-floating">
                                     <input id="crea_sTel_Marcheur" name="crea_sTel_Marcheur" required placeholder="0123456789" class="form-control" title="Format : 0123456789" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
-                                    <label for="phone" class="form-label">Numéro de téléphone</label>
+                                    <label for="crea_sTel_Marcheur" class="form-label">Numéro de téléphone</label>
                                 </div>
                             </div>
                         </div>
@@ -267,7 +230,7 @@
                                 <!--Password-->
                                 <div class="mb-3 form-floating">
                                     <input id="crea_sMdp_Marcheur" name="crea_sMdp_Marcheur" type="password" class="form-control" placeholder="Entrer mot de passe" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
-                                    <label for="password" class="form-label">Mot de passe</label>
+                                    <label for="crea_sMdp_Marcheur" class="form-label">Mot de passe</label>
                                 </div>
                             </div>
                             <div class="col">
@@ -278,7 +241,7 @@
                                         <option>Guide</option>
                                         <option>Admin</option>
                                     </select>
-                                    <label for="guide" class="form-label h6">Création en tant que :</label>
+                                    <label for="crea_sRole_Marcheur" class="form-label h6">Création en tant que :</label>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-outline-success mb-1 h6">Créer</button>
@@ -331,7 +294,7 @@
                                             let userRole = roles.options[roles.selectedIndex].value;
                                             let userMail = mails.options[mails.selectedIndex].innerHTML;
 
-                                            console.log(userRole + userMail);
+                                            console.log(userRole + " " + userMail);
 
                                             var xmlhttp = new XMLHttpRequest();
                                             let response;
@@ -353,7 +316,7 @@
                                     </script>
                                 </select>
 
-                                <label for="guide" class="form-label h6">Changer en tant que :</label>
+                                <label for="roles_choice" class="form-label h6">Changer en tant que :</label>
                             </div>
                         </div>
 
@@ -377,82 +340,72 @@
             </div>
 
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="tab-pane fade bg-white rounded p-2 col-4 container" id="membres">
-                <?php
-                    require_once(__DIR__ ."/../Include/userManager.php");
+            <div class="tab-pane fade bg-white rounded" id="membres">
+                <div class="row p-1 justify-content-around">
+                    <?php
+                    require_once(__DIR__ . "/../Include/userManager.php");
                     $users = getAllUsers();
-                    foreach($users as $user) {
-                        echo '<div class="card">
-                            <label for="guide" class="form-label h6">Nom</label>
-                            <div class="card-header h5">'.$user[1].'</div>
-                            <label for="guide" class="form-label h6">Statut</label>
-                            <div class="card-body h5">'.$user[4].'</div>
-                            <label for="guide" class="form-label h6">Mail</label>
-                            <div class="card-body h5">'.$user[0].'</div>
-                            <label for="guide" class="form-label h6">Téléphone</label>
-                            <div class="card-body h5">'.$user[2].'</div>
 
-                            <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
-                        </div>
+                    foreach ($users as $user) {
+                        echo '
+                            <div class="card col-sm-12 col-md-5 mt-3 mb-3 border border-2 border-primary">
+                                <label class="form-label h3 text-success">Nom</label>
+                                <div class="card-header h5 text-primary">' . $user[1] . '</div>
+                                <label class="form-label h3 text-success">Mail</label>
+                                <div class="card-body h5 text-primary">' . $user[0] . '</div>
+                                <label class="form-label h3 text-success">Téléphone</label>
+                                <div class="card-body h3 text-primary">' . $user[2] . '</div>
+                                <label class="form-label h3 text-success">Statut</label>
+                                <div class="card-body h5 text-primary">' . $user[4] . '</div>
+
+                                <button class="btn btn-outline-success mb-1 fs-3" type="submit">Randonnées</button>
+                            </div>
                         ';
                     }
-                ?>
-                <!-- <div class="card">
-                    <label for="guide" class="form-label h6">Nom</label>
-                    <div class="card-header h5">Nom placeholder</div>
-                    <label for="guide" class="form-label h6">Statut</label>
-                    <div class="card-body h5">Randonneur / guide</div>
-                    <label for="guide" class="form-label h6">Mail</label>
-                    <div class="card-body h5">Mail placeholder</div>
-                    <label for="guide" class="form-label h6">Téléphone</label>
-                    <div class="card-body h5">Tel placeholder</div>
-
-                    <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
-                </div> -->
+                    ?>
+                </div>
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
-                  </div>
-                  <form id='creation_materiel' name='creation_materiel' class="form" method="POST" action="#">
-                  <div class="modal-body">
-                    <label for="email" class="form-label h6">Nom du nouveau materiel</label>
-                    <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
-                  </form>
-                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
+                        </div>
+                        <form id='creation_material' name='creation_material' class="form" method="POST" action="#">
+                            <div class="modal-body">
+                                <label for="Nom_materiel_autre" class="form-label h6">Nom du nouveau materiel</label>
+                                <textarea id="Nom_materiel_autre" name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                        </form>
+                        <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <!----------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="modal fade" id="terrainModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
+        </div>
+        <!----------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="modal fade" id="terrainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
-                  </div>
-                  <form id='add_terrain_form' name='ajout_terrain_form' class="form" method="POST" action="#">
-                  <div class="modal-body">
-                    <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
-                    <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
-                  </form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
+                    </div>
+                    <form id='add_terrain_form' name='add_terrain_form' class="form" method="POST" action="#">
+                        <div class="modal-body">
+                            <label for="Nom_terrain_autre" class="form-label h6">Nom du nouveau terrain</label>
+                            <textarea id="Nom_terrain_autre" name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    </form>
                     <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>

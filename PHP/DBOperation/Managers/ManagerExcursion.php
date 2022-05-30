@@ -20,7 +20,8 @@
 \*******************************************************************************/
 
 require_once(__DIR__."/../Objects/ExcursionObject.php");
-require_once(__DIR__."/../Objects/EscaleObject.php");
+require_once("ManagerTerrain.php");
+require_once("ManagerTraversee.php");
 require_once("Manager.php");
 
 class ManagerExcursion extends Manager
@@ -54,7 +55,7 @@ class ManagerExcursion extends Manager
   }
 
   // Database commands
-  public function insertExcursion(Excursion $e)
+  public function insertExcursion(Excursion $e, $ids)
   // Goal : Insert an excursion in the database
   // Entry : A excursion object
   {
@@ -72,6 +73,10 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
 
+      // Creation of a row in Escale & Necessaire
+      $last_id = $this->getdb()->lastInsertId();
+      $this->autoInsertTraversee($ids, $last_id);
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -85,7 +90,25 @@ class ManagerExcursion extends Manager
       $result['error'] = true;
       $result['message'] = $error->getMessage();
       return($result);
-      
+
+    }
+  }
+
+  private function autoInsertTraversee(array $ids, $excursionId)
+  {
+    $m_e = new ManagerTraversee(connect_bd());
+
+    foreach($ids as $material_id)
+    {
+      $donnees = array (
+        "nId_Excursion"  => $excursionId,
+        "sLabel_Terrain" => $material_id
+      );
+
+      $e = new Traversee;
+      $e->hydrate($donnees);
+
+      $m_e->insertTraversee($e);
     }
   }
 
@@ -132,15 +155,12 @@ class ManagerExcursion extends Manager
 			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-			$e = new Excursion;
-      $tab = $this->arrayConstructor($stmt);
-			$e->hydrate($tab);
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['excursion'] = $e;
+      $result['stmt'] = $stmt->fetchAll()[0];
       return($result);
 
 		} catch(PDOException $error) {
@@ -151,6 +171,36 @@ class ManagerExcursion extends Manager
       return($result);
 
 		}
+  }
+
+  public function selectExcursionsByProgrammeId($id)
+  {
+    $req = "SELECT * FROM EXCURSION WHERE idExcursion IN(SELECT idExcursion FROM ESCALE WHERE IdProgramme = :ID)";
+
+    // Send the request to the database
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindvalue(":ID", $id, PDO::PARAM_INT);
+      $stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt->fetchAll();
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
+
+    }
   }
 
   public function updateExcursionById(Excursion $e, $num)
@@ -166,7 +216,7 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":NEWINFO", $e->getsDesc_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWDEPART", $e->getsDepart_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
-      $stmt->bindValue(":NEWPRIX", $m->getfPrix_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success
@@ -291,7 +341,7 @@ class ManagerExcursion extends Manager
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
       return($result);
-      
+
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -303,4 +353,3 @@ class ManagerExcursion extends Manager
   }
 
 }
-?>

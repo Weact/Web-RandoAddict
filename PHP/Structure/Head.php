@@ -18,20 +18,20 @@
 
     <link rel="icon" type="image/x-icon" href="../ASSETS/favicon.ico">
 
-    <script src="AJAX/pageNavigator.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
+        <script src="AJAX/pageNavigator.js"></script>
 </head>
 
 <?php
   //CONNEXION AUTOMATIQUE
     //Vérification et initialisation des variables de session le cas échéant.
-    if ($_SESSION['typeUtilisateur'] == "Admin")
+    if (strtolower($_SESSION['typeUtilisateur']) == "admin")
     {
       require_once("Structure/HeaderAdmin.php");
     }
-    elseif($_SESSION['typeUtilisateur'] == "Guide" || $_SESSION["typeUtilisateur"] == "Marcheur")
+    elseif(strtolower($_SESSION['typeUtilisateur']) == "guide" || strtolower($_SESSION["typeUtilisateur"]) == "marcheur")
     {
       require_once("Structure/HeaderOnline.php");
     }

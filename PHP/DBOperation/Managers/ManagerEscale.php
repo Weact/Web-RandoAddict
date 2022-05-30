@@ -38,7 +38,7 @@ class ManagerEscale extends Manager
     }else{
       $tab = array(
         "nId_Excursion" => "",
-        "nId_Prog" => "",
+        "nId_Prog" => ""
         );
     }
 
@@ -107,7 +107,7 @@ class ManagerEscale extends Manager
 
   public function selectEscalesByIdProg($num)
   {
-    $req = "SELECT * FROM ESCALE WHERE idProgramme = :ID";
+    $req = 'SELECT * FROM ESCALE WHERE idProgramme = :ID';
 
     // Send the request to the database
     try
@@ -116,10 +116,13 @@ class ManagerEscale extends Manager
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
+<<<<<<< HEAD
       // $e = new Escale;
       // $tab = $this->arrayConstructor($stmt);
       // $e->hydrate($tab);
 
+=======
+>>>>>>> LucasD
       // Return success
       $result['success'] = true;
       $result['error'] = false;

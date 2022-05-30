@@ -13,7 +13,7 @@
 *                 deleteParticipationById($num)
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
 require_once(__DIR__."/../Objects/ParticipationObject.php");
@@ -86,7 +86,7 @@ class ManagerParticipation extends Manager
     {
       $stmt = $this->getdb()->prepare($req);
 			$stmt->execute();
-			
+
       // Return success
       $result['success'] = true;
       $result['error'] = false;
@@ -106,6 +106,35 @@ class ManagerParticipation extends Manager
     }
   }
 
+  public function selectPartcipationByUserId($num)
+  {
+    $req = "SELECT * FROM Participation WHERE mailMarcheur = :ID";
+
+    // Send the request to the Database
+    try
+    {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_STR );
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt->fetchAll();
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
+
+    }
+  }
   public function selectPartcipationById($num)
   {
     $req = "SELECT * FROM Participation WHERE idProgramme = :ID";
@@ -117,15 +146,11 @@ class ManagerParticipation extends Manager
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
 			$stmt->execute();
 
-      $p = new Participation;
-      $tab = $this->arrayConstructor($stmt);
-      $p->hydrate($tab);
-			
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['participation'] = $p;
+      $result['stmt'] = $stmt->fetchAll();
       return($result);
 
     } catch (PDOException $error) {
@@ -196,6 +221,30 @@ class ManagerParticipation extends Manager
 
 			exit();
 
+    }
+  }
+
+  public function deleteParticipationByIdFromParticipant($num, $mailUtilisateur){
+    $req = "DELETE FROM PARTICIPATION WHERE idProgramme = :ID AND mailMarcheur = :MAILMARCHEUR";
+
+    try{
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":MAILMARCHEUR", $mailUtilisateur, PDO::PARAM_STR);
+      $stmt->execute();
+
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+
+      return($result);
+
+    }catch(PDOException $error){
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+
+      exit();
     }
   }
 

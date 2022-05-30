@@ -10,7 +10,7 @@
 *				  Getters & Setters
 *
 * Créateur      : Luc Cornu
-* 
+*
 \*******************************************************************************/
 
 class Terrain
@@ -66,5 +66,4 @@ class Terrain
 	// Others
 
 }
-
 ?>

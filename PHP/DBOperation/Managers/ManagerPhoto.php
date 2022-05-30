@@ -1,23 +1,24 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
-*
-* Description   : Le Manager pour la table Photo.
-*
-* Classe        : ManagerPhoto
-* Fonctions     : arrayConstructor($stmt)
-*                 insertPhoto(Photo $p)
-*                 selectPhotos()
-*                 selectPhotoById($num)
-*                 updatePhotoById(Photo $p, $num)
-*                 deletePhotoById($num)
-*                 selectPhotosByLabel($text)
-*
-* Créateur      : Luc Cornu
-*
+ * Fichier       : /PHP/DBOperation/Managers/ManagerPhoto.php
+ *
+ * Description   : Le Manager pour la table Photo.
+ *
+ * Classe        : ManagerPhoto
+ * Fonctions     : arrayConstructor($stmt)
+ *                 insertPhoto(Photo $p)
+ *                 selectPhotos()
+ *                 selectPhotoById($num)
+ *                 updatePhotoById(Photo $p, $num)
+ *                 deletePhotoById($num)
+ *                 selectPhotosByLabel($text)
+ *
+ * Créateur      : Luc Cornu
+ *
 \*******************************************************************************/
 
-require_once(__DIR__."/../Objects/PhotoObject.php");
+require_once(__DIR__ . "/../Objects/PhotoObject.php");
 require_once("Manager.php");
 
 class ManagerPhoto extends Manager
@@ -25,8 +26,7 @@ class ManagerPhoto extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount() > 0)
-    {
+    if ($stmt->rowCount() > 0) {
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
@@ -34,14 +34,14 @@ class ManagerPhoto extends Manager
         "sLien_Photo" => $valueStmt["lienPhoto"],
         "sLabel_Photo" => $valueStmt["labelPhoto"],
         "nId_Excursion" => $valueStmt["idExcursion"]
-        );
-    }else{
+      );
+    } else {
       $tab = array(
         "nId_Photo" => "",
         "sLien_Photo" => "",
         "sLabel_Photo" => "",
         "nId_Excursion" => ""
-        );
+      );
     }
 
     return $tab;
@@ -55,8 +55,7 @@ class ManagerPhoto extends Manager
     $req = "INSERT INTO PHOTO(lienPhoto, labelPhoto, idExcursion) VALUES (:LIEN, :LABEL, :ID)";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
       $stmt->bindValue(":LABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
@@ -67,15 +66,13 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -86,10 +83,9 @@ class ManagerPhoto extends Manager
     $req = "SELECT * FROM PHOTO";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
@@ -103,8 +99,7 @@ class ManagerPhoto extends Manager
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -115,32 +110,28 @@ class ManagerPhoto extends Manager
   {
     $req = "SELECT * FROM PHOTO WHERE idPhoto = :ID";
 
-		//Envoie de la requête à la base
-		try
-		{
-			$stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-			$stmt->execute();
+    //Envoie de la requête à la base
+    try {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->execute();
 
-			$p = new Photo;
+      $p = new Photo;
       $tab = $this->arrayConstructor($stmt);
-			$p->hydrate($tab);
+      $p->hydrate($tab);
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['photo'] = $p;
-      return($result);
-
-
-		} catch (PDOException $error) {
+      return ($result);
+    } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -150,10 +141,9 @@ class ManagerPhoto extends Manager
   {
     $req = "UPDATE PHOTO SET lienPhoto = :NEWLIEN, labelPhoto = :NEWLABEL, idExcursion = :NEW_ID WHERE idPhoto = :ID";
 
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
       $stmt->bindValue(":NEWLIEN", $p->getsLien_Photo(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWLABEL", $p->getsLabel_Photo(), PDO::PARAM_STR);
       $stmt->bindValue(":NEW_ID", $p->getnId_Excursion(), PDO::PARAM_INT);
@@ -162,15 +152,13 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "Photo mise à jour";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -183,33 +171,30 @@ class ManagerPhoto extends Manager
     // Send the request to the Database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-			$stmt->execute();
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "Photo supprimée";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
   public function selectPhotosByLabel($text)
   {
     $req = "SELECT * FROM PHOTO WHERE labelPhoto LIKE :LABEL";
-    $text = "%".$text."%";
+    $text = "%" . $text . "%";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
 			$stmt->execute();
@@ -218,16 +203,14 @@ class ManagerPhoto extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      $result['stmt'] = $stmt;
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -236,28 +219,23 @@ class ManagerPhoto extends Manager
     $req = "SELECT * FROM PHOTO WHERE idExcursion = :ID";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $id, PDO::PARAM_INT);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
-
 }
-?>
