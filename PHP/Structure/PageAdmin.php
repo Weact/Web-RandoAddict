@@ -274,7 +274,7 @@
                                 <!--Is guide-->
                                 <div class="mb-3 form-floating">
                                     <select class="form-select">
-                                        <option>Visiteur</option>
+                                        <option>Marcheur</option>
                                         <option>Guide</option>
                                         <option>Administrateur</option>
                                     </select>
@@ -308,7 +308,7 @@
                             <!--Is guide-->
                             <div class="mb-3 form-floating">
                                 <select class="form-select" id="roles_choice">
-                                    <option>Visiteur</option>
+                                    <option>Marcheur</option>
                                     <option>Guide</option>
                                     <option>Admin</option>
                                     <script>
@@ -419,7 +419,7 @@
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
                   </div>
-                  <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#">
+                  <form id='ajout_terrain_form' name='ajout_terrain_form' class="form" method="POST" action="#">
                   <div class="modal-body">
                     <label for="email" class="form-label h6">Nom du nouveau materiel</label>
                     <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>

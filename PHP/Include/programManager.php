@@ -157,4 +157,11 @@
 
     }
 
-?>
+    function getProgramsByName($name)
+    {
+      $conn = connect_bd();
+      $mng_Prog = new ManagerProgramme($conn);
+      
+      return $mng_Prog->selectProgrammesByLabel(strtolower($name))['stmt'];
+
+    }

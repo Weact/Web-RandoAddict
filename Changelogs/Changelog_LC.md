@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.7] - 2022-05-30
+### Added
+- Ajout de la page poyur consulter un programme et s'inscrire.
+
 ## [0.1.6] - 2022-05-29
 ### Added
 - Modification dans la base de donnée du programme lors de l'envoie du formulaire en mode 'éditer'.
