@@ -40,21 +40,24 @@ foreach ($programs as $program) {
                 <div class="row">
                     <div class="col">
                         <h3 class="card-title display-5 text-light font-monospace border border-2 border-success p-2 text-capitalize" style="background-color: rgba(0, 100, 230, 0.3);" id="randonneeTitre" name="randonneeTitre"><?php echo $name ?></h3>
-                    </div>
+                    </div> <!-- 1 -->
                     <div class="col d-flex justify-content-center align-items-center">
                         <span class="badge bg-primary fs-3 p-2"><?php echo $difficulty ?></span>
-                    </div>
-                </div>
+                    </div> <!-- 2 -->
+                </div> <!-- 3 -->
                 <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="background-color: rgba(200,200,200,0.5); height:100%!important;">
                     <p class="card-text"><?php echo $description ?></p>
-                </div>
+                </div> <!-- 4 -->
                 <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php?',<?php echo $program['idProgramme'] ?>);">
 
                 <?php
                 if (isset($_SESSION["typeUtilisateur"])) {
-                    if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
                 ?>
-                        <div class="d-flex justify-content-around p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
+                    <div class="d-flex justify-content-around p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
+                        <?php
+                        if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
+                        ?>
+
                             <form method="POST" action="#" id="editProgForm">
                                 <button class="btn btn-outline-warning mt-2 m-1" style="width: 10em;" type="submit" name="editProgID" value="<?php echo $program['idProgramme'] ?>">
                                     <i class="bi bi-pencil-square fs-3 fw-bold" aria-hidden="true"></i>
@@ -86,13 +89,13 @@ foreach ($programs as $program) {
                             }
                         }
                         ?>
-                        </div>
-                    <?php
+                    </div> <!-- 5 -->
+                <?php
                 }
-                    ?>
-            </div>
-        </div>
-    </div>
+                ?>
+            </div> <!-- 6 -->
+        </div> <!-- 7 -->
+    </div> <!-- 8 -->
 
 <?php
 }
