@@ -2,6 +2,7 @@
 ### Modification
 -Correction des fichiers managers et de l'affichage associé.
 -Correction de l'affichage et la gestion des pages administrateurs.
+-Correction de la connexion.
 
 ## [0.0.6] - 2022-05-24
 ### Ajout

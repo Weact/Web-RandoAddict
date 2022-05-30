@@ -70,7 +70,7 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
         }
 
         makeNewUser($donnees);
-        //redirectUser(); // does the exit();
+        redirectUser(); // does the exit();
 
       } else { // ENTRER DANS CETTE CONDITION ELSE SIGNIFIE QU'UNE INSCRIPTION EST EFFECTUE PAR L'UTILISATEUR
         if (isset($_POST['sPseudo_Marcheur'])) {
@@ -88,8 +88,8 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
 
           makeNewUser($donnees);
           connectUser($_POST['sMail_Marcheur_Inscription']);
-          //redirectUser(); // does the exit();
-          var_dump($_SESSION);
+          redirectUser(); // does the exit();
+          //var_dump($_SESSION);
         }
       }
     }
@@ -114,24 +114,24 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
 
         makeNewUser($donnees); 
         connectUser($_POST['sMail_Marcheur_Inscription']);
-        //redirectUser();
-        var_dump($_SESSION);
+        redirectUser();
+        //var_dump($_SESSION);
     }
 
     if(isset($_POST["sMail_Marcheur_Connexion"])) {
         //CONNEXION AUTOMATIQUE
         $isValidMarcheur = checkUserPw($_POST["sMail_Marcheur_Connexion"], $_POST["sMdp_Marcheur"]);
-        var_dump($isValidMarcheur);
+        //var_dump($isValidMarcheur);
         if ($isValidMarcheur){
           connectUser($_POST["sMail_Marcheur_Connexion"]);
-          //redirectUser();
+          redirectUser();
         }
         else
         {
           $_SESSION['message'] = "Email ou Mot de Passe invalide";
           $_SESSION['status'] = "Erreur Connexion";
         }
-        var_dump($_SESSION);
+        //var_dump($_SESSION);
     }
 
     if(isset($_POST["Nom_materiel_autre"])) {
@@ -209,6 +209,6 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
     if(isset($_POST["disconnect"]))
     {
       connectUser("");
-      //redirectUser();
+      redirectUser();
     }
 ?>
