@@ -51,7 +51,7 @@ foreach ($programs as $program) {
                 <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php?',<?php echo $program['idProgramme'] ?>);">
 
                 <?php
-                if (isset($_SESSION["typeUtilisateur"])) {
+                if ( isset( $_SESSION["typeUtilisateur"] ) && $_SESSION["typeUtilisateur"] !== "anon" ) {
                 ?>
                     <div class="d-flex justify-content-around p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
                         <?php
