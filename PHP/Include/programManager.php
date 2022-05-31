@@ -1,167 +1,140 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/Include/gestionFormBDD.php
-*
-* Description   : Fichier répertoriant les réceptions de formulaires et leur gestion.
-*
-* Créateur      : Romain Schlotter
+ * Fichier       : /PHP/Include/gestionFormBDD.php
+ *
+ * Description   : Fichier répertoriant les réceptions de formulaires et leur gestion.
+ *
+ * Créateur      : Romain Schlotter
 \*******************************************************************************/
 /*******************************************************************************\
-* 29-03-2022   : Création du fichier
+ * 29-03-2022   : Création du fichier
 \*******************************************************************************/
 
-    require_once(__DIR__."/../DBOperation/PDO_Connect.php");
-    require_once(__DIR__."/../DBOperation/Managers/ManagerProgramme.php");
-    require_once(__DIR__."/../DBOperation/Managers/ManagerExcursion.php");
-    require_once(__DIR__."/../DBOperation/Managers/ManagerPhoto.php");
-    require_once(__DIR__."/../DBOperation/Managers/ManagerMateriel.php");
+require_once(__DIR__ . "/../DBOperation/PDO_Connect.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerProgramme.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerExcursion.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerPhoto.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerMateriel.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerParticipation.php");
 
-    if (isset($_POST['action'])) {
-      switch ($_POST['action']) {
-        case 'edit':
-          $conn = connect_bd();
-          $mng_Prog = new ManagerProgramme($conn);
 
-          echo json_encode($mng_Prog->selectProgrammeById($_POST["idProg"]));
-          break;
+function makeNewProgram($donnees)
+{
+  $conn = connect_bd();
+  $mng = new ManagerMarcheur($conn);
 
-        case 'delete':
-          // echo '<script> alert("'.$_POST["idProg"].'"); </script>';
-          deleteProgramme($_POST["idProg"]);
-          break;
+  $new_marcheur = new Marcheur();
+  $new_marcheur->hydrate($donnees);
+  $result = $mng->insertMarcheur($new_marcheur);
+  $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
+}
 
-        case 'edit2':
-          $conn = connect_bd();
-          $mng_Exc = new ManagerExcursion($conn);
+function makeNewMat($donnees)
+{
+  $conn = connect_bd();
+  $mng = new ManagerMateriel($conn);
 
-          echo json_encode($mng_Exc->selectExcursionsByProgrammeId($_POST["idProg"]));
-          break;
+  $new_item = new Materiel();
+  $new_item->hydrate($donnees);
+  $result = $mng->insertMateriel($new_item);
+}
 
-        case 'edit3':
-          $conn = connect_bd();
-          $mng_Mat = new ManagerMateriel($conn);
+function getAllExc()
+{
+  $conn = connect_bd();
+  $mng = new ManagerExcursion($conn);
 
-          echo json_encode($mng_Mat->selectMaterielByProgrammeId($_POST["idProg"]));
-          break;
+  $users = $mng->selectExcursions()['stmt'];
 
-        case 'update':
-          $conn = connect_bd();
-          $mng_Prog = new ManagerProgramme($conn);
+  return $users;
+}
 
-          echo json_encode($mng_Prog->updateProgrammeById($_POST["idProg"]));
-          break;
+function getAllMat()
+{
+  $conn = connect_bd();
+  $mng = new ManagerMateriel($conn);
 
-      }
-    }
+  $users = $mng->selectMateriels()['stmt'];
 
-    function makeNewProgram($donnees) {
-      $conn = connect_bd();
-      $mng = new ManagerMarcheur($conn);
+  return $users;
+}
 
-      $new_marcheur = new Marcheur();
-      $new_marcheur->hydrate($donnees);
-      $result = $mng->insertMarcheur($new_marcheur);
-      $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
+function makeNewExcursion($donnees)
+{
+  $conn = connect_bd();
 
-    }
+  $mng = new ManagerExcursion($conn);
+  $new_item = new Excursion();
+  $new_item->hydrate($donnees);
+  $result = $mng->insertExcursion($new_item);
 
-    function makeNewMat($donnees) {
-      $conn = connect_bd();
-      $mng = new ManagerMateriel($conn);
+  $new_item = $result['newExcursionId'];
 
-      $new_item = new Materiel();
-      $new_item->hydrate($donnees);
-      $result = $mng->insertMateriel($new_item);
+  $CANARDDEROMAIN = $donnees['sNom_Image']; // C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
+  $donnees_photo = array(
+    'sLien_Photo' => $CANARDDEROMAIN,
+    'sLabel_Photo' => "LabelPhoto",
+    'nId_Excursion' => $new_item
+  );
 
-    }
+  //var_dump($donnees_photo);
+  $mng_photo = new ManagerPhoto($conn);
+  $new_photo = new Photo();
+  $new_photo->hydrate($donnees_photo);
+  $result = $mng_photo->insertPhoto($new_photo);
+}
 
-    function getAllExc() {
-      $conn = connect_bd();
-      $mng = new ManagerExcursion($conn);
+function getAllPrograms()
+{
+  $conn = connect_bd();
+  $mng = new ManagerProgramme($conn);
 
-      $users = $mng->selectExcursions()['stmt'];
+  $users = $mng->selectProgrammes()['stmt'];
 
-      return $users;
+  return $users;
+}
 
-    }
+function getFirstPhotoByProgrammeId($id)
+{
+  $conn = connect_bd();
+  $mng_Exc = new ManagerExcursion($conn);
+  $mng_Photo = new ManagerPhoto($conn);
 
-    function getAllMat() {
-      $conn = connect_bd();
-      $mng = new ManagerMateriel($conn);
+  $excursions = $mng_Exc->selectExcursionsByProgrammeId($id)['stmt'];
+  if (count($excursions) > 0) {
+    $excursions = $excursions[0];
+  } else {
+    $excursions = $mng_Exc->selectExcursions()['stmt'][0];
+  }
 
-      $users = $mng->selectMateriels()['stmt'];
+  return $mng_Photo->selectPhotosByExcursionId($excursions['idExcursion'])['stmt'];
+}
 
-      return $users;
+function deleteProgramme($id)
+{
+  $conn = connect_bd();
+  $mng_Prog = new ManagerProgramme($conn);
 
-    }
+  echo json_encode($mng_Prog->deleteProgrammeById($id));
+}
 
-    function makeNewExcursion($donnees) {
-      $conn = connect_bd();
+function getProgramsByName($name)
+{
+  $conn = connect_bd();
+  $mng_Prog = new ManagerProgramme($conn);
 
-      $mng = new ManagerExcursion($conn);
-      $new_item = new Excursion();
-      $new_item->hydrate($donnees);
-      $result = $mng->insertExcursion($new_item);
+  return $mng_Prog->selectProgrammesByLabel(strtolower($name))['stmt'];
+}
 
-      $new_item = $result['newExcursionId'];
-
-      $CONNARDDEROMAIN = $donnees['sNom_Image']; // C'est Valentin qui a donné ce nom là à la variable, et je n'ai pas le droit de le changer.
-      // Validé par Luc CORNU, je n'ai pas le droit de le changer
-      $donnees_photo = array(
-        'sLien_Photo' => $CONNARDDEROMAIN,
-        'sLabel_Photo' => "LabelPhoto",
-        'nId_Excursion' => $new_item
-        );
-
-      //var_dump($donnees_photo);
-      $mng_photo = new ManagerPhoto($conn);
-      $new_photo = new Photo();
-      $new_photo->hydrate($donnees_photo);
-      $result = $mng_photo->insertPhoto($new_photo);
-
-    }
-
-    function getAllPrograms() {
-      $conn = connect_bd();
-      $mng = new ManagerProgramme($conn);
-
-      $users = $mng->selectProgrammes()['stmt'];
-
-      return $users;
-
-    }
-
-    function getFirstPhotoByProgrammeId($id) {
-      $conn = connect_bd();
-      $mng_Exc = new ManagerExcursion($conn);
-      $mng_Photo = new ManagerPhoto($conn);
-
-      $excursions = $mng_Exc->selectExcursionsByProgrammeId($id)['stmt'];
-      if (count($excursions) > 0) {
-        $excursions = $excursions[0];
-
-      } else {
-        $excursions = $mng_Exc->selectExcursions()['stmt'][0];
-
-      }
-      
-      return $mng_Photo->selectPhotosByExcursionId($excursions['idExcursion'])['stmt'];
-
-    }
-
-    function deleteProgramme($id) {
-      $conn = connect_bd();
-      $mng_Prog = new ManagerProgramme($conn);
-
-      echo json_encode($mng_Prog->deleteProgrammeById($id));
-
-    }
-
-    function getProgramsByName($name)
-    {
-      $conn = connect_bd();
-      $mng_Prog = new ManagerProgramme($conn);
-      
-      return $mng_Prog->selectProgrammesByLabel(strtolower($name))['stmt'];
-
-    }
+function getColorByDifficulty($dif)
+{
+  if ($dif <= 3)
+  {
+    return 'bg-success';
+  } elseif ($dif <= 6) {
+    return 'bg-warning';
+  } else {
+    return 'bg-danger';
+  }
+}

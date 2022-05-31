@@ -48,6 +48,7 @@
 
         $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
         $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
+        $_SESSION['mailUtilisateur'] = $current_marcheur->getsMail_Marcheur();
 
          header("HTTP/1.1 303 See Other");
          header("Location: ./Accueil.php");

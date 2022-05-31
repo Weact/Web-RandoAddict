@@ -32,6 +32,7 @@ class ManagerParticipation extends Manager
         "nId_Prog" => $valueStmt["idProg"],
         "sMail_Utilisateur" => $valueStmt["mailUtilisateur"],
         "sRole_Utilisateur" => $valueStmt["roleUtilisateur"]
+      );
     }else{
       $tab = array(
         "nId_Prog" => "",

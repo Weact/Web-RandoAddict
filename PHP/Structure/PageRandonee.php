@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************\
  * Fichier       : /PHP/PageRandonee.php
  *
@@ -19,8 +20,9 @@ require_once(__DIR__ . '/../Include/programManager.php');
 // Get programme by ID
 $conn = connect_bd();
 $mng_Prog = new ManagerProgramme($conn);
-$program = $mng_Prog->selectProgrammeById($_POST['idProg'])['programme'];
-// var_dump($program->getsLabel_Prog);
+$program = json_decode(json_encode($mng_Prog->selectProgrammeById($_POST['idProg'])['programme']), true);
+
+// var_dump($program);
 
 $mng_Exc = new ManagerExcursion($conn);
 $excursions = $mng_Exc->selectExcursionsByProgrammeId($_POST['idProg'])['stmt'];
@@ -29,71 +31,83 @@ $excursions = $mng_Exc->selectExcursionsByProgrammeId($_POST['idProg'])['stmt'];
 
 $photoHeight = "200";
 $photoWidth = "200";
+
+$FirstPhoto = getFirstPhotoByProgrammeId($program['idProg']);
+if (count($FirstPhoto) > 0) {
+    $photo = '../ASSETS/' . $FirstPhoto[0]['lienPhoto'];
+} else {
+    $photo = '../ASSETS/PaysageRandonnee_2.jpg';
+}
 ?>
 
 <section class="py-5 text-center container">
-    <div class="row py-3 shadow-lg">
-        <div class="col mx-auto bg-light">
-            <h1 class="d-flex justify-content-around align-items-stretch fw-bolder display-3 text-dark shadow-lg p-3 my-4 text-uppercase rounded rounded-5">
+    <div class="col-sm-16 col-md-9 col-lg-8 col-xl-7 mb-1 mx-auto" id="randonneeCardBase">
+        <div class="card text-dark fw-bold">
+            <img src="<?php echo $photo; ?>" alt="randonne image top" class="card-img-top">
+            <div class="card-img-overlay d-flex flex-column align-items-center" style="background-color: rgba(200,200,200,0.5);">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="card-title display-3" id="randonneeTitre" name="randonneeTitre">
+                            <?php
+                            $name = $program['labelProg'];
+                            if (strlen($name) > 29) {
+                                $name = substr($name, 0, 30) . "...";
+                            }
+                            echo $name;
 
-                <?php
-                echo $program->getnId_Prog();
-                ?>
+                            ?>
+                        </h3>
+                    </div>
+                    <div class="col d-flex justify-content-center align-items-center">
+                        <span class="badge <?php echo getColorByDifficulty($program["diffProg"]); ?> fs-3 p-2"><?php echo $program["diffProg"]; ?></span>
+                    </div>
+                </div>
+                <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="height:100%!important;">
+                    <p class="card-text"><?php echo $program['descProg']; ?></p>
+                </div>
+
+                <div class="d-flex flex-wrap row p-3 border rounded border-light justify-content-around font-monospace fw-bold" style="background-color: rgba(0, 125, 255, 0.55)">
+                    <div class="col-8">
+                        <h3 class="display-6">Date de départ</h3>
+                        <p class="fs-4 text-dark"> <?php echo $program['departProg']; ?> </p>
+                    </div>
+                    <div class="col-8">
+                        <h3 class="display-6">Date d'arrivée</h3>
+                        <p class="fs-4 text-dark"> <?php echo $program['arriveeProg']; ?> </p>
+                    </div>
+
+                    <?php
+
+                    if (isset($_SESSION['mailUtilisateur'])) {
+                        if (strtolower($_SESSION['typeUtilisateur']) != "anon" && strtolower($_SESSION['typeUtilisateur'] != '')) {
+                    ?>
+                            <form id="join_prog" name="join_prog" class="form" method="POST" action="#">
+                                <input hidden name="idMarcheurJoin" value="<?php echo $_SESSION['mailUtilisateur']; ?> "></input>
+                                <input hidden name="roleMarcheurJoin" value="Marcheur"></input>
+                                <input hidden name="idProgJoin" value="<?php echo $program['idProg']; ?>"></input>
+                                <button type="submit" class="btn btn-outline-warning mt-2 m-1 font-monospace fw-bold">Rejoindre en tant que Marcheur</button>
+                            </form>
+                    <?php
+                        }
+                    }
+                    ?>
+
+                </div>
                 <?php
                 if (isset($_SESSION["typeUtilisateur"])) {
                     if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
-                ?>
-                        <form id='deleteProgForm' name='deleteProgForm' class="form" method="POST" action="#">
-                            <button class="btn btn-outline-danger mt-2 m-1" style="width: 10em;" type="submit" name="deleteProgID" value="<?php echo $program->getnId_Prog() ?>">
-                                <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
-                            </button>
-                        </form>
-                <?php
+                        include_once("FormProg.php");
+                        $id = $program['idProg'];
+                        include_once('../Include/adminGestion.php');
                     }
                 }
                 ?>
-            </h1>
-            <p class="shadow-sm lead fs-4 text-dark shadow-lg py-3 font-monospace">
-
-                <?php
-                echo $program->getsDesc_Prog();
-                ?>
-
-            </p>
-            <p>
-                <?php
-                if (isset($_SESSION['mailUtilisateur'])) {
-                    if (strtolower($_SESSION['typeUtilisateur']) == "guide" || strtolower($_SESSION['typeUtilisateur']) == "admin") {
-                ?>
-            <form id="join_prog" name="join_prog" class="form" method="POST" action="#">
-                <input hidden name="idMarcheurJoin" value="<?php echo $_SESSION['mailUtilisateur']; ?> "></input>
-                <input hidden name="roleMarcheurJoin" value="Guide"></input>
-                <input hidden name="idProgJoin" value="<?php echo $program->getnId_Prog(); ?>"></input>
-                <button type="submit" class="btn btn-success my-2 fs-3 fw-bold">Rejoindre en tant que Guide</button>
-            </form>
-    <?php
-                    }
-                }
-    ?>
-    <?php
-    if (isset($_SESSION['mailUtilisateur'])) {
-        if (strtolower($_SESSION['typeUtilisateur']) != "anon" && strtolower($_SESSION['typeUtilisateur'] != '')) {
-    ?>
-            <form id="join_prog" name="join_prog" class="form" method="POST" action="#">
-                <input hidden name="idMarcheurJoin" value="<?php echo $_SESSION['mailUtilisateur']; ?> "></input>
-                <input hidden name="roleMarcheurJoin" value="Marcheur"></input>
-                <input hidden name="idProgJoin" value="<?php echo $program->getnId_Prog(); ?>"></input>
-                <button type="submit" class="btn btn-primary my-2 fs-3 fw-bold">Rejoindre en tant que Marcheur</button>
-            </form>
-    <?php
-        }
-    }
-    ?>
-
-    </p>
+            </div>
         </div>
     </div>
 </section>
+
+
 
 <div class="album py-5">
     <div class="container">
@@ -104,32 +118,32 @@ $photoWidth = "200";
             ?>
                 <div class="col">
                     <div class="card shadow-sm">
-                        
 
-                            <div class="card-body bg-dark">
-                                <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
-                                        <?php
-                                        if (isset($_SESSION["typeUtilisateur"])) {
-                                            if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
-                                        ?>
+
+                        <div class="card-body bg-dark">
+                            <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
+                                    <?php
+                                    if (isset($_SESSION["typeUtilisateur"])) {
+                                        if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
+                                    ?>
                                             <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button>
 
-                                        <?php
-                                            }
+                                    <?php
                                         }
-                                        ?>
+                                    }
+                                    ?>
 
-                                    </div>
-                                    <small class="lead text-light fs-2"><?php echo $excursion['prixExcursion'] ?>€</small>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center shadow-mg bg-dark text-light">
-                                    <small class="lead fs-2 text-capitalize"><?php echo $excursion['departExcursion'] ?> </small>
-                                    <small class="lead fs-2 text-capitalize"><?php echo $excursion['arriveeExcursion'] ?></small>
-                                </div>
+                                <small class="lead text-light fs-2"><?php echo $excursion['prixExcursion'] ?>€</small>
                             </div>
+                            <div class="d-flex justify-content-between align-items-center shadow-mg bg-dark text-light">
+                                <small class="lead fs-2 text-capitalize"><?php echo $excursion['departExcursion'] ?> </small>
+                                <small class="lead fs-2 text-capitalize"><?php echo $excursion['arriveeExcursion'] ?></small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php

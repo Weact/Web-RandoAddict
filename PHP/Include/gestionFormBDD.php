@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************\
  * Fichier       : /PHP/Include/gestionFormBDD.php
  *
@@ -16,6 +17,54 @@ require_once(__DIR__ . "/../DBOperation/PDO_Connect.php");
 $conn = connect_bd();
 require_once("userManager.php");
 require_once("programManager.php");
+
+if (isset($_POST['action'])) {
+  switch ($_POST['action']) {
+    case 'edit':
+      $conn = connect_bd();
+      $mng_Prog = new ManagerProgramme($conn);
+
+      echo json_encode($mng_Prog->selectProgrammeById($_POST["idProg"]));
+      break;
+
+    case 'delete':
+      // echo '<script> alert("'.$_POST["idProg"].'"); </script>';
+      deleteProgramme($_POST["idProg"]);
+      break;
+
+    case 'Exc':
+      $conn = connect_bd();
+      $mng_Exc = new ManagerExcursion($conn);
+
+      echo json_encode($mng_Exc->selectExcursionsByProgrammeId($_POST["idProg"]));
+      break;
+
+    case 'Mat':
+      $conn = connect_bd();
+      $mng_Mat = new ManagerMateriel($conn);
+
+      echo json_encode($mng_Mat->selectMaterielByProgrammeId($_POST["idProg"]));
+      break;
+  }
+}
+
+if (isset($_POST['idMarcheurJoin']))
+{
+  var_dump ($_POST["idProgJoin"]);
+  $conn = connect_bd();
+  $mng_Part = new ManagerParticipation($conn);
+
+  $donnees_Part = array(
+    'nId_Prog' => $_POST['idProgJoin'],
+    'sMail_Marcheur' =>  $_POST['idMarcheurJoin'],
+    'sRole_Marcheur' => "Marcheur"
+  );
+  $new_Part = new Participation();
+  $new_Part->hydrate($donnees_Part);
+
+  $mng_Part->insertParticipation($new_Part);
+}
+
 
 // Vérification et initialisation des variables de session le cas échéant.
 if (!isset($_SESSION['typeUtilisateur'])) {
@@ -127,12 +176,12 @@ if (isset($_POST["sLabel_Prog"])) {
     'sValide_Prog' => "En attente"
   );
 
-  var_dump($donnees);
+  // var_dump($donnees);
   $new_item = new Programme();
   $new_item->hydrate($donnees);
 
   if (isset($_POST["editForm"])) {
-    echo $_POST["editForm"];
+    // echo $_POST["editForm"];
     $mng->updateProgrammeById($new_item, $_POST["editForm"]);
   } else {
     $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);

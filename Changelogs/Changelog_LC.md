@@ -1,6 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.8] - 2022-05-31
+### Added
+- Ajout de la carte, de la date et du bouton d'inscription fonctionnel.
+- Affichage de la difficulté d'un programme de manière dynamique.
+
+### Changed
+- correction de bugs sur la base de donnée.
+
+### Removed
+- Messages de debugs.
+
 ## [0.1.7] - 2022-05-30
 ### Added
 - Ajout de la page poyur consulter un programme et s'inscrire.
