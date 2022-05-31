@@ -39,3 +39,67 @@ foreach ($programs as $program) {
 <?php
 }
 ?>
+<script>
+    function editSelf(id) {
+        $.post("./Include/programManager.php", {
+            action: "edit",
+            idProg: id
+        }, function(data, status) {
+            let result = jQuery.parseJSON(data);
+            console.log(result);
+            if (result["success"]) {
+                $programme = result["stmt"];
+                document.getElementById("selectionNom").value = $programme["labelProgramme"];
+                document.getElementById("descProg").value = $programme["descProgramme"];
+                document.getElementById("selectionTerrain").value = $programme["diffProgramme"];
+                document.getElementById("selectionQuantite").value = $programme["capaciteProgramme"];
+                let depart = $programme["dateDepartProgramme"].split(" ");
+                document.getElementById("startDate").value = depart[0];
+                document.getElementById("startHour").value = depart[1];
+                let arrivee = $programme["dateArriveeProgramme"].split(" ");
+                document.getElementById("arriveDate").value = arrivee[0];
+                document.getElementById("arriveHour").value = arrivee[1];
+                $.post("./Include/programManager.php", {
+                    action: "edit2",
+                    idProg: id
+                }, function(data, status) {
+                    let response = jQuery.parseJSON(data);
+                    if (response["success"]) {
+                        let values = [];
+                        response["stmt"].forEach(returnValue);
+
+                        function returnValue(item, index, arr) {
+                            values.push(item[0]);
+                        }
+                        let element = document.getElementById("selectionRando00");
+                        for (let i = 0; i < element.options.length; i++) {
+                            element.options[i].selected = values.includes(element.options[i].value);
+                        }
+                    } else {
+                        alert("erreur");
+                    }
+                });
+                $.post("./Include/programManager.php", {
+                    action: "edit3",
+                    idProg: id
+                }, function(data, status) {
+                    let response = jQuery.parseJSON(data);
+                    if (response["success"]) {
+                        response["stmt"].forEach(checkInput);
+
+                        function checkInput(item, index, arr) {
+                            document.getElementById(item[0]).checked = true;
+                        }
+
+                    } else {
+                        alert("erreur");
+                    }
+                });
+                document.getElementById("typeForm").value = id;
+
+            } else {
+                alert("erreur");
+            }
+        });
+    }
+</script> 

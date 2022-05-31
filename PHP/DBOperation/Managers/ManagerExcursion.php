@@ -20,6 +20,7 @@
 \*******************************************************************************/
 
 require_once(__DIR__."/../Objects/ExcursionObject.php");
+require_once(__DIR__."/../Objects/EscaleObject.php");
 require_once("ManagerTerrain.php");
 require_once("ManagerTraversee.php");
 require_once("Manager.php");

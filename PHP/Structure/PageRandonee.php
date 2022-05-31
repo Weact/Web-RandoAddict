@@ -15,6 +15,7 @@
 
 session_start();
 require_once(__DIR__ . '/../Include/programManager.php');
+include(__DIR__ . "/../Structure/FormProg.php");
 
 // PROGRAM MANAGEMENT
 $program = getProgramById($_POST['value']);
@@ -43,6 +44,9 @@ $photoWidth = "200";
                                 <i class="bi bi-trash-fill fs-3 fw-bold" aria-hidden="true"></i>
                             </button>
                         </form>
+                          <button class="btn btn-outline-warning mt-2 m-1" style="width: 10em;" type="button" name="editProgID" data-bs-toggle="modal" data-bs-target="#editProgModal" onclick="editSelf(<?php echo $program['idProgramme'] ?>)" value="<?php echo $program['idProgramme'] ?>">
+                              <i class="bi bi-pencil-square fs-3 fw-bold" aria-hidden="true"></i>
+                          </button>
                 <?php
                     }
                 }
@@ -134,7 +138,7 @@ $photoWidth = "200";
                                     <div class="btn-group">
                                     <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase" data-bs-toggle="modal"
                                       data-bs-target="#SeeExcModal<?php echo $excursion['idExcursion'] ?>">View</button>
-                                      
+
                                         <?php
                                         if (isset($_SESSION["typeUtilisateur"])) {
                                             if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
@@ -156,7 +160,9 @@ $photoWidth = "200";
                                 </div>
                             </div>
                     </div>
-                </div><div class="modal fade text-dark" id="SeeExcModal<?php echo $excursion['idExcursion'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                </div>
+
+                <div class="modal fade text-dark" id="SeeExcModal<?php echo $excursion['idExcursion'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
                   aria-hidden="true">
                   <div class="modal-dialog">
                     <div class="modal-content">

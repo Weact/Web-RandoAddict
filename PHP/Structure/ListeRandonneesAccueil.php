@@ -13,7 +13,7 @@ require_once(__DIR__ . '/../Include/programManager.php');
                 break;
               }
               $nb++;
-            echo '<button type="button" data-bs-target="#randoPaysages" data-bs-slide-to="'.($prog['idProgramme']-1).'" class="active p-2"
+            echo '<button type="button" data-bs-target="#randoPaysages" data-bs-slide-to="'.($nb).'" class="active p-2"
                 aria-current="true" aria-label="Randonnee Paysage 1"></button>';
           }  ?>
 
@@ -22,10 +22,20 @@ require_once(__DIR__ . '/../Include/programManager.php');
 
               <?php
               $nb = 0;
-              foreach($progs as $prog){
+              $nbDone = array();
+              foreach($progs as $proga){
                 if($nb > 2){
                   break;
                 }
+                $randNb = rand(0,sizeof($progs)-1);
+                $nbLoop = 0;
+                while(in_array($randNb, $nbDone) && $nbLoop < 50){
+                  $randNb = rand(0,sizeof($progs)-1);
+                  $nbLoop++;
+                }
+                $prog = $progs[$randNb];
+                array_push($nbDone, $randNb);
+
                 $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
 
                 $photolink = '/../../ASSETS/' . $photo['lienPhoto'];?>

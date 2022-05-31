@@ -164,7 +164,13 @@
           if(isset($_POST['materiel'])){
             $mat = $_POST['materiel'];
           }
-          $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $mat);
+
+          if( isset( $_POST["editForm"] ) ){
+              $mng->updateProgrammeById($new_item, $_POST['editForm']);
+            }else{
+              // It's inserting a new programme into the database.
+              $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
+            }
 
         }
 
