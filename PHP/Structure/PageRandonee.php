@@ -55,6 +55,32 @@ $photoWidth = "200";
                 ?>
 
             </p>
+
+            <?php
+            $dateDepart = new DateTime($program['dateDepartProgramme']);
+            $dateArrivee = new DateTime($program['dateArriveeProgramme']);
+            $dateFormat = "H\hi d/m/Y";
+
+            $dateDepart = $dateDepart->format($dateFormat);
+            $dateArrivee = $dateArrivee->format($dateFormat);
+            ?>
+
+            <div class="d-flex justify-content-evenly flex-wrap shadow-sm lead fs-4 text-dark shadow-lg py-3 font-monospace fw-bold">
+                <p class="p-3 display-6">
+                    <i class="bi bi-arrow-up-circle-fill"></i>
+
+                    <?php
+                    echo $dateDepart;
+                    ?>
+                </p>
+                <p class="p-3 display-6">
+                    <?php
+                    echo $dateArrivee;
+                    ?>
+                    <i class="bi bi-arrow-down-circle-fill"></i>
+                </p>
+            </div>
+
             <p>
                 <?php
                 if (isset($_SESSION['typeUtilisateur'])) {
@@ -107,27 +133,39 @@ $photoWidth = "200";
                             <div class="card-body bg-dark">
                                 <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
-                                        <?php
-                                        if (isset($_SESSION["typeUtilisateur"])) {
-                                            if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
-                                        ?>
-
-
-                                                <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button>
-
-                                        <?php
-                                            }
-                                        }
-                                        ?>
+                                    <div class="btn-group col-8">
+                                        <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-4 fw-bold uppercase">View</button>
 
                                     </div>
-                                    <small class="lead text-light fs-2"><?php echo $excursion['prixExcursion'] ?>€</small>
+                                    <span class="badge rounded-pill bg-primary fs-5 lead fw-bolder"><?php echo $excursion['prixExcursion'] ?>€</span>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center shadow-mg bg-dark text-light">
-                                    <small class="lead fs-2 text-capitalize"><?php echo $excursion['departExcursion'] ?> </small>
-                                    <small class="lead fs-2 text-capitalize"><?php echo $excursion['arriveeExcursion'] ?></small>
+                                <div class="d-flex flex-wrap justify-content-between align-items-center shadow-mg bg-dark text-light">
+                                    <small class="lead fs-2 text-capitalize" title="<?php echo $excursion['departExcursion']; ?>">
+                                        <?php
+                                        $e_depart = $excursion['departExcursion'];
+
+                                        if (strlen($e_depart) > 6) {
+                                            $e_depart = substr($e_depart, 0, 7) . "";
+                                            $e_depart = str_replace(" ", "_", $e_depart);
+                                            $e_depart = $e_depart . "...";
+                                        }
+
+                                        echo $e_depart;
+                                        ?>
+                                    </small>
+                                    <small class="lead fs-2 text-capitalize" title="<?php echo $excursion['arriveeExcursion']; ?>">
+                                        <?php
+                                        $e_arrivee = $excursion['arriveeExcursion'];
+
+                                        if (strlen($e_arrivee) > 6) {
+                                            $e_arrivee = substr($e_arrivee, 0, 7) . "";
+                                            $e_arrivee = str_replace(" ", "_", $e_arrivee);
+                                            $e_arrivee = $e_arrivee . "...";
+                                        }
+
+                                        echo $e_arrivee;
+                                        ?>
+                                    </small>
                                 </div>
                             </div>
                     </div>

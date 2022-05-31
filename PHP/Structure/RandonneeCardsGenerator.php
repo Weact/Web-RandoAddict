@@ -34,7 +34,7 @@ foreach ($programs as $program) {
     }
 ?>
 
-    <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mb-1" id="randonneeCardBase">
+    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4 mb-1" id="randonneeCardBase">
         <div class="card text-dark fw-bold">
             <img src="<?php echo $photo ?>" width="<?php echo $photoWidth ?>" height="<?php echo $photoHeight ?>" alt="randonne image top" class="card-img-top">
             <div class="card-img-overlay d-flex flex-column align-items-center">

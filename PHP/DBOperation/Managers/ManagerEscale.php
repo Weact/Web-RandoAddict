@@ -285,4 +285,5 @@ class ManagerEscale extends Manager
     }
   }
 }
+
 ?>
