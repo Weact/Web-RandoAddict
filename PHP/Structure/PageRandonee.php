@@ -25,6 +25,11 @@ $excursions = getAllExcursionsFromProgram($program);
 $photoHeight = "200";
 $photoWidth = "200";
 
+$prixtotal = 0;
+foreach ($excursions as $excursion) {
+    $prixtotal = $prixtotal + $excursion['prixExcursion'];
+}
+
 ?>
 <section class="py-5 text-center container">
     <div class="row py-3 shadow-lg">
@@ -81,6 +86,19 @@ $photoWidth = "200";
                 </p>
             </div>
 
+            <div class="d-flex justify-content-evenly flex-wrap shadow-sm shadow-lag py-3 my-3 font-monospace fw-bold">
+                <span class="badge rounded-pill fs-4 lead p-4 text-dark">
+                    <?php
+                    echo ucfirst("prix total à régler: ") . $prixtotal . "€";
+                    ?>
+                </span>
+                <span class="badge rounded-pill fs-4 lead p-4 text-dark">
+                    <?php
+                    echo ucfirst("Difficulté de la randonné: ") . $program['difficulteProgramme'];
+                    ?>
+                </span>
+            </div>
+
             <p>
                 <?php
                 if (isset($_SESSION['typeUtilisateur'])) {
@@ -134,7 +152,7 @@ $photoWidth = "200";
                                 <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group col-8">
-                                        <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-4 fw-bold uppercase">View</button>
+                                        <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-4 fw-bold uppercase">Détails</button>
 
                                     </div>
                                     <span class="badge rounded-pill bg-primary fs-5 lead fw-bolder"><?php echo $excursion['prixExcursion'] ?>€</span>
