@@ -137,6 +137,12 @@
           }
           makeNewExcursion($donnees, $ter);
       }
+
+      if(isset($_POST["deleteEscaleIdExc"]))
+      {
+          var_dump(deleteEscaleId($_POST['deleteEscaleIdProg'], $_POST["deleteEscaleIdExc"]));
+      }
+
       if(isset($_POST["sLabel_Prog"]))
         {
           $mng = new ManagerProgramme($conn);

@@ -57,13 +57,26 @@ $photoWidth = "200";
                 ?><p class="d-flex justify-content-around align-items-stretch fw-bolder display-6 text-dark shadow-lg p-3 my-4 text-uppercase rounded rounded-5">
 
 
-                  <?php
-                                                $prix = 0.0;
-                                                foreach ($excursions as $excursion) {
-                                                  $prix += (float)$excursion['prixExcursion'];
-                                                }
-                                                  echo $prix."€";?>
-                                                </p>
+                <?php
+                $prix = 0.0;
+                foreach ($excursions as $excursion) {
+                  $prix += (float)$excursion['prixExcursion'];
+                }
+                  echo $prix."€";?>
+                </p>
+            </p>
+
+            <p class="shadow-sm lead fs-7 text-dark shadow-lg py-3 font-monospace">
+
+                <?php
+                echo "Depart : ". $program['dateDepartProgramme']."<br>";
+                echo "Arrive : ". $program['dateArriveeProgramme'];
+
+                ?>
+
+
+
+                </p>
             </p>
 
             <p>
@@ -119,14 +132,15 @@ $photoWidth = "200";
                                 <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                    <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
+                                    <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase" data-bs-toggle="modal"
+                                      data-bs-target="#SeeExcModal<?php echo $excursion['idExcursion'] ?>">View</button>
+                                      
                                         <?php
                                         if (isset($_SESSION["typeUtilisateur"])) {
                                             if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
                                         ?>
 
 
-                                                <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button>
 
                                             <?php
                                             }
@@ -142,11 +156,44 @@ $photoWidth = "200";
                                 </div>
                             </div>
                     </div>
+                </div><div class="modal fade text-dark" id="SeeExcModal<?php echo $excursion['idExcursion'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="terrainModalLabel">Excursion <?php echo $excursion['labelExcursion']?></h5>
+                      </div>
+                      <div class="modal-body">
+                        <h5 class="modal-title" id="terrainModalLabel">ID</h5>
+
+                        <p for="titre" class="form-label h6"><?php echo $excursion['idExcursion'];?></p>
+                          <h5 class="modal-title" id="terrainModalLabel">Nom</h5>
+                        <p for="titre" class="form-label h6"><?php echo $excursion['labelExcursion'];?></p>
+                          <h5 class="modal-title" id="terrainModalLabel">Description</h5>
+                        <p for="titre" class="form-label h6"><?php echo $excursion['descExcursion'];?></p>
+                          <h5 class="modal-title" id="terrainModalLabel">Lieu de départ</h5>
+                        <p for="titre" class="form-label h6"><?php echo $excursion['departExcursion'];?></p>
+                          <h5 class="modal-title" id="terrainModalLabel">Lieu d'arrivé</h5>
+                        <p for="titre" class="form-label h6"><?php echo $excursion['arriveeExcursion'];?></p>
+                          <h5 class="modal-title" id="terrainModalLabel">Prix de l'excursion</h5>
+                        <p for="titre" class="form-label h6"><?php echo $excursion['prixExcursion'];?></p>
+                        <img src="<?php echo "../ASSETS/" . getPhotoOfExcursion($excursion['idExcursion'])['lienPhoto'] ?>" width="<?php echo $photoWidth ?>" height="<?php echo $photoHeight ?>" alt="randonne image top" class="card-img-top">
+                        <title><?php echo $excursion['labelExcursion']  ?></title>
+                        <rect width="100%" height="100%" fill="#55595c">
+                            </img>
+                      </div>
+                      <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             <?php
             }
             ?>
 
         </div>
+
+
     </div>
 </div>

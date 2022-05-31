@@ -28,7 +28,7 @@ foreach ($programs as $program) {
                     </div>
                 </div>
                 <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="background-color: rgba(200,200,200,0.5); height:100%!important;">
-                    <p class="card-text"><?php echo $program["descProgramme"]?></p>
+                    <p class="card-text"><?php echo substr($program["descProgramme"], 0, 250); ?></p>
                 </div>
 
                 <input type="button" value="Consulter" onclick="goToPost('Structure/PageRandonee.php','idProg', <?php echo $program['idProgramme'];?>)" class="btn btn-success w-100 mt-auto">

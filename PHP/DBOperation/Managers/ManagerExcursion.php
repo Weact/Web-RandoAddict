@@ -224,7 +224,7 @@ public function selectExcursionsByProgrammeId($id)
       $stmt->bindValue(":NEWINFO", $e->getsDesc_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWDEPART", $e->getsDepart_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
-      $stmt->bindValue(":NEWPRIX", $m->getfPrix_Excursion(), PDO::PARAM_STR);
+      $stmt->bindValue(":NEWPRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR);
 			$stmt->execute();
 
       // Return success

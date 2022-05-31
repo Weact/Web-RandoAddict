@@ -28,15 +28,16 @@
           $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
 
       }
+
       function getAllExcursionsFromProgram($pgrm)
-{
-  $conn = connect_bd();
+      {
+        $conn = connect_bd();
 
-  $mng_excur = new ManagerExcursion($conn);
-  $excurs = $mng_excur->selectExcursionsByProgrammeId($pgrm['idProgramme'])['stmt'];
+        $mng_excur = new ManagerExcursion($conn);
+        $excurs = $mng_excur->selectExcursionsByProgrammeId($pgrm['idProgramme'])['stmt'];
 
-  return $excurs;
-}
+        return $excurs;
+      }
 
       function makeNewTer($donnees) {
         $conn = connect_bd();
@@ -136,6 +137,7 @@
           makeNewPhoto($donnees_photo);
         }
 
+
     function getAllPrograms() {
           $conn = connect_bd();
           $mng = new ManagerProgramme($conn);
@@ -222,6 +224,15 @@
         $mng = new ManagerProgramme ($conn);
 
         $msg = $mng->deleteProgrammeById($idProg)['message'];
+
+        return $msg;
+
+    }
+    function deleteEscaleId($idProg, $idExc){
+        $conn = connect_bd();
+        $mng = new ManagerEscale($conn);
+
+        $msg = $mng->deleteEscaleByIdExcursionAndIdProg($idProg, $idExc)['message'];
 
         return $msg;
 

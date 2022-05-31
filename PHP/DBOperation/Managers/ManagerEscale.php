@@ -284,5 +284,33 @@ class ManagerEscale extends Manager
 
     }
   }
+  public function deleteEscaleByIdExcursionAndIdProg($idProg, $idExc)
+  {
+    $req = "DELETE FROM ESCALE WHERE idExcursion = :IDEXC AND IdProgramme = :IDPROG";
+
+    // Send the request to the Database
+    try {
+      $stmt = $this->getdb()->prepare($req);
+			$stmt->bindValue(":IDPROG", $idProg, PDO::PARAM_INT);
+			$stmt->bindValue(":IDEXC", $idExc, PDO::PARAM_INT);
+			$stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      return($result);
+
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = true;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return($result);
+
+			exit();
+
+    }
+  }
 }
 ?>
