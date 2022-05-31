@@ -42,10 +42,11 @@ function goTo(page) {
     });
 };
 
-function goToPost(page, id) {
-  console.log("Go to " + page);
+function goToPost(page, id, value = "") {
+  console.log("Go to " + page + " for ID " + id + " for value " + value);
   $.post(page,{
-        idProg: id
+        idProg: id,
+        value: value
       },
       function(data, status){
           $("#main").html(data);

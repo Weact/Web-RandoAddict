@@ -28,6 +28,10 @@ if (!isset($_SESSION['nomUtilisateur'])) {
 
 //Gestion de toutes les réceptions de tous les formulaires formulaires.
 
+if (isset($_POST["mailMarcheurCheck"])) {
+  $_SESSION['checkMailUtilisateur'] = $_POST["mailMarcheurCheck"];
+}
+
 // GERE L'INSCRIPTION UTILISATEUR NORMAL ET INSCRIPTION UTILISATEUR PAR ADMIN
 if (isset($_POST["sMail_Marcheur_Inscription"])) {
 
@@ -80,8 +84,8 @@ if (isset($_POST["deleteProgID"])) {
   $msg = deleteProgId($_POST["deleteProgID"]);
 }
 
-if(isset($_POST["leaveProgID"])){
-  $result = leaveProg($_SESSION['mailUtilisateur'], $_POST["leaveProgID"] );
+if (isset($_POST["leaveProgID"])) {
+  $result = leaveProg($_SESSION['mailUtilisateur'], $_POST["leaveProgID"]);
 }
 
 if (isset($_POST["update_role_marcheur"])) {
@@ -165,13 +169,12 @@ if (isset($_POST["sLabel_Prog"])) {
   $new_item = new Programme();
   $new_item->hydrate($donnees);
 
-  if( isset( $_POST["editForm"] ) ){
+  if (isset($_POST["editForm"])) {
     $mng->updateProgrammeById($new_item, $_POST['editForm']);
-  }else{
+  } else {
     // It's inserting a new programme into the database.
     $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
   }
-
 }
 
 
