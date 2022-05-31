@@ -60,10 +60,11 @@ require_once(__DIR__ . '/../Include/programManager.php');
     </div>
 
     <div class="container-fluid" id="randonneeCardContainer">
-        <div class="row p-1" id="randonneeCardsRow"> <!-- ADD CHILD CARDS IN THIS ELEMENT -->
-        <?php
-            include_once("RandonneeCardsGenerator.php")
-        ?>
+      <div class="row p-1" id="randonneeCardsRow">
+          <!-- ADD CHILD CARDS IN THIS ELEMENT -->
+          <?php
+          include_once("RandonneeCardsGenerator.php")
+      ?>
         </div>
     </div>
 </section>

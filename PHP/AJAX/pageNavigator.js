@@ -7,6 +7,8 @@ window.addEventListener("load", function () {
   goToOnClick(document.getElementsByClassName("goToDispRando"), "Structure/ListeRandonneesAccueil.php");
   goToOnClick(document.getElementsByClassName("goToAdmin"), "Structure/PageAdmin.php");
   goToOnClick(document.getElementsByClassName("goToContactFAQ"), "Structure/PageFAQ.php");
+
+  goSearchRandonnee(document.getElementById("researchRandonnee"), document.getElementById("randonneeRecherche"), "Structure/RandonneeCardsGenerator.php");
 });
 
 function goToOnClick(btnArray, page) {
@@ -38,3 +40,25 @@ function goToPost(page, keyId, value) {
         }
     );
 };
+function goSearchRandonnee(btn, input, page){
+  btn.addEventListener("click", ()=>{
+    searchRandonnee(page, input.value);
+  })
+  input.onkeypress = function(e){
+    var key = e.charCode || e.keyCode || 0;
+    if(key == 13){
+      searchRandonnee(page, input.value);
+      e.preventDefault();
+    }
+  }
+}
+function searchRandonnee(page, label){
+  console.log("Searching randonne in " + page + " with " + label + "...");
+  $.post(page, {
+    rechercheRandonnee: label
+  },
+  function(data, status){
+    $("#randonneeCardsRow").html(data);
+  });
+
+}

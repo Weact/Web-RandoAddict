@@ -28,6 +28,15 @@
           $_POST["sMail_Marcheur_Connexion"] = $_POST['sMail_Marcheur_Inscription'];
 
       }
+      function getAllExcursionsFromProgram($pgrm)
+{
+  $conn = connect_bd();
+
+  $mng_excur = new ManagerExcursion($conn);
+  $excurs = $mng_excur->selectExcursionsByProgrammeId($pgrm['idProgramme'])['stmt'];
+
+  return $excurs;
+}
 
       function makeNewTer($donnees) {
         $conn = connect_bd();
@@ -217,6 +226,14 @@
         return $msg;
 
     }
+    function getProgramsByName($prog_name)
+    {
+      $conn = connect_bd();
+      $mng = new ManagerProgramme($conn);
 
+      $progs = $mng->selectProgrammesByLabel($prog_name)['stmt'];
+
+      return $progs;
+    }
 
 ?>
