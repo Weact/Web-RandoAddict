@@ -20,8 +20,8 @@ require_once("programManager.php");
 
 $_SESSION['message']="";
 $_SESSION['status']="";
-var_dump($_SESSION);
-var_dump($_POST);
+//var_dump($_SESSION);
+//var_dump($_POST);
 
 //Vérification et initialisation des variables de session le cas échéant.
 if (!isset($_SESSION['typeUtilisateur'])) {
