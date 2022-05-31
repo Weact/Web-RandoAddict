@@ -35,11 +35,6 @@ if (isset($_POST['action'])) {
       $mng_Mat = new ManagerMateriel($conn);
       echo json_encode($mng_Mat->selectMaterielByProgrammeId($_POST["idProg"]));
       break;
-    //case "update":
-    //  $mng_Prog = new ManagerProgramme($conn);
-    //  $prog = $mng_Prog->selectProgrammeById( $_POST['idProg'] );
-    //  echo json_encode($mng_Prog->updateProgrammeById( $prog['stmt'] ) );
-    // break;
   }
 }
 

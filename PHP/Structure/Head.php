@@ -33,6 +33,11 @@
     }
     elseif(strtolower($_SESSION['typeUtilisateur']) == "guide" || strtolower($_SESSION["typeUtilisateur"]) == "marcheur")
     {
+      if( strtolower($_SESSION["nomUtilisateur"]) === "admin" ){
+        $random_pseudo = "User" . rand(0, 2147483646);
+        updateUserPseudo($_SESSION["mailUtilisateur"],$random_pseudo );
+        $_SESSION["nomUtilisateur"] = $random_pseudo;
+      }
       require_once("Structure/HeaderOnline.php");
     }
     else

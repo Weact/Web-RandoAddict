@@ -44,6 +44,14 @@ function updateUserRole($mail, $role)
   //echo json_encode($result);
 }
 
+function updateUserPseudo($mail, $pseudo){
+  $conn = connect_bd();
+  $mngu = new ManagerMarcheur($conn);
+  $new_marcheur = $mngu->selectMarcheurByMail($mail)['marcheur'];
+  $new_marcheur->setsPseudo_Marcheur($pseudo);
+  $result = $mngu->updateMarcheurByMail($new_marcheur, $mail);
+}
+
 function redirectUser()
 {
   header("HTTP/1.1 303 See Other");
