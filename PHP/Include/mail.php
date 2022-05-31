@@ -288,7 +288,6 @@
         // Le 1er fichier (inline)
         //---------------------------------
         $fichier = "../../ASSETS/".$image; //VariableASSETS/
-        //var_dump($fichier);
 
         $fp      = fopen($fichier, "rb");
         $fichierattache = fread($fp, filesize($fichier));

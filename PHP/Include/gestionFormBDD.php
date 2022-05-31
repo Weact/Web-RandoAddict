@@ -112,6 +112,7 @@ if (isset($_POST["sMail_Marcheur_Connexion"])) {
     connectUser($_POST["sMail_Marcheur_Connexion"]);
   }
 }
+
 if (isset($_POST["Nom_terrain_autre"])) {
   $donnees = array(
     'sLabel_Terrain' => $_POST['Nom_terrain_autre'],
@@ -134,9 +135,6 @@ if (isset($_POST["Nom_terrain_autre"])) {
     $nomImage = time() . uniqid(rand()) . "." . $imageFileType;
     $uploadfile = $uploaddir . basename($nomImage);
     move_uploaded_file($_FILES["image"]["tmp_name"], $uploadfile);
-
-    //var_dump($_FILES["image"]["tmp_name"]);
-    //var_dump($uploadfile);
   }
 
   $donnees = array(
@@ -166,7 +164,14 @@ if (isset($_POST["sLabel_Prog"])) {
 
   $new_item = new Programme();
   $new_item->hydrate($donnees);
-  $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
+
+  if( isset( $_POST["editForm"] ) ){
+    $mng->updateProgrammeById($new_item, $_POST['editForm']);
+  }else{
+    // It's inserting a new programme into the database.
+    $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
+  }
+
 }
 
 

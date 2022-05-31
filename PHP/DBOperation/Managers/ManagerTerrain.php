@@ -1,22 +1,23 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
-*
-* Description   : Le Manager pour la table Terrain.
-*
-* Classe        : ManagerTerrain
-* Fonctions     : arrayConstructor($stmt)
-*                 insertTerrain(Terrain $t)
-*                 selectTerrains()
-*                 selectTerrainByLabel($text)
-*                 updateTerrainByLabel(TERRAIN $t, $text)
-*                 deleteTerrainByLabel($text)
-*
-* Créateur      : Luc Cornu
-*
+ * Fichier       : /PHP/DBOperation/Managers/ManagerTerrain.php
+ *
+ * Description   : Le Manager pour la table Terrain.
+ *
+ * Classe        : ManagerTerrain
+ * Fonctions     : arrayConstructor($stmt)
+ *                 insertTerrain(Terrain $t)
+ *                 selectTerrains()
+ *                 selectTerrainByLabel($text)
+ *                 updateTerrainByLabel(TERRAIN $t, $text)
+ *                 deleteTerrainByLabel($text)
+ *
+ * Créateur      : Luc Cornu
+ *
 \*******************************************************************************/
 
-require_once(__DIR__."/../../DBOperation/Objects/TerrainObject.php");
+require_once(__DIR__ . "/../../DBOperation/Objects/TerrainObject.php");
 require_once("Manager.php");
 
 class ManagerTerrain extends Manager
@@ -24,15 +25,14 @@ class ManagerTerrain extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount() > 0)
-    {
+    if ($stmt->rowCount() > 0) {
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
         "sLabel_Terrain" => $valueStmt["labelTerrain"],
         "sDesc_Terrain" => $valueStmt["descTerrain"]
       );
-    }else{
+    } else {
       $tab = array(
         "sLabel_Terrain" => "",
         "sDesc_Terrain" => ""
@@ -60,17 +60,15 @@ class ManagerTerrain extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
       exit();
-
     }
   }
 
@@ -81,27 +79,24 @@ class ManagerTerrain extends Manager
     $req = "SELECT * FROM TERRAIN";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      $result['stmt'] = $stmt;
-      return($result);
-
+      $result['stmt'] = $stmt->fetchAll();
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
       exit();
-
     }
   }
 
@@ -113,13 +108,12 @@ class ManagerTerrain extends Manager
     $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->execute();
 
-			$t = new Terrain;
+      $t = new Terrain;
       $tab = $this->arrayConstructor($stmt);
       $t->hydrate($tab);
 
@@ -128,17 +122,15 @@ class ManagerTerrain extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['terrain'] = $t;
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
       exit();
-
     }
   }
 
@@ -149,29 +141,26 @@ class ManagerTerrain extends Manager
     $req = "UPDATE TERRAIN SET labelTerrain = :NEWLABEL, descTerrain = :NEWINFO WHERE labelTerrain = :LABEL";
 
     // Send the request to the Database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
       $stmt->bindValue(":NEWLABEL", $t->getsLabel_Terrain(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWINFO", $t->getsDesc_Terrain(), PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
       exit();
-
     }
   }
 
@@ -182,29 +171,24 @@ class ManagerTerrain extends Manager
     $req = "DELETE FROM TERRAIN WHERE labelTerrain = :LABEL";
 
     // Send the request to the Database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
       exit();
-
     }
   }
-
 }
-?>

@@ -1,22 +1,23 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerMateriel.php
-*
-* Description   : Le Manager pour la table Materiel.
-*
-* Classe        : ManagerMateriel
-* Fonctions     : arrayConstructor($stmt)
-*                 insertMateriel(Materiel $m)
-*                 selectMateriels()
-*                 selectMaterielByLabel($text)
-*                 updateMaterielByLabel($m, $text)
-*                 deleteMaterielByLabel($text)
-*
-* Créateur      : Luc Cornu
-*
+ * Fichier       : /PHP/DBOperation/Managers/ManagerMateriel.php
+ *
+ * Description   : Le Manager pour la table Materiel.
+ *
+ * Classe        : ManagerMateriel
+ * Fonctions     : arrayConstructor($stmt)
+ *                 insertMateriel(Materiel $m)
+ *                 selectMateriels()
+ *                 selectMaterielByLabel($text)
+ *                 updateMaterielByLabel($m, $text)
+ *                 deleteMaterielByLabel($text)
+ *
+ * Créateur      : Luc Cornu
+ *
 \*******************************************************************************/
 
-require_once(__DIR__."/../../DBOperation/Objects/MaterielObject.php");
+require_once(__DIR__ . "/../../DBOperation/Objects/MaterielObject.php");
 require_once("Manager.php");
 
 class ManagerMateriel extends Manager
@@ -24,19 +25,18 @@ class ManagerMateriel extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount() > 0)
-    {
+    if ($stmt->rowCount() > 0) {
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
         "sLabel_Materiel" => $valueStmt["labelMateriel"],
         "sDesc_Materiel" => $valueStmt["descMateriel"]
-        );
-    }else{
+      );
+    } else {
       $tab = array(
         "sLabel_Materiel" => "",
         "sDesc_Materiel" => ""
-        );
+      );
     }
 
     return $tab;
@@ -60,15 +60,13 @@ class ManagerMateriel extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Retour error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
 
@@ -79,56 +77,47 @@ class ManagerMateriel extends Manager
     $req = "SELECT * FROM MATERIEL";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->execute();
-
-      // Retour success
-      $result['success'] = true;
-      $result['error'] = false;
-      $result['message'] = "success";
-      $result['stmt'] = $stmt;
-      return($result);
-
-    } catch (PDOException $error) {
-      // Retour error
-      $result['success'] = false;
-      $result['error'] = true;
-      $result['message'] = $error->getMessage();
-      return($result);
-
-    }
-  }
-
-  public function selectMaterielByProgrammeId($text)
-  // Goal : Select a material by a given name
-  // Entry : A text for the name
-  // Return : A material object
-  {
-    $req = "SELECT * FROM MATERIEL WHERE labelMateriel = :LABEL";
-
-    // Send the request to the database
-    try
-    {
-      $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->execute();
 
       // Retour success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Retour error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
+    }
+  }
 
+  public function selectMaterielByProgrammeId($id)
+  {
+    $req = "SELECT * FROM MATERIEL WHERE labelMateriel IN(SELECT labelMateriel FROM NECESSAIRE WHERE IdProgramme = :ID)";
+
+    // Send the request to the database
+    try {
+      $stmt = $this->getdb()->prepare($req);
+      $stmt->bindvalue(":ID", $id, PDO::PARAM_INT);
+      $stmt->execute();
+
+      // Return success
+      $result['success'] = true;
+      $result['error'] = false;
+      $result['message'] = "success";
+      $result['stmt'] = $stmt->fetchAll();
+      return ($result);
+    } catch (PDOException $error) {
+      // Return error
+      $result['success'] = false;
+      $result['error'] = true;
+      $result['message'] = $error->getMessage();
+      return ($result);
     }
   }
 
@@ -139,10 +128,9 @@ class ManagerMateriel extends Manager
     $req = "UPDATE MATERIEL SET labelMateriel = :NEWLABEL, descMateriel = :NEWINFO WHERE labelMateriel = :LABEL";
 
     // Send the request to the database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
       $stmt->bindValue(":NEWLABEL", $m->getsLabel_Materiel(), PDO::PARAM_STR);
       $stmt->bindValue(":NEWINFO", $m->getsDesc_Materiel(), PDO::PARAM_STR);
       $stmt->execute();
@@ -151,16 +139,14 @@ class ManagerMateriel extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
-    } catch(PDOException $error) {
-			// Retour error
+      return ($result);
+    } catch (PDOException $error) {
+      // Retour error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
-		}
+      return ($result);
+    }
   }
 
   public function deleteMaterielByLabel($text)
@@ -172,24 +158,20 @@ class ManagerMateriel extends Manager
     // Send the request to the database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->bindValue(":LABEL", $text, PDO::PARAM_STR);
+      $stmt->execute();
 
       // Retour success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Retour error
       $result['success'] = false;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
-
+      return ($result);
     }
   }
-
 }
-?>

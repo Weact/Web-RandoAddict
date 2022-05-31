@@ -17,7 +17,31 @@ require_once(__DIR__ . "/../DBOperation/Managers/ManagerExcursion.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerTerrain.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerPhoto.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerParticipation.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerMateriel.php");
+
 $conn = connect_bd();
+
+if (isset($_POST['action'])) {
+  switch ($_POST['action']) {
+    case "edit":
+      $mng_Prog = new ManagerProgramme($conn);
+      echo json_encode($mng_Prog->selectProgrammeById($_POST["idProg"]));
+      break;
+    case "edit2":
+      $mng_Exc = new ManagerExcursion($conn);
+      echo json_encode($mng_Exc->selectExcursionsByProgrammeId($_POST["idProg"]));
+      break;
+    case "edit3":
+      $mng_Mat = new ManagerMateriel($conn);
+      echo json_encode($mng_Mat->selectMaterielByProgrammeId($_POST["idProg"]));
+      break;
+    //case "update":
+    //  $mng_Prog = new ManagerProgramme($conn);
+    //  $prog = $mng_Prog->selectProgrammeById( $_POST['idProg'] );
+    //  echo json_encode($mng_Prog->updateProgrammeById( $prog['stmt'] ) );
+    // break;
+  }
+}
 
 function makeNewProgram($donnees)
 {
@@ -120,7 +144,6 @@ function makeNewPhoto($donnees)
 {
   $conn = connect_bd();
 
-  //var_dump($donnees_photo);
   $mng_photo = new ManagerPhoto($conn);
   $new_photo = new Photo();
   $new_photo->hydrate($donnees);
@@ -214,7 +237,7 @@ function getExcsOfProg($prog)
   $mng2 = new ManagerExcursion($conn);
   $mng3 = new ManagerEscale($conn);
 
-  $escales = $mng3->selectEscaleByIdProg($prog['idProgramme'])['stmt'];
+  $escales = $mng3->selectEscalesByIdProg($prog['idProgramme'])['stmt'];
   $excursions = [];
   foreach ($escales as $escale) {
     array_push($excursions, $mng2->selectExcursionById($escale['idExcursion'])['stmt']);
@@ -268,12 +291,13 @@ function deleteProgId($idProg)
   return $msg;
 }
 
-function leaveProg($mailUtilisateur, $idProg){
+function leaveProg($mailUtilisateur, $idProg)
+{
   $conn = connect_bd();
 
   $mng_parti = new ManagerParticipation($conn);
 
   $result = $mng_parti->deleteParticipationByIdFromParticipant($idProg, $mailUtilisateur);
-  
+
   return $result;
 }

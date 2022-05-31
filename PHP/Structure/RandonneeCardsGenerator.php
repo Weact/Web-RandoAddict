@@ -1,4 +1,5 @@
 <?php
+include(__DIR__ . "/../Structure/FormProg.php");
 require_once(__DIR__ . "/../Include/programManager.php");
 
 
@@ -48,10 +49,10 @@ foreach ($programs as $program) {
                 <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="background-color: rgba(200,200,200,0.5); height:100%!important;">
                     <p class="card-text"><?php echo $description ?></p>
                 </div> <!-- 4 -->
-                <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php?',<?php echo $program['idProgramme'] ?>);">
+                <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" id="edit<?php echo $program['idProgramme'] ?>" onclick="goToPost('Structure/PageRandonee.php?',<?php echo $program['idProgramme'] ?>);">
 
                 <?php
-                if ( isset( $_SESSION["typeUtilisateur"] ) && $_SESSION["typeUtilisateur"] !== "anon" ) {
+                if (isset($_SESSION["typeUtilisateur"]) && $_SESSION["typeUtilisateur"] !== "anon") {
                 ?>
                     <div class="d-flex justify-content-around p-2 border rounded m-2" style="background-color: rgba(0, 125, 200, 0.3)">
                         <?php
@@ -59,7 +60,7 @@ foreach ($programs as $program) {
                         ?>
 
                             <form method="POST" action="#" id="editProgForm">
-                                <button class="btn btn-outline-warning mt-2 m-1" style="width: 10em;" type="submit" name="editProgID" value="<?php echo $program['idProgramme'] ?>">
+                                <button class="btn btn-outline-warning mt-2 m-1" style="width: 10em;" type="button" name="editProgID" data-bs-toggle="modal" data-bs-target="#editProgModal" onclick="editSelf(<?php echo $program['idProgramme'] ?>)" value="<?php echo $program['idProgramme'] ?>">
                                     <i class="bi bi-pencil-square fs-3 fw-bold" aria-hidden="true"></i>
                                 </button>
                             </form>
@@ -100,3 +101,68 @@ foreach ($programs as $program) {
 <?php
 }
 ?>
+
+<script>
+    function editSelf(id) {
+        $.post("./Include/programManager.php", {
+            action: "edit",
+            idProg: id
+        }, function(data, status) {
+            let result = jQuery.parseJSON(data);
+            console.log(result);
+            if (result["success"]) {
+                $programme = result["stmt"];
+                document.getElementById("selectionNom").value = $programme["labelProgramme"];
+                document.getElementById("descProg").value = $programme["descProgramme"];
+                document.getElementById("selectionTerrain").value = $programme["diffProgramme"];
+                document.getElementById("selectionQuantite").value = $programme["capaciteProgramme"];
+                let depart = $programme["dateDepartProgramme"].split(" ");
+                document.getElementById("startDate").value = depart[0];
+                document.getElementById("startHour").value = depart[1];
+                let arrivee = $programme["dateArriveeProgramme"].split(" ");
+                document.getElementById("arriveDate").value = arrivee[0];
+                document.getElementById("arriveHour").value = arrivee[1];
+                $.post("./Include/programManager.php", {
+                    action: "edit2",
+                    idProg: id
+                }, function(data, status) {
+                    let response = jQuery.parseJSON(data);
+                    if (response["success"]) {
+                        let values = [];
+                        response["stmt"].forEach(returnValue);
+
+                        function returnValue(item, index, arr) {
+                            values.push(item[0]);
+                        }
+                        let element = document.getElementById("selectionRando00");
+                        for (let i = 0; i < element.options.length; i++) {
+                            element.options[i].selected = values.includes(element.options[i].value);
+                        }
+                    } else {
+                        alert("erreur");
+                    }
+                });
+                $.post("./Include/programManager.php", {
+                    action: "edit3",
+                    idProg: id
+                }, function(data, status) {
+                    let response = jQuery.parseJSON(data);
+                    if (response["success"]) {
+                        response["stmt"].forEach(checkInput);
+
+                        function checkInput(item, index, arr) {
+                            document.getElementById(item[0]).checked = true;
+                        }
+
+                    } else {
+                        alert("erreur");
+                    }
+                });
+                document.getElementById("typeForm").value = id;
+
+            } else {
+                alert("erreur");
+            }
+        });
+    }
+</script>
