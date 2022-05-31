@@ -24,7 +24,7 @@ foreach ($programs as $program) {
                     <p class="card-text"><?php echo $program["descProgramme"]?></p>
                 </div>
 
-                <input type="button" value="Consulter" onclick="goToPost('Structure/PageRandonee.php',<?php echo $program['idProgramme'];?>)" class="btn btn-success w-100 mt-auto">
+                <input type="button" value="Consulter" onclick="goToPost('Structure/PageRandonee.php','idProg', <?php echo $prog['idProgramme'];?>)" class="btn btn-success w-100 mt-auto">
 
                 </div>
                 </div>
