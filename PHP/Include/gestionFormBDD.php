@@ -49,9 +49,6 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
       $donnees['sRole_Marcheur'] = $_POST['crea_sRole_Marcheur'];
     }
 
-    if (strtolower($donnees['sPseudo_Marcheur']) == "admin") {
-      $donnees['sRole_Marcheur'] = "Admin";
-    }
     makeNewUser($donnees);
     redirectUser(); // does the exit();
 
@@ -64,10 +61,6 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
         'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
         'sRole_Marcheur' => 'Marcheur'
       );
-
-      if ($donnees['sPseudo_Marcheur'] == "admin") {
-        $donnees['sRole_Marcheur'] = "Admin";
-      }
 
       if (isset($_POST['sRole_Marcheur'])) {
         $donnees['sRole_Marcheur'] = $_POST['sRole_Marcheur'];
@@ -96,10 +89,6 @@ if (isset($_POST["update_role_marcheur"])) {
     'sMdp_Marcheur' => $_POST['sMdp_Marcheur'],
     'sRole_Marcheur' => $_POST['update_role_marcheur']
   );
-
-  if ($donnees['sPseudo_Marcheur'] == "admin") {
-    $donnees['sRole_Marcheur'] = "Admin";
-  }
 
   if (isset($_POST['sRole_Marcheur'])) {
     $donnees['sRole_Marcheur'] = $_POST('sRole_Marcheur');
