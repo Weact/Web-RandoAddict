@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.9] - 2022-06-02
+### Added
+- Les utilisateurs du site peuvent désormais s'inscrire à un programme valide uniquement.
+
+### Changed
+- L'affichage des programmes est dépendant de la validité de ceux-ci :
+	- Si aucun programme n'est recherché, le site n'affiche que les programmes avec une date valide.
+	- Sinon, il affiche tous les programmes correspondants à la recherche, même ceux avec une date dépassée.
+- Création de compte par l'administrateur opérationnel.
+
 ## [0.1.8] - 2022-05-31
 ### Added
 - Ajout de la carte, de la date et du bouton d'inscription fonctionnel.

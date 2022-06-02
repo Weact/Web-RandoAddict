@@ -95,6 +95,16 @@ function getAllPrograms()
   return $users;
 }
 
+function getAllValidePrograms()
+{
+  $conn = connect_bd();
+  $mng = new ManagerProgramme($conn);
+
+  $users = $mng->selectProgrammesWithValideDate()['stmt'];
+
+  return $users;
+}
+
 function getFirstPhotoByProgrammeId($id)
 {
   $conn = connect_bd();

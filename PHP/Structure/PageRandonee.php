@@ -38,12 +38,20 @@ if (count($FirstPhoto) > 0) {
 } else {
     $photo = '../ASSETS/PaysageRandonnee_2.jpg';
 }
+
+$valideProgs = getAllValidePrograms();
+$bValide = false;
+foreach ($valideProgs as $prog) {
+    if ($prog[0] == $program['idProg']) {
+        $bValide = true;
+    }
+}
 ?>
 
 <section class="py-5 text-center container">
     <div class="col-sm-16 col-md-9 col-lg-8 col-xl-7 mb-1 mx-auto" id="randonneeCardBase">
         <div class="card text-dark fw-bold">
-            <img src="<?php echo $photo; ?>" alt="randonne image top" class="card-img-top">
+            <img src="<?php echo $photo; ?>" alt="randonne image top" height="600" class="card-img-top">
             <div class="card-img-overlay d-flex flex-column align-items-center" style="background-color: rgba(200,200,200,0.5);">
                 <div class="row">
                     <div class="col">
@@ -68,18 +76,18 @@ if (count($FirstPhoto) > 0) {
 
                 <div class="d-flex flex-wrap row p-3 border rounded border-light justify-content-around font-monospace fw-bold" style="background-color: rgba(0, 125, 255, 0.55)">
                     <div class="col-8">
-                        <h3 class="display-6">Date de départ</h3>
-                        <p class="fs-4 text-dark"> <?php echo $program['departProg']; ?> </p>
+                        <h3 class="fs-3">Date de départ</h3>
+                        <p class="fs-6 text-dark"> <?php echo $program['departProg']; ?> </p>
                     </div>
                     <div class="col-8">
-                        <h3 class="display-6">Date d'arrivée</h3>
-                        <p class="fs-4 text-dark"> <?php echo $program['arriveeProg']; ?> </p>
+                        <h3 class="fs-3">Date d'arrivée</h3>
+                        <p class="fs-6 text-dark"> <?php echo $program['arriveeProg']; ?> </p>
                     </div>
 
                     <?php
 
                     if (isset($_SESSION['mailUtilisateur'])) {
-                        if (strtolower($_SESSION['typeUtilisateur']) != "anon" && strtolower($_SESSION['typeUtilisateur'] != '')) {
+                        if (strtolower($_SESSION['typeUtilisateur']) != "anon" && strtolower($_SESSION['typeUtilisateur'] != '') && $bValide) {
                     ?>
                             <form id="join_prog" name="join_prog" class="form" method="POST" action="#">
                                 <input hidden name="idMarcheurJoin" value="<?php echo $_SESSION['mailUtilisateur']; ?> "></input>

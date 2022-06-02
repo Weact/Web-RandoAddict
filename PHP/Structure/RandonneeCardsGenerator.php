@@ -4,15 +4,11 @@ include_once("FormProg.php");
 require_once(__DIR__ . "/../Include/programManager.php");
 
 $programs;
-if (isset($_POST['labelProg'])) {
+if (isset($_POST['labelProg']) && $_POST['labelProg'] != '') {
     $programs = getProgramsByName($_POST['labelProg']);
 } else {
-    $programs = getAllPrograms();
+    $programs = getAllValidePrograms();
 }
-
-// $conn = connect_bd();
-// $mng_Prog = new ManagerProgramme($conn)
-// var_dump ($mng_Prog->selectProgrammeById(137)["programme"]);
 
 foreach ($programs as $program) {
     $name = $program[1];

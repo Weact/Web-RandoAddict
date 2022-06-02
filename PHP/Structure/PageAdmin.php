@@ -241,7 +241,7 @@
                         <div class="row">
                             <div class="col">
                                 <div class="mb-3 mt-3 form-floating">
-                                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="email" placeholder="Entrer email" name="email" required>
+                                    <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" class="form-control" id="sMail_Marcheur_Inscription" placeholder="Entrer email" name="sMail_Marcheur_Inscription" required>
                                     <label for="email" class="form-label h6">Email</label>
                                 </div>
                             </div>
@@ -250,14 +250,14 @@
                             <div class="col">
                                 <!--Pseudo-->
                                 <div class="mb-3 form-floating">
-                                    <input type="name" class="form-control" id="name" placeholder="Entrer pseudonyme" name="name" required>
+                                    <input type="name" class="form-control" id="sPseudo_Marcheur" placeholder="Entrer pseudonyme" name="sPseudo_Marcheur" required>
                                     <label for="name" class="form-label h6">Pseudonyme</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Phone-->
                                 <div class="mb-3 form-floating">
-                                    <input required placeholder="01234567890" id="phone" class="form-control" title="Format : 01234567890" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
+                                    <input required placeholder="01234567890" id="sTel_Marcheur" name="sTel_Marcheur" class="form-control" title="Format : 01234567890" pattern="[0][0-9]{9}" type="tel" onchange="inputValidation(this)" />
                                     <label for="phone" class="form-label h6">Numéro de téléphone portable</label>
                                 </div>
                             </div>
@@ -266,14 +266,14 @@
                             <div class="col">
                                 <!--Password-->
                                 <div class="mb-3 form-floating">
-                                    <input type="password" class="form-control" id="password" placeholder="Entrer mot de passe" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
+                                    <input type="password" class="form-control" id="sMdp_Marcheur" placeholder="Entrer mot de passe" name="sMdp_Marcheur" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus." required>
                                     <label for="password" class="form-label h6">Mot de passe</label>
                                 </div>
                             </div>
                             <div class="col">
                                 <!--Is guide-->
                                 <div class="mb-3 form-floating">
-                                    <select class="form-select">
+                                    <select class="form-select" id="sRole_Marcheur" name="sRole_Marcheur">
                                         <option>Marcheur</option>
                                         <option>Guide</option>
                                         <option>Administrateur</option>

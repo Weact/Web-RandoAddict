@@ -297,7 +297,7 @@ class ManagerProgramme extends Manager
   // Goal : Select a program still valid considering the date
   // Return : An array holding all the programs valid
   {
-    $req = "SELECT * FROM PROGRAMME WHERE departProgramme > (CURDATE() + INTERVAL 3 DAY)"; // TO-DO : Verify this one
+    $req = "SELECT * FROM PROGRAMME WHERE dateDepartProgramme > (CURDATE() + INTERVAL 3 DAY)"; // TO-DO : Verify this one
 
     // Send the request to the database
     try {

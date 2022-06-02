@@ -74,8 +74,10 @@ if (!isset($_SESSION['nomUtilisateur'])) {
   $_SESSION['nomUtilisateur'] = "anon";
 }
 
-// Gestion de toutes les réceptions de tous les formulaires formulaires.
+// Gestion de toutes les réceptions de tous les formulaires.
 if (isset($_POST["sMail_Marcheur_Inscription"])) {
+  echo "JAAAAAAAAAAAAAAJ";
+
   $donnees = array(
     'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
     'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
@@ -89,7 +91,7 @@ if (isset($_POST["sMail_Marcheur_Inscription"])) {
   }
 
   if (isset($_POST['sRole_Marcheur'])) {
-    $donnees['sRole_Marcheur'] = $_POST('sRole_Marcheur');
+    $donnees['sRole_Marcheur'] = $_POST['sRole_Marcheur'];
   }
 
   makeNewUser($donnees);
