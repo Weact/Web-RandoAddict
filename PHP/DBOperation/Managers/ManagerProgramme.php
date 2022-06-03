@@ -23,6 +23,7 @@ require_once(__DIR__."/../Objects/ProgrammeObject.php");
 require_once("ManagerEscale.php");
 require_once("ManagerNecessaire.php");
 require_once("ManagerMateriel.php");
+require_once("ManagerCorrespondance.php");
 
 require_once("Manager.php");
 
@@ -86,7 +87,7 @@ class ManagerProgramme extends Manager
     foreach($labels as $materielLabel)
     {
       $donnees = array (
-        "nId_Prog"  => $prog_id,
+        "nId_Prog" => $prog_id,
         "sLabel_Materiel" => $materielLabel
       );
 
@@ -97,8 +98,27 @@ class ManagerProgramme extends Manager
     }
   }
 
+  private function autoInsertCorrespondanceType(array $types, $prog_id)
+  {
+    var_dump($types);
+    $m_c = new ManagerCorrespondance(connect_bd());
+
+    foreach($types as $typeLabel)
+    {
+      $donnees = array (
+        "nId_Prog" => $prog_id,
+        "sLabel_Type" => $typeLabel
+      );
+
+      $c = new Correspondance;
+      $c->hydrate($donnees);
+
+      $m_c->insertCorrespondance($c);
+    }
+  }
+
   // Database commands
-  public function insertProgramme(Programme $p, array $ids, array $labels)
+  public function insertProgramme(Programme $p, array $ids, array $labels, array $types)
   // Goal : Insert a program in the database
   // Entry : A program object
   {
@@ -120,6 +140,7 @@ class ManagerProgramme extends Manager
       $last_id = $this->getdb()->lastInsertId();
       $this->autoInsertEscale($ids, $last_id);
       $this->autoInsertNecessaire($labels, $last_id);
+      $this->autoInsertCorrespondanceType($types, $last_id);
 
       // Return success
       $result['success'] = true;

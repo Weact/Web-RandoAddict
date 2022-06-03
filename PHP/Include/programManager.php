@@ -17,6 +17,8 @@ require_once(__DIR__ . "/../DBOperation/Managers/ManagerExcursion.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerPhoto.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerMateriel.php");
 require_once(__DIR__ . "/../DBOperation/Managers/ManagerParticipation.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerType.php");
+require_once(__DIR__ . "/../DBOperation/Managers/ManagerTerrain.php");
 
 
 function makeNewProgram($donnees)
@@ -40,6 +42,16 @@ function makeNewMat($donnees)
   $result = $mng->insertMateriel($new_item);
 }
 
+function makeNewTerrain($donnees) {
+  $conn = connect_bd();
+  $mng_Terr = new ManagerTerrain($conn);
+  
+  $new_Terrain = new Terrain();
+  $new_Terrain->hydrate($donnees);
+  $mng_Terr->insertTerrain($new_Terrain);
+  
+}
+
 function getAllExc()
 {
   $conn = connect_bd();
@@ -60,14 +72,30 @@ function getAllMat()
   return $users;
 }
 
-function makeNewExcursion($donnees)
+function getAllTypes()
+{
+  $conn = connect_bd();
+  $mng_Type = new ManagerType($conn);
+
+  return $mng_Type->selectTypes()['stmt'];
+}
+
+function getAllTerrains()
+{
+  $conn = connect_bd();
+  $mng_Terrain = new ManagerTerrain($conn);
+
+  return $mng_Terrain->selectTerrains()['stmt'];
+}
+
+function makeNewExcursion($donnees, array $terrains)
 {
   $conn = connect_bd();
 
   $mng = new ManagerExcursion($conn);
   $new_item = new Excursion();
   $new_item->hydrate($donnees);
-  $result = $mng->insertExcursion($new_item);
+  $result = $mng->insertExcursion($new_item, $terrains);
 
   $new_item = $result['newExcursionId'];
 

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.10] - 2022-06-03
+### Changed
+- Les formulaires de création/modification des excursions et des programmes ont été complétés. Ils sont désormais 100% opérationnels.
+- La base de données a été mise à jour pour pouvoir supprimer correctement des programmes. 
+
 ## [0.1.9] - 2022-06-02
 ### Added
 - Les utilisateurs du site peuvent désormais s'inscrire à un programme valide uniquement.

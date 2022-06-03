@@ -21,6 +21,7 @@
 
 require_once(__DIR__."/../Objects/ExcursionObject.php");
 require_once(__DIR__."/../Objects/EscaleObject.php");
+require_once("ManagerTraversee.php");
 require_once("Manager.php");
 
 class ManagerExcursion extends Manager
@@ -53,8 +54,26 @@ class ManagerExcursion extends Manager
     return $tab;
   }
 
+  private function autoInsertTraversee(array $terrains, $prog_id)
+  {
+    $m_t = new ManagerTraversee(connect_bd());
+
+    foreach($terrains as $terrain)
+    {
+      $donnees = array (
+        "nId_Excursion" => $prog_id,
+        "sLabel_Terrain" => $terrain
+      );
+
+      $t = new Traversee;
+      $t->hydrate($donnees);
+
+      $m_t->insertTraversee($t);
+    }
+  }
+
   // Database commands
-  public function insertExcursion(Excursion $e)
+  public function insertExcursion(Excursion $e, array $terrains)
   // Goal : Insert an excursion in the database
   // Entry : A excursion object
   {
@@ -71,6 +90,9 @@ class ManagerExcursion extends Manager
       $stmt->bindValue(":ARRIVEE", $e->getsArrivee_Excursion(), PDO::PARAM_STR);
       $stmt->bindValue(":PRIX", $e->getfPrix_Excursion(), PDO::PARAM_STR); // There is no PDO::PARAM_FLOAT
       $stmt->execute();
+
+      $last_id = $this->getdb()->lastInsertId();
+      $this->autoInsertTraversee($terrains, $last_id);
 
       // Return success
       $result['success'] = true;

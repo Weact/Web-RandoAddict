@@ -110,7 +110,7 @@ class ManagerTerrain extends Manager
   // Entry : A text
   // Return : A terrain identified by the text
   {
-    $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL"
+    $req = "SELECT * FROM TERRAIN WHERE labelTerrain = :LABEL";
 
     // Send the request to the database
     try

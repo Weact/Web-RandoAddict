@@ -50,7 +50,6 @@ if (isset($_POST['action'])) {
 
 if (isset($_POST['idMarcheurJoin']))
 {
-  var_dump ($_POST["idProgJoin"]);
   $conn = connect_bd();
   $mng_Part = new ManagerParticipation($conn);
 
@@ -76,8 +75,6 @@ if (!isset($_SESSION['nomUtilisateur'])) {
 
 // Gestion de toutes les réceptions de tous les formulaires.
 if (isset($_POST["sMail_Marcheur_Inscription"])) {
-  echo "JAAAAAAAAAAAAAAJ";
-
   $donnees = array(
     'sMail_Marcheur' => $_POST['sMail_Marcheur_Inscription'],
     'sPseudo_Marcheur' => $_POST['sPseudo_Marcheur'],
@@ -129,13 +126,15 @@ if (isset($_POST["sMail_Marcheur_Connexion"])) {
   }
 }
 
-if (isset($_POST["Nom_materiel_autre"])) {
-  $donnees = array(
-    'sLabel_Materiel' => $_POST['Nom_materiel_autre'],
-    'sDesc_Materiel' => "desc"
+if (isset($_POST["Nom_terrain_autre"])) {
+  $donnees = array (
+    'sLabel_Terrain' => $_POST['Nom_terrain_autre'],
+    'sDesc_Terrain' => 'desc'
   );
-  makeNewMat($donnees);
-} elseif (isset($_POST["labelExcursion"])) {
+  makeNewTerrain($donnees);
+}
+
+if (isset($_POST["labelExcursion"])) {
   $nomImage = "";
   $uploaddir = '.././ASSETS/';
   $uploadfile = $uploaddir . basename($_FILES["image"]["name"]);
@@ -159,13 +158,22 @@ if (isset($_POST["Nom_materiel_autre"])) {
     'sNom_Image' => $nomImage
   );
 
-  makeNewExcursion($donnees);
+  makeNewExcursion($donnees, $_POST['terrain']);
+}
+
+// Création de programme
+if (isset($_POST["Nom_materiel_autre"])) {
+  $donnees = array(
+    'sLabel_Materiel' => $_POST['Nom_materiel_autre'],
+    'sDesc_Materiel' => 'desc'
+  );
+  makeNewMat($donnees);
 }
 
 if (isset($_POST["sLabel_Prog"])) {
   $mng = new ManagerProgramme($conn);
 
-  $materiels = $_POST['materiel'];
+  // $materiels = $_POST['materiel'];
   // var_dump($materiels);
   // TO DO : ADD sExcur_Prog
   $donnees = array(
@@ -186,7 +194,7 @@ if (isset($_POST["sLabel_Prog"])) {
     // echo $_POST["editForm"];
     $mng->updateProgrammeById($new_item, $_POST["editForm"]);
   } else {
-    $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);
+    $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel'], $_POST['type']);
   }
 }
 

@@ -1,3 +1,5 @@
+<?php require_once(__DIR__ . '/../Include/programManager.php'); ?>
+
 <div class="container bg-light p-3">
     <h2 class="text-center text-success">Page administrateur</h2>
 
@@ -31,66 +33,25 @@
         <div class="tab-content text-dark m-5">
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="crea_rando">
                 <form id='creation_rando' name='creation_rando' class="form" method="POST" action="#" enctype="multipart/form-data">
-                  <legend for="selection_rando">Nom de la randonnée</legend>
-                  <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
+                    <legend for="selection_rando">Nom de la randonnée</legend>
+                    <textarea name="labelExcursion" class="form-control" aria-label="nom_randonnee" required></textarea>
                     <div class="form-group">
 
-                        <legend for="selection_rando">Type de terrain</legend><br>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="ck6">
-                            <label class="form-check-label h6" for="ck6">Fitness</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="ck7">
-                            <label class="form-check-label h6" for="ck7">Restaurant</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c1" id="c_ck1">
-                            <label class="form-check-label h6" for="c_ck1">Forêt</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c2" id="c_ck2">
-                            <label class="form-check-label h6" for="c_ck2">Montagne</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c3" id="c_ck3">
-                            <label class="form-check-label h6" for="c_ck3">Plaine</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c4" id="c_ck4">
-                            <label class="form-check-label h6" for="c_ck4">Désert</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c5" id="c_ck5">
-                            <label class="form-check-label h6" for="c_ck5">Glacier</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c6" id="c_ck6">
-                            <label class="form-check-label h6" for="c_ck6">Vignes</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c7" id="c_ck7">
-                            <label class="form-check-label h6" for="c_ck7">Ruines</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c8" id="c_ck8">
-                            <label class="form-check-label h6" for="c_ck8">Milieu urbain</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c9" id="c_ck9">
-                            <label class="form-check-label h6" for="c_ck9">Jungle</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c10" id="c_ck10">
-                            <label class="form-check-label h6" for="c_ck10">Tundra</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" value="c11" id="c_ck11">
-                            <label class="form-check-label h6" for="c_ck11">Profondeur océanique</label>
+                        <div>
+                            <legend for="selection_rando">Type de terrain</legend><br>
+                            <?php
+                            $i = 0;
+                            foreach (getAllTerrains() as $Terrain) {
+                                echo '<div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="terrain[]" type="checkbox" value="' . $Terrain[0] . '" id="ck' . $i . '">
+                                    <label class="form-check-label h6" for="ck' . $i . '">' . $Terrain[0] . '</label>
+                                </div>';
+                                $i++;
+                            }
+                            ?>
                         </div>
 
-                        <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
-                          data-bs-target="#terrainModal">Ajouter un terrain</button>
+                        <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#terrainModal">Ajouter un terrain</button>
 
                         <legend for="prix_pers">Prix par personne</legend>
                         <div class="def-number-input number-input safari_only">
@@ -112,13 +73,13 @@
                         <legend for="selection">Description</legend>
                         <textarea name="descExcursion" class="form-control" aria-label="Description"></textarea>
                         <br>
-                        
+
                         <!--Inclusion d'une image-->
                         <legend for="fileInput">Image de l'excursion</legend>
-                        <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary"/>
+                        <input type="file" id="fileInput" accept="image/png, image/jpeg, image/jpg" name="image" required class="btn-outline-primary" />
                         <input type="hidden" name="MAX_FILE_SIZE" value="300000" />
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
 
                         <button class="btn  btn-outline-success mb-1" type="submit">Valider</button>
 
@@ -136,7 +97,6 @@
                     <select multiple name="sExcur_Prog[]" id="selection_rando" class="form-control" required>
                         <optgroup>
                             <?php
-                            require_once(__DIR__ . '/../Include/programManager.php');
                             $excursions = getAllExc();
                             foreach ($excursions as $excursion) {
                                 echo "<option value='" . $excursion[0] . "'>" . $excursion[1] . "</option>";
@@ -169,62 +129,53 @@
                         <button type="button" onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                     </div>
 
-                    <legend for="selection_rando">Type de programme</legend><br>
+                    <div>
+                        <legend for="selection_rando" id="selectionType">Type de programme</legend><br>
+                        <?php
+                        $i = 0;
+                        foreach (getAllTypes() as $Type) {
+                            echo '<div class="form-check form-check-inline">
+                                <input class="form-check-input" name="type[]" type="checkbox" value="' . $Type[0] . '" id="ck' . $i . '">
+                                <label class="form-check-label h6" for="ck' . $i . '">' . $Type[0] . '</label>
+                            </div>';
+                            $i++;
+                        }
+                        ?>
+                    </div>
 
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                        <label class="form-check-label h6" for="ck1">Senior</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-                        <label class="form-check-label h6" for="ck2">Junior</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-                        <label class="form-check-label h6" for="ck3">Majeur</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                        <label class="form-check-label h6" for="ck4">Nature</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                        <label class="form-check-label h6" for="ck5">Histoire</label>
-                    </div>
 
                     <legend for="startDate">Date de départ</legend>
-                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required/>
+                    <input name="sDepart_Prog" id="startDate" class="form-control" type="date" required />
 
                     <legend for="startDate">Heure de départ</legend>
                     <div class="cs-form">
-                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required/>
+                        <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
 
                     <legend for="arriveDate">Date d'arriver</legend>
-                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required/>
+                    <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required />
 
                     <legend for="arriveDate">Heure d'arrivée</legend>
                     <div class="cs-form">
-                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required/>
+                        <input name="sArriveHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
-                  <div>
-                    <legend for="selection">Matériel</legend>
-                    <?php
-                    require_once(__DIR__ . '/../Include/programManager.php');
-                    $materiels = getAllMat();
-                    foreach ($materiels as $materiel) {
-                        echo '<div class="form-check form-check-inline">
-                            <input class="form-check-input" name="materiel[]" type="checkbox" id="'. $materiel[0] . '" value="'. $materiel[0] . '">
-                            <label class="form-check-label h6" for="'. $materiel[0] . '">' . $materiel[0] . "</label>
+                    <div>
+                        <legend for="selection">Matériel</legend>
+                        <?php
+                        require_once(__DIR__ . '/../Include/programManager.php');
+                        $materiels = getAllMat();
+                        foreach ($materiels as $materiel) {
+                            echo '<div class="form-check form-check-inline">
+                            <input class="form-check-input" name="materiel[]" type="checkbox" id="' . $materiel[0] . '" value="' . $materiel[0] . '">
+                            <label class="form-check-label h6" for="' . $materiel[0] . '">' . $materiel[0] . "</label>
                         </div>";
-                    }
+                        }
 
-                    ?>
+                        ?>
 
-                    <br>
-                  </div>
-                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal"
-                      data-bs-target="#materielModal">Ajouter un materiel</button>
+                        <br>
+                    </div>
+                    <button type="button" class="btn btn-outline-warning fs-5 fw-bold border-2" data-bs-toggle="modal" data-bs-target="#materielModal">Ajouter un materiel</button>
 
                     <legend for="selection_rando">Description</legend>
                     <textarea name="sDesc_Prog" class="form-control" aria-label="Background et notes" required></textarea>
@@ -379,23 +330,23 @@
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="tab-pane fade bg-white rounded p-2 col-4 container" id="membres">
                 <?php
-                    require_once(__DIR__ ."/../Include/userManager.php");
-                    $users = getAllUsers();
-                    foreach($users as $user) {
-                        echo '<div class="card">
+                require_once(__DIR__ . "/../Include/userManager.php");
+                $users = getAllUsers();
+                foreach ($users as $user) {
+                    echo '<div class="card">
                             <label for="guide" class="form-label h6">Nom</label>
-                            <div class="card-header h5">'.$user[1].'</div>
+                            <div class="card-header h5">' . $user[1] . '</div>
                             <label for="guide" class="form-label h6">Statut</label>
-                            <div class="card-body h5">'.$user[4].'</div>
+                            <div class="card-body h5">' . $user[4] . '</div>
                             <label for="guide" class="form-label h6">Mail</label>
-                            <div class="card-body h5">'.$user[0].'</div>
+                            <div class="card-body h5">' . $user[0] . '</div>
                             <label for="guide" class="form-label h6">Téléphone</label>
-                            <div class="card-body h5">'.$user[2].'</div>
+                            <div class="card-body h5">' . $user[2] . '</div>
 
                             <button class="btn  btn-outline-success mb-1" type="submit">Randonnées</button>
                         </div>
                         ';
-                    }
+                }
                 ?>
                 <!-- <div class="card">
                     <label for="guide" class="form-label h6">Nom</label>
@@ -412,47 +363,45 @@
             </div>
 
             <!----------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
-                  </div>
-                  <form id='ajout_terrain_form' name='ajout_terrain_form' class="form" method="POST" action="#">
-                  <div class="modal-body">
-                    <label for="email" class="form-label h6">Nom du nouveau materiel</label>
-                    <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
-                  </form>
-                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
+            <div class="modal fade" id="materielModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ajout de materiel</h5>
+                        </div>
+                        <form id='ajout_terrain_form' name='ajout_terrain_form' class="form" method="POST" action="#">
+                            <div class="modal-body">
+                                <label for="email" class="form-label h6">Nom du nouveau materiel</label>
+                                <textarea name="Nom_materiel_autre" class="form-control" aria-label="Nom_materiel_autre"></textarea>
+                            </div>
+                            <div class="modal-footer justify-content-between">
+                                <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                        </form>
+                        <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <!----------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="modal fade" id="terrainModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-              aria-hidden="true">
-              <div class="modal-dialog">
+        </div>
+        <!----------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="modal fade" id="terrainModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
-                  </div>
-                  <form id='add_terrain_form' name='creation_rando' class="form" method="POST" action="#">
-                  <div class="modal-body">
-                    <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
-                    <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
-                  </div>
-                  <div class="modal-footer justify-content-between">
-                    <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
-                  </form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="terrainModalLabel">Ajout de terrain</h5>
+                    </div>
+                    <form id='add_terrain_form' name='creation_rando' class="form" method="POST" action="#">
+                        <div class="modal-body">
+                            <label for="titre" class="form-label h6">Nom du nouveau terrain</label>
+                            <textarea name="Nom_terrain_autre" class="form-control" aria-label="Nom_terrain_autre"></textarea>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <button type="submit" class="btn btn-outline-warning fs-5 fw-bold border-2">Ajouter</button>
+                    </form>
                     <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>
+</div>
+</div>
 </div>
