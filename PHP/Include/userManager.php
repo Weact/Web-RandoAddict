@@ -77,11 +77,12 @@ function connectUser($mail)
     $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
     $_SESSION['mailUtilisateur'] = $mail;
     $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
+  }
 
-  $_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
+  /*$_SESSION['nomUtilisateur'] = $current_marcheur->getsPseudo_Marcheur();
   $_SESSION['mailUtilisateur'] = $mail;
   $_SESSION['typeUtilisateur'] = $current_marcheur->getsRole_Marcheur();
-  $_SESSION['checkMailUtilisateur'] = $mail;
+  $_SESSION['checkMailUtilisateur'] = $mail;*/
 
   redirectUser();
 }

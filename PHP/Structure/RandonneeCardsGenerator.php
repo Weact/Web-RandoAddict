@@ -195,8 +195,7 @@ foreach ($programs as $program) {
     echo '</div>
         </div>
     </div>';
-  }
-}
+  } 
 ?>
 
 <script>
