@@ -1,22 +1,23 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Objects/ProgrammeObject.php
-*
-* Description   : L'objet Programme.
-*
-* Classe        : Programme
-* Fonctions     : hydrate(array $donnees)
-*				          __destruct()
-*				          Getters & Setters
-*
-* Créateur      : Luc Cornu
-*
+ * Fichier       : /PHP/DBOperation/Objects/ProgrammeObject.php
+ *
+ * Description   : L'objet Programme.
+ *
+ * Classe        : Programme
+ * Fonctions     : hydrate(array $donnees)
+ *				          __destruct()
+ *				          Getters & Setters
+ *
+ * Créateur      : Luc Cornu
+ *
 \*******************************************************************************/
 
 class Programme implements JsonSerializable
 {
-	// Private members
-	private $nId_Prog;
+  // Private members
+  private $nId_Prog;
   private $sLabel_Prog;
   private $sDesc_Prog;
   private $sDepart_Prog;
@@ -25,42 +26,41 @@ class Programme implements JsonSerializable
   private $nDifficulte_Prog;
   private $sValide_Prog;
 
-	// Methods
-	// Hydrate
-	public function hydrate(array $donnees)
-	{
-		foreach($donnees as $key => $value)
-		{
+  // Methods
+  // Hydrate
+  public function hydrate(array $donnees)
+  {
+    foreach ($donnees as $key => $value) {
       // We get the name of the setter corresponding to the attribut
-			$method = "set".$key;
+      $method = "set" . $key;
 
-			// If the setter exists
-			if(method_exists($this, $method))
-			{
-				// We call the setter
-				$this->$method($value);
-			}
-		}
-	}
+      // If the setter exists
+      if (method_exists($this, $method)) {
+        // We call the setter
+        $this->$method($value);
+      }
+    }
+  }
 
-	public function __destruct()
-	{
-		// None
-	}
+  public function __destruct()
+  {
+    // None
+  }
 
-  public function jsonSerialize () {
+  public function jsonSerialize()
+  {
     return array(
-        'idProg'=>$this->nId_Prog,
-        'labelProg'=>$this->sLabel_Prog,
-        'descProg'=>$this->sDesc_Prog,
-        'diffProg'=>$this->nDifficulte_Prog,
-        'capaciteProg'=>$this->nCapacite_Prog,
-        'departProg'=>$this->sDepart_Prog,
-        'arriveeProg'=>$this->sArrivee_Prog
+      'idProg' => $this->nId_Prog,
+      'labelProg' => $this->sLabel_Prog,
+      'descProg' => $this->sDesc_Prog,
+      'diffProg' => $this->nDifficulte_Prog,
+      'capaciteProg' => $this->nCapacite_Prog,
+      'departProg' => $this->sDepart_Prog,
+      'arriveeProg' => $this->sArrivee_Prog
     );
   }
 
-	// Getters & Setters
+  // Getters & Setters
   public function getnId_Prog()
   {
     return $this->nId_Prog;
@@ -140,6 +140,4 @@ class Programme implements JsonSerializable
   {
     $this->sValide_Prog = $text;
   }
-
 }
-?>

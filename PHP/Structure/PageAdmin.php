@@ -347,6 +347,23 @@
                     $users = getAllUsers();
 
                     foreach ($users as $user) {
+                    ?>
+                        <div class="card col-sm-12 col-md-5 mt-3 mb-3 border border-2 border-primary">
+                            <label for="" class="form-label h3 text-success">Nom</label>
+                            <div class="card-header h5 text-primary"><?php echo $user[1] ?></div>
+                            <label class="form-label h3 text-success">Mail</label>
+                            <div class="card-body h5 text-primary"><?php echo $user[0] ?></div>
+                            <label class="form-label h3 text-success">Téléphone</label>
+                            <div class="card-body h3 text-primary"><?php echo $user[2] ?></div>
+                            <label class="form-label h3 text-success">Statut</label>
+                            <div class="card-body h5 text-primary"><?php echo $user[4] ?></div>
+
+                            <button class="btn btn-outline-success mb-1 fs-3" type="submit" onclick="goToPost('Structure/ListeRandonneesAdminPage.php',
+                            'checkMailMarcheur',
+                            '<?php echo $user['mailMarcheur']; ?>');">Randonnées</button>
+                        </div>
+                    <?php
+                        /*
                         echo '
                             <div class="card col-sm-12 col-md-5 mt-3 mb-3 border border-2 border-primary">
                                 <label class="form-label h3 text-success">Nom</label>
@@ -358,9 +375,9 @@
                                 <label class="form-label h3 text-success">Statut</label>
                                 <div class="card-body h5 text-primary">' . $user[4] . '</div>
 
-                                <button class="btn btn-outline-success mb-1 fs-3" type="submit">Randonnées</button>
+                                <button class="btn btn-outline-success mb-1 fs-3" type="submit" onclick="goToPost(\"Structure/ListeRandonneesAdminPage.php\");">Randonnées</button>
                             </div>
-                        ';
+                        ';*/
                     }
                     ?>
                 </div>

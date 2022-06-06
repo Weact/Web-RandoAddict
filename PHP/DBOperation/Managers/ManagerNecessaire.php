@@ -1,22 +1,23 @@
 <?php
+
 /*******************************************************************************\
-* Fichier       : /PHP/DBOperation/Managers/ManagerNecessaire.php
-*
-* Description   : Le Manager pour la table Necessaire.
-*
-* Classe        : ManagerNecessaire
-* Fonctions     : arrayConstructor($stmt)
-*                 insertNecessaire(Necessaire $n)
-*                 selectNecessaires()
-*                 selectNecessaireById($num)
-*                 updateNecessaireById(Necessaire $n, $num)
-*                 deleteNecessaireById($num)
-*
-* Créateur      : Luc Cornu
-*
+ * Fichier       : /PHP/DBOperation/Managers/ManagerNecessaire.php
+ *
+ * Description   : Le Manager pour la table Necessaire.
+ *
+ * Classe        : ManagerNecessaire
+ * Fonctions     : arrayConstructor($stmt)
+ *                 insertNecessaire(Necessaire $n)
+ *                 selectNecessaires()
+ *                 selectNecessaireById($num)
+ *                 updateNecessaireById(Necessaire $n, $num)
+ *                 deleteNecessaireById($num)
+ *
+ * Créateur      : Luc Cornu
+ *
 \*******************************************************************************/
 
-require_once(__DIR__."/../../DBOperation/Objects/NecessaireObject.php");
+require_once(__DIR__ . "/../../DBOperation/Objects/NecessaireObject.php");
 require_once("Manager.php");
 
 class ManagerNecessaire extends Manager
@@ -24,19 +25,18 @@ class ManagerNecessaire extends Manager
   private function arrayConstructor($stmt)
   // Goal : It should return the array for the corresponding object
   {
-    if($stmt->rowCount() > 0)
-    {
+    if ($stmt->rowCount() > 0) {
       $valueStmt = $stmt->fetchAll()[0];
 
       $tab = array(
         "nId_Prog" => $valueStmt["idProg"],
         "sLabel_Materiel" => $valueStmt["labelMateriel"]
-        );
-    }else{
+      );
+    } else {
       $tab = array(
         "nId_Prog" => "",
         "sLabel_Materiel" => ""
-        );
+      );
     }
 
     return $tab;
@@ -48,8 +48,7 @@ class ManagerNecessaire extends Manager
     $req = "INSERT INTO NECESSAIRE(idProgramme, labelMateriel) VALUES (:ID, :LABEL)";
 
     // Send the request to the Database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $n->getnId_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":LABEL", $n->getsLabel_Materiel(), PDO::PARAM_STR);
@@ -59,17 +58,15 @@ class ManagerNecessaire extends Manager
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
-			exit();
-
+      exit();
     }
   }
 
@@ -78,27 +75,24 @@ class ManagerNecessaire extends Manager
     $req = "SELECT * FROM NECESSAIRE";
 
     // Send the request to the Database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
-			exit();
-
+      exit();
     }
   }
 
@@ -107,28 +101,25 @@ class ManagerNecessaire extends Manager
     $req = "SELECT * FROM NECESSAIRE WHERE idProgramme = :ID";
 
     // Send the request to the Database
-    try
-    {
+    try {
       $stmt = $this->getdb()->prepare($req);
       $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
-			exit();
-
+      exit();
     }
   }
 
@@ -139,26 +130,24 @@ class ManagerNecessaire extends Manager
     // Send the request to the Database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
       $stmt->bindValue(":NEW_ID", $n->getnId_Prog(), PDO::PARAM_INT);
       $stmt->bindValue(":NEWLABEL", $n->getsLabel_Materiel(), PDO::PARAM_STR);
-			$stmt->execute();
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
-			exit();
-
+      exit();
     }
   }
 
@@ -169,26 +158,22 @@ class ManagerNecessaire extends Manager
     // Send the request to the Database
     try {
       $stmt = $this->getdb()->prepare($req);
-			$stmt->bindValue(":ID", $num, PDO::PARAM_INT);
-			$stmt->execute();
+      $stmt->bindValue(":ID", $num, PDO::PARAM_INT);
+      $stmt->execute();
 
       // Return success
       $result['success'] = true;
       $result['error'] = false;
       $result['message'] = "success";
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = true;
       $result['error'] = true;
       $result['message'] = $error->getMessage();
-      return($result);
+      return ($result);
 
-			exit();
-
+      exit();
     }
   }
-
 }
-?>

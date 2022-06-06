@@ -25,6 +25,45 @@ $excursions = getAllExcursionsFromProgram($program);
 $photoHeight = "200";
 $photoWidth = "200";
 
+$prixtotal = 0;
+foreach ($excursions as $excursion) {
+    $prixtotal = $prixtotal + $excursion['prixExcursion'];
+
+?>
+    <div class="modal fade text-dark" id="SeeExcModal<?php echo strtoupper($excursion['idExcursion']) ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <h5 class="modal-title display-5" id="terrainModalLabel"><?php echo strtoupper("excursion ".$excursion['labelExcursion']); ?></h5>
+                </div>
+                <div class="modal-body font-monospace">
+                    <h5 class="modal-title display-6 shadow-lg text-success" id="terrainModalLabel">ID</h5>
+
+                    <p for="titre" class="form-label fs-4 shadow-sm text-primary"><?php echo $excursion['idExcursion']; ?></p>
+                    <h5 class="modal-title display-6 shadow-lg text-success" id="terrainModalLabel">NOM</h5>
+                    <p for="titre" class="form-label fs-4 shadow-sm text-primary"><?php echo $excursion['labelExcursion']; ?></p>
+                    <h5 class="modal-title display-6 shadow-lg text-success" id="terrainModalLabel">DESCRIPTION</h5>
+                    <p for="titre" class="form-label fs-4 shadow-sm text-primary"><?php echo $excursion['descExcursion']; ?></p>
+                    <h5 class="modal-title display-6 shadow-lg text-success" id="terrainModalLabel"><?php echo strtoupper("lieu de départ"); ?></h5>
+                    <p for="titre" class="form-label fs-4 shadow-sm text-primary"><?php echo $excursion['departExcursion']; ?></p>
+                    <h5 class="modal-title display-6 shadow-lg text-success" id="terrainModalLabel"><?php echo strtoupper("lieu d'arrivée"); ?></h5>
+                    <p for="titre" class="form-label fs-4 shadow-sm text-primary"><?php echo $excursion['arriveeExcursion']; ?></p>
+                    <h5 class="modal-title display-6 shadow-lg text-success" id="terrainModalLabel">PRIX DE L'EXCURSION</h5>
+                    <p for="titre" class="form-label fs-4 shadow-sm text-primary"><?php echo $excursion['prixExcursion']; ?>€</p>
+                    <img src="<?php echo "../ASSETS/" . getPhotoOfExcursion($excursion['idExcursion'])['lienPhoto'] ?>" width="500" height="500" alt="randonne image top" class="card-img-top">
+                    <title><?php echo $excursion['labelExcursion']  ?></title>
+                    <rect width="100%" height="100%" fill="#55595c">
+                        </img>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn-close fs-5" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+}
+
 ?>
 <section class="py-5 text-center container">
     <div class="row py-3 shadow-lg">
@@ -55,6 +94,45 @@ $photoWidth = "200";
                 ?>
 
             </p>
+
+            <?php
+            $dateDepart = new DateTime($program['dateDepartProgramme']);
+            $dateArrivee = new DateTime($program['dateArriveeProgramme']);
+            $dateFormat = "H\hi d/m/Y";
+
+            $dateDepart = $dateDepart->format($dateFormat);
+            $dateArrivee = $dateArrivee->format($dateFormat);
+            ?>
+
+            <div class="d-flex justify-content-evenly flex-wrap shadow-sm lead fs-4 text-dark shadow-lg py-3 font-monospace fw-bold">
+                <p class="p-3 display-6">
+                    <i class="bi bi-arrow-up-circle-fill"></i>
+
+                    <?php
+                    echo $dateDepart;
+                    ?>
+                </p>
+                <p class="p-3 display-6">
+                    <?php
+                    echo $dateArrivee;
+                    ?>
+                    <i class="bi bi-arrow-down-circle-fill"></i>
+                </p>
+            </div>
+
+            <div class="d-flex justify-content-evenly flex-wrap shadow-sm shadow-lag py-3 my-3 font-monospace fw-bold">
+                <span class="badge rounded-pill fs-4 lead p-4 text-dark">
+                    <?php
+                    echo ucfirst("prix total à régler: ") . $prixtotal . "€";
+                    ?>
+                </span>
+                <span class="badge rounded-pill fs-4 lead p-4 text-dark">
+                    <?php
+                    echo ucfirst("Difficulté de la randonné: ") . $program['difficulteProgramme'];
+                    ?>
+                </span>
+            </div>
+
             <p>
                 <?php
                 if (isset($_SESSION['typeUtilisateur'])) {
@@ -107,27 +185,41 @@ $photoWidth = "200";
                             <div class="card-body bg-dark">
                                 <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                    <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
-                                        <?php
-                                        if (isset($_SESSION["typeUtilisateur"])) {
-                                            if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
-                                        ?>
-
-                                                
-                                                <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button>
-
-                                            <?php
-                                            }
-                                        }
-                                        ?>
+                                    <div class="btn-group col-8">
+                                        <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-4 fw-bold uppercase" data-bs-toggle="modal" data-bs-target="#SeeExcModal<?php echo $excursion['idExcursion'] ?>">
+                                            Détails
+                                        </button>
 
                                     </div>
-                                    <small class="lead text-light fs-2"><?php echo $excursion['prixExcursion'] ?>€</small>
+                                    <span class="badge rounded-pill bg-primary fs-5 lead fw-bolder"><?php echo $excursion['prixExcursion'] ?>€</span>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center shadow-mg bg-dark text-light">
-                                    <small class="lead fs-2 text-capitalize"><?php echo $excursion['departExcursion'] ?> </small>
-                                    <small class="lead fs-2 text-capitalize"><?php echo $excursion['arriveeExcursion'] ?></small>
+                                <div class="d-flex flex-wrap justify-content-between align-items-center shadow-mg bg-dark text-light">
+                                    <small class="lead fs-2 text-capitalize" title="<?php echo $excursion['departExcursion']; ?>">
+                                        <?php
+                                        $e_depart = $excursion['departExcursion'];
+
+                                        if (strlen($e_depart) > 6) {
+                                            $e_depart = substr($e_depart, 0, 7) . "";
+                                            $e_depart = str_replace(" ", "_", $e_depart);
+                                            $e_depart = $e_depart . "...";
+                                        }
+
+                                        echo $e_depart;
+                                        ?>
+                                    </small>
+                                    <small class="lead fs-2 text-capitalize" title="<?php echo $excursion['arriveeExcursion']; ?>">
+                                        <?php
+                                        $e_arrivee = $excursion['arriveeExcursion'];
+
+                                        if (strlen($e_arrivee) > 6) {
+                                            $e_arrivee = substr($e_arrivee, 0, 7) . "";
+                                            $e_arrivee = str_replace(" ", "_", $e_arrivee);
+                                            $e_arrivee = $e_arrivee . "...";
+                                        }
+
+                                        echo $e_arrivee;
+                                        ?>
+                                    </small>
                                 </div>
                             </div>
                     </div>
