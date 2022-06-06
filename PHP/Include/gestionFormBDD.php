@@ -125,7 +125,7 @@
           $mng = new ManagerProgramme($conn);
 
           $materiels = $_POST['materiel'];
-          var_dump($materiels);
+          //var_dump($materiels);
           //TO DO : ADD sExcur_Prog
           $donnees = array(
             'sLabel_Prog' => $_POST['sLabel_Prog'],
@@ -137,7 +137,7 @@
             'sValide_Prog' => "En attente"
             );
 
-            var_dump($donnees);
+            //var_dump($donnees);
           $new_item = new Programme();
           $new_item->hydrate($donnees);
           $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel']);

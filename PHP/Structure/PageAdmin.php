@@ -200,7 +200,7 @@
                         <input name="sDepartHeure_Prog" type="time" class="form-control" value="" required/>
                     </div>
 
-                    <legend for="arriveDate">Date d'arriver</legend>
+                    <legend for="arriveDate">Date d'arrivée</legend>
                     <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required/>
 
                     <legend for="arriveDate">Heure d'arrivée</legend>
