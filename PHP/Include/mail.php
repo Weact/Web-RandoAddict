@@ -321,9 +321,9 @@
     //1 = La randonnée est ok
     //2 = La randonnée est annulé
     $Date = "";// La date de départ
-    $Date2 = "";// La date d'arriver
+    $Date2 = "";// La date d'arrivée
     $guide = "";//Le pseudo du guide
-    $Lieu = "";//Le lieu d'arriver 
+    $Lieu = "";//Le lieu d'arrivée
     $Lieu2 = "";//Le lieu de départ 
     $NbGens = "";//Le nombre de gens
     $difficult = "";///La difficultée de la rando

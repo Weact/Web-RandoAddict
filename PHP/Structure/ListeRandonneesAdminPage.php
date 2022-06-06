@@ -94,9 +94,9 @@
                                                 <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                                             </div>
                                             <legend for="selection">Départ</legend>
-                                            <textarea class="form-control" aria-label="Départ et arriver"></textarea>
+                                            <textarea class="form-control" aria-label="Départ et arrivée"></textarea>
                                             <legend for="selection">Arrivée</legend>
-                                            <textarea class="form-control" aria-label="Départ et arriver"></textarea>
+                                            <textarea class="form-control" aria-label="Départ et arrivée"></textarea>
                                             <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
                                                 <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                             </div>

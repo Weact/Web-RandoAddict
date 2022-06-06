@@ -64,10 +64,10 @@
                         </div>
 
                         <legend><label for="departExcursion">Départ</label></legend>
-                        <textarea id="departExcursion" name="departExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
+                        <textarea id="departExcursion" name="departExcursion" class="form-control" aria-label="Départ et arrivée" required></textarea>
 
                         <legend><label for="arriveeExcursion">Arrivée</label></legend>
-                        <textarea id="arriveeExcursion" name="arriveeExcursion" class="form-control" aria-label="Départ et arriver" required></textarea>
+                        <textarea id="arriveeExcursion" name="arriveeExcursion" class="form-control" aria-label="Départ et arrivée" required></textarea>
 
                         <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
                             <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -164,7 +164,7 @@
                         <input name="sDepartHeure_Prog" id="sDepartHeure_Prog" type="time" class="form-control" value="" required />
                     </div>
 
-                    <legend for="arriveDate">Date d'arriver</legend>
+                    <legend for="arriveDate">Date dée</legend>
                     <input name="sArrivee_Prog" id="arriveDate" class="form-control" type="date" required />
 
                     <legend for="sArriveHeure_Prog">Heure d'arrivée</legend>
