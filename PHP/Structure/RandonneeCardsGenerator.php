@@ -23,6 +23,8 @@ foreach ($programs as $program) {
         $description = substr($description, 0, 251) . "";
     }
 
+    var_dump($program['idProgramme']);
+    var_dump(getExcsOfProg($program));
     $FirstPhoto = getPhotoOfExcursion(getExcsOfProg($program)[0]['idExcursion']);
 
     $photo = '../ASSETS/' . $FirstPhoto[1] . '';
