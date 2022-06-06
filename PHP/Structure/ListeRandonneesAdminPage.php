@@ -1,38 +1,16 @@
-<?php session_start();
-require_once(__DIR__ . '/../Include/programManager.php');
-//$progs = getProgOfUser($_SESSION['mailUtilisateur']);
-
-if (isset($_POST["idProg"])) {
-    if ($_POST["idProg"] == "checkMailMarcheur") {
-        if (isset($_POST["value"])) {
-            $_SESSION['checkMailUtilisateur'] = $_POST["value"];
-        }
-    }
-}
-
-$progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
-
-?>
-<style>
-    .randolink.active {
-        color: green!important;
-    }
-</style>
 <div class="container bg-light p-3  text-dark">
-    <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir de</h2>
-    <p class="text-muted"><?php echo $_SESSION['checkMailUtilisateur']; ?></p>
-
+    <h2 class="text-center text-success">Liste de randonnées effectuées ou à venir</h2>
     <!---------------------------------------------------------------------------------------------------------------------------------------------->
     <!---Onglets------------>
     <div class="m-4">
         <ul class="nav nav-tabs justify-content-center" id="myTab">
             <li class="nav-item border-top border-2 border-primary">
-                <a href="#rando_effectuee" class="nav-link active fw-bolder p-2 text-primary fs-5 randolink" data-bs-toggle="tab">
+                <a href="#rando_effectuee" class="nav-link active fw-bolder p-2 text-primary fs-5" data-bs-toggle="tab">
                     <h3>Randonnées effectuées</h3>
                 </a>
             </li>
             <li class="nav-item border-top border-2 border-primary">
-                <a href="#rando_a_venir" class="nav-link fw-bolder p-2 text-primary fs-5 randolink" data-bs-toggle="tab">
+                <a href="#rando_a_venir" class="nav-link fw-bolder p-2 text-primary fs-5" data-bs-toggle="tab">
                     <h3>Randonnées à venir</h3>
                 </a>
             </li>
@@ -41,87 +19,48 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
         <!---Contenus des onglets------------>
         <div class="tab-content">
             <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="rando_effectuee">
-
-                <?php foreach ($progs as $prog) {
-                    $time = $prog['dateArriveeProgramme'];
-                    $hour = substr($time, 11, 2);
-                    $min = substr($time, 14, 2);
-                    $sec = substr($time, 17, 2);
-                    $year = substr($time, 0, 4);
-                    $month = substr($time, 5, 2);
-                    $day = substr($time, 8, 2);
-                    if (mktime($hour, $min, $sec, $month, $day, $year) > time()) {
-                        continue;
-                    } ?>
-                    <div class="card">
-                        <div class="inline">
-                            <label for="guide" class="form-label h4">Randonnée</label>
-                            <div class="card-body h5"><?php echo $prog['labelProgramme']; ?></div>
-                            <label for="guide" class="form-label h4">Difficulté</label>
-                            <div class="card-body ">
-                                <label class="bg-success text-centered"><?php echo $prog['difficulteProgramme']; ?></label>
-                            </div>
-                        </div>
-                        <img src="<?php
-                                    $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
-
-                                    $photolink = '../ASSETS/' . $photo['lienPhoto'];
-
-                                    echo $photolink; ?>" class="img-fluid" alt="...">
-                        <label for="guide" class="form-label h4">Date départ</label>
-                        <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
-                        <label for="guide" class="form-label h4">Date arrivée</label>
-                        <input id="endDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateArriveeProgramme'], 0, 10); ?>" />
-                        <label for="guide" class="form-label h4">Description</label>
-                        <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
-
-                        <div class="inline center">
-                            <button class="btn btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme']; ?>)" type="edit">Consulter</button>
+                <div class="card">
+                    <div class="inline">
+                        <label for="guide" class="form-label h4">Randonnée</label>
+                        <div class="card-body h5">Randonnée placeholder</div>
+                        <label for="guide" class="form-label h4">Difficulté</label>
+                        <div class="card-body ">
+                            <label class="bg-success text-centered">0</label>
                         </div>
                     </div>
-
-                <?php
-                } ?>
-
+                    <img src="" class="img-fluid" alt="...">
+                    <label for="guide" class="form-label h4">Date départ</label>
+                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+                    <label for="guide" class="form-label h4">Date arrivée</label>
+                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+                    <label for="guide" class="form-label h4">Description</label>
+                    <div class="card-body h5">Description placeholder</div>
+                    <div class="inline center">
+                        <button class="btn  btn-outline-success mb-1" type="edit">Consulter</button>
+                    </div>
+                </div>
             </div>
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
             <div class="tab-pane fade bg-white rounded p-2 col-6" id="rando_a_venir">
-                <?php foreach ($progs as $prog) {
-                    $time = $prog['dateArriveeProgramme'];
-                    $hour = substr($time, 11, 2);
-                    $min = substr($time, 14, 2);
-                    $sec = substr($time, 17, 2);
-                    $year = substr($time, 0, 4);
-                    $month = substr($time, 5, 2);
-                    $day = substr($time, 8, 2);
-                    if (mktime($hour, $min, $sec, $month, $day, $year) < time()) {
-                        continue;
-                    } ?>
-                    <div class="card">
-                        <div class="inline">
-                            <label for="guide" class="form-label h4">Randonnée</label>
-                            <div class="card-body h5"><?php echo $prog['labelProgramme']; ?></div>
-                            <label for="guide" class="form-label h4">Difficulté</label>
-                            <div class="card-body ">
-                                <label class="bg-success text-centered"><?php echo $prog['difficulteProgramme']; ?></label>
-                            </div>
+                <div class="card">
+                    <div class="inline">
+                        <label for="guide" class="form-label h4">Randonnée</label>
+                        <div class="card-body h5">Randonnée placeholder</div>
+                        <label for="guide" class="form-label h4">Difficulté</label>
+                        <div class="card-body ">
+                            <label class="bg-success text-centered">0</label>
                         </div>
-                        <img src="<?php
-                                    $photo = getPhotoOfExcursion(getExcsOfProg($prog)[0]['idExcursion']);
-
-                                    $photolink = '../ASSETS/' . $photo['lienPhoto'];
-                                    echo $photolink; ?>" class="img-fluid" alt="...">
-                        <label for="guide" class="form-label h4">Date départ</label>
-                        <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
-                        <label for="guide" class="form-label h4">Date arrivée</label>
-                        <input id="endDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateArriveeProgramme'], 0, 10); ?>" />
-                        <label for="guide" class="form-label h4">Description</label>
-                        <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
-
-                        <div class="inline center">
-                            <button class="btn  btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme']; ?>)" type="edit">Consulter</button>
-                        </div>
-
+                    </div>
+                    <img src="" class="img-fluid" alt="...">
+                    <label for="guide" class="form-label h4">Date départ</label>
+                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+                    <label for="guide" class="form-label h4">Date arrivée</label>
+                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
+                    <label for="guide" class="form-label h4">Description</label>
+                    <div class="card-body h5">Description placeholder</div>
+                    <div class="inline center">
+                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
+                        <button class="btn  btn-outline-danger mb-1" type="edit">Supprimer</button>
                         <!--Modal formulaire de mofification-->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -147,7 +86,6 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                                                     <option value="">9</option>
                                                 </optgroup>
                                             </select>
-
                                             <legend for="prix_pers">Prix par personne <span class="text-muted">€</span>
                                             </legend>
                                             <div class="def-number-input number-input">
@@ -155,17 +93,13 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                                                 <input class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" style="outline: none!important;" min="0" name="quantity" value="0" type="number" step="1.0" date-prefix="€">
                                                 <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
                                             </div>
-
                                             <legend for="selection">Départ</legend>
                                             <textarea class="form-control" aria-label="Départ et arriver"></textarea>
-
                                             <legend for="selection">Arrivée</legend>
                                             <textarea class="form-control" aria-label="Départ et arriver"></textarea>
-
                                             <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
                                                 <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                                             </div>
-
                                             <legend for="selection">Matériel</legend>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c1" id="ck1">
@@ -237,7 +171,6 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                                             </div>
                                             <legend for="selection">Autres</legend>
                                             <textarea class="form-control" aria-label="Autres"></textarea>
-
                                             <legend for="selection">Description</legend>
                                             <textarea class="form-control" aria-label="Description"></textarea>
                                         </div>
@@ -250,13 +183,8 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                             </div>
                         </div>
                     </div>
-                <?php
-                } ?>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<?php
-$_SESSION['checkMailUtilisateur'] = $_SESSION['mailUtilisateur'];
-?>
