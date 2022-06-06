@@ -149,8 +149,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -267,8 +266,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -294,8 +292,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -323,8 +320,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -349,8 +345,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -375,8 +370,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
@@ -401,8 +395,7 @@ class ManagerProgramme extends Manager
       $result['error'] = false;
       $result['message'] = "success";
       $result['stmt'] = $stmt->fetchAll();
-      return($result);
-
+      return ($result);
     } catch (PDOException $error) {
       // Return error
       $result['success'] = false;
