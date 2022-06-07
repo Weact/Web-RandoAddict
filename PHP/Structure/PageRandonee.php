@@ -25,9 +25,7 @@ $program = json_decode(json_encode($mng_Prog->selectProgrammeById($_POST['idProg
 // var_dump($program);
 
 $mng_Exc = new ManagerExcursion($conn);
-$excursions = $mng_Exc->selectExcursionsByProgrammeId($_POST['idProg'])['stmt'];
-
-// $excursions = getAllExcursionsFromProgram($program);
+$curr_excursions = $mng_Exc->selectExcursionsByProgrammeId($_POST['idProg'])['stmt'];
 
 $photoHeight = "200";
 $photoWidth = "200";
@@ -54,7 +52,7 @@ foreach ($valideProgs as $prog) {
             <img src="<?php echo $photo; ?>" alt="randonne image top" height="600" class="card-img-top">
             <div class="card-img-overlay d-flex flex-column align-items-center" style="background-color: rgba(200,200,200,0.5);">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-9">
                         <h3 class="card-title display-3" id="randonneeTitre" name="randonneeTitre">
                             <?php
                             $name = $program['labelProg'];
@@ -66,7 +64,7 @@ foreach ($valideProgs as $prog) {
                             ?>
                         </h3>
                     </div>
-                    <div class="col d-flex justify-content-center align-items-center">
+                    <div class="col-3 d-flex justify-content-center align-items-center">
                         <span class="badge <?php echo getColorByDifficulty($program["diffProg"]); ?> fs-3 p-2"><?php echo $program["diffProg"]; ?></span>
                     </div>
                 </div>
@@ -122,7 +120,7 @@ foreach ($valideProgs as $prog) {
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             <?php
-            foreach ($excursions as $excursion) {
+            foreach ($curr_excursions as $excursion) {
             ?>
                 <div class="col">
                     <div class="card shadow-sm">
@@ -132,12 +130,12 @@ foreach ($valideProgs as $prog) {
                             <p class="card-text fs-5"><?php echo $excursion['descExcursion'] ?></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button>
+                                    <!-- <button type="button" class="btn btn-md btn-outline-success p-1 m-1 fs-5 fw-bold uppercase">View</button> -->
                                     <?php
                                     if (isset($_SESSION["typeUtilisateur"])) {
                                         if (strtolower($_SESSION["typeUtilisateur"]) == "admin") {
                                     ?>
-                                            <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button>
+                                            <!-- <button type="button" class="btn btn-md btn-outline-warning p-1 m-1 fs-5 fw-bold uppercase">Edit</button> -->
 
                                     <?php
                                         }

@@ -50,7 +50,7 @@
                     
 
                     <div>
-                        <legend for="selection_rando" id="selectionType">Type de programme</legend><br>
+                        <legend for="selection_rando" id="selectionType" required>Type de programme</legend><br>
                         <?php
                         $i = 0;
                         foreach(getAllTypes() as $Type) {

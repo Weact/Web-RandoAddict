@@ -100,7 +100,6 @@ class ManagerProgramme extends Manager
 
   private function autoInsertCorrespondanceType(array $types, $prog_id)
   {
-    var_dump($types);
     $m_c = new ManagerCorrespondance(connect_bd());
 
     foreach($types as $typeLabel)

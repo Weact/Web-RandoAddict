@@ -194,7 +194,17 @@ if (isset($_POST["sLabel_Prog"])) {
     // echo $_POST["editForm"];
     $mng->updateProgrammeById($new_item, $_POST["editForm"]);
   } else {
-    $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel'], $_POST['type']);
+    if (isset($_POST["type"])) {
+      if (isset($_POST["materiel"])) {
+        $mng->insertProgramme($new_item, $_POST['sExcur_Prog'], $_POST['materiel'], $_POST['type']);
+      } else {
+        echo "Attention : matériel manquant";
+      }
+
+    } else {
+      echo "Attention : Type de randonnée manquante";
+    }
+
   }
 }
 
@@ -202,5 +212,3 @@ if (isset($_POST["sLabel_Prog"])) {
 if (isset($_POST["disconnect"])) {
   connectUser("");
 }
-
-$_POST = array();

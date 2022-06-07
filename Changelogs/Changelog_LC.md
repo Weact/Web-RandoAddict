@@ -6,6 +6,12 @@ All notable changes to this project will be documented in this file.
 - Le carousel est désormais dynamique, avec une sélection de trois excursions aléatoires.
 - Ajout de "On Delete Cascade" pour les tables dont il manquait cette commande.
 - Remise à zéro des données de la base.
+- La carte dans l'onglet "Consulter" s'affiche désormais correctement et ne déborde plus pour les administrateur lorsque le nom est trop long.
+- Correction d'un bug sur l'affichage des excursions dans l'onglet "Consulter".
+- Var_Dump retirés.
+
+### Removed
+- Boutons "View" et "Edit" pour les excursions.
 
 ## [0.1.10] - 2022-06-03
 ### Changed
