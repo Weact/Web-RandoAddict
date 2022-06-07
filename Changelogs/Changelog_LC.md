@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - La carte dans l'onglet "Consulter" s'affiche désormais correctement et ne déborde plus pour les administrateur lorsque le nom est trop long.
 - Correction d'un bug sur l'affichage des excursions dans l'onglet "Consulter".
 - Var_Dump retirés.
+- Les onglets "Randonnées effectuées" et "Randonnées à venir" sont désormais dynamiques.
 
 ### Removed
 - Boutons "View" et "Edit" pour les excursions.

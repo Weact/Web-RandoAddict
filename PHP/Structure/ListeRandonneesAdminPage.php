@@ -17,182 +17,129 @@
             </li>
         </ul>
         <!---------------------------------------------------------------------------------------------------------------------------------------------->
-        <!---Contenus des onglets------------>
-        <div class="tab-content">
-            <div class="tab-pane fade show active bg-white rounded p-2  col-6" id="rando_effectuee">
-                <div class="card">
-                    <div class="inline">
-                        <label for="guide" class="form-label h4">Randonnée</label>
-                        <div class="card-body h5">Randonnée placeholder</div>
-                        <label for="guide" class="form-label h4">Difficulté</label>
-                        <div class="card-body ">
-                            <label class="bg-success text-centered">0</label>
-                        </div>
-                    </div>
-                    <img src="" class="img-fluid" alt="...">
-                    <label for="guide" class="form-label h4">Date départ</label>
-                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
-                    <label for="guide" class="form-label h4">Date arrivée</label>
-                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
-                    <label for="guide" class="form-label h4">Description</label>
-                    <div class="card-body h5">Description placeholder</div>
 
-                    <div class="inline center">
-                        <button class="btn  btn-outline-success mb-1" type="edit">Consulter</button>
-                    </div>
+        <?php
+        session_start();
+        require_once(__DIR__ . '/../Include/programManager.php');
+
+        $conn = connect_bd();
+        $mng_Prog = new ManagerProgramme($conn);
+
+        $passedPrograms = $mng_Prog->selectPassedProgrammeByMailMarcheur($_SESSION["mailUtilisateur"])["stmt"];
+        $futurePrograms = $mng_Prog->selectFuturProgrammeByMailMarcheur($_SESSION["mailUtilisateur"])["stmt"];
+        ?>
+
+        <!---Contenus des onglets------------>
+
+        <div class="tab-content">
+            <div class="tab-pane fade show active bg-white rounded p-2" id="rando_effectuee">
+
+                <div class="col-sm-16 col-md-9 col-lg-8 col-xl-7 mb-1 mx-auto" id="randonneeCardBase">
+                    <?php
+                    foreach ($passedPrograms as $p_Prog) {
+                        $FirstPhoto = getFirstPhotoByProgrammeId($p_Prog[0]);
+                        if (count($FirstPhoto) > 0) {
+                            $photo = '../ASSETS/' . $FirstPhoto[0]['lienPhoto'];
+                        } else {
+                            $photo = '../ASSETS/PaysageRandonnee_2.jpg';
+                        }
+                    ?>
+                        <div class="card text-dark fw-bold">
+                            <img src="<?php echo $photo; ?>" alt="randonne image top" height="600" class="card-img-top">
+                            <div class="card-img-overlay d-flex flex-column align-items-center" style="background-color: rgba(200,200,200,0.5);">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h3 class="card-title display-3" id="randonneeTitre" name="randonneeTitre">
+                                            <?php
+                                            $name = $p_Prog[1];
+                                            if (strlen($name) > 29) {
+                                                $name = substr($name, 0, 30) . "...";
+                                            }
+                                            echo $name;
+
+                                            ?>
+                                        </h3>
+                                    </div>
+                                    <div class="col-3 d-flex justify-content-center align-items-center">
+                                        <span class="badge <?php echo getColorByDifficulty($p_Prog[6]); ?> fs-3 p-2"><?php echo $p_Prog[6]; ?></span>
+                                    </div>
+                                </div>
+                                <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="height:100%!important;">
+                                    <p class="card-text"><?php echo $p_Prog[2]; ?></p>
+                                </div>
+
+                                <div class="d-flex flex-wrap row p-3 border rounded border-light justify-content-around font-monospace fw-bold" style="background-color: rgba(0, 125, 255, 0.55)">
+                                    <div class="col-8">
+                                        <h3 class="fs-3">Date de départ</h3>
+                                        <p class="fs-6 text-dark"> <?php echo $p_Prog[3]; ?> </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <h3 class="fs-3">Date d'arrivée</h3>
+                                        <p class="fs-6 text-dark"> <?php echo $p_Prog[4]; ?> </p>
+                                    </div>
+                                </div>
+
+                                <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php', <?php echo $p_Prog[0]; ?>)">
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <!---------------------------------------------------------------------------------------------------------------------------------------------->
-            <div class="tab-pane fade bg-white rounded p-2 col-6" id="rando_a_venir">
-                <div class="card">
-                    <div class="inline">
-                        <label for="guide" class="form-label h4">Randonnée</label>
-                        <div class="card-body h5">Randonnée placeholder</div>
-                        <label for="guide" class="form-label h4">Difficulté</label>
-                        <div class="card-body ">
-                            <label class="bg-success text-centered">0</label>
-                        </div>
-                    </div>
-                    <img src="" class="img-fluid" alt="...">
-                    <label for="guide" class="form-label h4">Date départ</label>
-                    <input id="startDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
-                    <label for="guide" class="form-label h4">Date arrivée</label>
-                    <input id="endDate" class="form-control" type="date" readonly="readonly" value="2022-02-02" />
-                    <label for="guide" class="form-label h4">Description</label>
-                    <div class="card-body h5">Description placeholder</div>
+            <div class="tab-pane fade bg-white rounded p-2" id="rando_a_venir">
+                <div class="col-sm-16 col-md-9 col-lg-8 col-xl-7 mb-1 mx-auto" id="randonneeCardBase">
+                    <?php
+                    foreach ($futurePrograms as $f_Prog) {
+                        $FirstPhoto = getFirstPhotoByProgrammeId($f_Prog[0]);
+                        if (count($FirstPhoto) > 0) {
+                            $photo = '../ASSETS/' . $FirstPhoto[0]['lienPhoto'];
+                        } else {
+                            $photo = '../ASSETS/PaysageRandonnee_2.jpg';
+                        }
+                    ?>
+                        <div class="card text-dark fw-bold">
+                            <img src="<?php echo $photo; ?>" alt="randonne image top" height="600" class="card-img-top">
+                            <div class="card-img-overlay d-flex flex-column align-items-center" style="background-color: rgba(200,200,200,0.5);">
+                                <div class="row">
+                                    <div class="col-9">
+                                        <h3 class="card-title display-3" id="randonneeTitre" name="randonneeTitre">
+                                            <?php
+                                            $name = $f_Prog[1];
+                                            if (strlen($name) > 29) {
+                                                $name = substr($name, 0, 30) . "...";
+                                            }
+                                            echo $name;
 
-                    <div class="inline center">
-                        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">Modifier</button>
-                        <button class="btn  btn-outline-danger mb-1" type="edit">Supprimer</button>
-
-                        <!--Modal formulaire de mofification-->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Formulaire de modification</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            ?>
+                                        </h3>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <legend for="selection">Difficulté de la randonnée</legend>
-                                            <select id="selection" class="form-control" required>
-                                                <optgroup>
-                                                    <option value="">Choisissez la difficultée du terrain</option>
-                                                    <option value="">1</option>
-                                                    <option value="">2</option>
-                                                    <option value="">3</option>
-                                                    <option value="">4</option>
-                                                    <option value="">5</option>
-                                                    <option value="">6</option>
-                                                    <option value="">7</option>
-                                                    <option value="">8</option>
-                                                    <option value="">9</option>
-                                                </optgroup>
-                                            </select>
-
-                                            <legend for="prix_pers">Prix par personne <span class="text-muted">€</span>
-                                            </legend>
-                                            <div class="def-number-input number-input">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" class="minus text-light bg-danger border rounded-pill fs-5 p-2">-</button>
-                                                <input class="quantity fs-4 text-center border-0 g-0 fw-bold border-bottom border-bottom-5 border-secondary" style="outline: none!important;" min="0" name="quantity" value="0" type="number" step="1.0" date-prefix="€">
-                                                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus text-light bg-success border rounded-pill fs-5 p-2">+</button>
-                                            </div>
-
-                                            <legend for="selection">Départ</legend>
-                                            <textarea class="form-control" aria-label="Départ et arriver"></textarea>
-
-                                            <legend for="selection">Arrivée</legend>
-                                            <textarea class="form-control" aria-label="Départ et arriver"></textarea>
-
-                                            <div id="map-container-google-1" class="z-depth-1-half map-container m-3" style="height: 450px">
-                                                <iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyC46IZ31q8x_YylxY0FGZiM9QqkspgZL5w&origin=Pl.+des+Halles,+67000+Strasbourg&destination=KFC+Homme+de+fer&mode=walking" width="450" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                                            </div>
-
-                                            <legend for="selection">Matériel</legend>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                                                <label class="form-check-label h6" for="ck1">Chaussure de
-                                                    randonnée</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-                                                <label class="form-check-label h6" for="ck2">Corde</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-                                                <label class="form-check-label h6" for="ck3">Raquettes</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                                                <label class="form-check-label h6" for="ck4">Mousqueton et suspension
-                                                    d'escalade</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Lunettes d'eclipse</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c6" id="ck6">
-                                                <label class="form-check-label h6" for="ck6">Tente</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c7" id="ck7">
-                                                <label class="form-check-label h6" for="ck7">Sac de couchage</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c1" id="ck1">
-                                                <label class="form-check-label h6" for="ck1">Réchaud et cantine</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c2" id="ck2">
-                                                <label class="form-check-label h6" for="ck2">Hamac</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c3" id="ck3">
-                                                <label class="form-check-label h6" for="ck3">Matelas</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c4" id="ck4">
-                                                <label class="form-check-label h6" for="ck4">Désinfectant d'eau</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Rations / casse
-                                                    croute</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Combinaison de
-                                                    plongée</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Palme</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Masque et tuba</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="checkbox" value="c5" id="ck5">
-                                                <label class="form-check-label h6" for="ck5">Bouteille d'oxygene</label>
-                                            </div>
-                                            <legend for="selection">Autres</legend>
-                                            <textarea class="form-control" aria-label="Autres"></textarea>
-
-                                            <legend for="selection">Description</legend>
-                                            <textarea class="form-control" aria-label="Description"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                        <button type="button" class="btn btn-success">Modifier</button>
+                                    <div class="col-3 d-flex justify-content-center align-items-center">
+                                        <span class="badge <?php echo getColorByDifficulty($f_Prog[6]); ?> fs-3 p-2"><?php echo $f_Prog[6]; ?></span>
                                     </div>
                                 </div>
+                                <div class="container-fluid d-flex justify-content-center align-items-center p-2 mb-2 border rounded border-primary" id="randonneeDescription" name="randonneeDescription" style="height:100%!important;">
+                                    <p class="card-text"><?php echo $f_Prog[2]; ?></p>
+                                </div>
+
+                                <div class="d-flex flex-wrap row p-3 border rounded border-light justify-content-around font-monospace fw-bold" style="background-color: rgba(0, 125, 255, 0.55)">
+                                    <div class="col-8">
+                                        <h3 class="fs-3">Date de départ</h3>
+                                        <p class="fs-6 text-dark"> <?php echo $f_Prog[3]; ?> </p>
+                                    </div>
+                                    <div class="col-8">
+                                        <h3 class="fs-3">Date d'arrivée</h3>
+                                        <p class="fs-6 text-dark"> <?php echo $f_Prog[4]; ?> </p>
+                                    </div>
+                                </div>
+
+                                <input type="button" value="Consulter" class="btn btn-success w-100 mt-auto" onclick="goToPost('Structure/PageRandonee.php', <?php echo $f_Prog[0]; ?>)">
                             </div>
                         </div>
-                    </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
