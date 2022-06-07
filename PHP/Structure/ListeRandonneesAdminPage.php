@@ -15,7 +15,7 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
 ?>
 <style>
     .randolink.active {
-        color: green!important;
+        color: green !important;
     }
 </style>
 <div class="container bg-light p-3  text-dark">
@@ -52,14 +52,28 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                     $day = substr($time, 8, 2);
                     if (mktime($hour, $min, $sec, $month, $day, $year) > time()) {
                         continue;
-                    } ?>
-                    <div class="card">
+                    }
+
+                    $progdesc = $prog['descProgramme'];
+                    if (strlen($progdesc) > 125) {
+                        $progdesc = substr($progdesc, 0, 126) . " [...]";
+                    }
+
+                ?>
+                    <div class="card col-12 m-3 p-3 font-monospace">
                         <div class="inline">
-                            <label for="guide" class="form-label h4">Randonnée</label>
-                            <div class="card-body h5"><?php echo $prog['labelProgramme']; ?></div>
-                            <label for="guide" class="form-label h4">Difficulté</label>
+                            <label for="guide" class="form-label display-4 fw-bolder text-primary">Randonnée</label>
+                            <div class="card-body display-6 fw-bold shadow"><?php echo $prog['labelProgramme']; ?></div>
+                            <label for="guide" class="form-label display-4 fw-bolder text-primary">Difficulté</label>
                             <div class="card-body ">
-                                <label class="bg-success text-centered"><?php echo $prog['difficulteProgramme']; ?></label>
+                                <!-- Create difficulty program with color according to difficulty -->
+                                <label class="<?php if ($prog['difficulteProgramme'] < 4) {
+                                                    echo "bg-success";
+                                                } elseif ($prog['difficulteProgramme'] >= 4 && $prog['difficulteProgramme'] < 7) {
+                                                    echo "bg-warning";
+                                                } elseif ($prog['difficulteProgramme'] >= 7) {
+                                                    echo "bg-danger";
+                                                } ?> badge rounded-pill w-25 mb-5 fs-4 text-centered p-3 fw-bolder text-light"><?php echo $prog['difficulteProgramme']; ?></label>
                             </div>
                         </div>
                         <img src="<?php
@@ -68,15 +82,15 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                                     $photolink = '../ASSETS/' . $photo['lienPhoto'];
 
                                     echo $photolink; ?>" class="img-fluid" alt="...">
-                        <label for="guide" class="form-label h4">Date départ</label>
-                        <input id="startDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
-                        <label for="guide" class="form-label h4">Date arrivée</label>
-                        <input id="endDate" class="form-control" type="date" readonly="readonly" value="<?php echo substr($prog['dateArriveeProgramme'], 0, 10); ?>" />
-                        <label for="guide" class="form-label h4">Description</label>
-                        <div class="card-body h5"><?php echo $prog['descProgramme']; ?></div>
+                        <label for="guide" class="form-label display-4 fw-bolder text-primary">Date départ</label>
+                        <input id="startDate" class="form-control p-3 bg-success text-light fs-3 fw-bold text-center" type="date" readonly="readonly" value="<?php echo substr($prog['dateDepartProgramme'], 0, 10); ?>" />
+                        <label for="guide" class="form-label display-4 fw-bolder text-primary">Date arrivée</label>
+                        <input id="endDate" class="form-control p-3 bg-success text-light fs-3 fw-bold text-center" type="date" readonly="readonly" value="<?php echo substr($prog['dateArriveeProgramme'], 0, 10); ?>" />
+                        <label for="guide" class="form-label display-4 fw-bolder text-primary">Description</label>
+                        <div class="card-body h5 text-info bg-dark rounded rounded-5 rounded-pill" title="<?php echo $prog['descProgramme']; ?>"><?php echo $progdesc; ?></div>
 
                         <div class="inline center">
-                            <button class="btn btn-outline-success mb-1" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme']; ?>)" type="edit">Consulter</button>
+                            <button class="btn btn-outline-success mb-3 fw-bolder fs-5 w-50 border-5" onclick="goToPost('Structure/PageRandonee.php',<?php echo $prog['idProgramme']; ?>)" type="edit">Consulter</button>
                         </div>
                     </div>
 
@@ -96,7 +110,8 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                     $day = substr($time, 8, 2);
                     if (mktime($hour, $min, $sec, $month, $day, $year) < time()) {
                         continue;
-                    } ?>
+                    }
+                    ?>
                     <div class="card">
                         <div class="inline">
                             <label for="guide" class="form-label h4">Randonnée</label>
@@ -171,7 +186,7 @@ $progs = getProgOfUser($_SESSION['checkMailUtilisateur']);
                                                 <input class="form-check-input" type="checkbox" value="c1" id="ck1">
                                                 <label class="form-check-label h6" for="ck1">Chaussure de
                                                     randonnée</label>
-                                            </div>
+                                            </div> 
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="checkbox" value="c2" id="ck2">
                                                 <label class="form-check-label h6" for="ck2">Corde</label>
