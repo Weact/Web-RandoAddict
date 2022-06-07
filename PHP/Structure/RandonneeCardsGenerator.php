@@ -2,7 +2,6 @@
 include(__DIR__ . "/../Structure/FormProg.php");
 require_once(__DIR__ . "/../Include/programManager.php");
 
-
 $programs;
 if (isset($_POST['rechercheRandonnee'])) {
     $programs = getProgramsByName(strtolower($_POST['rechercheRandonnee']));
