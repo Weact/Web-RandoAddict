@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [0.1.11] - 2022-06-07
+### Changed
+- Le carousel est désormais dynamique, avec une sélection de trois excursions aléatoires.
+- Ajout de "On Delete Cascade" pour les tables dont il manquait cette commande.
+- Remise à zéro des données de la base.
+
 ## [0.1.10] - 2022-06-03
 ### Changed
 - Les formulaires de création/modification des excursions et des programmes ont été complétés. Ils sont désormais 100% opérationnels.

@@ -202,3 +202,5 @@ if (isset($_POST["sLabel_Prog"])) {
 if (isset($_POST["disconnect"])) {
   connectUser("");
 }
+
+$_POST = array();

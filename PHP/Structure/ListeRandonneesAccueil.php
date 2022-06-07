@@ -1,5 +1,43 @@
 <?php
 session_start();
+require_once(__DIR__ . "/../Include/programManager.php");
+
+$excursions = getAllExc();
+$max = count($excursions)-1;
+
+$rand_int_0 = rand(0, $max);
+$rand_int_1 = rand(0, $max);
+$rand_int_2 = rand(0, $max);
+
+$excursion_0 = $excursions[$rand_int_0];
+$excursion_1 = $excursions[$rand_int_1];
+$excursion_2 = $excursions[$rand_int_2];
+
+$conn = connect_bd();
+$mng_Photo = new ManagerPhoto($conn);
+
+$photo_0 = $mng_Photo->selectPhotosByExcursionId($excursion_0[0])['stmt'];
+$photo_1 = $mng_Photo->selectPhotosByExcursionId($excursion_1[0])['stmt'];
+$photo_2 = $mng_Photo->selectPhotosByExcursionId($excursion_2[0])['stmt'];
+
+if (count($photo_0) > 0) {
+    $photo_0 = "../ASSETS/" . $photo_0[0][1];
+} else {
+    $photo_0 = '../ASSETS/PaysageRandonnee_2.jpg';
+}
+
+if (count($photo_1) > 0) {
+    $photo_1 = "../ASSETS/" . $photo_1[0][1];
+} else {
+    $photo_1 = '../ASSETS/PaysageRandonnee_2.jpg';
+}
+
+if (count($photo_2) > 0) {
+    $photo_2 = "../ASSETS/" . $photo_2[0][1];
+} else {
+    $photo_2 = '../ASSETS/PaysageRandonnee_2.jpg';
+}
+
 ?>
 
 <section class="container-fluid w-100 h-100" id="randonneesection">
@@ -14,39 +52,27 @@ session_start();
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../ASSETS/PaysageRandonnee_1.jpg" class="d-block w-100" alt="paysage1" style="height: 800px;">
+                <img src="<?php echo $photo_0; ?>" class="d-block w-100" alt="paysage1" style="height: 800px;">
                 <div class="carousel-caption d-md-block text-dark font-weigh-bolder text-uppercase m-5"
                     style="background-color: rgba(180, 180, 180, 0.5)">
-                    <h1 class="display-5">Randonnée - Montagne / Lac</h1>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
+                    <h1 class="display-5"><?php echo $excursion_0[1]; ?></h1>
+                    <span><?php echo $excursion_0[2]; ?></span>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../ASSETS/PaysageRandonnee_2.jpg" class="d-block w-100" alt="paysage2" style="height: 800px;">
+                <img src="<?php echo $photo_1; ?>" class="d-block w-100" alt="paysage2" style="height: 800px;">
                 <div class="carousel-caption d-md-block text-dark font-weigh-bolder text-uppercase m-5"
                     style="background-color: rgba(180, 180, 180, 0.5)">
-                    <h1 class="display-5">Randonnée - Montagne</h1>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
+                    <h1 class="display-5"><?php echo $excursion_1[1]; ?></h1>
+                    <span><?php echo $excursion_1[2]; ?></span>
                 </div>
             </div>
             <div class="carousel-item">
-                <img src="../ASSETS/PaysageRandonnee_3.jpg" class="d-block w-100" alt="paysage3" style="height: 800px;">
+                <img src=" <?php echo $photo_2; ?>" class="d-block w-100" alt="paysage3" style="height: 800px;">
                 <div class="carousel-caption d-md-block text-dark font-weigh-bolder text-uppercase m-5"
                     style="background-color: rgba(180, 180, 180, 0.5)">
-                    <h1 class="display-5">Randonnée - Forêt</h1>
-                    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-                        non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span>
+                    <h1 class="display-5"><?php echo $excursion_2[1]; ?></h1>
+                    <span><?php echo $excursion_2[2]; ?></span>
                 </div>
             </div>
         </div>
